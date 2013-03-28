@@ -12,6 +12,8 @@ TARGET = CMDSim
 TEMPLATE = app
 
 
+CONFIG += qwt
+
 SOURCES += main.cpp\
         cmdsimmw.cpp
 
