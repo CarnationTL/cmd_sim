@@ -21,8 +21,8 @@ HEADERS  += cmdsimmw.h
 
 FORMS    += cmdsimmw.ui
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/C:/Qwt-6.1.0-rc3/lib/ -lqwt
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/C:/Qwt-6.1.0-rc3/lib/ -lqwtd
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/ -lqwt
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/ -lqwtd
 
-INCLUDEPATH += $$PWD/C:/Qwt-6.1.0-rc3/include
-DEPENDPATH += $$PWD/C:/Qwt-6.1.0-rc3/include
+INCLUDEPATH += $$PWD/include
+DEPENDPATH += $$PWD/include
