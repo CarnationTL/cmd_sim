@@ -26,3 +26,4 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/ -lqwtd
 
 INCLUDEPATH += $$PWD/include
 DEPENDPATH += $$PWD/include
+
