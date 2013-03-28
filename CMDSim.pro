@@ -15,9 +15,11 @@ TEMPLATE = app
 CONFIG += qwt
 
 SOURCES += main.cpp\
-        cmdsimmw.cpp
+        cmdsimmw.cpp \
+    rfm2gse.cpp
 
-HEADERS  += cmdsimmw.h
+HEADERS  += cmdsimmw.h \
+    rfm2gse.h
 
 FORMS    += cmdsimmw.ui
 
