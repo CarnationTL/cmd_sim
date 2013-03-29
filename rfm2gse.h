@@ -1,7 +1,7 @@
 #ifndef RFM2GSE_H
 #define RFM2GSE_H
 
-
+#include <Windows.h>
 #include <wincodecsdk.h>
 #include <wincodec.h>
 #include <WinDef.h>

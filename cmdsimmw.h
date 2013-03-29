@@ -18,6 +18,7 @@ public:
 private:
     Ui::CMDSimMW *ui;
     int initrfm(void);
+    int init75c3(void);
 };
 
 #endif // CMDSIMMW_H
