@@ -24,7 +24,8 @@ HEADERS  += cmdsimmw.h \
     rfm2gse.h \
     cmddefs.h \
     c75c3encap.h \
-    C75C3Expls.h
+    C75C3Expls.h \
+    c75c3funcp.h
 
 FORMS    += cmdsimmw.ui
 

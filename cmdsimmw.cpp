@@ -34,7 +34,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     if(pfunc) {
         int ret = pfunc(0);
         if(ret != CPCI75C3_SUCCESS) {
-            QMessageBox::warning(this, "a", ",", QMessageBox::Yes);
+            QMessageBox::warning(this, "load", ",", QMessageBox::Yes);
         }
     }
     while(1) {
