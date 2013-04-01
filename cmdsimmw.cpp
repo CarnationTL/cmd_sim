@@ -4,15 +4,16 @@
 #include "cmdsimmw.h"
 #include "ui_cmdsimmw.h"
 #include "rfm2gse.h"
-#include "c75c3encap.h"
 #include "C75C3Expls.h"
-
+#include "c75c3dllencap.h"
 typedef int(* funca )(int);
 
 
 CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMDSimMW) {
+
+    ui->setupUi(this);
 #if 0
 	if (initrfm() != EXE_SUCCESS) {
 		QMessageBox::warning(NULL, "lib_load", "lib_load", QMessageBox::Yes);
@@ -23,7 +24,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     init75c3();
 #endif
 
-#if 1
+#if 0
     C75C3Encap enp;
     enp.pclib = new QLibrary("CPCI75C3Dll");
     enp.pclib->load();
@@ -42,7 +43,21 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     }
 #endif
 
-    ui->setupUi(this);
+#if 0
+    C75C3DllEncap *ptr = C75C3DllEncap::getInst();
+    if(ptr != NULL) {
+		ptr->loadDll();
+		FPTR_OPEN ptrOpen =  ptr->getopen();
+		if (ptrOpen != NULL) {
+			int ret = ptrOpen(0);
+			if (ret != 0) {
+				QMessageBox::warning(this, "funccall", "funcall", QMessageBox::Yes);
+			}
+		}
+	}
+#endif
+
+
 }
 
 CMDSimMW::~CMDSimMW()
@@ -56,6 +71,5 @@ int CMDSimMW::initrfm() {
 }
 
 int CMDSimMW::init75c3() {
-    C75C3Encap bd;
-    return bd.OpenTest();
+    return 0;
 }

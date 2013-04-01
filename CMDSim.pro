@@ -18,14 +18,16 @@ CONFIG += qwt
 SOURCES += main.cpp\
         cmdsimmw.cpp \
     rfm2gse.cpp \
-    c75c3encap.cpp
+    commonch.cpp \
+    c75c3dllencap.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
     cmddefs.h \
-    c75c3encap.h \
     C75C3Expls.h \
-    c75c3funcp.h
+    c75c3funcp.h \
+    commonch.h \
+    c75c3dllencap.h
 
 FORMS    += cmdsimmw.ui
 
@@ -45,8 +47,7 @@ win32: PRE_TARGETDEPS += $$PWD/rfmlib/rfm2gdll_stdc.lib
 
 #75C3 debug lib and release lib
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/75C3Rlib/ -lCPCI75C3Dll
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/75C3Dlib/ -lCPCI75C3Dll
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/75C3Dlib/ -lCPCI75C3Dlld
 
 INCLUDEPATH += $$PWD/75C3inc
 DEPENDPATH += $$PWD/75C3inc
-
