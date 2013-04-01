@@ -6,6 +6,7 @@
 #include "rfm2gse.h"
 #include "C75C3Expls.h"
 #include "c75c3dllencap.h"
+#include "lvdtch.h"
 typedef int(* funca )(int);
 
 
@@ -44,7 +45,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 #endif
 
     //in lvdt ch...class this is a test..
-#if 1
+#if 0
     C75C3DllEncap *ptr = C75C3DllEncap::getInst();
     if(ptr != NULL) {
         if(ptr->isloaded() == false) {
@@ -62,6 +63,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
         }
     }
 #endif
+
+    LVDTCh *ptrLch = new LVDTCh(1, "lvdt_ch1");
 
 }
 

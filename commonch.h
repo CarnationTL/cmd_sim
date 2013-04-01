@@ -10,7 +10,7 @@ class CommonCh : public QObject
     Q_OBJECT
 public:
     explicit CommonCh(QObject *parent = 0);
-
+    explicit CommonCh(int chno, QString chname, QObject *parent = 0);
     int chno() const;
     void setChno(int chno);
 

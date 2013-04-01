@@ -1,8 +1,12 @@
 #include "commonch.h"
 
 CommonCh::CommonCh(QObject *parent) :
-    QObject(parent)
-{
+    QObject(parent) {
+
+}
+
+CommonCh::CommonCh(int chno, QString chname, QObject *parent):
+                  _chno(chno), _chname(chname), QObject(parent) {
 
 }
 

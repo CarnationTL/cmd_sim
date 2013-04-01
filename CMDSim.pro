@@ -19,7 +19,9 @@ SOURCES += main.cpp\
         cmdsimmw.cpp \
     rfm2gse.cpp \
     commonch.cpp \
-    c75c3dllencap.cpp
+    c75c3dllencap.cpp \
+    lvdtch.cpp \
+    commbrd.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -27,7 +29,9 @@ HEADERS  += cmdsimmw.h \
     C75C3Expls.h \
     c75c3funcp.h \
     commonch.h \
-    c75c3dllencap.h
+    c75c3dllencap.h \
+    lvdtch.h \
+    commbrd.h
 
 FORMS    += cmdsimmw.ui
 
@@ -51,3 +55,6 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/75C3Dlib/ -lCPCI75C3Dll
 
 INCLUDEPATH += $$PWD/75C3inc
 DEPENDPATH += $$PWD/75C3inc
+
+OTHER_FILES += \
+    notes.txt
