@@ -43,20 +43,25 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     }
 #endif
 
-#if 0
+    //in lvdt ch...class this is a test..
+#if 1
     C75C3DllEncap *ptr = C75C3DllEncap::getInst();
     if(ptr != NULL) {
-		ptr->loadDll();
-		FPTR_OPEN ptrOpen =  ptr->getopen();
-		if (ptrOpen != NULL) {
-			int ret = ptrOpen(0);
-			if (ret != 0) {
-				QMessageBox::warning(this, "funccall", "funcall", QMessageBox::Yes);
-			}
-		}
-	}
-#endif
+        if(ptr->isloaded() == false) {
+            ptr->loadDll(); //in lvdtch construct...function..
+        }
 
+        if(ptr->isloaded()) {
+            FPTR_OPEN ptrOpen =  ptr->getOpen();
+            if (ptrOpen != NULL) {
+                int ret = ptrOpen(0);
+                if (ret != 0) {
+                    QMessageBox::warning(this, "funccall", "funcall", QMessageBox::Yes);
+                }
+            }
+        }
+    }
+#endif
 
 }
 

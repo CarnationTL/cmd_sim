@@ -14,7 +14,6 @@ private:
     static C75C3DllEncap * C75C3;
     static HINSTANCE hdll;
 public:
-
     static C75C3DllEncap *getInst() {
 		static C75C3DllEncap instC75;
 		return &instC75;
@@ -33,7 +32,13 @@ public:
         }
         return 1;
     }
-    FPTR_OPEN getopen();
+    bool isloaded() {
+        if(hdll != NULL) {
+            return true;
+        } else
+            return false;
+    }
+    FPTR_OPEN getOpen();
 };
 
 #endif // C75C3DLLENCAP_H

@@ -11,7 +11,7 @@ C75C3DllEncap::~C75C3DllEncap() {
 }
 
 
-FPTR_OPEN C75C3DllEncap::getopen() {
+FPTR_OPEN C75C3DllEncap::getOpen() {
     if(hdll != NULL) {
         FPTR_OPEN ptrs = (FPTR_OPEN)(GetProcAddress(hdll, FSTR_Open));
 		if(ptrs != NULL) {
