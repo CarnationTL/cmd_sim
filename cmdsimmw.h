@@ -17,6 +17,9 @@ public:
     explicit CMDSimMW(QWidget *parent = 0);
     ~CMDSimMW();
     int initInstructs();
+private slots:
+    void on_actionSetBrd_triggered();
+
 private:
     Ui::CMDSimMW *ui;
     int initrfm(void);

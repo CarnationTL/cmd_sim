@@ -145,6 +145,9 @@ QString CMDSimMW::cvcp936(const char str[]) {
     return QString("");
 }
 
+/**
+  band the model to view
+*/
 void CMDSimMW::initInsView() {
     //Cmd_D_Model dv_model;
     QListView *pv = ui->listw_sig_sel;
@@ -161,4 +164,11 @@ void CMDSimMW::initInsView() {
         }
     }
     pv->setModel(dv_model);
+}
+
+/**
+  add action set brd
+*/
+void CMDSimMW::on_actionSetBrd_triggered() {
+    QMessageBox::warning(this, "set brd", "set brd", QMessageBox::Yes);
 }
