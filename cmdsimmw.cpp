@@ -1,4 +1,4 @@
-
+﻿
 #define WIN32_LEAN_AND_MEAN
 #include <QMessageBox>
 #include "cmdsimmw.h"
@@ -7,6 +7,8 @@
 #include "C75C3Expls.h"
 #include "c75c3dllencap.h"
 #include "lvdtch.h"
+#include <QStringList>
+#include <QTextCodec>
 typedef int(* funca )(int);
 
 
@@ -64,13 +66,61 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     }
 #endif
 
-    LVDTCh *ptrLch = new LVDTCh(1, "lvdt_ch1");
-
+//    LVDTCh *ptrLch = new LVDTCh(1, "lvdt_ch1");
+    initInsView();
 }
 
 CMDSimMW::~CMDSimMW()
 {
     delete ui;
+}
+
+int CMDSimMW::initInstructs() {
+    QStringList *prefix = new QStringList();
+    prefix->append(cvcp936("左驾驶盘位移信号"));
+    prefix->append(cvcp936("右驾驶盘位移信号"));
+    prefix->append(cvcp936("左驾驶柱位移信号"));
+    prefix->append(cvcp936("右驾驶柱位移信号"));
+    prefix->append(cvcp936("左脚蹬位移信号"));
+    prefix->append(cvcp936("右脚蹬位移信号"));
+    prefix->append(cvcp936("减速杆位置信号"));
+    prefix->append(cvcp936("减速杆位置信号"));
+
+    prefix->append(cvcp936("襟缝翼收放手柄位置信号"));
+    prefix->append(cvcp936("起落架收放手柄位置信号"));
+
+    prefix->append(cvcp936("左前轮位移信号"));
+    prefix->append(cvcp936("左前轮位移信号"));
+
+    prefix->append(cvcp936("左刹车位移信号"));
+    prefix->append(cvcp936("左刹车位移信号"));
+
+    QStringList *end = new QStringList();
+    end->append("A");
+    end->append("B");
+    end->append("C");
+    end->append("D");
+
+
+    ps_ins_v = new QStringList();
+    QString tempStr;
+
+    if(prefix == NULL || end == NULL)
+        return NULL;
+
+    for(int i = 0; i < prefix->size(); i++) {
+        for(int j = 0; j < end->size(); j++)  {
+            tempStr.clear();
+            tempStr.prepend(prefix->at(i));
+            tempStr.append(end->at(j));
+            ps_ins_v->append(tempStr);
+        }
+    }
+    return ps_ins_v->size();
+    delete prefix;
+    delete end;
+    prefix = NULL;
+    end = NULL;
 }
 
 int CMDSimMW::initrfm() {
@@ -80,4 +130,35 @@ int CMDSimMW::initrfm() {
 
 int CMDSimMW::init75c3() {
     return 0;
+}
+/**
+  convert cp936 to unicode
+*/
+QString CMDSimMW::cvcp936(const char str[]) {
+    if((sizeof(str) /sizeof(char)) <= 0)
+        return QString("");
+    QTextCodec *codec = QTextCodec::codecForName("cp936");
+    if(codec != NULL) {
+        QString ret = codec->toUnicode(str);
+        return ret;
+    }
+    return QString("");
+}
+
+void CMDSimMW::initInsView() {
+    //Cmd_D_Model dv_model;
+    QListView *pv = ui->listw_sig_sel;
+    int cnt = initInstructs();
+    dv_model = new QStandardItemModel(cnt, 0);
+    if(pv != NULL && cnt > 0) {
+        //// Cmd_DM_Item *newItem;
+        QStandardItem *newItem;
+        for(int i = 0; i < cnt; i++) {
+            newItem = new QStandardItem(ps_ins_v->at(i));
+            newItem->setCheckable(true);
+            newItem->setCheckState(Qt::Unchecked);
+            dv_model->setItem(i, newItem);
+        }
+    }
+    pv->setModel(dv_model);
 }
