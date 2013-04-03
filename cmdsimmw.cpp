@@ -11,7 +11,7 @@
 #include <QTextCodec>
 #include <QDialog>
 #include <QLayout>
-
+#include "setbrddlg.h"
 typedef int(* funca )(int);
 
 
@@ -171,33 +171,37 @@ void CMDSimMW::initInsView() {
 }
 
 /**
-  set the layout of setBrdDlg
+  set the layout of setBrdDlg (will move to new ui file)
 */
-
+#if 0
 int CMDSimMW::initSetBrdDlg(QDialog *pdlg) {
     if(pdlg != NULL) {
         //set parent.. prevent mem leak.
         _pMainLay = new QGridLayout(pdlg);
-        _pMainLay->setContentsMargins(11, 11, 11, 11);
-        _pLabel = new QLabel("test......", pdlg);
-        _pLabel1 = new QLabel("context....", pdlg);
-        _pMainLay->addWidget(_pLabel, 0, 0);
-        _pMainLay->addWidget(_pLabel1, 0, 1);
+        _pMainLay->setContentsMargins(30, 11, 30, 11);
+
+        for(int i = 0; i < LVDTBrds; i++) {
+            QString tmpStr(cvcp936("LVDT板卡"));
+            tmpStr.append(QString::number(i).toUtf8());
+            tmpStr.append(": ");
+            _plblLVDT[i] = new QLabel(tmpStr, pdlg);
+            _pleLVDT[i] = new QLineEdit(pdlg);
+       }
         _pMainLay->setSpacing(20);
         pdlg->setLayout(_pMainLay);
         return EXE_SUCCESS;
     }
     return EXE_FAIL;
 }
+#endif
 
 /**
   add action set brd
 */
 void CMDSimMW::on_actionSetBrd_triggered() {
-    _pdlg = new QDialog(this);
+    _pdlg = new SetBrdDlg(this);
     if(_pdlg != NULL) {
-        _pdlg->setAttribute(Qt::WA_DeleteOnClose);
-        initSetBrdDlg(_pdlg);
+        _pdlg->setAttribute(Qt::WA_DeleteOnClose);  //2parameter = true
         _pdlg->exec();
     }
     //QMessageBox::warning(this, "set brd", "set brd", QMessageBox::Yes);

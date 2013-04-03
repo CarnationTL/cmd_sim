@@ -32,6 +32,7 @@ private slots:
     void on_bbx_sig_sel_rejected();
 
 private:
+    enum {LVDTBrds = 4};
     Ui::CMDSimMW *ui;
     int initrfm(void);
     int init75c3(void);
@@ -40,13 +41,9 @@ private:
     QStandardItemModel *dv_model;
     QString cvcp936(const char str[]);
     void initInsView();
-    int initSetBrdDlg(QDialog *pdlg);
     QDialog *_pdlg;
     QGridLayout *_pMainLay;
     QGridLayout *_pLeftLay;
-
-    QLabel *_pLabel;
-    QLabel *_pLabel1;
 };
 
 #endif // CMDSIMMW_H

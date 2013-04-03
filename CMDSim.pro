@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     c75c3dllencap.cpp \
     lvdtch.cpp \
     commbrd.cpp \
-    apdapter.cpp
+    apdapter.cpp \
+    setbrddlg.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -33,9 +34,11 @@ HEADERS  += cmdsimmw.h \
     c75c3dllencap.h \
     lvdtch.h \
     commbrd.h \
-    apdapter.h
+    apdapter.h \
+    setbrddlg.h
 
-FORMS    += cmdsimmw.ui
+FORMS    += cmdsimmw.ui \
+    setbrddlg.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwt
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwtd
