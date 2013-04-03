@@ -9,6 +9,8 @@
 #include "lvdtch.h"
 #include <QStringList>
 #include <QTextCodec>
+#include <QDialog>
+#include <QLayout>
 
 typedef int(* funca )(int);
 
@@ -18,6 +20,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     ui(new Ui::CMDSimMW) {
 
     ui->setupUi(this);
+
 #if 0
 	if (initrfm() != EXE_SUCCESS) {
 		QMessageBox::warning(NULL, "lib_load", "lib_load", QMessageBox::Yes);
@@ -168,8 +171,49 @@ void CMDSimMW::initInsView() {
 }
 
 /**
+  set the layout of setBrdDlg
+*/
+
+int CMDSimMW::initSetBrdDlg(QDialog *pdlg) {
+    if(pdlg != NULL) {
+        //set parent.. prevent mem leak.
+        _pMainLay = new QGridLayout(pdlg);
+        _pMainLay->setContentsMargins(11, 11, 11, 11);
+        _pLabel = new QLabel("test......", pdlg);
+        _pLabel1 = new QLabel("context....", pdlg);
+        _pMainLay->addWidget(_pLabel, 0, 0);
+        _pMainLay->addWidget(_pLabel1, 0, 1);
+        _pMainLay->setSpacing(20);
+        pdlg->setLayout(_pMainLay);
+        return EXE_SUCCESS;
+    }
+    return EXE_FAIL;
+}
+
+/**
   add action set brd
 */
 void CMDSimMW::on_actionSetBrd_triggered() {
-    QMessageBox::warning(this, "set brd", "set brd", QMessageBox::Yes);
+    _pdlg = new QDialog(this);
+    if(_pdlg != NULL) {
+        _pdlg->setAttribute(Qt::WA_DeleteOnClose);
+        initSetBrdDlg(_pdlg);
+        _pdlg->exec();
+    }
+    //QMessageBox::warning(this, "set brd", "set brd", QMessageBox::Yes);
 }
+
+/**
+  accept sel
+*/
+void CMDSimMW::on_bbx_sig_sel_accepted() {
+    QMessageBox::warning(this, "accpet", "accept", QMessageBox::Yes);
+}
+
+/**
+  reject sel
+*/
+void CMDSimMW::on_bbx_sig_sel_rejected() {
+    QMessageBox::warning(this, "rejected..", "reject...", QMessageBox::Yes);
+}
+

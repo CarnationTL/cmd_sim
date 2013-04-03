@@ -5,6 +5,13 @@
 #include <QStringList>
 #include <QListView>
 #include <QStandardItemModel>
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QDialog>
+
 namespace Ui {
 class CMDSimMW;
 }
@@ -20,6 +27,10 @@ public:
 private slots:
     void on_actionSetBrd_triggered();
 
+    void on_bbx_sig_sel_accepted();
+
+    void on_bbx_sig_sel_rejected();
+
 private:
     Ui::CMDSimMW *ui;
     int initrfm(void);
@@ -29,6 +40,13 @@ private:
     QStandardItemModel *dv_model;
     QString cvcp936(const char str[]);
     void initInsView();
+    int initSetBrdDlg(QDialog *pdlg);
+    QDialog *_pdlg;
+    QGridLayout *_pMainLay;
+    QGridLayout *_pLeftLay;
+
+    QLabel *_pLabel;
+    QLabel *_pLabel1;
 };
 
 #endif // CMDSIMMW_H
