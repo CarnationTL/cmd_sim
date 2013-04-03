@@ -6,10 +6,15 @@ Apdapter::Apdapter(QObject *parent) :
 {
 }
 
-Apdapter::Apdapter(double max_phyval, double min_phyval, QObject *parent)
-    :_maxPhyval(max_phyval), _minPhyval(min_phyval), QObject(parent) {
+Apdapter::Apdapter(double maxPval, double minPval,
+                   double maxEval, double minEval, QObject *parent) :
+                   _maxPhyval(maxPval), _minPhyval(minPval),
+                   _maxElcval(maxEval), _minElcval(minEval), QObject(parent) {
 
 }
+
+
+
 
 double Apdapter::maxPhyval() const {
     return _maxPhyval;
@@ -56,7 +61,8 @@ double Apdapter::genStepval() {
     if(rangePval <= 0 || rangeEval <= 0) {
         return (double)EXE_FAIL;
     } else {
-        return (double)(rangeEval / rangePval);
+        _stepVal = (double)(rangeEval / rangePval);
+        return _stepVal;
     }
     return (double)EXE_FAIL;
 }

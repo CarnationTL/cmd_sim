@@ -7,8 +7,11 @@ class Apdapter : public QObject
     Q_OBJECT
 public:
     explicit Apdapter(QObject *parent = 0);
-    explicit Apdapter(double max_phyval,
-                      double min_phyval, QObject *parent = 0);
+
+
+    explicit Apdapter(double maxPval, double minPval, double maxEval, double minEval,
+                     QObject *parent = 0);
+
     double maxPhyval() const;
     void setMaxPhyval(double maxPhyval);
 
@@ -22,7 +25,7 @@ public:
     double maxElcval() const;
     void setMaxElcval(double maxElcval);
 
-
+    double genStepval();
 signals:
     
 public slots:
@@ -32,6 +35,7 @@ private:
     double _minPhyval;
     double _minElcval;
     double _maxElcval;
+    double _stepVal;
 };
 
 #endif // APDAPTER_H
