@@ -6,6 +6,7 @@ SetBrdDlg::SetBrdDlg(QWidget *parent) :
     ui(new Ui::SetBrdDlg)
 {
     ui->setupUi(this);
+    this->setLayout(ui->setbdGlay);
 }
 
 SetBrdDlg::~SetBrdDlg()

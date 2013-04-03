@@ -200,6 +200,7 @@ int CMDSimMW::initSetBrdDlg(QDialog *pdlg) {
 */
 void CMDSimMW::on_actionSetBrd_triggered() {
     _pdlg = new SetBrdDlg(this);
+
     if(_pdlg != NULL) {
         _pdlg->setAttribute(Qt::WA_DeleteOnClose);  //2parameter = true
         _pdlg->exec();
