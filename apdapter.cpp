@@ -13,9 +13,6 @@ Apdapter::Apdapter(double maxPval, double minPval,
 
 }
 
-
-
-
 double Apdapter::maxPhyval() const {
     return _maxPhyval;
 }
@@ -33,7 +30,6 @@ double Apdapter::minPhyval() const {
 void Apdapter::setMinPhyval(double minPhyval) {
     _minPhyval = minPhyval;
 }
-
 
 double Apdapter::minElcval() const {
     return _minElcval;
@@ -66,3 +62,33 @@ double Apdapter::genStepval() {
     }
     return (double)EXE_FAIL;
 }
+
+/**
+  conv from pval to eval
+*/
+double Apdapter::doConvert(double pVal) {
+    if(pVal <= _maxPhyval && pVal >= _minPhyval) {
+        return (_stepVal * pVal);
+    }
+    return (double)EXE_FAIL;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

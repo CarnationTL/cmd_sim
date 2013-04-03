@@ -26,6 +26,7 @@ public:
     void setMaxElcval(double maxElcval);
 
     double genStepval();
+    double doConvert(double pVal);
 signals:
     
 public slots:
