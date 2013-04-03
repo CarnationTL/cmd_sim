@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     commonch.cpp \
     c75c3dllencap.cpp \
     lvdtch.cpp \
-    commbrd.cpp
+    commbrd.cpp \
+    apdapter.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -31,7 +32,8 @@ HEADERS  += cmdsimmw.h \
     commonch.h \
     c75c3dllencap.h \
     lvdtch.h \
-    commbrd.h
+    commbrd.h \
+    apdapter.h
 
 FORMS    += cmdsimmw.ui
 

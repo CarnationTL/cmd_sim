@@ -9,6 +9,7 @@
 #include "lvdtch.h"
 #include <QStringList>
 #include <QTextCodec>
+
 typedef int(* funca )(int);
 
 
