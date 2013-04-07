@@ -39,6 +39,8 @@ public:
             return false;
     }
     FPTR_OPEN getOpen();
+    FPTR_CLOSE getClose();
+    FPTR_GET_CH_POS getChPos();
 };
 
 #endif // C75C3DLLENCAP_H

@@ -20,3 +20,22 @@ FPTR_OPEN C75C3DllEncap::getOpen() {
     }
 	return NULL;
 }
+
+
+FPTR_CLOSE C75C3DllEncap::getClose() {
+    if(hdll != NULL) {
+        return (FPTR_CLOSE)(GetProcAddress(hdll, FSTR_Close));
+    }
+    return NULL;
+}
+
+/**
+  get pos
+*/
+FPTR_GET_CH_POS C75C3DllEncap::getChPos() {
+   if(hdll != NULL) {
+       return (FPTR_GET_CH_POS)GetProcAddress(hdll, FSTR_DL_GetPosition);
+   }
+   return NULL;
+}
+

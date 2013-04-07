@@ -85,10 +85,3 @@ double Apdapter::doConvert(double pVal) {
 
 
 
-
-
-
-
-
-
-

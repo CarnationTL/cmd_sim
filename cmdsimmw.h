@@ -6,8 +6,8 @@
 #include <QListView>
 #include <QStandardItemModel>
 #include <QGridLayout>
-#include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QDialog>
