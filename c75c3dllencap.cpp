@@ -39,3 +39,10 @@ FPTR_GET_CH_POS C75C3DllEncap::getChPos() {
    return NULL;
 }
 
+
+FPTR_GET_CHPW_STA C75C3DllEncap::getPwStat() {
+    if(hdll != NULL) {
+        return (FPTR_GET_CHPW_STA)GetProcAddress(hdll, FSTR_DL_GetPowerSupplyState);
+    }
+    return NULL;
+}

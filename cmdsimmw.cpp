@@ -1,5 +1,4 @@
-﻿
-#define WIN32_LEAN_AND_MEAN
+﻿#define WIN32_LEAN_AND_MEAN
 #include <QMessageBox>
 #include "cmdsimmw.h"
 #include "ui_cmdsimmw.h"

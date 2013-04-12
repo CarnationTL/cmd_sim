@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     commbrd.cpp \
     apdapter.cpp \
     setbrddlg.cpp \
-    setwpdlg.cpp
+    setwpdlg.cpp \
+    brd75c3.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -37,7 +38,8 @@ HEADERS  += cmdsimmw.h \
     commbrd.h \
     apdapter.h \
     setbrddlg.h \
-    setwpdlg.h
+    setwpdlg.h \
+    brd75c3.h
 
 FORMS    += cmdsimmw.ui \
     setbrddlg.ui \

@@ -9,6 +9,9 @@ class CommBrd : public QObject
 public:
     explicit CommBrd(QObject *parent = 0);
     explicit CommBrd(int bdno, QObject *parent);
+    virtual int openbrd(int) = 0;
+    virtual int closebrd(int) = 0;
+    virtual int bitTest() = 0;
 private:
     int _bdno;
 signals:

@@ -41,6 +41,7 @@ public:
     FPTR_OPEN getOpen();
     FPTR_CLOSE getClose();
     FPTR_GET_CH_POS getChPos();
+    FPTR_GET_CHPW_STA getPwStat();
 };
 
 #endif // C75C3DLLENCAP_H
