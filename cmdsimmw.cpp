@@ -12,6 +12,7 @@
 #include <QDialog>
 #include <QLayout>
 #include "setbrddlg.h"
+#include "setwpdlg.h"
 typedef int(* funca )(int);
 
 
@@ -199,12 +200,23 @@ int CMDSimMW::initSetBrdDlg(QDialog *pdlg) {
   add action set brd
 */
 void CMDSimMW::on_actionSetBrd_triggered() {
+
+#if 1
     _pdlg = new SetBrdDlg(this);
 
     if(_pdlg != NULL) {
         _pdlg->setAttribute(Qt::WA_DeleteOnClose);  //2parameter = true
         _pdlg->exec();
     }
+#endif
+
+#if 0
+	_pdlg = new SetWPDlg(this);
+	if (_pdlg != NULL) {
+		_pdlg->setAttribute(Qt::WA_DeleteOnClose);
+		_pdlg->exec();
+	}
+#endif
     //QMessageBox::warning(this, "set brd", "set brd", QMessageBox::Yes);
 }
 
