@@ -18,6 +18,7 @@ C75C3DllEncap::~C75C3DllEncap() {
 
 
 FPTR_OPEN C75C3DllEncap::getOpen() {
+#if 0
     if(hdll != NULL) {
         FPTR_OPEN ptrs = (FPTR_OPEN)(GetProcAddress(hdll, FSTR_Open));
 		if(ptrs != NULL) {
@@ -25,6 +26,13 @@ FPTR_OPEN C75C3DllEncap::getOpen() {
 		}
     }
 	return NULL;
+#endif
+    FPTR_OPEN get_ret;
+    GET_FP(hdll, FPTR_OPEN, FSTR_Open, get_ret);
+    if(get_ret != NULL) {
+        return get_ret;
+    }
+    return NULL;
 }
 
 FPTR_OPEN C75C3DllEncap::getOpenMacro() {
@@ -38,8 +46,16 @@ FPTR_OPEN C75C3DllEncap::getOpenMacro() {
 
 
 FPTR_CLOSE C75C3DllEncap::getClose() {
+#if 0
     if(hdll != NULL) {
         return (FPTR_CLOSE)(GetProcAddress(hdll, FSTR_Close));
+    }
+    return NULL;
+#endif
+    FPTR_CLOSE _ret = NULL;
+    GET_FP(hdll, FPTR_CLOSE, FSTR_Close, _ret);
+    if(_ret != NULL) {
+        return _ret;
     }
     return NULL;
 }
@@ -48,8 +64,16 @@ FPTR_CLOSE C75C3DllEncap::getClose() {
   get pos
 */
 FPTR_GET_CH_POS C75C3DllEncap::getChPos() {
+#if 0
    if(hdll != NULL) {
        return (FPTR_GET_CH_POS)GetProcAddress(hdll, FSTR_DL_GetPosition);
+   }
+   return NULL;
+#endif
+   FPTR_GET_CH_POS _ret = NULL;
+   GET_FP(hdll, FPTR_GET_CH_POS, FSTR_DL_GetPosition, _ret);
+   if(_ret != NULL) {
+       return _ret;
    }
    return NULL;
 }
