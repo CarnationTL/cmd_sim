@@ -16,6 +16,18 @@ C75C3DllEncap::~C75C3DllEncap() {
 
 }
 
+/**
+  init the dll res
+*/
+FPTR_INIT C75C3DllEncap::initbrd() {
+    FPTR_INIT _ret = NULL;
+    GET_FP(hdll, FPTR_INIT, FSTR_Init, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
 
 FPTR_OPEN C75C3DllEncap::getOpen() {
 #if 0
@@ -60,6 +72,28 @@ FPTR_CLOSE C75C3DllEncap::getClose() {
     return NULL;
 }
 
+FPTR_GET_DEVCNT C75C3DllEncap::getDevcnt() {
+    FPTR_GET_DEVCNT _ret = NULL;
+    GET_FP(hdll, FPTR_GET_DEVCNT, FSTR_GetDevCnt, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+
+/**
+  for every brd...
+*/
+FPTR_GET_BRDREADY C75C3DllEncap::getBrdReady() {
+    FPTR_GET_BRDREADY _ret = NULL;
+    GET_FP(hdll, FPTR_GET_BRDREADY, FSTR_GetBoardReady, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
 /**
   get pos
 */
@@ -78,15 +112,37 @@ FPTR_GET_CH_POS C75C3DllEncap::getChPos() {
    return NULL;
 }
 
+FPTR_SET_CH_POS C75C3DllEncap::setChPos() {
+    FPTR_SET_CH_POS _ret = NULL;
+    GET_FP(hdll, FPTR_SET_CH_POS, FSTR_DL_SetPosition, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
 
-FPTR_GET_CHPW_STA C75C3DllEncap::getPwStat() {
+/**
+  acu pos for bk use
+*/
+FPTR_GET_ACU_POS C75C3DllEncap::getChAcuPos() {
+    FPTR_GET_ACU_POS _ret = NULL;
+    GET_FP(hdll, FPTR_GET_ACU_POS, FSTR_DL_GetAccumPosition, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+/**
+  the pw status for DL model this is fake one ^V^
+*/
+FPTR_GET_CHPW_STA C75C3DllEncap::getDLPwStat() {
 #if 0
     if(hdll != NULL) {
         return (FPTR_GET_CHPW_STA)GetProcAddress(hdll, FSTR_DL_GetPowerSupplyState);
     }
     return NULL;
 #endif
-
     FPTR_GET_CHPW_STA _ret = NULL;
     GET_FP(hdll, FPTR_GET_CHPW_STA, FSTR_DL_GetPowerSupplyState, _ret);
     if(_ret != NULL) {
@@ -95,9 +151,11 @@ FPTR_GET_CHPW_STA C75C3DllEncap::getPwStat() {
     return NULL;
 }
 
-
+/**
+  indicate the ch output or not..
+*/
 FPTR_GET_CHOP_STA C75C3DllEncap::getChOPStat() {
-    FPTR_GET_CHOP_STA _ret;
+    FPTR_GET_CHOP_STA _ret = NULL;
     GET_FP(hdll, FPTR_GET_CHOP_STA, FSTR_DL_GetChanOutputState, _ret);
     if(_ret != NULL) {
         return _ret;
@@ -105,3 +163,67 @@ FPTR_GET_CHOP_STA C75C3DllEncap::getChOPStat() {
     return NULL;
 }
 
+FPTR_GET_OB_REFEQ C75C3DllEncap::getOBRefeq() {
+    FPTR_GET_OB_REFEQ _ret = NULL;
+    GET_FP(hdll, FPTR_GET_OB_REFEQ, FSTR_DL_GetOnBrdRefFreq, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_SET_OB_REFEQ C75C3DllEncap::setOBRefeq() {
+    FPTR_SET_OB_REFEQ _ret = NULL;
+    GET_FP(hdll, FPTR_SET_OB_REFEQ, FSTR_DL_SetOnBrdRefFreq, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_GET_OB_REFVOL C75C3DllEncap::getOBRefVol() {
+    FPTR_GET_OB_REFVOL _ret = NULL;
+    GET_FP(hdll, FPTR_GET_OB_REFVOL, FSTR_DL_GetOnBrdRefVoltage, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+
+FPTR_SET_OB_REFVOL C75C3DllEncap::setOBRefVol() {
+    FPTR_SET_OB_REFVOL _ret = NULL;
+    GET_FP(hdll, FPTR_SET_OB_REFVOL, FSTR_DL_SetOnBrdRefVoltage, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+
+FPTR_GET_ACT_CHS C75C3DllEncap::getActChs() {
+    FPTR_GET_ACT_CHS _ret = NULL;
+    GET_FP(hdll, FPTR_GET_ACT_CHS, FSTR_DL_GetActiveChannel, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_SET_ACT_CHS C75C3DllEncap::setActChs() {
+    FPTR_SET_ACT_CHS _ret = NULL;
+    GET_FP(hdll, FPTR_SET_ACT_CHS, FSTR_DL_SetActiveChannel, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_GET_BIT_STA C75C3DllEncap::getBIT() {
+    FPTR_GET_BIT_STA _ret = NULL;
+    GET_FP(hdll, FPTR_GET_BIT_STA, FSTR_DL_GetBITStatus, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}

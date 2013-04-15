@@ -51,7 +51,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 #endif
 
     //in lvdt ch...class this is a test..
-#if 1
+#if 0
     C75C3DllEncap *ptr = C75C3DllEncap::getInst();
     if(ptr != NULL) {
         if(ptr->isloaded() == false) {

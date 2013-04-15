@@ -38,12 +38,28 @@ public:
         } else
             return false;
     }
+
+    FPTR_INIT initbrd();
     FPTR_OPEN getOpen();
     FPTR_OPEN getOpenMacro();
     FPTR_CLOSE getClose();
+    FPTR_GET_DEVCNT getDevcnt();
+    FPTR_GET_BRDREADY getBrdReady();
     FPTR_GET_CH_POS getChPos();
-    FPTR_GET_CHPW_STA getPwStat();
+    FPTR_SET_CH_POS setChPos();
+    FPTR_GET_ACU_POS getChAcuPos();
+    FPTR_GET_CHPW_STA getDLPwStat();
     FPTR_GET_CHOP_STA getChOPStat();
+
+    FPTR_GET_OB_REFEQ getOBRefeq();
+    FPTR_SET_OB_REFEQ setOBRefeq();
+    FPTR_GET_OB_REFVOL getOBRefVol();
+    FPTR_SET_OB_REFVOL setOBRefVol();
+
+    FPTR_GET_ACT_CHS getActChs();
+    FPTR_SET_ACT_CHS setActChs();
+
+    FPTR_GET_BIT_STA getBIT();   //bit for dl model
 };
 
 #endif // C75C3DLLENCAP_H
