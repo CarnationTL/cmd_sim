@@ -200,6 +200,40 @@ FPTR_SET_OB_REFVOL C75C3DllEncap::setOBRefVol() {
     return NULL;
 }
 
+/**
+  four or two.
+*/
+FPTR_SET_WIREMODE C75C3DllEncap::setWireMode() {
+    FPTR_SET_WIREMODE _ret = NULL;
+    GET_FP(hdll, FPTR_SET_WIREMODE, FSTR_DL_SetWireMode, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+
+/**
+  the vll mode relate with warp pw line
+*/
+FPTR_SET_VLL_OPTMOD C75C3DllEncap::setVllOptMode() {
+    FPTR_SET_VLL_OPTMOD _ret = NULL;
+    GET_FP(hdll, FPTR_SET_VLL_OPTMOD, FSTR_DL_SetVllOutputMode, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_GET_VLL_OPTMOD C75C3DllEncap::getVllOptMode() {
+    FPTR_GET_VLL_OPTMOD _ret = NULL;
+    GET_FP(hdll, FPTR_GET_VLL_OPTMOD, FSTR_DL_GetVllOutputMode, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
 
 FPTR_GET_ACT_CHS C75C3DllEncap::getActChs() {
     FPTR_GET_ACT_CHS _ret = NULL;

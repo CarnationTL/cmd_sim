@@ -56,6 +56,11 @@ public:
     FPTR_GET_OB_REFVOL getOBRefVol();
     FPTR_SET_OB_REFVOL setOBRefVol();
 
+    FPTR_SET_WIREMODE setWireMode();
+
+    FPTR_SET_VLL_OPTMOD setVllOptMode();
+    FPTR_GET_VLL_OPTMOD getVllOptMode();
+
     FPTR_GET_ACT_CHS getActChs();
     FPTR_SET_ACT_CHS setActChs();
 

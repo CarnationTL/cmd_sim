@@ -28,7 +28,10 @@ typedef int(* FPTR_GET_OB_REFVOL)(int, int, double*);
 typedef int(* FPTR_SET_OB_REFVOL)(int, int, double);
 
 typedef int(* FPTR_SET_WIREMODE)(int, int, int, unsigned short);
+
 typedef int(* FPTR_SET_VLL_OPTMOD)(int, int, int, unsigned short);
+typedef int(* FPTR_GET_VLL_OPTMOD)(int, int, int, unsigned short*);
+
 typedef int(* FPTR_SET_REFLOSS_THOLD)(int, int, int, double);
 typedef int(* FPTR_SET_SIGLOSS_THOLD)(int, int, int, double);
 typedef int(* FPTR_SET_PW_SUPPLY)(int, int, int, unsigned short);
