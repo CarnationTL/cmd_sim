@@ -48,8 +48,11 @@ public:
     FPTR_GET_CH_POS getChPos();
     FPTR_SET_CH_POS setChPos();
     FPTR_GET_ACU_POS getChAcuPos();
-    FPTR_GET_CHPW_STA getDLPwStat();
+    FPTR_GET_DLCHPW_STA getDLPwStat();
+    FPTR_SET_DLCHPW_STA setDLPwStat();
+
     FPTR_GET_CHOP_STA getChOPStat();
+    FPTR_SET_CHOP_STA setChOPStat();
 
     FPTR_GET_OB_REFEQ getOBRefeq();
     FPTR_SET_OB_REFEQ setOBRefeq();
@@ -57,13 +60,27 @@ public:
     FPTR_SET_OB_REFVOL setOBRefVol();
 
     FPTR_SET_WIREMODE setWireMode();
+    FPTR_GET_WIREMODE getWireMode();
 
     FPTR_SET_VLL_OPTMOD setVllOptMode();
     FPTR_GET_VLL_OPTMOD getVllOptMode();
 
+    FPTR_SET_SIGLOSS_THOLD setSigLossTH();
+    FPTR_GET_SIGLOSS_THOLD getSigLossTH();
+    FPTR_SET_REFLOSS_THOLD setRefLossTH();
+    FPTR_GET_REFLOSS_THOLD getRefLossTH();
+
+
+    FPTR_SET_REF_FEQ setRefFeq();
+    FPTR_SET_REF_VOL setRefVol();
+
     FPTR_GET_ACT_CHS getActChs();
     FPTR_SET_ACT_CHS setActChs();
 
+    FPTR_GET_REF_PW_EN getPWenable();
+    FPTR_SET_REF_PW_EN setPWenable();
+
+    FPTR_GET_REF_CUR getRefCurrent();
     FPTR_GET_BIT_STA getBIT();   //bit for dl model
 };
 

@@ -17,8 +17,12 @@ typedef int(* FPTR_SET_CH_POS)(int, int, int, double*);
 typedef int(* FPTR_GET_ACT_CHS)(int, int, int, unsigned short*);
 typedef int(* FPTR_SET_ACT_CHS)(int, int, int, unsigned short);
 typedef int(* FPTR_GET_BIT_STA)(int, int, int, unsigned short*);
-typedef int(* FPTR_GET_CHPW_STA)(int, int, int, unsigned short*);
+
+typedef int(* FPTR_GET_DLCHPW_STA)(int, int, int, unsigned short*);
+typedef int(* FPTR_SET_DLCHPW_STA)(int, int, int, unsigned short);
+
 typedef int(* FPTR_GET_CHOP_STA)(int, int, int, unsigned short*);
+typedef int(* FPTR_SET_CHOP_STA)(int, int, int, unsigned short);
 typedef int(* FPTR_GET_PLL_STA)(int, int, int, unsigned short*);
 typedef int(* FPTR_GET_CH_POS)(int, int, int, int, double*);
 
@@ -28,17 +32,23 @@ typedef int(* FPTR_GET_OB_REFVOL)(int, int, double*);
 typedef int(* FPTR_SET_OB_REFVOL)(int, int, double);
 
 typedef int(* FPTR_SET_WIREMODE)(int, int, int, unsigned short);
+typedef int(* FPTR_GET_WIREMODE)(int, int, int, unsigned short*);
 
 typedef int(* FPTR_SET_VLL_OPTMOD)(int, int, int, unsigned short);
 typedef int(* FPTR_GET_VLL_OPTMOD)(int, int, int, unsigned short*);
 
 typedef int(* FPTR_SET_REFLOSS_THOLD)(int, int, int, double);
+typedef int(* FPTR_GET_REFLOSS_THOLD)(int, int, int, double*);
 typedef int(* FPTR_SET_SIGLOSS_THOLD)(int, int, int, double);
-typedef int(* FPTR_SET_PW_SUPPLY)(int, int, int, unsigned short);
+typedef int(* FPTR_GET_SIGLOSS_THOLD)(int, int, int, double*);
+
+//typedef int(* FPTR_SET_PW_SUPPLY)(int, int, int, unsigned short);
 typedef int(* FPTR_SET_REF_VOL)(int, int, double);     //set card ref not model..
 typedef int(* FPTR_SET_REF_FEQ)(int, int, unsigned int);
 
 typedef int(* FPTR_GET_REF_PW_EN)(int, int, unsigned short*);
+typedef int(* FPTR_SET_REF_PW_EN)(int, int, unsigned short);
+
 typedef int(* FPTR_GET_REF_CUR)(int, int, int*);
 
 //#define FSTR_REF_GetRefFreq                  "_CPCI75C3_REF_GetRefFreq@12"
@@ -53,15 +63,4 @@ typedef int(* FPTR_GET_REF_CUR)(int, int, int*);
 //#define FSTR_REF_SetRefVoltage               "_CPCI75C3_REF_SetRefVoltage@16"
 //#define FSTR_REF_SetRefVoltageWord           "_CPCI75C3_REF_SetRefVoltageWord@12"
 //#
-
-
-
-
-
-
-
-
-
-
-
 #endif // C75C3FUNCP_H

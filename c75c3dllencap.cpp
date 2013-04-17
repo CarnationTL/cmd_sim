@@ -136,15 +136,24 @@ FPTR_GET_ACU_POS C75C3DllEncap::getChAcuPos() {
 /**
   the pw status for DL model this is fake one ^V^
 */
-FPTR_GET_CHPW_STA C75C3DllEncap::getDLPwStat() {
+FPTR_GET_DLCHPW_STA C75C3DllEncap::getDLPwStat() {
 #if 0
     if(hdll != NULL) {
         return (FPTR_GET_CHPW_STA)GetProcAddress(hdll, FSTR_DL_GetPowerSupplyState);
     }
     return NULL;
 #endif
-    FPTR_GET_CHPW_STA _ret = NULL;
-    GET_FP(hdll, FPTR_GET_CHPW_STA, FSTR_DL_GetPowerSupplyState, _ret);
+    FPTR_GET_DLCHPW_STA _ret = NULL;
+    GET_FP(hdll, FPTR_GET_DLCHPW_STA, FSTR_DL_GetPowerSupplyState, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_SET_DLCHPW_STA C75C3DllEncap::setDLPwStat() {
+    FPTR_SET_DLCHPW_STA _ret = NULL;
+    GET_FP(hdll, FPTR_SET_DLCHPW_STA, FSTR_DL_SetPowerSupplyState, _ret);
     if(_ret != NULL) {
         return _ret;
     }
@@ -157,6 +166,15 @@ FPTR_GET_CHPW_STA C75C3DllEncap::getDLPwStat() {
 FPTR_GET_CHOP_STA C75C3DllEncap::getChOPStat() {
     FPTR_GET_CHOP_STA _ret = NULL;
     GET_FP(hdll, FPTR_GET_CHOP_STA, FSTR_DL_GetChanOutputState, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_SET_CHOP_STA C75C3DllEncap::setChOPStat() {
+    FPTR_SET_CHOP_STA _ret = NULL;
+    GET_FP(hdll, FPTR_SET_CHOP_STA, FSTR_DL_SetChanOutputState, _ret);
     if(_ret != NULL) {
         return _ret;
     }
@@ -212,6 +230,15 @@ FPTR_SET_WIREMODE C75C3DllEncap::setWireMode() {
     return NULL;
 }
 
+FPTR_GET_WIREMODE C75C3DllEncap::getWireMode() {
+    FPTR_GET_WIREMODE _ret = NULL;
+    GET_FP(hdll, FPTR_GET_WIREMODE, FSTR_DL_GetWireMode, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
 
 /**
   the vll mode relate with warp pw line
@@ -228,6 +255,81 @@ FPTR_SET_VLL_OPTMOD C75C3DllEncap::setVllOptMode() {
 FPTR_GET_VLL_OPTMOD C75C3DllEncap::getVllOptMode() {
     FPTR_GET_VLL_OPTMOD _ret = NULL;
     GET_FP(hdll, FPTR_GET_VLL_OPTMOD, FSTR_DL_GetVllOutputMode, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+/**
+  thresh hold..for input sig
+*/
+FPTR_SET_SIGLOSS_THOLD C75C3DllEncap::setSigLossTH() {
+    FPTR_SET_SIGLOSS_THOLD _ret = NULL;
+    GET_FP(hdll, FPTR_SET_SIGLOSS_THOLD, FSTR_DL_SetSigLossThreshold, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_GET_SIGLOSS_THOLD C75C3DllEncap::getSigLossTH() {
+    FPTR_GET_SIGLOSS_THOLD _ret = NULL;
+    GET_FP(hdll, FPTR_GET_SIGLOSS_THOLD, FSTR_DL_GetSigLossThreshold, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_SET_REFLOSS_THOLD C75C3DllEncap::setRefLossTH() {
+    FPTR_SET_REFLOSS_THOLD _ret = NULL;
+    GET_FP(hdll, FPTR_SET_REFLOSS_THOLD, FSTR_DL_SetRefLossThreshold, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_GET_REFLOSS_THOLD C75C3DllEncap::getRefLossTH() {
+    FPTR_GET_REFLOSS_THOLD _ret = NULL;
+    GET_FP(hdll, FPTR_GET_REFLOSS_THOLD, FSTR_DL_GetRefLossThreshold, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+#if 0
+/**
+  this pw supply for ref model
+*/
+FPTR_SET_PW_SUPPLY C75C3DllEncap::setPWsupply() {
+    FPTR_SET_PW_SUPPLY _ret = NULL;
+    GET_FP(hdll, FPTR_SET_PW_SUPPLY, FSTR_DL_SetPowerSupplyState, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+#endif
+
+/**
+  set the refmode feq and vol (NOT THE DL MODEL!!)
+*/
+FPTR_SET_REF_FEQ C75C3DllEncap::setRefFeq() {
+    FPTR_SET_REF_FEQ _ret = NULL;
+    GET_FP(hdll, FPTR_SET_REF_FEQ, FSTR_REF_SetRefFreq, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_SET_REF_VOL C75C3DllEncap::setRefVol() {
+    FPTR_SET_REF_VOL _ret = NULL;
+    GET_FP(hdll, FPTR_SET_REF_VOL, FSTR_REF_SetRefVoltage, _ret);
     if(_ret != NULL) {
         return _ret;
     }
@@ -252,6 +354,37 @@ FPTR_SET_ACT_CHS C75C3DllEncap::setActChs() {
     }
     return NULL;
 }
+
+/**
+  PW supply enable.
+*/
+FPTR_GET_REF_PW_EN C75C3DllEncap::getPWenable() {
+    FPTR_GET_REF_PW_EN _ret = NULL;
+    GET_FP(hdll, FPTR_GET_REF_PW_EN, FSTR_REF_GetPowerSupplyEnable, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_SET_REF_PW_EN C75C3DllEncap::setPWenable() {
+    FPTR_SET_REF_PW_EN _ret = NULL;
+    GET_FP(hdll, FPTR_SET_REF_PW_EN, FSTR_REF_PowerSupplyEnable, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_GET_REF_CUR C75C3DllEncap::getRefCurrent() {
+    FPTR_GET_REF_CUR _ret = NULL;
+    GET_FP(hdll, FPTR_GET_REF_CUR, FSTR_REF_GetRefCurrent, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
 
 FPTR_GET_BIT_STA C75C3DllEncap::getBIT() {
     FPTR_GET_BIT_STA _ret = NULL;
