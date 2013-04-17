@@ -84,6 +84,9 @@ public:
 
     FPTR_GET_REF_CUR getRefCurrent();
     FPTR_GET_BIT_STA getBIT();   //bit for dl model
+
+    FPTR_GET_PLL_STA getPllSTA();
+    FPTR_SET_PLL_STA setPllSTA();
 };
 
 #endif // C75C3DLLENCAP_H

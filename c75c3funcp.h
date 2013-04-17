@@ -14,8 +14,10 @@ typedef int(* FPTR_GET_BRDREADY)(int, unsigned short);
 
 typedef int(* FPTR_GET_ACU_POS)(int, int, int, double);
 typedef int(* FPTR_SET_CH_POS)(int, int, int, double*);
+
 typedef int(* FPTR_GET_ACT_CHS)(int, int, int, unsigned short*);
 typedef int(* FPTR_SET_ACT_CHS)(int, int, int, unsigned short);
+
 typedef int(* FPTR_GET_BIT_STA)(int, int, int, unsigned short*);
 
 typedef int(* FPTR_GET_DLCHPW_STA)(int, int, int, unsigned short*);
@@ -23,7 +25,10 @@ typedef int(* FPTR_SET_DLCHPW_STA)(int, int, int, unsigned short);
 
 typedef int(* FPTR_GET_CHOP_STA)(int, int, int, unsigned short*);
 typedef int(* FPTR_SET_CHOP_STA)(int, int, int, unsigned short);
+
 typedef int(* FPTR_GET_PLL_STA)(int, int, int, unsigned short*);
+typedef int(* FPTR_SET_PLL_STA)(int, int, int, unsigned short);
+
 typedef int(* FPTR_GET_CH_POS)(int, int, int, int, double*);
 
 typedef int(* FPTR_GET_OB_REFEQ)(int, int, unsigned int*);

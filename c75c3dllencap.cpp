@@ -412,3 +412,19 @@ FPTR_GET_BIT_STA C75C3DllEncap::getBIT() {
     }
     return NULL;
 }
+
+/**
+  PLL sta sta
+*/
+FPTR_GET_PLL_STA C75C3DllEncap::getPllSTA() {
+    FPTR_GET_PLL_STA _ret = NULL;
+    GET_FP(hdll, FPTR_GET_PLL_STA, FSTR_DL_GetPLLStatus, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_SET_PLL_STA C75C3DllEncap::setPllSTA() {
+    return NULL;
+}
