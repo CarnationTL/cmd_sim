@@ -42,7 +42,6 @@ typedef int(* FPTR_GET_REFLOSS_THOLD)(int, int, int, double*);
 typedef int(* FPTR_SET_SIGLOSS_THOLD)(int, int, int, double);
 typedef int(* FPTR_GET_SIGLOSS_THOLD)(int, int, int, double*);
 
-//typedef int(* FPTR_SET_PW_SUPPLY)(int, int, int, unsigned short);
 typedef int(* FPTR_SET_REF_VOL)(int, int, double);     //set card ref not model..
 typedef int(* FPTR_SET_REF_FEQ)(int, int, unsigned int);
 
