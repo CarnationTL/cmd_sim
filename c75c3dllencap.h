@@ -72,7 +72,9 @@ public:
 
 
     FPTR_SET_REF_FEQ setRefFeq();
+    FPTR_GET_REF_FEQ getRefFeq();
     FPTR_SET_REF_VOL setRefVol();
+    FPTR_GET_REF_VOL getRefVol();
 
     FPTR_GET_ACT_CHS getActChs();
     FPTR_SET_ACT_CHS setActChs();

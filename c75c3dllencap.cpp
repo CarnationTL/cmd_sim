@@ -327,9 +327,27 @@ FPTR_SET_REF_FEQ C75C3DllEncap::setRefFeq() {
     return NULL;
 }
 
+FPTR_GET_REF_FEQ C75C3DllEncap::getRefFeq() {
+    FPTR_GET_REF_FEQ _ret = NULL;
+    GET_FP(hdll, FPTR_GET_REF_FEQ, FSTR_REF_GetRefFreq, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
 FPTR_SET_REF_VOL C75C3DllEncap::setRefVol() {
     FPTR_SET_REF_VOL _ret = NULL;
     GET_FP(hdll, FPTR_SET_REF_VOL, FSTR_REF_SetRefVoltage, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
+    return NULL;
+}
+
+FPTR_GET_REF_VOL C75C3DllEncap::getRefVol() {
+    FPTR_GET_REF_VOL _ret = NULL;
+    GET_FP(hdll, FPTR_GET_REF_VOL, FSTR_REF_GetRefVoltage, _ret);
     if(_ret != NULL) {
         return _ret;
     }

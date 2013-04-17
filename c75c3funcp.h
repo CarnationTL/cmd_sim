@@ -43,7 +43,10 @@ typedef int(* FPTR_SET_SIGLOSS_THOLD)(int, int, int, double);
 typedef int(* FPTR_GET_SIGLOSS_THOLD)(int, int, int, double*);
 
 typedef int(* FPTR_SET_REF_VOL)(int, int, double);     //set card ref not model..
+typedef int(* FPTR_GET_REF_VOL)(int, int, double*);
 typedef int(* FPTR_SET_REF_FEQ)(int, int, unsigned int);
+typedef int(* FPTR_GET_REF_FEQ)(int, int, unsigned int*);
+
 
 typedef int(* FPTR_GET_REF_PW_EN)(int, int, unsigned short*);
 typedef int(* FPTR_SET_REF_PW_EN)(int, int, unsigned short);
