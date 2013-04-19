@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>748</width>
-    <height>542</height>
+    <width>809</width>
+    <height>578</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QGroupBox" name="gBox_sig_sel">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
+      <x>30</x>
+      <y>20</y>
       <width>201</width>
-      <height>461</height>
+      <height>491</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -33,7 +33,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>380</y>
+       <y>410</y>
        <width>41</width>
        <height>16</height>
       </rect>
@@ -50,73 +50,125 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QDialogButtonBox" name="bbx_sig_sel">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>400</y>
-       <width>160</width>
-       <height>54</height>
+       <y>450</y>
+       <width>158</width>
+       <height>27</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QLineEdit" name="edit_line">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>133</width>
-          <height>17</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDialogButtonBox" name="bbx_sig_sel">
-        <property name="styleSheet">
-         <string notr="true">font: 9pt &quot;微软雅黑&quot;;
+     <property name="styleSheet">
+      <string notr="true">font: 9pt &quot;微软雅黑&quot;;
 
 </string>
-        </property>
-        <property name="standardButtons">
-         <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
     </widget>
-   </widget>
-   <widget class="QListView" name="listw_sig_sel">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>181</width>
-      <height>341</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
-    </property>
-    <property name="viewMode">
-     <enum>QListView::ListMode</enum>
-    </property>
+    <widget class="QListView" name="listw_sig_sel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>181</width>
+       <height>341</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+     </property>
+     <property name="viewMode">
+      <enum>QListView::ListMode</enum>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edit_line">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>410</y>
+       <width>133</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>133</width>
+       <height>17</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>-20</y>
       <width>2</width>
       <height>2</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout"/>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>40</y>
+      <width>74</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>50</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+    </property>
+    <property name="text">
+     <string>仪器模块:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_2">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>90</y>
+      <width>74</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>90</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+    </property>
+    <property name="text">
+     <string>模块通道:</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -124,7 +176,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>748</width>
+     <width>809</width>
      <height>17</height>
     </rect>
    </property>
