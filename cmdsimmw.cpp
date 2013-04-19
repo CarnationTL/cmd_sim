@@ -78,6 +78,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 //    LVDTCh *ptrLch = new LVDTCh(1, "lvdt_ch1");
     initInsView();
     initSeachLE();
+    initHWSel();
+    initCHModel();
 }
 
 CMDSimMW::~CMDSimMW()
@@ -189,6 +191,36 @@ void CMDSimMW::initSeachLE() {
 }
 
 /**
+  init hw select
+*/
+void CMDSimMW::initHWSel() {
+    _pcbxSigSel = ui->cbx_sigts;
+    _pcbxCh = ui->cbx_ch;
+    if(_pcbxSigSel != NULL && _pcbxCh != NULL) {
+        _pcbxSigSel->addItem(cvcp936("LVDT"));
+        _pcbxSigSel->addItem(cvcp936("AO"));
+    }
+}
+
+/**
+  diff type with diff models
+*/
+void CMDSimMW::initCHModel() {
+    QString _tmpStr;
+    QString _sLVDT(cvcp936("LVDT"));
+    QString _sAO(cvcp936("AO"));
+    _pcbxCh = ui->cbx_ch;
+    if(_pcbxSigSel != NULL && _pcbxCh != NULL) {
+        _tmpStr = _pcbxSigSel->currentText();
+        if(_tmpStr.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
+            _pcbxCh->addItem(cvcp936("LVDT>>>>>>"));
+        } else if(_tmpStr.compare(_sAO, Qt::CaseInsensitive) == 0) {
+            _pcbxCh->addItem(cvcp936("AO>>>>>>"));
+        }
+    }
+}
+
+/**
   set the layout of setBrdDlg (will move to new ui file)
 */
 #if 0
@@ -250,3 +282,26 @@ void CMDSimMW::on_bbx_sig_sel_accepted() {
 void CMDSimMW::on_bbx_sig_sel_rejected() {
     QMessageBox::warning(this, "rejected..", "reject...", QMessageBox::Yes);
 }
+
+void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
+    QString _sLVDT(cvcp936("LVDT"));
+    QString _sAO(cvcp936("AO"));
+    _pcbxCh = ui->cbx_ch;
+    _pcbxCh->clear();
+    if(arg1.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
+        //band model
+        _pcbxCh->addItem(cvcp936("LVDT>>>>>>"));
+    } else if(arg1.compare(_sAO, Qt::CaseInsensitive) == 0) {
+        //band model
+        _pcbxCh->addItem(cvcp936("AO>>>>>>"));
+    }
+}
+
+
+
+
+
+
+
+
+
