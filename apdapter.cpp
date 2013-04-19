@@ -2,8 +2,7 @@
 #include <qmath.h>
 #include <cmddefs.h>
 Apdapter::Apdapter(QObject *parent) :
-    QObject(parent)
-{
+    QObject(parent) {
 }
 
 Apdapter::Apdapter(double maxPval, double minPval,
