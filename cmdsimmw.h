@@ -11,7 +11,6 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QDialog>
-
 namespace Ui {
 class CMDSimMW;
 }
@@ -41,9 +40,12 @@ private:
     QStandardItemModel *dv_model;
     QString cvcp936(const char str[]);
     void initInsView();
+    void initSeachLE();
     QDialog *_pdlg;
     QGridLayout *_pMainLay;
     QGridLayout *_pLeftLay;
+    QLineEdit *_pSeachEdit;
+    QCompleter *_pCompleter;
 };
 
 #endif // CMDSIMMW_H

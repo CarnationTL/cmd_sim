@@ -12,6 +12,7 @@
 #include <QLayout>
 #include "setbrddlg.h"
 #include "setwpdlg.h"
+#include <QCompleter>
 typedef int(* funca )(int);
 
 
@@ -76,6 +77,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 
 //    LVDTCh *ptrLch = new LVDTCh(1, "lvdt_ch1");
     initInsView();
+    initSeachLE();
 }
 
 CMDSimMW::~CMDSimMW()
@@ -172,6 +174,18 @@ void CMDSimMW::initInsView() {
         }
     }
     pv->setModel(dv_model);
+}
+
+/**
+  init the search edit...
+*/
+void CMDSimMW::initSeachLE() {
+    _pSeachEdit = ui->edit_search;
+    if(_pSeachEdit != NULL && dv_model != NULL) {
+        _pCompleter = new QCompleter(this);
+        _pCompleter->setModel(dv_model);
+        _pSeachEdit->setCompleter(_pCompleter);
+    }
 }
 
 /**
