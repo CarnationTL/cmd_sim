@@ -12,6 +12,7 @@
 #include <QLineEdit>
 #include <QDialog>
 #include <QComboBox>
+#include <QStringList>
 namespace Ui {
 class CMDSimMW;
 }
@@ -24,6 +25,7 @@ public:
     explicit CMDSimMW(QWidget *parent = 0);
     ~CMDSimMW();
     int initInstructs();
+    void qbshow(QString str);
 private slots:
     void on_actionSetBrd_triggered();
 
@@ -55,6 +57,10 @@ private:
     QCompleter *_pCompleter;
     QComboBox *_pcbxSigSel;
     QComboBox *_pcbxCh;
+    QStringList *_lch_list;
+    QStringList *_ach_list;
+    void initLchList();
+    void initAOList();
 };
 
 #endif // CMDSIMMW_H

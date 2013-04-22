@@ -12,4 +12,6 @@
 #define TIMEOUT         6000
 
 #define DEV_LEN         80
+#define MAX_LVDT_CH     32
+#define MAX_AO_CH       16
 #endif // CMDDEFS_H

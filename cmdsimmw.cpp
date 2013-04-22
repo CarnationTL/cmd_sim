@@ -80,6 +80,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     initSeachLE();
     initHWSel();
     initCHModel();
+    initLchList();
 }
 
 CMDSimMW::~CMDSimMW()
@@ -128,11 +129,16 @@ int CMDSimMW::initInstructs() {
             ps_ins_v->append(tempStr);
         }
     }
-    return ps_ins_v->size();
+
     delete prefix;
     delete end;
     prefix = NULL;
     end = NULL;
+    return ps_ins_v->size();
+}
+
+void CMDSimMW::qbshow(QString str) {
+    QMessageBox::warning(this, str, str, QMessageBox::Yes);
 }
 
 int CMDSimMW::initrfm() {
@@ -202,9 +208,11 @@ void CMDSimMW::initHWSel() {
     }
 }
 
+
 /**
   diff type with diff models
 */
+
 void CMDSimMW::initCHModel() {
     QString _tmpStr;
     QString _sLVDT(cvcp936("LVDT"));
@@ -213,12 +221,69 @@ void CMDSimMW::initCHModel() {
     if(_pcbxSigSel != NULL && _pcbxCh != NULL) {
         _tmpStr = _pcbxSigSel->currentText();
         if(_tmpStr.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
+            //bind model
             _pcbxCh->addItem(cvcp936("LVDT>>>>>>"));
         } else if(_tmpStr.compare(_sAO, Qt::CaseInsensitive) == 0) {
+            //bind model
             _pcbxCh->addItem(cvcp936("AO>>>>>>"));
         }
     }
 }
+
+void CMDSimMW::initLchList() {
+#if 0
+    _lch_list = new QStringList();
+    QString _tmp;
+    for(int i = 0; i < MAX_LVDT_CH; i++) {
+        _tmp.clear();
+        _tmp = cvcp936("LVDT") + QString::number(i, 10);
+        _lch_list->append(_tmp);
+    }
+    _pcbxCh = ui->cbx_ch;
+    _pcbxCh->clear();
+    _pcbxCh->addItems(*_lch_list);
+#endif
+}
+
+void CMDSimMW::initAOList() {
+
+
+}
+
+
+#if 0
+void CMDSimMW::initLchModel() {
+    QStringList _strlist;
+    lch_model = new QStandardItemModel(MAX_LVDT_CH, 0, 0);
+    QString _tmp;
+    for(int i = 0; i < MAX_LVDT_CH; i++) {
+        _tmp.clear();
+        _tmp.append((cvcp936("LVDT") + i));
+        _strlist.append(_tmp);
+        QStandardItem *_item = new QStandardItem(_tmp.at(i));
+        //lch_model->setItem(i, _item);
+        lch_model->insertRow(i, _item);
+    }
+//    _pcbxCh = ui->cbx_ch;
+//    _pcbxCh->setModelColumn(0);
+//    _pcbxCh->setModel(lch_model);
+}
+#endif
+
+#if 0
+void CMDSimMW::initAOModel() {
+ QStringList _strlist;
+    ach_model = new QStandardItemModel(MAX_AO_CH, 0);
+    QString _tmp;
+    for(int i = 0; i < MAX_LVDT_CH; i++) {
+        _tmp.clear();
+        _tmp.append((cvcp936("AO") + i));
+        _strlist.append(_tmp);
+        QStandardItem *_item = new QStandardItem(_tmp.at(i));
+        ach_model->setItem(i, _item);
+    }
+}
+#endif
 
 /**
   set the layout of setBrdDlg (will move to new ui file)
@@ -283,6 +348,9 @@ void CMDSimMW::on_bbx_sig_sel_rejected() {
     QMessageBox::warning(this, "rejected..", "reject...", QMessageBox::Yes);
 }
 
+/**
+  bind the model when indx changed..
+*/
 void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
@@ -296,12 +364,3 @@ void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
         _pcbxCh->addItem(cvcp936("AO>>>>>>"));
     }
 }
-
-
-
-
-
-
-
-
-
