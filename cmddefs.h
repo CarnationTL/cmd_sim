@@ -13,5 +13,5 @@
 
 #define DEV_LEN         80
 #define MAX_LVDT_CH     32
-#define MAX_AO_CH       16
+#define MAX_AO_CH       12
 #endif // CMDDEFS_H

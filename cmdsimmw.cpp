@@ -87,6 +87,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     initHWSel();
     initCHModel();
 
+    //_pcbxCh->clear();
+    //_pcbxCh->setModel(ach_model);
 }
 
 CMDSimMW::~CMDSimMW()
@@ -224,9 +226,9 @@ void CMDSimMW::initCHModel() {
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
     _pcbxCh = ui->cbx_ch;
-    _pcbxCh->clear();
+    //_pcbxCh->clear();
     if(_pcbxSigSel != NULL && _pcbxCh != NULL) {
-        _tmpStr = _pcbxSigSel->currentText();
+//        _tmpStr = _pcbxSigSel->currentText();
         if(_tmpStr.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
             //bind model
             //_pcbxCh->addItem(cvcp936("LVDT>>>>>>"));
@@ -271,7 +273,7 @@ void CMDSimMW::initLchList() {
 
 void CMDSimMW::initAOList() {
     ach_model = new QStandardItemModel();
-    for(int i = 0; i < MAX_LVDT_CH; i++) {
+    for(int i = 0; i < MAX_AO_CH; i++) {
         QStandardItem *item = new QStandardItem(cvcp936("AO") + QString::number(i, 10));
         ach_model->appendRow(item);
     }
@@ -382,12 +384,15 @@ void CMDSimMW::on_bbx_sig_sel_rejected() {
   bind the model when indx changed..
 */
 void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
-    if(lch_model->rowCount() < 0 || ach_model->rowCount() < 0)
+
+    if(lch_model->rowCount() < 0 || ach_model->rowCount() < 0) {
         return;
+    }
+
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
     _pcbxCh = ui->cbx_ch;
-    _pcbxCh->clear();
+    //_pcbxCh->clear();
     if(arg1.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
         //band model
         //_pcbxCh->addItem(cvcp936("LVDT>>>>>>"));
