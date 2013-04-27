@@ -14,6 +14,7 @@
 #include "setwpdlg.h"
 #include <QCompleter>
 #include <QList>
+#include <QHeaderView>
 typedef int(* funca )(int);
 
 
@@ -90,6 +91,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     initHWSel();
     initCHModel();
 
+    initTbl();
     //_pcbxCh->clear();
     //_pcbxCh->setModel(ach_model);
 }
@@ -266,6 +268,37 @@ void CMDSimMW::initAOList() {
         ach_model->appendRow(item);
     }
     rach_model = new QStandardItemModel();
+}
+
+/**
+  init tbl
+*/
+void CMDSimMW::initTbl() {
+    _ptbl = ui->tbl_selres;
+    tbl_model = new QStandardItemModel(4, 4);
+    _ptbl->setModel(tbl_model);
+    tbl_model->setHeaderData(0, Qt::Horizontal, cvcp936("类型"));
+    tbl_model->setHeaderData(1, Qt::Horizontal, cvcp936("名称"));
+    tbl_model->setHeaderData(2, Qt::Horizontal, cvcp936("编号"));
+    tbl_model->setHeaderData(3, Qt::Horizontal, cvcp936("模式"));
+
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            QModelIndex idx = tbl_model->index(i, j);
+            if(j == 0) {
+                tbl_model->setData(idx, "L");
+            } else {
+                tbl_model->setData(idx, "test");
+            }
+
+        }
+    }
+    //set last col
+    _ptbl->horizontalHeader()->setStretchLastSection(true);
+    _ptbl->setColumnWidth(0, 35);
+    if(_ptbl != NULL) {
+
+    }
 }
 
 
@@ -460,4 +493,3 @@ bool CMDSimMW::switchtoUmodel(QStandardItem *item, int type) {
     }
     return false;
 }
-

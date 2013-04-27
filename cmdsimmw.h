@@ -13,6 +13,7 @@
 #include <QLineEdit>
 #include <QDialog>
 #include <QComboBox>
+#include <QTableView>
 namespace Ui {
 class CMDSimMW;
 }
@@ -52,6 +53,7 @@ private:
     QStandardItemModel *ach_model;
     QStandardItemModel *rlch_model;
     QStandardItemModel *rach_model;
+    QStandardItemModel *tbl_model;
     QString cvcp936(const char str[]);
     void initInsView();
     void initSeachLE();
@@ -64,8 +66,11 @@ private:
     QCompleter *_pCompleter;
     QComboBox *_pcbxSigSel;
     QComboBox *_pcbxCh;
+    QTableView *_ptbl;
+
     void initLchList();
     void initAOList();
+    void initTbl();
 
     bool switchtoRmodel(QStandardItem *item, int type);
     bool switchtoUmodel(QStandardItem *item, int type);
