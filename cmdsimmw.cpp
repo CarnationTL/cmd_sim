@@ -13,6 +13,7 @@
 #include "setbrddlg.h"
 #include "setwpdlg.h"
 #include <QCompleter>
+#include <QList>
 typedef int(* funca )(int);
 
 
@@ -20,6 +21,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMDSimMW) {
 
+    SIG_LVDT = new QString(cvcp936("LVDT"));
+    SIG_AO = new QString(cvcp936("AO"));
     ui->setupUi(this);
 
 #if 0
@@ -91,8 +94,11 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     //_pcbxCh->setModel(ach_model);
 }
 
-CMDSimMW::~CMDSimMW()
-{
+CMDSimMW::~CMDSimMW() {
+    if(SIG_LVDT != NULL)
+        delete SIG_LVDT;
+    if(SIG_AO != NULL)
+        delete SIG_AO;
     delete ui;
 }
 
@@ -226,7 +232,6 @@ void CMDSimMW::initCHModel() {
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
     _pcbxCh = ui->cbx_ch;
-    //_pcbxCh->clear();
     if(_pcbxSigSel != NULL && _pcbxCh != NULL) {
 //        _tmpStr = _pcbxSigSel->currentText();
         if(_tmpStr.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
@@ -246,29 +251,12 @@ void CMDSimMW::initCHModel() {
 }
 
 void CMDSimMW::initLchList() {
-#if 0
-    _lch_list = new QStringList();
-    QString _tmp;
-    for(int i = 0; i < MAX_LVDT_CH; i++) {
-        _tmp.clear();
-        _tmp = cvcp936("LVDT") + QString::number(i, 10);
-        _lch_list->append(_tmp);
-    }
-    _pcbxCh = ui->cbx_ch;
-    _pcbxCh->clear();
-    _pcbxCh->addItems(*_lch_list);
-#endif
-
-#if 1
     lch_model = new QStandardItemModel();
     for(int i = 0; i < MAX_LVDT_CH; i++) {
         QStandardItem *item = new QStandardItem(cvcp936("LVDT") + QString::number(i, 10));
         lch_model->appendRow(item);
     }
-    //_pcbxCh = ui->cbx_ch;
-    //_pcbxCh->clear();
-    //_pcbxCh->setModel(lch_model);
-#endif
+    rlch_model = new QStandardItemModel();
 }
 
 void CMDSimMW::initAOList() {
@@ -277,9 +265,7 @@ void CMDSimMW::initAOList() {
         QStandardItem *item = new QStandardItem(cvcp936("AO") + QString::number(i, 10));
         ach_model->appendRow(item);
     }
-    //_pcbxCh = ui->cbx_ch;
-    //_pcbxCh->clear();
-    //_pcbxCh->setModel(ach_model);
+    rach_model = new QStandardItemModel();
 }
 
 
@@ -404,3 +390,74 @@ void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
 
     }
 }
+/**
+  select the sig ch and type
+*/
+void CMDSimMW::on_pushButton_clicked() {
+    _pcbxCh = ui->cbx_ch;
+    _pcbxSigSel = ui->cbx_sigts;
+    QString _curText, _curText2;
+    _curText = _pcbxCh->currentText();
+    _curText2 = _pcbxSigSel->currentText();
+
+    QList <QStandardItem *> findres;
+    findres = lch_model->findItems(_curText);
+    if(findres.size() == 1) {
+       qbshow( QString::number(findres.at(0)->row(), 10));
+    }
+}
+
+
+/**
+  switch To remove models
+*/
+bool CMDSimMW::switchtoRmodel(QStandardItem *item, int type) {
+    QList <QStandardItem *> fres;
+    if(type == T_L) {
+        fres = lch_model->findItems(item->text());
+        if(fres.size() == 1) { //ex find
+            rlch_model->appendRow(item);
+            lch_model->removeRow(item->row());
+            return true;
+        }
+        return false;
+    } else if(type == T_A) {
+        fres = ach_model->findItems(item->text());
+        if(fres.size() == 1) {
+            rach_model->appendRow(item);
+            ach_model->removeRow(item->row());
+            return true;
+        }
+        return true;
+    }
+    return false;
+}
+
+
+/**
+  switch r model to u model
+*/
+bool CMDSimMW::switchtoUmodel(QStandardItem *item, int type) {
+    QList <QStandardItem *> fres;
+    if(type == T_L) {
+        fres = rlch_model->findItems(item->text());
+        if(fres.size() == 1) { //ex find
+            lch_model->appendRow(item);
+            rlch_model->removeRow(item->row());
+            lch_model->sort(0);
+            return true;
+        }
+        return false;
+    } else if(type == T_A) {
+        fres = rach_model->findItems(item->text());
+        if(fres.size() == 1) {
+            ach_model->appendRow(item);
+            rach_model->removeRow(item->row());
+            ach_model->sort(0);
+            return true;
+        }
+        return true;
+    }
+    return false;
+}
+

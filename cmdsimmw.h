@@ -2,6 +2,7 @@
 #define CMDSIMMW_H
 
 #include <QMainWindow>
+#include <QString>
 #include <QStringList>
 #include <QListView>
 #include <QStandardItemModel>
@@ -12,7 +13,6 @@
 #include <QLineEdit>
 #include <QDialog>
 #include <QComboBox>
-#include <QStringList>
 namespace Ui {
 class CMDSimMW;
 }
@@ -35,8 +35,13 @@ private slots:
 
     void on_cbx_sigts_currentIndexChanged(const QString &arg1);
 
+    void on_pushButton_clicked();
+
 private:
     enum {LVDTBrds = 4};
+    QString *SIG_LVDT;
+    QString *SIG_AO;
+    enum {T_L, T_A};
     Ui::CMDSimMW *ui;
     int initrfm(void);
     int init75c3(void);
@@ -45,6 +50,8 @@ private:
     QStandardItemModel *dv_model;
     QStandardItemModel *lch_model;
     QStandardItemModel *ach_model;
+    QStandardItemModel *rlch_model;
+    QStandardItemModel *rach_model;
     QString cvcp936(const char str[]);
     void initInsView();
     void initSeachLE();
@@ -57,10 +64,11 @@ private:
     QCompleter *_pCompleter;
     QComboBox *_pcbxSigSel;
     QComboBox *_pcbxCh;
-    QStringList *_lch_list;
-    QStringList *_ach_list;
     void initLchList();
     void initAOList();
+
+    bool switchtoRmodel(QStandardItem *item, int type);
+    bool switchtoUmodel(QStandardItem *item, int type);
 };
 
 #endif // CMDSIMMW_H
