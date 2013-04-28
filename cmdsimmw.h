@@ -38,6 +38,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_commandLinkButton_clicked();
+
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
@@ -67,6 +69,7 @@ private:
     QComboBox *_pcbxSigSel;
     QComboBox *_pcbxCh;
     QTableView *_ptbl;
+    QDialog *_pqwtdlg;
 
     void initLchList();
     void initAOList();

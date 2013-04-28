@@ -423,6 +423,7 @@ void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
 
     }
 }
+
 /**
   select the sig ch and type
 */
@@ -461,11 +462,10 @@ bool CMDSimMW::switchtoRmodel(QStandardItem *item, int type) {
             ach_model->removeRow(item->row());
             return true;
         }
-        return true;
+        return false;
     }
     return false;
 }
-
 
 /**
   switch r model to u model
@@ -489,7 +489,17 @@ bool CMDSimMW::switchtoUmodel(QStandardItem *item, int type) {
             ach_model->sort(0);
             return true;
         }
-        return true;
+        return false;
     }
     return false;
+}
+
+void CMDSimMW::on_commandLinkButton_clicked() {
+#if 1
+    _pqwtdlg = new SetWPDlg(this);
+    if(_pqwtdlg != NULL) {
+        _pqwtdlg->setAttribute(Qt::WA_DeleteOnClose);  //2parameter = true
+        _pqwtdlg->exec();
+    }
+#endif
 }

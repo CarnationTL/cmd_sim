@@ -15,6 +15,9 @@ public:
     explicit SetWPDlg(QWidget *parent = 0);
     ~SetWPDlg();
     
+private slots:
+    void on_pb_test_clicked();
+
 private:
     Ui::SetWPDlg *ui;
 };
