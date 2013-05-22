@@ -14,12 +14,12 @@
 #include <QDialog>
 #include <QComboBox>
 #include <QTableView>
+
 namespace Ui {
 class CMDSimMW;
 }
 
-class CMDSimMW : public QMainWindow
-{
+class CMDSimMW : public QMainWindow {
     Q_OBJECT
     
 public:
@@ -27,6 +27,7 @@ public:
     ~CMDSimMW();
     int initInstructs();
     void qbshow(QString str);
+
 private slots:
     void on_actionSetBrd_triggered();
 

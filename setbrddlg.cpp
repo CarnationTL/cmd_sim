@@ -9,6 +9,13 @@ SetBrdDlg::SetBrdDlg(QWidget *parent) :
     this->setLayout(ui->setbdGlay);
 }
 
+/**
+  init board styles..
+*/
+void SetBrdDlg::initBrdDlgCtls() {
+
+}
+
 SetBrdDlg::~SetBrdDlg()
 {
     delete ui;

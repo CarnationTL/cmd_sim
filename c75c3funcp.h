@@ -58,6 +58,7 @@ typedef int(* FPTR_SET_REF_PW_EN)(int, int, unsigned short);
 
 typedef int(* FPTR_GET_REF_CUR)(int, int, int*);
 
+
 //#define FSTR_REF_GetRefFreq                  "_CPCI75C3_REF_GetRefFreq@12"
 //#define FSTR_REF_GetRefFreqWord              "_CPCI75C3_REF_GetRefFreqWord@12"
 //#define FSTR_REF_GetRefOverCurrent           "_CPCI75C3_REF_GetRefOverCurrent@12"

@@ -5,8 +5,7 @@
 #include <QString>
 #include "c75c3funcp.h"
 #include "C75C3Expls.h"
-class CommonCh : public QObject
-{
+class CommonCh : public QObject {
     Q_OBJECT
 public:
     explicit CommonCh(QObject *parent = 0);
@@ -23,7 +22,6 @@ private:
 signals:
     
 public slots:
-    
 };
 
 #endif // COMMONCH_H

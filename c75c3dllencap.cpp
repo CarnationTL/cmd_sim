@@ -425,6 +425,16 @@ FPTR_GET_PLL_STA C75C3DllEncap::getPllSTA() {
     return NULL;
 }
 
+#if 0
+/**
+ Set PLL status...
+*/
 FPTR_SET_PLL_STA C75C3DllEncap::setPllSTA() {
+    FPTR_SET_PLL_STA _ret = NULL;
+    GET_FP(hdll, FPTR_SET_PLL_STA, FSTR_DL_SetPLLStatus, _ret);
+    if(_ret != NULL) {
+        return _ret;
+    }
     return NULL;
 }
+#endif

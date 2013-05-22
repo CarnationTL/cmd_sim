@@ -16,7 +16,7 @@
 #include <QList>
 #include <QHeaderView>
 typedef int(* funca )(int);
-
+#define TBL_COL 4
 
 CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),
@@ -212,6 +212,7 @@ void CMDSimMW::initSeachLE() {
     }
 }
 
+
 /**
   init hw select
 */
@@ -274,6 +275,7 @@ void CMDSimMW::initAOList() {
   init tbl
 */
 void CMDSimMW::initTbl() {
+    //set table sytle
     _ptbl = ui->tbl_selres;
     tbl_model = new QStandardItemModel(4, 4);
     _ptbl->setModel(tbl_model);
@@ -282,23 +284,26 @@ void CMDSimMW::initTbl() {
     tbl_model->setHeaderData(2, Qt::Horizontal, cvcp936("编号"));
     tbl_model->setHeaderData(3, Qt::Horizontal, cvcp936("模式"));
 
-    for(int i = 0; i < 4; i++) {
-        for(int j = 0; j < 4; j++) {
+    for(int i = 0; i < TBL_COL; i++) {
+        for(int j = 0; j < TBL_COL; j++) {
             QModelIndex idx = tbl_model->index(i, j);
+            //test the first col...
             if(j == 0) {
                 tbl_model->setData(idx, "L");
             } else {
                 tbl_model->setData(idx, "test");
             }
-
         }
     }
+
+#if 0
     //set last col
     _ptbl->horizontalHeader()->setStretchLastSection(true);
     _ptbl->setColumnWidth(0, 35);
     if(_ptbl != NULL) {
 
     }
+#endif
 }
 
 
@@ -498,8 +503,16 @@ void CMDSimMW::on_commandLinkButton_clicked() {
 #if 1
     _pqwtdlg = new SetWPDlg(this);
     if(_pqwtdlg != NULL) {
-        _pqwtdlg->setAttribute(Qt::WA_DeleteOnClose);  //2parameter = true
+        //_pqwtdlg->setAttribute(Qt::WA_DeleteOnClose);  //2parameter = true
+        _pqwtdlg->setAttribute(Qt::WA_DeleteOnClose);
         _pqwtdlg->exec();
     }
 #endif
 }
+
+
+/*
+  _pqwtdlg = new SetWPDlg(this);
+  if(_pqwtdlg_ )
+*/
+

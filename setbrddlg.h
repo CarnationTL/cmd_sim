@@ -13,6 +13,7 @@ class SetBrdDlg : public QDialog
     
 public:
     explicit SetBrdDlg(QWidget *parent = 0);
+    void initBrdDlgCtls();
     ~SetBrdDlg();
     
 private:

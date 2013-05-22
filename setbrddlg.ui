@@ -38,21 +38,21 @@
     <item row="1" column="3">
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>TextLabel</string>
+       <string>激励频率:</string>
       </property>
      </widget>
     </item>
     <item row="5" column="3">
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>TextLabel</string>
+       <string>激励频率:</string>
       </property>
      </widget>
     </item>
     <item row="4" column="3">
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>TextLabel</string>
+       <string>激励频率:</string>
       </property>
      </widget>
     </item>
@@ -88,15 +88,12 @@
     <item row="4" column="0">
      <widget class="QLabel" name="lbl3">
       <property name="text">
-       <string>TextLabel</string>
+       <string>LVDT输出模块3-激励电压:</string>
       </property>
      </widget>
     </item>
     <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEdit_3"/>
-    </item>
-    <item row="1" column="4">
-     <widget class="QLineEdit" name="lineEdit_5"/>
+     <widget class="QLineEdit" name="le_lvdt_volt3"/>
     </item>
     <item row="0" column="4">
      <spacer name="horizontalSpacer_11">
@@ -114,12 +111,12 @@
     <item row="5" column="0">
      <widget class="QLabel" name="lbl4">
       <property name="text">
-       <string>TextLabel</string>
+       <string>LVDT输出模块4-激励电压:</string>
       </property>
      </widget>
     </item>
     <item row="5" column="1">
-     <widget class="QLineEdit" name="lineEdit_4"/>
+     <widget class="QLineEdit" name="le_lvdt_volt4"/>
     </item>
     <item row="5" column="2">
      <spacer name="horizontalSpacer_4">
@@ -138,25 +135,25 @@
      </spacer>
     </item>
     <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEdit_2"/>
+     <widget class="QLineEdit" name="le_lvdt_volt2"/>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="lbl1">
       <property name="text">
-       <string>TextLabel</string>
+       <string>LVDT输出模块1-激励电压:</string>
       </property>
      </widget>
     </item>
     <item row="3" column="4">
-     <widget class="QLineEdit" name="lineEdit_6"/>
+     <widget class="QLineEdit" name="le_lvdt_feq2"/>
     </item>
     <item row="4" column="4">
-     <widget class="QLineEdit" name="lineEdit_7"/>
+     <widget class="QLineEdit" name="le_lvdt_feq3"/>
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="lbl2">
       <property name="text">
-       <string>TextLabel</string>
+       <string>LVDT输出模块2-激励电压:</string>
       </property>
      </widget>
     </item>
@@ -186,12 +183,9 @@
     <item row="3" column="3">
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>TextLabel</string>
+       <string>激励频率:</string>
       </property>
      </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit"/>
     </item>
     <item row="1" column="5">
      <spacer name="horizontalSpacer_5">
@@ -313,9 +307,22 @@
       </property>
      </widget>
     </item>
+    <item row="1" column="1">
+     <widget class="QwtKnob" name="Knob"/>
+    </item>
+    <item row="1" column="4">
+     <widget class="QwtKnob" name="Knob_2"/>
+    </item>
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QwtKnob</class>
+   <extends>QWidget</extends>
+   <header>qwt_knob.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

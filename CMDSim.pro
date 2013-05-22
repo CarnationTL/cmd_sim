@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     apdapter.cpp \
     setbrddlg.cpp \
     setwpdlg.cpp \
-    brd75c3.cpp
+    brd75c3.cpp \
+    setlbrdparadlg.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -39,11 +40,13 @@ HEADERS  += cmdsimmw.h \
     apdapter.h \
     setbrddlg.h \
     setwpdlg.h \
-    brd75c3.h
+    brd75c3.h \
+    setlbrdparadlg.h
 
 FORMS    += cmdsimmw.ui \
     setbrddlg.ui \
-    setwpdlg.ui
+    setwpdlg.ui \
+    setlbrdparadlg.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwt
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwtd

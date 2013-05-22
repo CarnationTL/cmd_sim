@@ -23,4 +23,3 @@ int RFM2gSE::open() {
 	}
 	return EXE_SUCCESS;
 }
-

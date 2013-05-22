@@ -13,9 +13,9 @@ public:
 private:
     C75C3DllEncap *pdll;
 signals:
-    
+
 public slots:
-    
+
 };
 
 #endif // BRD75C3_H

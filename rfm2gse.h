@@ -56,9 +56,8 @@ private:
 	char           *pchar;
 	RFM2G_UINT32   *prfmInt;
 signals:
-    
+
 public slots:
     
 };
-
     #endif // RFM2GSE_H
