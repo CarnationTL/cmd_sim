@@ -8,6 +8,7 @@ setLbrdParaDlg::setLbrdParaDlg(QWidget *parent) :
     ui->setupUi(this);
 }
 
+
 setLbrdParaDlg::~setLbrdParaDlg()
 {
     delete ui;

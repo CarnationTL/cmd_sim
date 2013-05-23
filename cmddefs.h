@@ -14,4 +14,19 @@
 #define DEV_LEN         80
 #define MAX_LVDT_CH     32
 #define MAX_AO_CH       12
+
+enum sigtypes {
+    T_SINE,
+    T_TRI,
+    T_SAW,
+    T_SQUARE,
+    T_SP
+};				/* ----------  end of enum sigtypes  ---------- */
+
+typedef enum sigtypes Sigtypes;
+
+
+
+
+
 #endif // CMDDEFS_H

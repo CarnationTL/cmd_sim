@@ -16,11 +16,10 @@ double Apdapter::maxPhyval() const {
     return _maxPhyval;
 }
 
+
 void Apdapter::setMaxPhyval(double maxPhyval) {
     _maxPhyval = maxPhyval;
 }
-
-
 
 double Apdapter::minPhyval() const {
     return _minPhyval;
@@ -71,3 +70,4 @@ double Apdapter::doConvert(double pVal) {
     }
     return (double)EXE_FAIL;
 }
+
