@@ -13,9 +13,7 @@ class Sig : public QObject {
         Sig(double amp, double feq) : _amp(amp), _feq(feq) {
 
         }
-        ~Sig() {
-
-        }
+        virtual ~Sig();
         double  Amp() const {
             return _amp;
         }
@@ -33,8 +31,6 @@ class Sig : public QObject {
         double _feq;
 }; /* -----  end of class Sig  ----- */
 
-
-
 class Sine : public Sig {
     Q_OBJECT
     public:
@@ -45,7 +41,8 @@ class Sine : public Sig {
             _amp = other.Amp();
             _feq = other.Feq();
         }
-        ~Sine ();
+        ~Sine () {
+        }
         Sine& operator = ( const Sine &other ) {
             _amp = other.Amp();
             _feq = other.Feq();
