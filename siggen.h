@@ -11,7 +11,7 @@ class SigGen : public QObject
     Q_OBJECT
 public:
     explicit SigGen(QObject *parent = 0);
-    int genData(int type, );
+  //  int genData(int type, );
 signals:
     
 public slots:

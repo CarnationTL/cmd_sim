@@ -510,9 +510,7 @@ void CMDSimMW::on_commandLinkButton_clicked() {
 #endif
 }
 
-
 /*
   _pqwtdlg = new SetWPDlg(this);
   if(_pqwtdlg_ )
 */
-
