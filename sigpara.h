@@ -13,7 +13,7 @@ class Sig : public QObject {
         Sig(double amp, double feq) : _amp(amp), _feq(feq) {
 
         }
-        virtual ~Sig();
+        ~Sig() {}
         double  Amp() const {
             return _amp;
         }
@@ -26,9 +26,11 @@ class Sig : public QObject {
         void setFeq(double feq) {
             _feq = feq;
         }
+      //  virtual Sig* getPara() = 0;
     protected:
         double _amp;
         double _feq;
+       // Sig   *_psig;
 }; /* -----  end of class Sig  ----- */
 
 class Sine : public Sig {
@@ -48,9 +50,6 @@ class Sine : public Sig {
             _feq = other.Feq();
         }
 }; /* -----  end of class Sine  ----- */
-
-
-
 
 class Tri : public Sig {
     Q_OBJECT
@@ -151,13 +150,22 @@ class Saw : public Sig {
 }; /* -----  end of class Saw  ----- */
 
 
+
+
+
+
+
+
+#if 0
+
 class SigPara : public QObject
 {
     Q_OBJECT
     public:
         explicit SigPara(QObject *parent = 0) : QObject(parent) {
         }
-        virtual Sig* createSigPara(double amp, ...) = 0;
+        //virtual Sig* createSigPara(double amp, ...) = 0;
+        virtual Sig* createSigPara(double amp, double feq, double duty) = 0;
 };
 
 class SinePara : public SigPara {
@@ -165,7 +173,8 @@ class SinePara : public SigPara {
     public:
         explicit SinePara(QObject *parent = 0) : SigPara(parent) {
         }
-        Sig* createSigPara(double amp, double feq) {
+        Sig* createSigPara(double amp, double feq, double duty = 0) {
+            duty = 0;
             return new Sine(amp, feq);
         }
 };
@@ -175,7 +184,8 @@ class TriPara : public SigPara {
     public:
         explicit TriPara(QObject *parent = 0) : SigPara(parent) {
         }
-        Sig* createSigPara(double amp, double feq) {
+        Sig* createSigPara(double amp, double feq, double duty = 0) {
+            duty = 0;
             return new Tri(amp, feq);
         }
 };
@@ -185,7 +195,8 @@ class SawPara : public SigPara {
     public:
         explicit SawPara(QObject *parent = 0) : SigPara(parent) {
         }
-        Sig* createSigPara(double amp, double feq) {
+        Sig* createSigPara(double amp, double feq, double duty) {
+            duty = 0;
             return new Saw(amp, feq);
         }
 };
@@ -206,9 +217,12 @@ class SpPara : public SigPara {
     public:
         explicit SpPara(QObject *parent = 0) : SigPara(parent) {
         }
-        Sig* createSigPara(double value) {
-            return new Sp(value);
+        Sig* createSigPara(double amp, double feq = 0, double duty = 0) {
+            feq = 0, duty = 0;
+            return new Sp(amp);
         }
 };
+
+#endif
 
 #endif // SIGPARA_H

@@ -15,6 +15,15 @@
 #include <QCompleter>
 #include <QList>
 #include <QHeaderView>
+
+#include <sigpara.h>
+#include <siggen.h>
+
+#include <QTextBrowser>
+#include <QPlainTextEdit>
+#include <QPalette>
+#include <QTimer>
+
 typedef int(* funca )(int);
 #define TBL_COL 4
 
@@ -92,6 +101,15 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     initCHModel();
 
     initTbl();
+    initoptLog();
+
+
+#if 1                                           /* test the sig gen */
+    Sine para(1, 23);
+    SineGen *p = new SineGen();
+    p->genData(para);
+#endif
+
     //_pcbxCh->clear();
     //_pcbxCh->setModel(ach_model);
 }
@@ -306,6 +324,77 @@ void CMDSimMW::initTbl() {
 #endif
 }
 
+int CMDSimMW::warningTextInfo(QPlainTextEdit &p) {
+    QPalette porg = p.palette();
+    QPalette pdef;
+    pdef.setColor(QPalette::WindowText, Qt::yellow);
+    pdef.setColor(QPalette::Text, Qt::yellow);
+    pdef.setColor(QPalette::Active, QPalette::Base, Qt::red);
+    pdef.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
+
+
+    p.setPalette(pdef);
+
+    pdef.setColor(QPalette::WindowText, Qt::green);
+    pdef.setColor(QPalette::Text, Qt::yellow);
+    pdef.setColor(QPalette::Active, QPalette::Base, Qt::red);
+    pdef.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
+
+    p.setPalette(pdef);
+
+
+
+    pdef.setColor(QPalette::WindowText, Qt::blue);
+    pdef.setColor(QPalette::Text, Qt::yellow);
+    pdef.setColor(QPalette::Active, QPalette::Base, Qt::green);
+    pdef.setColor(QPalette::Inactive, QPalette::Base, Qt::green);
+
+    p.setPalette(pdef);
+
+
+    pdef.setColor(QPalette::WindowText, Qt::yellow);
+    pdef.setColor(QPalette::Text, Qt::yellow);
+    pdef.setColor(QPalette::Active, QPalette::Base, Qt::red);
+    pdef.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
+
+    p.setPalette(pdef);
+
+
+    p.setPalette(porg);
+    return 0;
+}
+
+int CMDSimMW::showWarning() {
+    for(int i = 0; i < 10 ; i++) {
+        warningTextInfo(*(ui->plainTextEdit));
+    }
+    return 0;
+
+}
+
+/**
+  init Qtextbrowser and QPlainTextEdit
+*/
+void CMDSimMW::initoptLog() {
+    QTextBrowser *pb = ui->textBrowser;
+    QPlainTextEdit *ppl = ui->plainTextEdit;
+    QPalette pal;
+    pal.setColor(QPalette::WindowText, Qt::yellow);
+    pal.setColor(QPalette::Text, Qt::yellow);
+    pal.setColor(QPalette::Active, QPalette::Base, Qt::red);
+    pal.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
+    ppl->setPalette(pal);
+    if(pb != NULL) {
+        pb->setText("test");
+        pb->setTextBackgroundColor(Qt::blue);
+    } 
+    if(ppl != NULL) {
+        ppl->setPlainText("fdsafdsafdsa");
+        ppl->setReadOnly(true);
+    }
+    qbshow(ppl->toPlainText());
+}
+
 
 #if 0
 void CMDSimMW::initLchModel() {
@@ -500,7 +589,12 @@ bool CMDSimMW::switchtoUmodel(QStandardItem *item, int type) {
 }
 
 void CMDSimMW::on_commandLinkButton_clicked() {
+
+
 #if 1
+    showWarning();
+#endif
+#if 0
     _pqwtdlg = new SetWPDlg(this);
     if(_pqwtdlg != NULL) {
         //_pqwtdlg->setAttribute(Qt::WA_DeleteOnClose);  //2parameter = true

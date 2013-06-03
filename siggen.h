@@ -16,7 +16,7 @@ class SigGen : public QObject {
     Q_OBJECT
     public:
         explicit SigGen(QObject *parent = 0);
-        virtual int genData(SigPara &para) = 0;
+        virtual int genData(Sig &para) = 0;
         virtual QList <double> Data() const = 0;
     protected:
         QList <double> _data;
@@ -27,7 +27,7 @@ class SineGen : public SigGen {
     public:
     explicit SineGen(QObject *parent = 0) : SigGen(parent) {
     }
-    int genData(SigPara &para);
+    int genData(Sig &para);
     QList <double> Data() const;
 };
 
@@ -37,7 +37,7 @@ class TriGen : public SigGen {
     public:
     explicit TriGen(QObject *parent = 0) : SigGen(parent) {
     }
-    int genData(SigPara &para);
+    int genData(Sig &para);
     QList <double> Data() const;
 };
 
@@ -46,7 +46,7 @@ class SawGen : public SigGen {
     public:
     explicit SawGen(QObject *parent = 0) : SigGen(parent) {
     }
-    int genData(SigPara &para);
+    int genData(Sig &para);
     QList <double> Data() const;
 };
 
@@ -56,7 +56,7 @@ class SpGen : public SigGen {
     public:
     explicit SpGen(QObject *parent = 0) : SigGen(parent) {
     }
-    int genData(SigPara &para);
+    int genData(Sig &para);
     QList <double> Data() const;
 };
 
@@ -65,7 +65,7 @@ class SquareGen : public SigGen {
     public:
     explicit SquareGen(QObject *parent = 0) : SigGen(parent) {
     }
-    int genData(SigPara &para);
+    int genData(Sig &para);
     QList <double> Data() const;
 };
 

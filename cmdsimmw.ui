@@ -224,7 +224,7 @@
       <x>430</x>
       <y>30</y>
       <width>571</width>
-      <height>341</height>
+      <height>131</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -240,8 +240,8 @@
    <widget class="QCommandLinkButton" name="commandLinkButton">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>400</y>
+      <x>440</x>
+      <y>180</y>
       <width>168</width>
       <height>41</height>
      </rect>
@@ -250,11 +250,50 @@
      <string>CommandLinkButton</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>180</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+    </property>
+    <property name="text">
+     <string>操作状态</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>230</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>230</y>
+      <width>201</width>
+      <height>201</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>gBox_sig_sel</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>tbl_selres</zorder>
    <zorder>commandLinkButton</zorder>
+   <zorder>label</zorder>
+   <zorder>textBrowser</zorder>
+   <zorder>plainTextEdit</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -262,7 +301,7 @@
      <x>0</x>
      <y>0</y>
      <width>1019</width>
-     <height>22</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

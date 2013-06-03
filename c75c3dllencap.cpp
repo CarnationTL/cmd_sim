@@ -394,6 +394,7 @@ FPTR_SET_REF_PW_EN C75C3DllEncap::setPWenable() {
     return NULL;
 }
 
+
 FPTR_GET_REF_CUR C75C3DllEncap::getRefCurrent() {
     FPTR_GET_REF_CUR _ret = NULL;
     GET_FP(hdll, FPTR_GET_REF_CUR, FSTR_REF_GetRefCurrent, _ret);
@@ -438,3 +439,4 @@ FPTR_SET_PLL_STA C75C3DllEncap::setPllSTA() {
     return NULL;
 }
 #endif
+

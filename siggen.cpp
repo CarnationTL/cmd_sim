@@ -6,15 +6,14 @@ SigGen::SigGen(QObject *parent) :
 
 
 /* Sin */
-int SineGen::genData(SigPara &para) {
-    SinePara *p = new SinePara(1, 2);
-#if 0
-    SinePara *p = NULL;
-    p = dynamic_cast <SinePara*> (&para);
+int SineGen::genData(Sig &para) {
+    Sine *p = NULL;
+    p = dynamic_cast <Sine*> (&para);
     if(p != NULL) {
-        p->createSigPara(1, 2);
+        p->Amp();
+        p->Feq();
     }
-#endif
+    /* gen sin data */
     return 0;
 }
 
@@ -24,7 +23,12 @@ QList<double> SineGen::Data() const {
 
 
 /* Tri */
-int TriGen::genData(SigPara &para) {
+int TriGen::genData(Sig &para) {
+    Tri *p = dynamic_cast <Tri*>(&para);
+    if(p != NULL) {
+        p->Amp();
+        p->Feq();
+    }
     return 0;
 }
 
@@ -33,7 +37,12 @@ QList<double> TriGen::Data() const {
 }
 
 /* Saw */
-int SawGen::genData(SigPara &para) {
+int SawGen::genData(Sig &para) {
+    Saw *p = dynamic_cast <Saw*>(&para);
+    if(p != NULL) {
+        p->Amp();
+        p->Feq();
+    }
     return 0;
 }
 
@@ -42,7 +51,11 @@ QList<double> SawGen::Data() const {
 }
 
 /* Sp */
-int SpGen::genData(SigPara &para) {
+int SpGen::genData(Sig &para) {
+    Sp *p = dynamic_cast <Sp*>(&para);
+    if(p != NULL) {
+        p->Amp();                               /* sp class only have value set. */
+    }
     return 0;
 }
 
@@ -51,7 +64,13 @@ QList<double> SpGen::Data() const {
 }
 
 /* Square */
-int SquareGen::genData(SigPara &para) {
+int SquareGen::genData(Sig &para) {
+    Square *p = dynamic_cast <Square*>(&para);
+    if(p != NULL) {
+        p->Amp();
+        p->Feq();
+        p->Duty();
+    }
     return 0;
 }
 

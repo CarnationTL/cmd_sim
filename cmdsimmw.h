@@ -14,6 +14,7 @@
 #include <QDialog>
 #include <QComboBox>
 #include <QTableView>
+#include <QPlainTextEdit>
 
 namespace Ui {
 class CMDSimMW;
@@ -76,6 +77,9 @@ private:
     void initAOList();
     void initTbl();
 
+    int warningTextInfo(QPlainTextEdit &p);
+    int showWarning();
+    void initoptLog();
     bool switchtoRmodel(QStandardItem *item, int type);
     bool switchtoUmodel(QStandardItem *item, int type);
 };
