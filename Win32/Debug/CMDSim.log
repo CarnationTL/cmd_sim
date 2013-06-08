@@ -1,35 +1,24 @@
-﻿生成启动时间为 6/8/2013 4:08:40 PM。
+﻿生成启动时间为 6/8/2013 5:21:45 PM。
      1>项目“E:\qt_prj\CMDSim\CMDSim.vcxproj”在节点 2 上(build 个目标)。
      1>C:\Program Files\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(298,5): warning MSB8004: Intermediate 目录未以斜杠结尾。此生成实例将添加斜杠，因为必须有这个斜杠才能正确计算 Intermediate 目录。
      1>InitializeBuildStatus:
          正在创建“Win32\Debug\CMDSim.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
-         Moc'ing apdapter.h...
-         Moc'ing brd75c3.h...
-         Moc'ing cmdsimmw.h...
-         Moc'ing commbrd.h...
-         Moc'ing commonch.h...
-         Moc'ing lvdtch.h...
-         Moc'ing rfm2gse.h...
-         Moc'ing setbrddlg.h...
-         Moc'ing setlbrdparadlg.h...
          Moc'ing setwpdlg.h...
-         Moc'ing siggen.h...
-         Moc'ing sigpara.h...
+         Uic'ing setwpdlg.ui...
        ClCompile:
-         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IE:\Qt\4.8.4\include\QtCore /IE:\Qt\4.8.4\include\QtGui /IE:\Qt\4.8.4\include /Iqwtinc /Irfmlib /I75C3inc /IE:\Qt\4.8.4\include\ActiveQt /Idebug /I. /I..\..\Qt\4.8.4\mkspecs\default /I.\GeneratedFiles /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_LARGEFILE_SUPPORT /D QT_DLL /D QT_GUI_LIB /D QT_CORE_LIB /D QT_HAVE_MMX /D QT_HAVE_3DNOW /D QT_HAVE_SSE /D QT_HAVE_MMXEXT /D QT_HAVE_SSE2 /D QT_THREAD_SUPPORT /Gm- /EHsc /MDd /GS- /fp:precise /Zc:wchar_t- /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Debug\moc_apdapter.cpp Debug\moc_brd75c3.cpp Debug\moc_cmdsimmw.cpp Debug\moc_commbrd.cpp Debug\moc_commonch.cpp Debug\moc_lvdtch.cpp Debug\moc_rfm2gse.cpp Debug\moc_setbrddlg.cpp Debug\moc_setlbrdparadlg.cpp Debug\moc_setwpdlg.cpp Debug\moc_siggen.cpp Debug\moc_sigpara.cpp setwpdlg.cpp -Zm200 -w34100 -w34189 
-         moc_apdapter.cpp
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IE:\Qt\4.8.4\include\QtCore /IE:\Qt\4.8.4\include\QtGui /IE:\Qt\4.8.4\include /Iqwtinc /Irfmlib /I75C3inc /IE:\Qt\4.8.4\include\ActiveQt /Idebug /I. /I..\..\Qt\4.8.4\mkspecs\default /I.\GeneratedFiles /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_LARGEFILE_SUPPORT /D QT_DLL /D QT_GUI_LIB /D QT_CORE_LIB /D QT_HAVE_MMX /D QT_HAVE_3DNOW /D QT_HAVE_SSE /D QT_HAVE_MMXEXT /D QT_HAVE_SSE2 /D QT_THREAD_SUPPORT /Gm- /EHsc /MDd /GS- /fp:precise /Zc:wchar_t- /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Debug\moc_brd75c3.cpp Debug\moc_commonch.cpp Debug\moc_lvdtch.cpp Debug\moc_setwpdlg.cpp brd75c3.cpp c75c3dllencap.cpp cmdsimmw.cpp commonch.cpp lvdtch.cpp setwpdlg.cpp -Zm200 -w34100 -w34189 
          moc_brd75c3.cpp
-         moc_cmdsimmw.cpp
-         moc_commbrd.cpp
          moc_commonch.cpp
          moc_lvdtch.cpp
-         moc_rfm2gse.cpp
-         moc_setbrddlg.cpp
-         moc_setlbrdparadlg.cpp
          moc_setwpdlg.cpp
-         moc_siggen.cpp
-         moc_sigpara.cpp
+         brd75c3.cpp
+     1>e:\qt_prj\cmdsim\75c3inc\NAIEthernet.h(23): warning C4005: “EWOULDBLOCK”: 宏重定义
+                 C:\Program Files\Microsoft Visual Studio 10.0\VC\include\errno.h(132) : 参见“EWOULDBLOCK”的前一个定义
+         c75c3dllencap.cpp
+         cmdsimmw.cpp
+         commonch.cpp
+         lvdtch.cpp
          setwpdlg.cpp
      1>setwpdlg.cpp(30): warning C4100: “value”: 未引用的形参
          正在生成代码...
@@ -71,4 +60,4 @@
 
 生成成功。
 
-已用时间 00:00:18.57
+已用时间 00:00:22.11

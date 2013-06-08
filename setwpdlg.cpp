@@ -57,4 +57,8 @@ void SetWPDlg::setdialstyle(QwtDial *p) {
     p->setNeedle(nd);
 }
 
+void SetWPDlg::on_pb_test2_clicked() {
+    QMessageBox::warning(this, "fdsafdas", "fdsafdsa", QMessageBox::Yes);
+}
+
 
