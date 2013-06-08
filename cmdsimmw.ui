@@ -286,6 +286,45 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>450</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>450</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_setwp">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>450</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>setwp</string>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>gBox_sig_sel</zorder>
    <zorder>layoutWidget</zorder>
@@ -294,6 +333,9 @@
    <zorder>label</zorder>
    <zorder>textBrowser</zorder>
    <zorder>plainTextEdit</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>pushButton_3</zorder>
+   <zorder>btn_setwp</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

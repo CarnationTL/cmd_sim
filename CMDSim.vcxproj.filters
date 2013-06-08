@@ -36,18 +36,21 @@
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{d7b003fc-3ee7-4957-b174-0e14b9747115}</UniqueIdentifier>
+      <UniqueIdentifier>{ca1784c7-69d0-4843-b224-54c1dfcb3927}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
     <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{bb795a94-b0b6-46bd-ad80-2aea852ac8a2}</UniqueIdentifier>
+      <UniqueIdentifier>{b8823b76-0416-466d-8e96-1fb09be58fc3}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="apdapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="brd75c3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="c75c3dllencap.cpp">
@@ -74,13 +77,28 @@
     <ClCompile Include="setbrddlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="setlbrdparadlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="setwpdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="siggen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sigpara.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_apdapter.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_apdapter.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_brd75c3.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_brd75c3.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_cmdsimmw.cpp">
@@ -119,10 +137,28 @@
     <ClCompile Include="Release\moc_setbrddlg.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_setlbrdparadlg.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_setlbrdparadlg.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_setwpdlg.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_setwpdlg.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_siggen.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_siggen.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_sigpara.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_sigpara.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,6 +167,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="apdapter.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="brd75c3.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="c75c3dllencap.h">
@@ -160,13 +199,25 @@
     <CustomBuild Include="setbrddlg.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="setlbrdparadlg.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="setwpdlg.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="siggen.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="sigpara.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="GeneratedFiles\ui_cmdsimmw.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_setbrddlg.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_setlbrdparadlg.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_setwpdlg.h">
@@ -178,6 +229,9 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="setbrddlg.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="setlbrdparadlg.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="setwpdlg.ui">

@@ -1,34 +1,65 @@
-﻿生成启动时间为 4/7/2013 6:33:55 PM。
+﻿生成启动时间为 6/8/2013 4:08:40 PM。
      1>项目“E:\qt_prj\CMDSim\CMDSim.vcxproj”在节点 2 上(build 个目标)。
      1>C:\Program Files\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(298,5): warning MSB8004: Intermediate 目录未以斜杠结尾。此生成实例将添加斜杠，因为必须有这个斜杠才能正确计算 Intermediate 目录。
      1>InitializeBuildStatus:
          正在创建“Win32\Debug\CMDSim.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
-         Uic'ing setwpdlg.ui...
+         Moc'ing apdapter.h...
+         Moc'ing brd75c3.h...
+         Moc'ing cmdsimmw.h...
+         Moc'ing commbrd.h...
+         Moc'ing commonch.h...
+         Moc'ing lvdtch.h...
+         Moc'ing rfm2gse.h...
+         Moc'ing setbrddlg.h...
+         Moc'ing setlbrdparadlg.h...
+         Moc'ing setwpdlg.h...
+         Moc'ing siggen.h...
+         Moc'ing sigpara.h...
        ClCompile:
-         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IE:\Qt\4.8.4\include\QtCore /IE:\Qt\4.8.4\include\QtGui /IE:\Qt\4.8.4\include /Iqwtinc /Irfmlib /I75C3inc /IE:\Qt\4.8.4\include\ActiveQt /Idebug /I. /I..\..\Qt\4.8.4\mkspecs\default /I.\GeneratedFiles /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_LARGEFILE_SUPPORT /D QT_DLL /D QT_GUI_LIB /D QT_CORE_LIB /D QT_HAVE_MMX /D QT_HAVE_3DNOW /D QT_HAVE_SSE /D QT_HAVE_MMXEXT /D QT_HAVE_SSE2 /D QT_THREAD_SUPPORT /Gm- /EHsc /MDd /GS- /fp:precise /Zc:wchar_t- /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt cmdsimmw.cpp setwpdlg.cpp -Zm200 -w34100 -w34189 
-         cmdsimmw.cpp
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IE:\Qt\4.8.4\include\QtCore /IE:\Qt\4.8.4\include\QtGui /IE:\Qt\4.8.4\include /Iqwtinc /Irfmlib /I75C3inc /IE:\Qt\4.8.4\include\ActiveQt /Idebug /I. /I..\..\Qt\4.8.4\mkspecs\default /I.\GeneratedFiles /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_LARGEFILE_SUPPORT /D QT_DLL /D QT_GUI_LIB /D QT_CORE_LIB /D QT_HAVE_MMX /D QT_HAVE_3DNOW /D QT_HAVE_SSE /D QT_HAVE_MMXEXT /D QT_HAVE_SSE2 /D QT_THREAD_SUPPORT /Gm- /EHsc /MDd /GS- /fp:precise /Zc:wchar_t- /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Debug\moc_apdapter.cpp Debug\moc_brd75c3.cpp Debug\moc_cmdsimmw.cpp Debug\moc_commbrd.cpp Debug\moc_commonch.cpp Debug\moc_lvdtch.cpp Debug\moc_rfm2gse.cpp Debug\moc_setbrddlg.cpp Debug\moc_setlbrdparadlg.cpp Debug\moc_setwpdlg.cpp Debug\moc_siggen.cpp Debug\moc_sigpara.cpp setwpdlg.cpp -Zm200 -w34100 -w34189 
+         moc_apdapter.cpp
+         moc_brd75c3.cpp
+         moc_cmdsimmw.cpp
+         moc_commbrd.cpp
+         moc_commonch.cpp
+         moc_lvdtch.cpp
+         moc_rfm2gse.cpp
+         moc_setbrddlg.cpp
+         moc_setlbrdparadlg.cpp
+         moc_setwpdlg.cpp
+         moc_siggen.cpp
+         moc_sigpara.cpp
          setwpdlg.cpp
+     1>setwpdlg.cpp(30): warning C4100: “value”: 未引用的形参
          正在生成代码...
        Link:
          C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"debug\\CMDSim.exe" /NOLOGO /LIBPATH:E:\Qt\4.8.4\lib /LIBPATH:E:\Qt\4.8.4\lib /LIBPATH:E:/qt_prj/CMDSim/qwtlib/ /LIBPATH:E:/qt_prj/CMDSim/rfmlib/ /LIBPATH:E:/qt_prj/CMDSim/75C3Dlib/ E:\Qt\4.8.4\lib\qtmaind.lib E:/qt_prj/CMDSim/qwtlib/\qwtd.lib E:/qt_prj/CMDSim/rfmlib/\rfm2gdll_stdc.lib E:/qt_prj/CMDSim/75C3Dlib/\CPCI75C3Dlld.lib E:\Qt\4.8.4\lib\QtGuid4.lib E:\Qt\4.8.4\lib\QtCored4.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Win32\Debug\CMDSim.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\qt_prj\CMDSim\debug\CMDSim.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X86 Win32\Debug\apdapter.obj
+         Win32\Debug\brd75c3.obj
          Win32\Debug\c75c3dllencap.obj
          Win32\Debug\cmdsimmw.obj
          Win32\Debug\commbrd.obj
          Win32\Debug\commonch.obj
          Win32\Debug\moc_apdapter.obj
+         Win32\Debug\moc_brd75c3.obj
          Win32\Debug\moc_cmdsimmw.obj
          Win32\Debug\moc_commbrd.obj
          Win32\Debug\moc_commonch.obj
          Win32\Debug\moc_lvdtch.obj
          Win32\Debug\moc_rfm2gse.obj
          Win32\Debug\moc_setbrddlg.obj
+         Win32\Debug\moc_setlbrdparadlg.obj
          Win32\Debug\moc_setwpdlg.obj
+         Win32\Debug\moc_siggen.obj
+         Win32\Debug\moc_sigpara.obj
          Win32\Debug\lvdtch.obj
          Win32\Debug\main.obj
          Win32\Debug\rfm2gse.obj
          Win32\Debug\setbrddlg.obj
-         Win32\Debug\setwpdlg.obj "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" 
+         Win32\Debug\setlbrdparadlg.obj
+         Win32\Debug\setwpdlg.obj
+         Win32\Debug\siggen.obj
+         Win32\Debug\sigpara.obj "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" 
          LINK : 没有找到 debug\\CMDSim.exe 或上一个增量链接没有生成它；正在执行完全链接
          CMDSim.vcxproj -> E:\qt_prj\CMDSim\debug\CMDSim.exe
        Manifest:
@@ -40,4 +71,4 @@
 
 生成成功。
 
-已用时间 00:00:09.00
+已用时间 00:00:18.57

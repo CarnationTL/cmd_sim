@@ -376,7 +376,7 @@ int CMDSimMW::showWarning() {
   init Qtextbrowser and QPlainTextEdit
 */
 void CMDSimMW::initoptLog() {
-    QTextBrowser *pb = ui->textBrowser;
+
     QPlainTextEdit *ppl = ui->plainTextEdit;
     QPalette pal;
     pal.setColor(QPalette::WindowText, Qt::yellow);
@@ -384,17 +384,34 @@ void CMDSimMW::initoptLog() {
     pal.setColor(QPalette::Active, QPalette::Base, Qt::red);
     pal.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
     ppl->setPalette(pal);
-    if(pb != NULL) {
-        pb->setText("test");
-        pb->setTextBackgroundColor(Qt::blue);
-    } 
+
     if(ppl != NULL) {
-        ppl->setPlainText("fdsafdsafdsa");
+        ppl->setPlainText("=============");
+        ppl->appendPlainText("show one line");
+        ppl->appendPlainText("===============");
+
         ppl->setReadOnly(true);
     }
-    qbshow(ppl->toPlainText());
-}
+#if 0
+    for(int i = 0;i < 5; i++) {
 
+        QMessageBox::warning(this, "fsdafdsa", "fdsafdsa", QMessageBox::Yes);
+        Sleep(100);
+        pal.setColor(QPalette::WindowText, Qt::yellow);
+        pal.setColor(QPalette::Text, Qt::yellow);
+        pal.setColor(QPalette::Active, QPalette::Base, Qt::red);
+        pal.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
+
+        pal.setColor(QPalette::WindowText, Qt::black);
+        pal.setColor(QPalette::Text, Qt::black);
+        pal.setColor(QPalette::Active, QPalette::Base, Qt::white);
+        pal.setColor(QPalette::Inactive, QPalette::Base, Qt::white);
+
+        ppl->setPalette(pal);
+    }
+#endif
+    /* qbshow(ppl->toPlainText()); */
+}
 
 #if 0
 void CMDSimMW::initLchModel() {
@@ -417,7 +434,7 @@ void CMDSimMW::initLchModel() {
 
 #if 0
 void CMDSimMW::initAOModel() {
- QStringList _strlist;
+    QStringList _strlist;
     ach_model = new QStandardItemModel(MAX_AO_CH, 0);
     QString _tmp;
     for(int i = 0; i < MAX_LVDT_CH; i++) {
@@ -608,3 +625,67 @@ void CMDSimMW::on_commandLinkButton_clicked() {
   _pqwtdlg = new SetWPDlg(this);
   if(_pqwtdlg_ )
 */
+
+void CMDSimMW::on_pushButton_2_clicked() {
+
+    QPlainTextEdit *ppl = ui->plainTextEdit;
+    QPalette pal;
+    pal.setColor(QPalette::WindowText, Qt::red);
+    pal.setColor(QPalette::Text, Qt::red);
+    pal.setColor(QPalette::Active, QPalette::Base, Qt::blue);
+    pal.setColor(QPalette::Inactive, QPalette::Base, Qt::blue);
+    ppl->setPalette(pal);
+
+    if(ppl != NULL) {
+        ppl->setPlainText("=============");
+        ppl->appendPlainText("show one line");
+        ppl->appendPlainText("===============");
+
+        ppl->setReadOnly(true);
+    }
+
+#if 1
+    for(int i = 0;i < 5; i++) {
+        Sleep(1000);
+        if(i % 2 == 0) {
+            pal.setColor(QPalette::WindowText, Qt::yellow);
+            pal.setColor(QPalette::Text, Qt::yellow);
+            pal.setColor(QPalette::Active, QPalette::Base, Qt::red);
+            pal.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
+        } else {
+            pal.setColor(QPalette::WindowText, Qt::black);
+            pal.setColor(QPalette::Text, Qt::black);
+            pal.setColor(QPalette::Active, QPalette::Base, Qt::white);
+            pal.setColor(QPalette::Inactive, QPalette::Base, Qt::white);
+        }
+       ppl->setPalette(pal);
+    }
+#endif
+
+}
+
+void CMDSimMW::on_pushButton_3_clicked() {
+
+    QPlainTextEdit *ppl = ui->plainTextEdit;
+    QPalette pal;
+    pal.setColor(QPalette::WindowText, Qt::red);
+    pal.setColor(QPalette::Text, Qt::red);
+    pal.setColor(QPalette::Active, QPalette::Base, Qt::yellow);
+    pal.setColor(QPalette::Inactive, QPalette::Base, Qt::yellow);
+    ppl->setPalette(pal);
+
+    if(ppl != NULL) {
+        ppl->setPlainText("=============");
+        ppl->appendPlainText("show one line");
+        ppl->appendPlainText("===============");
+        ppl->setReadOnly(true);
+    }
+}
+
+
+void CMDSimMW::on_btn_setwp_clicked() {
+	QDialog *p = new SetWPDlg();
+	if(p != NULL) {
+		p->show();
+	}
+}

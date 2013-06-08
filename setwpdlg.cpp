@@ -44,7 +44,7 @@ void SetWPDlg::on_knob_sliderMoved(double value) {
 
 /**
  * set the dial style
-*/
+**/
 void SetWPDlg::setdialstyle(QwtDial *p) {
     p->setTracking(true);
     p->setScaleArc(0, 360);

@@ -42,6 +42,12 @@ private slots:
 
     void on_commandLinkButton_clicked();
 
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_btn_setwp_clicked();
+
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
