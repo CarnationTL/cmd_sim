@@ -36,6 +36,9 @@ typedef int(* FPTR_SET_OB_REFEQ)(int, int, unsigned int);
 typedef int(* FPTR_GET_OB_REFVOL)(int, int, double*);
 typedef int(* FPTR_SET_OB_REFVOL)(int, int, double);
 
+typedef int(* FPTR_SET_EXPREF_VOL)(int, int, int, double);
+typedef int(* FPTR_GET_EXPREF_VOL)(int, int, int, double*);
+
 typedef int(* FPTR_SET_WIREMODE)(int, int, int, unsigned short);
 typedef int(* FPTR_GET_WIREMODE)(int, int, int, unsigned short*);
 

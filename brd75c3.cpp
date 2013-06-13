@@ -197,3 +197,57 @@ int Brd75C3::setChPwSupply( int brd, int model, int ch, unsigned short val ) {
 	return CPCI75C3_FAIL;
 }
 
+/*set ref vol val for DL and REF model*/
+int Brd75C3::setRefRefVol( int brd, int model, double val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_SET_REF_VOL func = NULL;
+		func = pdll->setRefVol();
+		if (func) {
+			return func(brd, model, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+int Brd75C3::getRefRefVol( int brd, int model, double *val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_GET_REF_VOL func = NULL;
+		func = pdll->getRefVol();
+		if (func) {
+			return func(brd, model, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+int Brd75C3::setDLRefVol( int brd, int model, int ch, double val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_SET_EXPREF_VOL func = NULL;
+		func = pdll->setexpRefVol();
+		if (func) {
+			return func(brd, model, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+int Brd75C3::getDLRefVol( int brd, int mdoel, int ch, double *val ) {
+
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_GET_EXPREF_VOL func = NULL;
+		func = pdll->getexpEefVol();
+		if (func) {
+			return func(brd, mdoel, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+

@@ -87,6 +87,9 @@ public:
 
     FPTR_GET_PLL_STA getPllSTA();
     FPTR_SET_PLL_STA setPllSTA();
+
+	FPTR_SET_EXPREF_VOL setexpRefVol();
+	FPTR_GET_EXPREF_VOL getexpEefVol();
 };
 
 #endif // C75C3DLLENCAP_H
