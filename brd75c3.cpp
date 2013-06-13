@@ -49,6 +49,7 @@ int Brd75C3::getwireMode( int brd, int model, int ch, unsigned short *mode ) {
 			return getwm(brd, model, ch, mode);
 		}
 	}
+	return CPCI75C3_FAIL;
 }
 
 int Brd75C3::setwireMode( int brd, int model, int ch, unsigned short mode ) {
@@ -61,6 +62,7 @@ int Brd75C3::setwireMode( int brd, int model, int ch, unsigned short mode ) {
 			return setwm(brd, model, ch, mode);
 		}
 	}
+	return CPCI75C3_FAIL;
 }
 
 /*set sig vll ratio matric or fix mode*/
@@ -74,6 +76,7 @@ int Brd75C3::setVllOptMode( int brd, int model, int ch, unsigned short mode ) {
 			return setvll(brd, model, ch, mode);
 		}
 	}
+	return CPCI75C3_FAIL;
 }
 
 int Brd75C3::getVllOptMode( int brd, int model, int ch, unsigned short *mode ) {
@@ -86,6 +89,111 @@ int Brd75C3::getVllOptMode( int brd, int model, int ch, unsigned short *mode ) {
 			return getvll(brd, model, ch, mode);
 		}
 	}
+	return CPCI75C3_FAIL;
 }
 
+int Brd75C3::setSigLossTH( int brd, int model, int ch, double val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_SET_SIGLOSS_THOLD func = NULL;
+		func = pdll->setSigLossTH();
+		if (func) {
+			return func(brd, model, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+int Brd75C3::getSigLossTH( int brd, int model, int ch, double *val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_GET_SIGLOSS_THOLD func = NULL;
+		func = pdll->getSigLossTH();
+		if (func) {
+			return func(brd, model, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+/*ref loss thread funcs*/
+int Brd75C3::getRefLossTH( int brd, int model, int ch, double *val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_GET_REFLOSS_THOLD func = NULL;
+		func = pdll->getRefLossTH();
+		if (func) {
+			return func(brd, model, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+int Brd75C3::setRefLossTH( int brd, int model, int ch, double val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_SET_REFLOSS_THOLD func = NULL;
+		func = pdll->setRefLossTH();
+		if (func) {
+			return func(brd, model, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+int Brd75C3::setChOpStatus( int brd, int model, int ch, unsigned short val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_SET_CHOP_STA func = NULL;
+		func = pdll->setChOPStat();
+		if (func) {
+			return func(brd, model, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+int Brd75C3::getChOpStatus( int brd, int model, int ch, unsigned short *val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_GET_CHOP_STA func;
+		func = pdll->getChOPStat();
+		if (func) {
+			return func(brd, model, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+int Brd75C3::getChPwSupply( int brd, int model, int ch, unsigned short *val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_GET_DLCHPW_STA func;
+		func = pdll->getDLPwStat();
+		if (func) {
+			return func(brd, model, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
+
+int Brd75C3::setChPwSupply( int brd, int model, int ch, unsigned short val ) {
+	pdll = NULL;
+	pdll = C75C3DllEncap::getInst();
+	if (pdll != NULL) {
+		FPTR_SET_DLCHPW_STA func = NULL;
+		func = pdll->setDLPwStat();
+		if (func) {
+			return func(brd, model, ch, val);
+		}
+	}
+	return CPCI75C3_FAIL;
+}
 

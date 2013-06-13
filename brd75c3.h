@@ -15,6 +15,19 @@ public:
 
 	int setVllOptMode(int brd, int model, int ch, unsigned short mode);
 	int getVllOptMode(int brd, int model, int ch, unsigned short *mode);
+
+	int setSigLossTH(int brd, int model, int ch, double val);
+	int getSigLossTH(int brd, int model, int ch, double *val);
+
+	int getRefLossTH(int brd, int model, int ch, double *val);
+	int setRefLossTH(int brd, int model, int ch, double val);
+
+	int setChOpStatus(int brd, int model, int ch, unsigned short val);
+	int getChOpStatus(int brd, int model, int ch, unsigned short *val);
+
+	int getChPwSupply(int brd, int model, int ch, unsigned short *val);
+	int setChPwSupply(int brd, int model, int ch, unsigned short val);
+
 private:
     C75C3DllEncap *pdll;
 signals:
