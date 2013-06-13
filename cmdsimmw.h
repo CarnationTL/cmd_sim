@@ -48,6 +48,7 @@ private slots:
 
     void on_btn_setwp_clicked();
 
+	void myBtnSlot();
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
@@ -88,6 +89,8 @@ private:
     void initoptLog();
     bool switchtoRmodel(QStandardItem *item, int type);
     bool switchtoUmodel(QStandardItem *item, int type);
+
+	void addtionSetUi();
 };
 
 #endif // CMDSIMMW_H

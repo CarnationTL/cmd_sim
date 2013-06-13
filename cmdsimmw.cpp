@@ -35,6 +35,9 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     SIG_AO = new QString(cvcp936("AO"));
     ui->setupUi(this);
 
+#if 1
+	addtionSetUi();
+#endif
 #if 0
 	if (initrfm() != EXE_SUCCESS) {
 		QMessageBox::warning(NULL, "lib_load", "lib_load", QMessageBox::Yes);
@@ -89,10 +92,6 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 #endif
 
 //    LVDTCh *ptrLch = new LVDTCh(1, "lvdt_ch1");
-
-
-
-
     initAOList();
     initLchList();
     initInsView();
@@ -689,3 +688,14 @@ void CMDSimMW::on_btn_setwp_clicked() {
 		p->show();
 	}
 }
+
+void CMDSimMW::myBtnSlot() {
+	qbshow("test my own slot");
+}
+
+/*add own sig to Control */
+void CMDSimMW::addtionSetUi() {
+	connect(ui->btn_MySin, SIGNAL(clicked()), this, SLOT(myBtnSlot()));
+}
+
+

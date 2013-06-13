@@ -55,6 +55,7 @@ void SetWPDlg::setdialstyle(QwtDial *p) {
     QwtDialSimpleNeedle * nd = new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow);
     p->setScaleMaxMajor(14);
     p->setNeedle(nd);
+	p->geometry();
 }
 
 void SetWPDlg::on_pb_test2_clicked() {

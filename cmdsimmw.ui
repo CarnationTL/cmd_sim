@@ -325,6 +325,19 @@
      <string>setwp</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_MySin">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>510</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>MySig</string>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>gBox_sig_sel</zorder>
    <zorder>layoutWidget</zorder>
@@ -336,6 +349,7 @@
    <zorder>pushButton_2</zorder>
    <zorder>pushButton_3</zorder>
    <zorder>btn_setwp</zorder>
+   <zorder>btn_MySin</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
