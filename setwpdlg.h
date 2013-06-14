@@ -19,6 +19,7 @@ public:
 private slots:
     void on_pb_test_clicked();
 
+	void on_pb_test2_clicked();
     void on_knob_sliderMoved(double value);
 
 private:

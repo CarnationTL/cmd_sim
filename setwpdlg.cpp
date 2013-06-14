@@ -44,7 +44,7 @@ void SetWPDlg::on_knob_sliderMoved(double value) {
 
 /**
  * set the dial style
-*/
+**/
 void SetWPDlg::setdialstyle(QwtDial *p) {
     p->setTracking(true);
     p->setScaleArc(0, 360);
@@ -55,6 +55,11 @@ void SetWPDlg::setdialstyle(QwtDial *p) {
     QwtDialSimpleNeedle * nd = new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow);
     p->setScaleMaxMajor(14);
     p->setNeedle(nd);
+	p->geometry();
+}
+
+void SetWPDlg::on_pb_test2_clicked() {
+    QMessageBox::warning(this, "fdsafdas", "fdsafdsa", QMessageBox::Yes);
 }
 
 

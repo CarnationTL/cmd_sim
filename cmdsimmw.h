@@ -42,6 +42,13 @@ private slots:
 
     void on_commandLinkButton_clicked();
 
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_btn_setwp_clicked();
+
+	void myBtnSlot();
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
@@ -82,6 +89,8 @@ private:
     void initoptLog();
     bool switchtoRmodel(QStandardItem *item, int type);
     bool switchtoUmodel(QStandardItem *item, int type);
+
+	void addtionSetUi();
 };
 
 #endif // CMDSIMMW_H
