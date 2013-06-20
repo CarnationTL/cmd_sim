@@ -440,7 +440,7 @@ FPTR_SET_PLL_STA C75C3DllEncap::setPllSTA() {
 }
 #endif
 
-
+/* EXP SET */
 FPTR_SET_EXPREF_VOL C75C3DllEncap::setexpRefVol() {
 	FPTR_SET_EXPREF_VOL _ret = NULL;
 	GET_FP(hdll, FPTR_SET_EXPREF_VOL, FSTR_DL_SetExpRefVoltInput, _ret);

@@ -2,6 +2,24 @@
 #include "ui_setwpdlg.h"
 #include <QMessageBox>
 #include <qwt_dial_needle.h>
+#include <qwt_plot_curve.h>
+#include <qwt_point_data.h>
+#include <qwt_series_data.h>
+
+
+class SinusData: public QwtSyntheticPointData
+{
+public:
+    SinusData():
+        QwtSyntheticPointData( 100 )
+    {
+    }
+    virtual double y ( double x ) const
+    {
+        return qSin( x );
+    }
+};
+
 
 SetWPDlg::SetWPDlg(QWidget *parent) :
     QDialog(parent),
@@ -59,7 +77,23 @@ void SetWPDlg::setdialstyle(QwtDial *p) {
 }
 
 void SetWPDlg::on_pb_test2_clicked() {
-    QMessageBox::warning(this, "fdsafdas", "fdsafdsa", QMessageBox::Yes);
+
+	QwtDial *p = ui->dial;
+	p->setValue(10.0);
+	QwtKnob *k = ui->knob;
+	k->setValue(10.0);
+
+	QwtPlot *pp = ui->qwtPlot;
+    pp->setAxisScale(QwtPlot::xBottom, 0.0, 10.0);
+    pp->setAxisScale(QwtPlot::yLeft, -1.0, 1.0);
+
+    pp->setTitle("fsdafdafdafdaadsf");
+
+	QwtPlotCurve *c = new QwtPlotCurve("curve1");
+    c->setRenderHint(QwtPlotItem::RenderAntialiased);
+    c->setPen(QPen(Qt::red));
+    c->setData(new SinusData());
+    c->attach(pp);
+    pp->show();
+
 }
-
-
