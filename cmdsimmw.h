@@ -38,8 +38,6 @@ private slots:
 
     void on_cbx_sigts_currentIndexChanged(const QString &arg1);
 
-    void on_pushButton_clicked();
-
     void on_commandLinkButton_clicked();
 
     void on_pushButton_2_clicked();
@@ -49,6 +47,12 @@ private slots:
     void on_btn_setwp_clicked();
 
 	void myBtnSlot();
+
+
+    void on_pushButton_4_clicked();
+
+    void on_btn_sigSel_ok_clicked();
+
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
@@ -71,15 +75,17 @@ private:
     void initHWSel();
     void initCHModel();
     QDialog *_pdlg;
-    QGridLayout *_pMainLay;
+    QGridLayout *_pMainLay;                     
     QGridLayout *_pLeftLay;
-    QLineEdit *_pSeachEdit;
-    QCompleter *_pCompleter;
-    QComboBox *_pcbxSigSel;
-    QComboBox *_pcbxCh;
-    QTableView *_ptbl;
+    QLineEdit *_pSeachEdit;                     /* sreach edit for signal name*/
+    QLineEdit *_pNewSigEdit;                    /* new  sig edit*/
+    QCompleter *_pCompleter;                    /* auto complete */
+    QComboBox *_pcbxSigSel;                     /* select sig */
+    QComboBox *_pcbxCh;                         /* select channel */
+    QTableView *_ptbl;                          /* show set result */
     QDialog *_pqwtdlg;
-
+    QPlainTextEdit *_ppl;                       /* show status */
+    QListView *_plistvsig;                      /* the list view for sigsel */
     void initLchList();
     void initAOList();
     void initTbl();
@@ -91,6 +97,8 @@ private:
     bool switchtoUmodel(QStandardItem *item, int type);
 
 	void addtionSetUi();
+    void appendtxtStatus(QString &str);
+    void initWidgetsPointer();
 };
 
 #endif // CMDSIMMW_H

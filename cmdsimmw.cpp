@@ -31,9 +31,14 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMDSimMW) {
 
+
     SIG_LVDT = new QString(cvcp936("LVDT"));
     SIG_AO = new QString(cvcp936("AO"));
+
+
     ui->setupUi(this);
+
+    initWidgetsPointer();
 
 #if 1
 	addtionSetUi();
@@ -201,10 +206,10 @@ QString CMDSimMW::cvcp936(const char str[]) {
 */
 void CMDSimMW::initInsView() {
     //Cmd_D_Model dv_model;
-    QListView *pv = ui->listw_sig_sel;
+    //_plistvsig = ui->listw_sig_sel;
     int cnt = initInstructs();
     dv_model = new QStandardItemModel(cnt, 0);
-    if(pv != NULL && cnt > 0) {
+    if(_plistvsig != NULL && cnt > 0) {
         //// Cmd_DM_Item *newItem;
         QStandardItem *newItem;
         for(int i = 0; i < cnt; i++) {
@@ -214,14 +219,14 @@ void CMDSimMW::initInsView() {
             dv_model->setItem(i, newItem);
         }
     }
-    pv->setModel(dv_model);
+    _plistvsig->setModel(dv_model);
 }
 
 /**
   init the search edit...
 */
 void CMDSimMW::initSeachLE() {
-    _pSeachEdit = ui->edit_search;
+    //_pSeachEdit = ui->edit_search;
     if(_pSeachEdit != NULL && dv_model != NULL) {
         _pCompleter = new QCompleter(this);
         _pCompleter->setModel(dv_model);
@@ -234,8 +239,8 @@ void CMDSimMW::initSeachLE() {
   init hw select
 */
 void CMDSimMW::initHWSel() {
-    _pcbxSigSel = ui->cbx_sigts;
-    _pcbxCh = ui->cbx_ch;
+    //_pcbxSigSel = ui->cbx_sigts;
+    //_pcbxCh = ui->cbx_ch;
     if(_pcbxSigSel != NULL && _pcbxCh != NULL) {
         _pcbxSigSel->addItem(cvcp936("LVDT"));
         _pcbxSigSel->addItem(cvcp936("AO"));
@@ -251,7 +256,7 @@ void CMDSimMW::initCHModel() {
     QString _tmpStr;
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
-    _pcbxCh = ui->cbx_ch;
+    //_pcbxCh = ui->cbx_ch;
     if(_pcbxSigSel != NULL && _pcbxCh != NULL) {
 //        _tmpStr = _pcbxSigSel->currentText();
         if(_tmpStr.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
@@ -365,7 +370,7 @@ int CMDSimMW::warningTextInfo(QPlainTextEdit &p) {
 
 int CMDSimMW::showWarning() {
     for(int i = 0; i < 10 ; i++) {
-        warningTextInfo(*(ui->plainTextEdit));
+        warningTextInfo(*(ui->pploptStatus));
     }
     return 0;
 
@@ -376,20 +381,20 @@ int CMDSimMW::showWarning() {
 */
 void CMDSimMW::initoptLog() {
 
-    QPlainTextEdit *ppl = ui->plainTextEdit;
+    //_ppl = ui->pploptStatus;
     QPalette pal;
     pal.setColor(QPalette::WindowText, Qt::yellow);
     pal.setColor(QPalette::Text, Qt::yellow);
     pal.setColor(QPalette::Active, QPalette::Base, Qt::red);
     pal.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
-    ppl->setPalette(pal);
+    _ppl->setPalette(pal);
 
-    if(ppl != NULL) {
-        ppl->setPlainText("=============");
-        ppl->appendPlainText("show one line");
-        ppl->appendPlainText("===============");
+    if(_ppl != NULL) {
+        _ppl->setPlainText("=============");
+        _ppl->appendPlainText("show one line");
+        _ppl->appendPlainText("===============");
 
-        ppl->setReadOnly(true);
+        _ppl->setReadOnly(true);
     }
 #if 0
     for(int i = 0;i < 5; i++) {
@@ -406,10 +411,10 @@ void CMDSimMW::initoptLog() {
         pal.setColor(QPalette::Active, QPalette::Base, Qt::white);
         pal.setColor(QPalette::Inactive, QPalette::Base, Qt::white);
 
-        ppl->setPalette(pal);
+        _ppl->setPalette(pal);
     }
 #endif
-    /* qbshow(ppl->toPlainText()); */
+    /* qbshow(_ppl->toPlainText()); */
 }
 
 #if 0
@@ -520,7 +525,7 @@ void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
 
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
-    _pcbxCh = ui->cbx_ch;
+    //_pcbxCh = ui->cbx_ch;
     //_pcbxCh->clear();
     if(arg1.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
         //band model
@@ -534,22 +539,6 @@ void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
     }
 }
 
-/**
-  select the sig ch and type
-*/
-void CMDSimMW::on_pushButton_clicked() {
-    _pcbxCh = ui->cbx_ch;
-    _pcbxSigSel = ui->cbx_sigts;
-    QString _curText, _curText2;
-    _curText = _pcbxCh->currentText();
-    _curText2 = _pcbxSigSel->currentText();
-
-    QList <QStandardItem *> findres;
-    findres = lch_model->findItems(_curText);
-    if(findres.size() == 1) {
-       qbshow( QString::number(findres.at(0)->row(), 10));
-    }
-}
 
 
 /**
@@ -627,23 +616,23 @@ void CMDSimMW::on_commandLinkButton_clicked() {
 
 void CMDSimMW::on_pushButton_2_clicked() {
 
-    QPlainTextEdit *ppl = ui->plainTextEdit;
+    //_ppl = ui->pploptStatus;
     QPalette pal;
     pal.setColor(QPalette::WindowText, Qt::red);
     pal.setColor(QPalette::Text, Qt::red);
     pal.setColor(QPalette::Active, QPalette::Base, Qt::blue);
     pal.setColor(QPalette::Inactive, QPalette::Base, Qt::blue);
-    ppl->setPalette(pal);
+    _ppl->setPalette(pal);
 
-    if(ppl != NULL) {
-        ppl->setPlainText("=============");
-        ppl->appendPlainText("show one line");
-        ppl->appendPlainText("===============");
+    if(_ppl != NULL) {
+        _ppl->setPlainText("=============");
+        _ppl->appendPlainText("show one line");
+        _ppl->appendPlainText("===============");
 
-        ppl->setReadOnly(true);
+        _ppl->setReadOnly(true);
     }
 
-#if 1
+#if 0
     for(int i = 0;i < 5; i++) {
         Sleep(1000);
         if(i % 2 == 0) {
@@ -657,7 +646,7 @@ void CMDSimMW::on_pushButton_2_clicked() {
             pal.setColor(QPalette::Active, QPalette::Base, Qt::white);
             pal.setColor(QPalette::Inactive, QPalette::Base, Qt::white);
         }
-       ppl->setPalette(pal);
+       _ppl->setPalette(pal);
     }
 #endif
 
@@ -665,19 +654,19 @@ void CMDSimMW::on_pushButton_2_clicked() {
 
 void CMDSimMW::on_pushButton_3_clicked() {
 
-    QPlainTextEdit *ppl = ui->plainTextEdit;
+    //_ppl = ui->pploptStatus;
     QPalette pal;
     pal.setColor(QPalette::WindowText, Qt::red);
     pal.setColor(QPalette::Text, Qt::red);
     pal.setColor(QPalette::Active, QPalette::Base, Qt::yellow);
     pal.setColor(QPalette::Inactive, QPalette::Base, Qt::yellow);
-    ppl->setPalette(pal);
+    _ppl->setPalette(pal);
 
-    if(ppl != NULL) {
-        ppl->setPlainText("=============");
-        ppl->appendPlainText("show one line");
-        ppl->appendPlainText("===============");
-        ppl->setReadOnly(true);
+    if(_ppl != NULL) {
+        _ppl->setPlainText("=============");
+        _ppl->appendPlainText("show one line");
+        _ppl->appendPlainText("===============");
+        _ppl->setReadOnly(true);
     }
 }
 
@@ -695,7 +684,55 @@ void CMDSimMW::myBtnSlot() {
 
 /*add own sig to Control */
 void CMDSimMW::addtionSetUi() {
-	connect(ui->btn_MySin, SIGNAL(clicked()), this, SLOT(myBtnSlot()));
+    connect(ui->btn_MySin, SIGNAL(clicked()), this, SLOT(myBtnSlot()));
 }
 
+/* append text to status brower*/
+void CMDSimMW::appendtxtStatus(QString &str) {
+    //_ppl = ui->pploptStatus;
+    _ppl->appendPlainText(str);
+}
+
+void CMDSimMW::on_pushButton_4_clicked() {
+    //_ppl = ui->pploptStatus;
+    _ppl->appendPlainText("new line\n");
+}
+
+void CMDSimMW::initWidgetsPointer() {
+
+    _pMainLay = NULL;
+    _pLeftLay = NULL;
+    _pLeftLay = NULL;
+    _pCompleter = NULL;
+    _pcbxSigSel = NULL;
+    _pcbxCh = NULL;
+    _ptbl = NULL;
+    _pqwtdlg = NULL;
+    _ppl = NULL;
+
+    _pSeachEdit = ui->edit_search;
+    _plistvsig = ui->listw_sig_sel;
+    _pNewSigEdit = ui->edit_newSig;
+    _ppl = ui->pploptStatus;
+    _pcbxSigSel = ui->cbx_sigts;
+    _pcbxCh = ui->cbx_ch;
+}
+
+
+/**
+  select the sig ch and type
+*/
+void CMDSimMW::on_btn_sigSel_ok_clicked() {
+ //_pcbxCh = ui->cbx_ch;
+    //_pcbxSigSel = ui->cbx_sigts;
+    QString _curText, _curText2;
+    _curText = _pcbxCh->currentText();
+    _curText2 = _pcbxSigSel->currentText();
+
+    QList <QStandardItem *> findres;
+    findres = lch_model->findItems(_curText);
+    if(findres.size() == 1) {
+       qbshow( QString::number(findres.at(0)->row(), 10));
+    }
+}
 
