@@ -51,7 +51,7 @@ private slots:
 
     void on_pushButton_4_clicked();
 
-    void on_btn_sigSel_ok_clicked();
+    void on_btn_sigSel_ok_clicked();            /* sigsel ok */
 
 private:
     enum {LVDTBrds = 4};
@@ -86,9 +86,9 @@ private:
     QDialog *_pqwtdlg;
     QPlainTextEdit *_ppl;                       /* show status */
     QListView *_plistvsig;                      /* the list view for sigsel */
-    void initLchList();
+    void initLchList();                         
     void initAOList();
-    void initTbl();
+    void initTbl();                             /* init result table for set  */
 
     int warningTextInfo(QPlainTextEdit &p);
     int showWarning();
@@ -97,8 +97,8 @@ private:
     bool switchtoUmodel(QStandardItem *item, int type);
 
 	void addtionSetUi();
-    void appendtxtStatus(QString &str);
-    void initWidgetsPointer();
+    void appendtxtStatus(QString &str);         /* append status plainEdit ctl */
+    void initWidgetsPointer();                  /* init widget pointer */
 };
 
 #endif // CMDSIMMW_H
