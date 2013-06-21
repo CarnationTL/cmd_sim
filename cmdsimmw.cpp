@@ -328,6 +328,9 @@ void CMDSimMW::initTbl() {
 #endif
 }
 
+
+
+/* not complete yet for show warning in plainEdit  */
 int CMDSimMW::warningTextInfo(QPlainTextEdit &p) {
     QPalette porg = p.palette();
     QPalette pdef;
@@ -367,6 +370,7 @@ int CMDSimMW::warningTextInfo(QPlainTextEdit &p) {
     p.setPalette(porg);
     return 0;
 }
+
 
 int CMDSimMW::showWarning() {
     for(int i = 0; i < 10 ; i++) {
@@ -717,6 +721,7 @@ void CMDSimMW::initWidgetsPointer() {
     _pcbxSigSel = ui->cbx_sigts;
     _pcbxCh = ui->cbx_ch;
 }
+
 
 
 /**
