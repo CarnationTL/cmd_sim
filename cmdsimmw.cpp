@@ -698,6 +698,9 @@ void CMDSimMW::on_pushButton_4_clicked() {
     _ppl->appendPlainText("new line\n");
 }
 
+
+
+/* init pointers of main Widget.. */
 void CMDSimMW::initWidgetsPointer() {
 
     _pMainLay = NULL;
@@ -732,7 +735,7 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
     QList <QStandardItem *> findres;
     findres = lch_model->findItems(_curText);
     if(findres.size() == 1) {
-       qbshow( QString::number(findres.at(0)->row(), 10));
+       qbshow( QString::number(findres.at(1)->row(), 10));
     }
 }
 
