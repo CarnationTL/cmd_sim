@@ -53,6 +53,12 @@ private slots:
 
     void on_btn_sigSel_ok_clicked();            /* sigsel ok */
 
+//    void on_sigLv_clickEd(const QModelIndex &index);
+
+    void on_listw_sig_sel_clicked(const QModelIndex &index);
+
+    void on_listw_sig_sel_entered(const QModelIndex &index);
+
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
@@ -97,6 +103,7 @@ private:
     bool switchtoUmodel(QStandardItem *item, int type);
 
 	void addtionSetUi();
+    void addtionSigSlotsMVC();
     void appendtxtStatus(QString &str);         /* append status plainEdit ctl */
     void initWidgetsPointer();                  /* init widget pointer */
 };

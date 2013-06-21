@@ -25,6 +25,7 @@
 #include <QTimer>
 
 typedef int(* funca )(int);
+int chSta = -1;
 #define TBL_COL 4
 
 CMDSimMW::CMDSimMW(QWidget *parent) :
@@ -236,7 +237,7 @@ void CMDSimMW::initSeachLE() {
 
 
 /**
-  init hw select
+  init sigtype  select
 */
 void CMDSimMW::initHWSel() {
     //_pcbxSigSel = ui->cbx_sigts;
@@ -689,6 +690,7 @@ void CMDSimMW::myBtnSlot() {
 /*add own sig to Control */
 void CMDSimMW::addtionSetUi() {
     connect(ui->btn_MySin, SIGNAL(clicked()), this, SLOT(myBtnSlot()));
+    //connect(ui->listw_sig_sel, SIGNAL(clicked(QModelIndex)), this, SLOT(clicked(QModelIndex)));
 }
 
 /* append text to status brower*/
@@ -726,7 +728,6 @@ void CMDSimMW::initWidgetsPointer() {
 }
 
 
-
 /**
   select the sig ch and type
 */
@@ -741,6 +742,43 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
     findres = lch_model->findItems(_curText);
     if(findres.size() == 1) {
        qbshow( QString::number(findres.at(1)->row(), 10));
+    }
+}
+
+
+//void  CMDSimMW::on_sigLv_clicked(const QModelIndex &index) {
+//
+//}
+/* listw_sig_sel checkState  */
+void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
+    QStandardItem *pf = dv_model->itemFromIndex(index);
+    QString tmp("");
+    if(pf->isCheckable() == false) {
+        return;
+    }
+
+    if(pf->checkState() == Qt::Checked && chSta == Qt::Unchecked ) {
+        tmp.append(cvcp936("选中->"));
+        tmp.append(pf->text());
+        appendtxtStatus(tmp);
+    } else if (pf->checkState() == Qt::Unchecked && chSta == Qt::Checked ) {
+        tmp.append(cvcp936("取消选中->"));
+        tmp.append(pf->text());
+        appendtxtStatus(tmp);
+    }
+}
+
+void CMDSimMW::addtionSigSlotsMVC() {
+    return;
+}
+
+/* test pressed button for filter status */
+void CMDSimMW::on_listw_sig_sel_entered(const QModelIndex &index) {
+    QStandardItem *pf = dv_model->itemFromIndex(index);
+    if(pf->checkState() == Qt::Unchecked) {
+        chSta = Qt::Unchecked;
+    } else if(pf->checkState() == Qt::Checked) {
+        chSta = Qt::Checked;
     }
 }
 
