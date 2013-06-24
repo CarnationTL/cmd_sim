@@ -38,8 +38,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     SIG_LVDT = new QString(cvcp936("LVDT"));
     SIG_AO = new QString(cvcp936("AO"));
 
-
     ui->setupUi(this);
+
 
     initWidgetsPointer();
 
@@ -552,12 +552,24 @@ void CMDSimMW::on_actionSetBrd_triggered() {
   accept sel
 */
 void CMDSimMW::on_bbx_sig_sel_accepted() {
-    if(_pNewSigEdit != NULL) {
-        QString tmp = _pNewSigEdit->text();
-        if(tmp.size() > 0) {
-            addItemToModel(dv_lv_model, tmp);
-        } else {
-            QMessageBox::warning(this, "waring", cvcp936("请输入信号名称！"));
+
+    if(_plistvsig->model() == dv_lv_model) {
+        if(_pNewSigEdit != NULL) {
+            QString tmp = _pNewSigEdit->text();
+            if(tmp.size() > 0) {
+                addItemToModel(dv_lv_model, tmp);
+            } else {
+                QMessageBox::warning(this, "waring", cvcp936("请输入信号名称！"));
+            }
+        }
+    } else if(_plistvsig->model() == dv_ao_model) {
+        if(_pNewSigEdit != NULL) {
+            QString tmp = _pNewSigEdit->text();
+            if(tmp.size() > 0) {
+                addItemToModel(dv_ao_model, tmp);
+            } else {
+                QMessageBox::warning(this, "waring", cvcp936("请输入信号名称！"));
+            }
         }
     }
 }
@@ -772,8 +784,6 @@ void CMDSimMW::initWidgetsPointer() {
 /*add own sig to Control */
 void CMDSimMW::addtionSetUi() {
     connect(ui->btn_MySin, SIGNAL(clicked()), this, SLOT(myBtnSlot()));
-    //connect(_plistvsig, SIGNAL(activated(QModelIndex)), this, SLOT(m_listwSigActived(QModelIndex)));
-    //connect(_plistvsig, SIGNAL(clicked(QModelIndex)), this, SLOT(m_listwSigActived(QModelIndex)));
 
     //modify
     if(_pbtnBoxSigSel != NULL) {
@@ -827,7 +837,15 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
 //}
 /* listw_sig_sel checkState  */
 void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
-    QStandardItem *pf = dv_lv_model->itemFromIndex(index);
+     QStandardItem *pf = NULL;
+    if(_plistvsig->model() == dv_lv_model) {
+        pf = dv_lv_model->itemFromIndex(index);
+    } else if(_plistvsig->model() == dv_ao_model) {
+        pf = dv_ao_model->itemFromIndex(index);
+    }
+    if(pf == NULL) {
+        return;
+    }
     QString tmp("");
     if(pf->isCheckable() == false) {
         return;
@@ -842,12 +860,8 @@ void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
         tmp.append(pf->text());
         appendtxtStatus(tmp);
     }
-
 }
 
-void CMDSimMW::m_listwSigActived(QModelIndex index) {
-    QMessageBox::warning(this, "fsdafsda", "fdsafdsa", QMessageBox::Yes);
-}
 void CMDSimMW::addtionSigSlotsMVC() {
     return;
 }
@@ -944,3 +958,5 @@ void CMDSimMW::initAOsigNameModel(int cnt) {
         }
     }
 }
+
+

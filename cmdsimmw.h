@@ -60,11 +60,10 @@ private slots:
 
     void on_listw_sig_sel_clicked(const QModelIndex &index);
 
-    void m_listwSigActived(QModelIndex index);
-
     void m_delItem(QModelIndex &index);
 
     void on_action_reset_sigDis_triggered();
+
 
 private:
     enum {LVDTBrds = 4};
@@ -127,6 +126,7 @@ private:
     int addItemToModel(QStandardItemModel* model, QString &newItem);  
     int delItemFromModel(QStandardItemModel* model);
     int rechkItemSel(QStandardItemModel* model);
+
 };
 
 #endif // CMDSIMMW_H
