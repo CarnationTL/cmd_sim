@@ -28,7 +28,8 @@ class CMDSimMW : public QMainWindow {
 public:
     explicit CMDSimMW(QWidget *parent = 0);
     ~CMDSimMW();
-    int initInstructs();
+    int initLvInstructs();
+    int initAoInstructs();
     void qbshow(QString str);
 
 signals:
@@ -75,8 +76,13 @@ private:
     int init75c3(void);
 
     QStringList *ps_ins_v;
-    QStandardItemModel *org_dv_model;
-    QStandardItemModel *dv_model;
+    QStringList *ps_ao_ins_v;
+    QStandardItemModel *org_dv_lv_model;
+    QStandardItemModel *dv_lv_model;
+
+    QStandardItemModel *org_dv_ao_model;
+    QStandardItemModel *dv_ao_model;
+
     QStandardItemModel *lch_model;
     QStandardItemModel *ach_model;
     QStandardItemModel *rlch_model;
@@ -105,6 +111,8 @@ private:
     void initLchList();                         
     void initAOList();
     void initTbl();                             /* init result table for set  */
+    void initLvsigNameModel(int cnt);
+    void initAOsigNameModel(int cnt);
 
     int warningTextInfo(QPlainTextEdit &p);
     int showWarning();
