@@ -15,6 +15,8 @@
 #include <QComboBox>
 #include <QTableView>
 #include <QPlainTextEdit>
+#include <QDialogButtonBox>
+
 
 namespace Ui {
 class CMDSimMW;
@@ -29,6 +31,8 @@ public:
     int initInstructs();
     void qbshow(QString str);
 
+signals:
+    int msig_delIndex(QModelIndex &index);
 private slots:
     void on_actionSetBrd_triggered();
 
@@ -53,11 +57,11 @@ private slots:
 
     void on_btn_sigSel_ok_clicked();            /* sigsel ok */
 
-//    void on_sigLv_clickEd(const QModelIndex &index);
-
     void on_listw_sig_sel_clicked(const QModelIndex &index);
 
-    void on_listw_sig_sel_entered(const QModelIndex &index);
+    void m_listwSigActived(QModelIndex index);
+
+    void m_delItem(QModelIndex &index);
 
 private:
     enum {LVDTBrds = 4};
@@ -92,6 +96,9 @@ private:
     QDialog *_pqwtdlg;
     QPlainTextEdit *_ppl;                       /* show status */
     QListView *_plistvsig;                      /* the list view for sigsel */
+    QDialogButtonBox *_pbtnBoxSigSel;           /* button box for sig accept and 
+                                                   reject(delete) */
+
     void initLchList();                         
     void initAOList();
     void initTbl();                             /* init result table for set  */
@@ -106,6 +113,9 @@ private:
     void addtionSigSlotsMVC();
     void appendtxtStatus(QString &str);         /* append status plainEdit ctl */
     void initWidgetsPointer();                  /* init widget pointer */
+    int addItemToModel(QStandardItemModel* model, QString &newItem);  
+    int delItemFromModel(QStandardItemModel* model);
+    int rechkItemSel(QStandardItemModel* model);
 };
 
 #endif // CMDSIMMW_H

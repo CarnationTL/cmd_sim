@@ -33,6 +33,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     ui(new Ui::CMDSimMW) {
 
 
+    connect(this, SIGNAL(msig_delIndex(QModelIndex&)), this, SLOT(m_delItem(QModelIndex&)));
+
     SIG_LVDT = new QString(cvcp936("LVDT"));
     SIG_AO = new QString(cvcp936("AO"));
 
@@ -206,7 +208,7 @@ QString CMDSimMW::cvcp936(const char str[]) {
   band the model to view
 */
 void CMDSimMW::initInsView() {
-    //Cmd_D_Model dv_model;
+    //Cmd_D_model.Model dv_model;
     //_plistvsig = ui->listw_sig_sel;
     int cnt = initInstructs();
     dv_model = new QStandardItemModel(cnt, 0);
@@ -321,7 +323,7 @@ void CMDSimMW::initTbl() {
 
 #if 0
     //set last col
-    _ptbl->horizontalHeader()->setStretchLastSection(true);
+    _ptbl->horizontalHeacder()->setStretchLastSection(true);
     _ptbl->setColumnWidth(0, 35);
     if(_ptbl != NULL) {
 
@@ -509,14 +511,28 @@ void CMDSimMW::on_actionSetBrd_triggered() {
   accept sel
 */
 void CMDSimMW::on_bbx_sig_sel_accepted() {
-    QMessageBox::warning(this, "accpet", "accept", QMessageBox::Yes);
+    if(_pNewSigEdit != NULL) {
+        QString tmp = _pNewSigEdit->text();
+        if(tmp.size() > 0) {
+            addItemToModel(dv_model, tmp);
+        } else {
+            QMessageBox::warning(this, "waring", cvcp936("请输入信号名称！"));
+        }
+    }
 }
 
 /**
   reject sel
 */
 void CMDSimMW::on_bbx_sig_sel_rejected() {
-    QMessageBox::warning(this, "rejected..", "reject...", QMessageBox::Yes);
+    //QMessageBox::warning(this, "rejected..", "reject...", QMessageBox::Yes);
+    while(rechkItemSel(dv_model)) {
+            for(int i = 0; i < dv_model->rowCount(); i++) {
+                if(dv_model->item(i, 0)->checkState() == Qt::Checked) {
+                    emit(msig_delIndex(dv_model->index(i, 0)));
+                }
+            }
+    }
 }
 
 /**
@@ -687,24 +703,6 @@ void CMDSimMW::myBtnSlot() {
 	qbshow("test my own slot");
 }
 
-/*add own sig to Control */
-void CMDSimMW::addtionSetUi() {
-    connect(ui->btn_MySin, SIGNAL(clicked()), this, SLOT(myBtnSlot()));
-    //connect(ui->listw_sig_sel, SIGNAL(clicked(QModelIndex)), this, SLOT(clicked(QModelIndex)));
-}
-
-/* append text to status brower*/
-void CMDSimMW::appendtxtStatus(QString &str) {
-    //_ppl = ui->pploptStatus;
-    _ppl->appendPlainText(str);
-}
-
-void CMDSimMW::on_pushButton_4_clicked() {
-    //_ppl = ui->pploptStatus;
-    _ppl->appendPlainText("new line\n");
-}
-
-
 
 /* init pointers of main Widget.. */
 void CMDSimMW::initWidgetsPointer() {
@@ -718,6 +716,7 @@ void CMDSimMW::initWidgetsPointer() {
     _ptbl = NULL;
     _pqwtdlg = NULL;
     _ppl = NULL;
+    _pbtnBoxSigSel = ui->bbx_sig_sel;
 
     _pSeachEdit = ui->edit_search;
     _plistvsig = ui->listw_sig_sel;
@@ -726,6 +725,40 @@ void CMDSimMW::initWidgetsPointer() {
     _pcbxSigSel = ui->cbx_sigts;
     _pcbxCh = ui->cbx_ch;
 }
+
+/*add own sig to Control */
+void CMDSimMW::addtionSetUi() {
+    connect(ui->btn_MySin, SIGNAL(clicked()), this, SLOT(myBtnSlot()));
+    //connect(_plistvsig, SIGNAL(activated(QModelIndex)), this, SLOT(m_listwSigActived(QModelIndex)));
+    //connect(_plistvsig, SIGNAL(clicked(QModelIndex)), this, SLOT(m_listwSigActived(QModelIndex)));
+
+    //modify
+    if(_pbtnBoxSigSel != NULL) {
+        QPushButton *pt = NULL;
+        pt = _pbtnBoxSigSel->button(QDialogButtonBox::Ok);
+        if(pt != NULL) {
+            pt->setText(cvcp936("添加信号"));
+        }
+        pt = NULL;
+        pt = _pbtnBoxSigSel->button(QDialogButtonBox::Cancel);
+        if(pt != NULL) {
+            pt->setText(cvcp936("删除信号"));
+        }
+    }
+
+}
+
+/* append text to status brower*/
+void CMDSimMW::appendtxtStatus(QString &str) {
+    //_ppl = ui->pploptStatus;
+    _ppl->appendPlainText(str);
+}
+
+void CMDSimMW::on_pushButton_4_clicked() {
+    //_ppl = ui->pploptStatus;
+    _ppl->appendPlainText("new line\n");
+}
+
 
 
 /**
@@ -757,28 +790,58 @@ void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
         return;
     }
 
-    if(pf->checkState() == Qt::Checked && chSta == Qt::Unchecked ) {
+    if(pf->checkState() == Qt::Checked /*&& chSta == Qt::Unchecked */) {
         tmp.append(cvcp936("选中->"));
         tmp.append(pf->text());
         appendtxtStatus(tmp);
-    } else if (pf->checkState() == Qt::Unchecked && chSta == Qt::Checked ) {
+    } else if (pf->checkState() == Qt::Unchecked /*&& chSta == Qt::Checked */) {
         tmp.append(cvcp936("取消选中->"));
         tmp.append(pf->text());
         appendtxtStatus(tmp);
     }
+
 }
 
+void CMDSimMW::m_listwSigActived(QModelIndex index) {
+    QMessageBox::warning(this, "fsdafsda", "fdsafdsa", QMessageBox::Yes);
+}
 void CMDSimMW::addtionSigSlotsMVC() {
     return;
 }
 
-/* test pressed button for filter status */
-void CMDSimMW::on_listw_sig_sel_entered(const QModelIndex &index) {
-    QStandardItem *pf = dv_model->itemFromIndex(index);
-    if(pf->checkState() == Qt::Unchecked) {
-        chSta = Qt::Unchecked;
-    } else if(pf->checkState() == Qt::Checked) {
-        chSta = Qt::Checked;
+int CMDSimMW::addItemToModel(QStandardItemModel *model, QString &newItem) {
+    QStandardItem *pi = new QStandardItem(newItem);
+    pi->setCheckable(true);
+    pi->setCheckState(Qt::Unchecked);
+    model->appendRow(pi);
+    return 0;
+}
+
+/* del Items from model by check */
+int CMDSimMW::delItemFromModel(QStandardItemModel *model) {
+    if(model->rowCount() > 0) {
+        int tmp = model->rowCount();
+        for (int i = 0; i < tmp; i++) {
+            if(model->item(i, 0)->checkState() == Qt::Checked) {
+                model->removeRow(i);
+            }
+        }
     }
+    return 0;
+}
+
+int CMDSimMW::rechkItemSel(QStandardItemModel *model) {
+    int tmp = model->rowCount();
+    for(int i = 0; i < tmp; i++) {
+        if(model->item(i)->checkState() == Qt::Checked){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void CMDSimMW::m_delItem(QModelIndex &index) {
+    QStandardItem *p = dv_model->itemFromIndex(index);
+    dv_model->removeRow(index.row(), index.parent());
 }
 
