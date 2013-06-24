@@ -63,6 +63,8 @@ private slots:
 
     void m_delItem(QModelIndex &index);
 
+    void on_action_reset_sigDis_triggered();
+
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
@@ -73,6 +75,7 @@ private:
     int init75c3(void);
 
     QStringList *ps_ins_v;
+    QStandardItemModel *org_dv_model;
     QStandardItemModel *dv_model;
     QStandardItemModel *lch_model;
     QStandardItemModel *ach_model;

@@ -212,14 +212,22 @@ void CMDSimMW::initInsView() {
     //_plistvsig = ui->listw_sig_sel;
     int cnt = initInstructs();
     dv_model = new QStandardItemModel(cnt, 0);
+    org_dv_model = new QStandardItemModel(cnt, 0);
     if(_plistvsig != NULL && cnt > 0) {
         //// Cmd_DM_Item *newItem;
         QStandardItem *newItem;
+        QStandardItem *org_newItem;
         for(int i = 0; i < cnt; i++) {
             newItem = new QStandardItem(ps_ins_v->at(i));
             newItem->setCheckable(true);
             newItem->setCheckState(Qt::Unchecked);
+
+            org_newItem = new QStandardItem(ps_ins_v->at(i));
+            org_newItem->setCheckable(true);
+            org_newItem->setCheckState(Qt::Unchecked);
+
             dv_model->setItem(i, newItem);
+            org_dv_model->setItem(i, org_newItem);
         }
     }
     _plistvsig->setModel(dv_model);
@@ -522,10 +530,10 @@ void CMDSimMW::on_bbx_sig_sel_accepted() {
 }
 
 /**
-  reject sel
+  reject sel do this function once can't del all 
+  so use while to force call del function
 */
 void CMDSimMW::on_bbx_sig_sel_rejected() {
-    //QMessageBox::warning(this, "rejected..", "reject...", QMessageBox::Yes);
     while(rechkItemSel(dv_model)) {
             for(int i = 0; i < dv_model->rowCount(); i++) {
                 if(dv_model->item(i, 0)->checkState() == Qt::Checked) {
@@ -841,7 +849,20 @@ int CMDSimMW::rechkItemSel(QStandardItemModel *model) {
 }
 
 void CMDSimMW::m_delItem(QModelIndex &index) {
-    QStandardItem *p = dv_model->itemFromIndex(index);
     dv_model->removeRow(index.row(), index.parent());
+}
+
+
+void CMDSimMW::on_action_reset_sigDis_triggered() {
+    dv_model->clear();
+    dv_model->removeRows(0, dv_model->rowCount());
+    int tmp = org_dv_model->rowCount();
+    for(int i = 0; i < tmp; i++) {
+        QStandardItem *p = new QStandardItem(org_dv_model->item(i, 0)->text());
+        p->setCheckable(true);
+        p->setCheckState(Qt::Unchecked);
+        dv_model->setItem(i, 0, p);
+    }
+    _plistvsig->setModel(dv_model);
 }
 

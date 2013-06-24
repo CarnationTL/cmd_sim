@@ -367,7 +367,14 @@
     <property name="title">
      <string>设置</string>
     </property>
+    <widget class="QMenu" name="menu_2">
+     <property name="title">
+      <string>信号选择设置</string>
+     </property>
+     <addaction name="action_reset_sigDis"/>
+    </widget>
     <addaction name="actionSetBrd"/>
+    <addaction name="menu_2"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -383,6 +390,11 @@
   <action name="actionSetBrd">
    <property name="text">
     <string>板卡设置</string>
+   </property>
+  </action>
+  <action name="action_reset_sigDis">
+   <property name="text">
+    <string>重置信号描述</string>
    </property>
   </action>
  </widget>
