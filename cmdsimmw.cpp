@@ -23,6 +23,7 @@
 #include <QPlainTextEdit>
 #include <QPalette>
 #include <QTimer>
+#include <QIcon>
 
 typedef int(* funca )(int);
 int chSta = -1;
@@ -558,6 +559,8 @@ void CMDSimMW::on_bbx_sig_sel_accepted() {
             QString tmp = _pNewSigEdit->text();
             if(tmp.size() > 0) {
                 addItemToModel(dv_lv_model, tmp);
+                QString astr(cvcp936("添加信号：") + tmp + QString("--->") + cvcp936("LVDT信号列表"));
+                appendtxtStatus(astr);
             } else {
                 QMessageBox::warning(this, "waring", cvcp936("请输入信号名称！"));
             }
@@ -567,6 +570,8 @@ void CMDSimMW::on_bbx_sig_sel_accepted() {
             QString tmp = _pNewSigEdit->text();
             if(tmp.size() > 0) {
                 addItemToModel(dv_ao_model, tmp);
+                QString astr(cvcp936("添加信号：") + tmp + QString("--->") + cvcp936("AO信号列表"));
+                appendtxtStatus(astr);
             } else {
                 QMessageBox::warning(this, "waring", cvcp936("请输入信号名称！"));
             }
@@ -579,13 +584,24 @@ void CMDSimMW::on_bbx_sig_sel_accepted() {
   so use while to force call del function
 */
 void CMDSimMW::on_bbx_sig_sel_rejected() {
-    while(rechkItemSel(dv_lv_model)) {
+    if(_plistvsig->model() == dv_lv_model) {
+        while(rechkItemSel(dv_lv_model)) {
             for(int i = 0; i < dv_lv_model->rowCount(); i++) {
                 if(dv_lv_model->item(i, 0)->checkState() == Qt::Checked) {
                     emit(msig_delIndex(dv_lv_model->index(i, 0)));
                 }
             }
+        }
+    } else if(_plistvsig->model() == dv_ao_model) {
+        while(rechkItemSel(dv_ao_model)) {
+            for(int i = 0; i < dv_ao_model->rowCount(); i++) {
+                if(dv_ao_model->item(i, 0)->checkState() == Qt::Checked) {
+                    emit(msig_delIndex(dv_ao_model->index(i, 0)));
+                }
+            }
+        }
     }
+
 }
 
 /**
@@ -798,6 +814,7 @@ void CMDSimMW::addtionSetUi() {
             pt->setText(cvcp936("删除信号"));
         }
     }
+    CMDSimMW::setWindowIcon(QIcon(":image/MW.ico"));
 
 }
 
@@ -897,7 +914,17 @@ int CMDSimMW::rechkItemSel(QStandardItemModel *model) {
 }
 
 void CMDSimMW::m_delItem(QModelIndex &index) {
-    dv_lv_model->removeRow(index.row(), index.parent());
+    if(_plistvsig->model() == dv_lv_model) {
+        dv_lv_model->removeRow(index.row(), index.parent());
+        QString tmp(dv_lv_model->itemFromIndex(index)->text());
+        QString astr(cvcp936("删除信号：") + tmp + QString("<---") + cvcp936("LVDT信号列表"));
+        appendtxtStatus(astr);
+    } else if(_plistvsig->model() == dv_ao_model) {
+        dv_ao_model->removeRow(index.row(), index.parent());
+        QString tmp(dv_ao_model->itemFromIndex(index)->text());
+        QString astr(cvcp936("删除信号：") + tmp + QString("<---") + cvcp936("AO信号列表"));
+        appendtxtStatus(astr);
+    }
 }
 
 
@@ -970,3 +997,16 @@ void CMDSimMW::on_listw_sig_sel_pressed(const QModelIndex &index) {
     chSta = p->checkState();
 }
 
+/* reset signal dis */
+void CMDSimMW::on_action_reset_SigAO_triggered() {
+
+    dv_ao_model->clear();
+    dv_ao_model->removeRows(0, dv_ao_model->rowCount());
+    int tmp = org_dv_ao_model->rowCount();
+    for(int i = 0; i < tmp; i++) {
+        QStandardItem *p = new QStandardItem(org_dv_ao_model->item(i, 0)->text());
+        p->setCheckable(true);
+        p->setCheckState(Qt::Unchecked);
+        dv_ao_model->setItem(i, 0, p);
+    }
+}

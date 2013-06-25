@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/edu_mathematics.ico</file>
+        <file>image/terminal.ico</file>
+        <file>image/hwinfo.ico</file>
+        <file>image/kcmmemory.ico</file>
+        <file>image/kcmprocessor.ico</file>
+        <file>image/kmenuedit.ico</file>
+        <file>image/konsole.ico</file>
+        <file>image/linuxconf.ico</file>
+        <file>image/MW.ico</file>
+        <file>image/package_development.ico</file>
+        <file>image/package_settings.ico</file>
+        <file>image/password.ico</file>
+        <file>image/taskbar.ico</file>
+    </qresource>
+</RCC>

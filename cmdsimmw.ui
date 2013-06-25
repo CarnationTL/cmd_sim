@@ -372,6 +372,7 @@
       <string>信号选择设置</string>
      </property>
      <addaction name="action_reset_sigDis"/>
+     <addaction name="action_reset_SigAO"/>
     </widget>
     <addaction name="actionSetBrd"/>
     <addaction name="menu_2"/>
@@ -394,7 +395,12 @@
   </action>
   <action name="action_reset_sigDis">
    <property name="text">
-    <string>重置信号描述</string>
+    <string>重置LVDT信号描述</string>
+   </property>
+  </action>
+  <action name="action_reset_SigAO">
+   <property name="text">
+    <string>重置AO信号描述</string>
    </property>
   </action>
  </widget>
