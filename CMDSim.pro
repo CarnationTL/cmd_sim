@@ -74,4 +74,20 @@ INCLUDEPATH += $$PWD/75C3inc
 DEPENDPATH += $$PWD/75C3inc
 
 OTHER_FILES += \
-    notes.txt
+    notes.txt \
+    image/taskbar.ico \
+    image/password.ico \
+    image/package_settings.ico \
+    image/package_development.ico \
+    image/looknfeel.ico \
+    image/linuxconf.ico \
+    image/konsole.ico \
+    image/kmenuedit.ico \
+    image/kcmprocessor.ico \
+    image/kcmmemory.ico \
+    image/hwinfo.ico \
+    image/edu_mathematics.ico \
+    image/terminal.ico
+
+RESOURCES += \
+    qres.qrc

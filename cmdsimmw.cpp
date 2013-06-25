@@ -23,17 +23,26 @@
 #include <QPlainTextEdit>
 #include <QPalette>
 #include <QTimer>
+#include <QIcon>
 
 typedef int(* funca )(int);
+int chSta = -1;
 #define TBL_COL 4
 
 CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMDSimMW) {
 
+
+    connect(this, SIGNAL(msig_delIndex(QModelIndex&)), this, SLOT(m_delItem(QModelIndex&)));
+
     SIG_LVDT = new QString(cvcp936("LVDT"));
     SIG_AO = new QString(cvcp936("AO"));
+
     ui->setupUi(this);
+
+
+    initWidgetsPointer();
 
 #if 1
 	addtionSetUi();
@@ -121,7 +130,52 @@ CMDSimMW::~CMDSimMW() {
     delete ui;
 }
 
-int CMDSimMW::initInstructs() {
+
+int CMDSimMW::initAoInstructs() {
+    QStringList *prefix = new QStringList();
+
+    prefix->append(cvcp936("左驾驶盘力信号"));
+    prefix->append(cvcp936("右驾驶盘力信号"));
+    prefix->append(cvcp936("左驾驶柱力信号"));
+    prefix->append(cvcp936("右驾驶柱力信号"));
+
+    prefix->append(cvcp936("左脚蹬力信号"));
+    prefix->append(cvcp936("右脚蹬力信号"));
+
+    prefix->append(cvcp936("减速杆力信号"));
+    prefix->append(cvcp936("减速杆力信号"));
+
+    QStringList *end = new QStringList();
+    end->append("A");
+    end->append("B");
+    end->append("C");
+    end->append("D");
+
+
+    ps_ao_ins_v = new QStringList();
+    QString tempStr;
+
+    if(prefix == NULL || end == NULL)
+        return NULL;
+
+    for(int i = 0; i < prefix->size(); i++) {
+        for(int j = 0; j < end->size(); j++)  {
+            tempStr.clear();
+            tempStr.prepend(prefix->at(i));
+            tempStr.append(end->at(j));
+            ps_ao_ins_v->append(tempStr);
+        }
+    }
+
+    delete prefix;
+    delete end;
+    prefix = NULL;
+    end = NULL;
+    return ps_ao_ins_v->size();
+}
+
+
+int CMDSimMW::initLvInstructs() {
     QStringList *prefix = new QStringList();
     prefix->append(cvcp936("左驾驶盘位移信号"));
     prefix->append(cvcp936("右驾驶盘位移信号"));
@@ -200,42 +254,36 @@ QString CMDSimMW::cvcp936(const char str[]) {
   band the model to view
 */
 void CMDSimMW::initInsView() {
-    //Cmd_D_Model dv_model;
-    QListView *pv = ui->listw_sig_sel;
-    int cnt = initInstructs();
-    dv_model = new QStandardItemModel(cnt, 0);
-    if(pv != NULL && cnt > 0) {
-        //// Cmd_DM_Item *newItem;
-        QStandardItem *newItem;
-        for(int i = 0; i < cnt; i++) {
-            newItem = new QStandardItem(ps_ins_v->at(i));
-            newItem->setCheckable(true);
-            newItem->setCheckState(Qt::Unchecked);
-            dv_model->setItem(i, newItem);
-        }
-    }
-    pv->setModel(dv_model);
+    //Cmd_D_model.Model dv_model;
+    //_plistvsig = ui->listw_sig_sel;
+    int cnt = initLvInstructs();
+    initLvsigNameModel(cnt);
+    int cnt1 = initAoInstructs();
+    initAOsigNameModel(cnt1);
+
+    _plistvsig->setModel(dv_lv_model);
 }
+
 
 /**
   init the search edit...
 */
 void CMDSimMW::initSeachLE() {
-    _pSeachEdit = ui->edit_search;
-    if(_pSeachEdit != NULL && dv_model != NULL) {
+    //_pSeachEdit = ui->edit_search;
+    if(_pSeachEdit != NULL && dv_lv_model != NULL) {
         _pCompleter = new QCompleter(this);
-        _pCompleter->setModel(dv_model);
+        _pCompleter->setModel(dv_lv_model);
         _pSeachEdit->setCompleter(_pCompleter);
     }
 }
 
 
 /**
-  init hw select
+  init sigtype  select
 */
 void CMDSimMW::initHWSel() {
-    _pcbxSigSel = ui->cbx_sigts;
-    _pcbxCh = ui->cbx_ch;
+    //_pcbxSigSel = ui->cbx_sigts;
+    //_pcbxCh = ui->cbx_ch;
     if(_pcbxSigSel != NULL && _pcbxCh != NULL) {
         _pcbxSigSel->addItem(cvcp936("LVDT"));
         _pcbxSigSel->addItem(cvcp936("AO"));
@@ -251,7 +299,7 @@ void CMDSimMW::initCHModel() {
     QString _tmpStr;
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
-    _pcbxCh = ui->cbx_ch;
+    //_pcbxCh = ui->cbx_ch;
     if(_pcbxSigSel != NULL && _pcbxCh != NULL) {
 //        _tmpStr = _pcbxSigSel->currentText();
         if(_tmpStr.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
@@ -259,12 +307,14 @@ void CMDSimMW::initCHModel() {
             //_pcbxCh->addItem(cvcp936("LVDT>>>>>>"));
             if(lch_model != NULL) {
                 _pcbxCh->setModel(lch_model);
+                _plistvsig->setModel(dv_lv_model);
             }
         } else if(_tmpStr.compare(_sAO, Qt::CaseInsensitive) == 0) {
             //bind model
             //_pcbxCh->addItem(cvcp936("AO>>>>>>"));
             if(ach_model != NULL) {
                 _pcbxCh->setModel(ach_model);
+                _plistvsig->setModel(dv_ao_model);
             }
         }
     }
@@ -315,7 +365,7 @@ void CMDSimMW::initTbl() {
 
 #if 0
     //set last col
-    _ptbl->horizontalHeader()->setStretchLastSection(true);
+    _ptbl->horizontalHeacder()->setStretchLastSection(true);
     _ptbl->setColumnWidth(0, 35);
     if(_ptbl != NULL) {
 
@@ -323,6 +373,9 @@ void CMDSimMW::initTbl() {
 #endif
 }
 
+
+
+/* not complete yet for show warning in plainEdit  */
 int CMDSimMW::warningTextInfo(QPlainTextEdit &p) {
     QPalette porg = p.palette();
     QPalette pdef;
@@ -363,9 +416,10 @@ int CMDSimMW::warningTextInfo(QPlainTextEdit &p) {
     return 0;
 }
 
+
 int CMDSimMW::showWarning() {
     for(int i = 0; i < 10 ; i++) {
-        warningTextInfo(*(ui->plainTextEdit));
+        warningTextInfo(*(ui->pploptStatus));
     }
     return 0;
 
@@ -376,20 +430,20 @@ int CMDSimMW::showWarning() {
 */
 void CMDSimMW::initoptLog() {
 
-    QPlainTextEdit *ppl = ui->plainTextEdit;
+    //_ppl = ui->pploptStatus;
     QPalette pal;
     pal.setColor(QPalette::WindowText, Qt::yellow);
     pal.setColor(QPalette::Text, Qt::yellow);
     pal.setColor(QPalette::Active, QPalette::Base, Qt::red);
     pal.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
-    ppl->setPalette(pal);
+    _ppl->setPalette(pal);
 
-    if(ppl != NULL) {
-        ppl->setPlainText("=============");
-        ppl->appendPlainText("show one line");
-        ppl->appendPlainText("===============");
+    if(_ppl != NULL) {
+        _ppl->setPlainText("=============");
+        _ppl->appendPlainText("show one line");
+        _ppl->appendPlainText("===============");
 
-        ppl->setReadOnly(true);
+        _ppl->setReadOnly(true);
     }
 #if 0
     for(int i = 0;i < 5; i++) {
@@ -406,10 +460,10 @@ void CMDSimMW::initoptLog() {
         pal.setColor(QPalette::Active, QPalette::Base, Qt::white);
         pal.setColor(QPalette::Inactive, QPalette::Base, Qt::white);
 
-        ppl->setPalette(pal);
+        _ppl->setPalette(pal);
     }
 #endif
-    /* qbshow(ppl->toPlainText()); */
+    /* qbshow(_ppl->toPlainText()); */
 }
 
 #if 0
@@ -499,14 +553,55 @@ void CMDSimMW::on_actionSetBrd_triggered() {
   accept sel
 */
 void CMDSimMW::on_bbx_sig_sel_accepted() {
-    QMessageBox::warning(this, "accpet", "accept", QMessageBox::Yes);
+
+    if(_plistvsig->model() == dv_lv_model) {
+        if(_pNewSigEdit != NULL) {
+            QString tmp = _pNewSigEdit->text();
+            if(tmp.size() > 0) {
+                addItemToModel(dv_lv_model, tmp);
+                QString astr(cvcp936("添加信号：") + tmp + QString("--->") + cvcp936("LVDT信号列表"));
+                appendtxtStatus(astr);
+            } else {
+                QMessageBox::warning(this, "waring", cvcp936("请输入信号名称！"));
+            }
+        }
+    } else if(_plistvsig->model() == dv_ao_model) {
+        if(_pNewSigEdit != NULL) {
+            QString tmp = _pNewSigEdit->text();
+            if(tmp.size() > 0) {
+                addItemToModel(dv_ao_model, tmp);
+                QString astr(cvcp936("添加信号：") + tmp + QString("--->") + cvcp936("AO信号列表"));
+                appendtxtStatus(astr);
+            } else {
+                QMessageBox::warning(this, "waring", cvcp936("请输入信号名称！"));
+            }
+        }
+    }
 }
 
 /**
-  reject sel
+  reject sel do this function once can't del all 
+  so use while to force call del function
 */
 void CMDSimMW::on_bbx_sig_sel_rejected() {
-    QMessageBox::warning(this, "rejected..", "reject...", QMessageBox::Yes);
+    if(_plistvsig->model() == dv_lv_model) {
+        while(rechkItemSel(dv_lv_model)) {
+            for(int i = 0; i < dv_lv_model->rowCount(); i++) {
+                if(dv_lv_model->item(i, 0)->checkState() == Qt::Checked) {
+                    emit(msig_delIndex(dv_lv_model->index(i, 0)));
+                }
+            }
+        }
+    } else if(_plistvsig->model() == dv_ao_model) {
+        while(rechkItemSel(dv_ao_model)) {
+            for(int i = 0; i < dv_ao_model->rowCount(); i++) {
+                if(dv_ao_model->item(i, 0)->checkState() == Qt::Checked) {
+                    emit(msig_delIndex(dv_ao_model->index(i, 0)));
+                }
+            }
+        }
+    }
+
 }
 
 /**
@@ -520,36 +615,22 @@ void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
 
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
-    _pcbxCh = ui->cbx_ch;
+    //_pcbxCh = ui->cbx_ch;
     //_pcbxCh->clear();
     if(arg1.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
         //band model
         //_pcbxCh->addItem(cvcp936("LVDT>>>>>>"));
         _pcbxCh->setModel(lch_model);
+        _plistvsig->setModel(dv_lv_model);
     } else if(arg1.compare(_sAO, Qt::CaseInsensitive) == 0) {
         //band model
         //_pcbxCh->addItem(cvcp936("AO>>>>>>"));
         _pcbxCh->setModel(ach_model);
+        _plistvsig->setModel(dv_ao_model);
 
     }
 }
 
-/**
-  select the sig ch and type
-*/
-void CMDSimMW::on_pushButton_clicked() {
-    _pcbxCh = ui->cbx_ch;
-    _pcbxSigSel = ui->cbx_sigts;
-    QString _curText, _curText2;
-    _curText = _pcbxCh->currentText();
-    _curText2 = _pcbxSigSel->currentText();
-
-    QList <QStandardItem *> findres;
-    findres = lch_model->findItems(_curText);
-    if(findres.size() == 1) {
-       qbshow( QString::number(findres.at(0)->row(), 10));
-    }
-}
 
 
 /**
@@ -627,23 +708,23 @@ void CMDSimMW::on_commandLinkButton_clicked() {
 
 void CMDSimMW::on_pushButton_2_clicked() {
 
-    QPlainTextEdit *ppl = ui->plainTextEdit;
+    //_ppl = ui->pploptStatus;
     QPalette pal;
     pal.setColor(QPalette::WindowText, Qt::red);
     pal.setColor(QPalette::Text, Qt::red);
     pal.setColor(QPalette::Active, QPalette::Base, Qt::blue);
     pal.setColor(QPalette::Inactive, QPalette::Base, Qt::blue);
-    ppl->setPalette(pal);
+    _ppl->setPalette(pal);
 
-    if(ppl != NULL) {
-        ppl->setPlainText("=============");
-        ppl->appendPlainText("show one line");
-        ppl->appendPlainText("===============");
+    if(_ppl != NULL) {
+        _ppl->setPlainText("=============");
+        _ppl->appendPlainText("show one line");
+        _ppl->appendPlainText("===============");
 
-        ppl->setReadOnly(true);
+        _ppl->setReadOnly(true);
     }
 
-#if 1
+#if 0
     for(int i = 0;i < 5; i++) {
         Sleep(1000);
         if(i % 2 == 0) {
@@ -657,7 +738,7 @@ void CMDSimMW::on_pushButton_2_clicked() {
             pal.setColor(QPalette::Active, QPalette::Base, Qt::white);
             pal.setColor(QPalette::Inactive, QPalette::Base, Qt::white);
         }
-       ppl->setPalette(pal);
+       _ppl->setPalette(pal);
     }
 #endif
 
@@ -665,19 +746,19 @@ void CMDSimMW::on_pushButton_2_clicked() {
 
 void CMDSimMW::on_pushButton_3_clicked() {
 
-    QPlainTextEdit *ppl = ui->plainTextEdit;
+    //_ppl = ui->pploptStatus;
     QPalette pal;
     pal.setColor(QPalette::WindowText, Qt::red);
     pal.setColor(QPalette::Text, Qt::red);
     pal.setColor(QPalette::Active, QPalette::Base, Qt::yellow);
     pal.setColor(QPalette::Inactive, QPalette::Base, Qt::yellow);
-    ppl->setPalette(pal);
+    _ppl->setPalette(pal);
 
-    if(ppl != NULL) {
-        ppl->setPlainText("=============");
-        ppl->appendPlainText("show one line");
-        ppl->appendPlainText("===============");
-        ppl->setReadOnly(true);
+    if(_ppl != NULL) {
+        _ppl->setPlainText("=============");
+        _ppl->appendPlainText("show one line");
+        _ppl->appendPlainText("===============");
+        _ppl->setReadOnly(true);
     }
 }
 
@@ -693,9 +774,239 @@ void CMDSimMW::myBtnSlot() {
 	qbshow("test my own slot");
 }
 
+
+/* init pointers of main Widget.. */
+void CMDSimMW::initWidgetsPointer() {
+
+    _pMainLay = NULL;
+    _pLeftLay = NULL;
+    _pLeftLay = NULL;
+    _pCompleter = NULL;
+    _pcbxSigSel = NULL;
+    _pcbxCh = NULL;
+    _ptbl = NULL;
+    _pqwtdlg = NULL;
+    _ppl = NULL;
+    _pbtnBoxSigSel = ui->bbx_sig_sel;
+
+    _pSeachEdit = ui->edit_search;
+    _plistvsig = ui->listw_sig_sel;
+    _pNewSigEdit = ui->edit_newSig;
+    _ppl = ui->pploptStatus;
+    _pcbxSigSel = ui->cbx_sigts;
+    _pcbxCh = ui->cbx_ch;
+}
+
 /*add own sig to Control */
 void CMDSimMW::addtionSetUi() {
-	connect(ui->btn_MySin, SIGNAL(clicked()), this, SLOT(myBtnSlot()));
+    connect(ui->btn_MySin, SIGNAL(clicked()), this, SLOT(myBtnSlot()));
+
+    //modify
+    if(_pbtnBoxSigSel != NULL) {
+        QPushButton *pt = NULL;
+        pt = _pbtnBoxSigSel->button(QDialogButtonBox::Ok);
+        if(pt != NULL) {
+            pt->setText(cvcp936("添加信号"));
+        }
+        pt = NULL;
+        pt = _pbtnBoxSigSel->button(QDialogButtonBox::Cancel);
+        if(pt != NULL) {
+            pt->setText(cvcp936("删除信号"));
+        }
+    }
+    CMDSimMW::setWindowIcon(QIcon(":image/MW.ico"));
+
+}
+
+/* append text to status brower*/
+void CMDSimMW::appendtxtStatus(QString &str) {
+    //_ppl = ui->pploptStatus;
+    _ppl->appendPlainText(str);
+}
+
+void CMDSimMW::on_pushButton_4_clicked() {
+    //_ppl = ui->pploptStatus;
+    _ppl->appendPlainText("new line\n");
 }
 
 
+
+/**
+  select the sig ch and type
+*/
+void CMDSimMW::on_btn_sigSel_ok_clicked() {
+ //_pcbxCh = ui->cbx_ch;
+    //_pcbxSigSel = ui->cbx_sigts;
+    QString _curText, _curText2;
+    _curText = _pcbxCh->currentText();
+    _curText2 = _pcbxSigSel->currentText();
+
+    QList <QStandardItem *> findres;
+    findres = lch_model->findItems(_curText);
+    if(findres.size() == 1) {
+       qbshow( QString::number(findres.at(1)->row(), 10));
+    }
+}
+
+
+//void  CMDSimMW::on_sigLv_clicked(const QModelIndex &index) {
+//
+//}
+/* listw_sig_sel checkState  */
+void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
+     QStandardItem *pf = NULL;
+    if(_plistvsig->model() == dv_lv_model) {
+        pf = dv_lv_model->itemFromIndex(index);
+    } else if(_plistvsig->model() == dv_ao_model) {
+        pf = dv_ao_model->itemFromIndex(index);
+    }
+    if(pf == NULL) {
+        return;
+    }
+    QString tmp("");
+    if(pf->isCheckable() == false) {
+        return;
+    }
+    if(pf->checkState() == Qt::Checked && chSta == Qt::Unchecked ) {
+        tmp.append(cvcp936("选中->"));
+        tmp.append(pf->text());
+        appendtxtStatus(tmp);
+    } else if (pf->checkState() == Qt::Unchecked && chSta == Qt::Checked ) {
+        tmp.append(cvcp936("取消选中->"));
+        tmp.append(pf->text());
+        appendtxtStatus(tmp);
+    }
+}
+
+void CMDSimMW::addtionSigSlotsMVC() {
+    return;
+}
+
+int CMDSimMW::addItemToModel(QStandardItemModel *model, QString &newItem) {
+    QStandardItem *pi = new QStandardItem(newItem);
+    pi->setCheckable(true);
+    pi->setCheckState(Qt::Unchecked);
+    model->appendRow(pi);
+    return 0;
+}
+
+/* del Items from model by check */
+int CMDSimMW::delItemFromModel(QStandardItemModel *model) {
+    if(model->rowCount() > 0) {
+        int tmp = model->rowCount();
+        for (int i = 0; i < tmp; i++) {
+            if(model->item(i, 0)->checkState() == Qt::Checked) {
+                model->removeRow(i);
+            }
+        }
+    }
+    return 0;
+}
+
+int CMDSimMW::rechkItemSel(QStandardItemModel *model) {
+    int tmp = model->rowCount();
+    for(int i = 0; i < tmp; i++) {
+        if(model->item(i)->checkState() == Qt::Checked){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void CMDSimMW::m_delItem(QModelIndex &index) {
+    if(_plistvsig->model() == dv_lv_model) {
+        dv_lv_model->removeRow(index.row(), index.parent());
+        QString tmp(dv_lv_model->itemFromIndex(index)->text());
+        QString astr(cvcp936("删除信号：") + tmp + QString("<---") + cvcp936("LVDT信号列表"));
+        appendtxtStatus(astr);
+    } else if(_plistvsig->model() == dv_ao_model) {
+        dv_ao_model->removeRow(index.row(), index.parent());
+        QString tmp(dv_ao_model->itemFromIndex(index)->text());
+        QString astr(cvcp936("删除信号：") + tmp + QString("<---") + cvcp936("AO信号列表"));
+        appendtxtStatus(astr);
+    }
+}
+
+
+void CMDSimMW::on_action_reset_sigDis_triggered() {
+    dv_lv_model->clear();
+    dv_lv_model->removeRows(0, dv_lv_model->rowCount());
+    int tmp = org_dv_lv_model->rowCount();
+    for(int i = 0; i < tmp; i++) {
+        QStandardItem *p = new QStandardItem(org_dv_lv_model->item(i, 0)->text());
+        p->setCheckable(true);
+        p->setCheckState(Qt::Unchecked);
+        dv_lv_model->setItem(i, 0, p);
+    }
+    //_plistvsig->setModel(dv_model);           /* already bind model to Widget  */
+}
+
+/*init lch signal model */
+void CMDSimMW::initLvsigNameModel(int cnt) {
+    dv_lv_model = new QStandardItemModel(cnt, 0);
+    org_dv_lv_model = new QStandardItemModel(cnt, 0);
+    if(cnt > 0) {
+        //// Cmd_DM_Item *newItem;
+        QStandardItem *newItem;
+        QStandardItem *org_newItem;
+        for(int i = 0; i < cnt; i++) {
+            newItem = new QStandardItem(ps_ins_v->at(i));
+            newItem->setCheckable(true);
+            newItem->setCheckState(Qt::Unchecked);
+
+            org_newItem = new QStandardItem(ps_ins_v->at(i));
+            org_newItem->setCheckable(true);
+            org_newItem->setCheckState(Qt::Unchecked);
+
+            dv_lv_model->setItem(i, newItem);
+            org_dv_lv_model->setItem(i, org_newItem);
+        }
+    }
+}
+/* init ao ch model */
+void CMDSimMW::initAOsigNameModel(int cnt) {
+    dv_ao_model = new QStandardItemModel(cnt, 0);
+    org_dv_ao_model = new QStandardItemModel(cnt, 0);
+    if(cnt > 0) {
+        QStandardItem *newItem;
+        QStandardItem *org_newItem;
+        for(int i = 0; i < cnt; i++) {
+            newItem = new QStandardItem(ps_ao_ins_v->at(i));
+            newItem->setCheckable(true);
+            newItem->setCheckState(Qt::Unchecked);
+
+            org_newItem = new QStandardItem(ps_ao_ins_v->at(i));
+            org_newItem->setCheckable(true);
+            org_newItem->setCheckState(Qt::Unchecked);
+
+            dv_ao_model->setItem(i, newItem);
+            org_dv_ao_model->setItem(i, org_newItem);
+        }
+    }
+}
+
+void CMDSimMW::on_listw_sig_sel_pressed(const QModelIndex &index) {
+    QStandardItem *p = NULL;
+    if(_plistvsig == NULL)
+        return;
+    if(_plistvsig->model() == dv_lv_model) {
+        p = dv_lv_model->itemFromIndex(index);
+    } else if(_plistvsig->model() == dv_ao_model) {
+        p = dv_ao_model->itemFromIndex(index);
+    }
+    chSta = p->checkState();
+}
+
+/* reset signal dis */
+void CMDSimMW::on_action_reset_SigAO_triggered() {
+
+    dv_ao_model->clear();
+    dv_ao_model->removeRows(0, dv_ao_model->rowCount());
+    int tmp = org_dv_ao_model->rowCount();
+    for(int i = 0; i < tmp; i++) {
+        QStandardItem *p = new QStandardItem(org_dv_ao_model->item(i, 0)->text());
+        p->setCheckable(true);
+        p->setCheckState(Qt::Unchecked);
+        dv_ao_model->setItem(i, 0, p);
+    }
+}

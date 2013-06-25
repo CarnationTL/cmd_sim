@@ -84,7 +84,7 @@
       <enum>QListView::ListMode</enum>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edit_line">
+    <widget class="QLineEdit" name="edit_newSig">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -201,7 +201,7 @@
       <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="btn_sigSel_ok">
      <property name="geometry">
       <rect>
        <x>100</x>
@@ -266,22 +266,12 @@
      <string>操作状态</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser">
+   <widget class="QPlainTextEdit" name="pploptStatus">
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>230</y>
-      <width>256</width>
-      <height>192</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>230</y>
-      <width>201</width>
+      <y>220</y>
+      <width>321</width>
       <height>201</height>
      </rect>
     </property>
@@ -338,18 +328,31 @@
      <string>MySig</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>320</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>append</string>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>gBox_sig_sel</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>tbl_selres</zorder>
    <zorder>commandLinkButton</zorder>
    <zorder>label</zorder>
-   <zorder>textBrowser</zorder>
-   <zorder>plainTextEdit</zorder>
+   <zorder>pploptStatus</zorder>
    <zorder>pushButton_2</zorder>
    <zorder>pushButton_3</zorder>
    <zorder>btn_setwp</zorder>
    <zorder>btn_MySin</zorder>
+   <zorder>pushButton_4</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -364,7 +367,15 @@
     <property name="title">
      <string>设置</string>
     </property>
+    <widget class="QMenu" name="menu_2">
+     <property name="title">
+      <string>信号选择设置</string>
+     </property>
+     <addaction name="action_reset_sigDis"/>
+     <addaction name="action_reset_SigAO"/>
+    </widget>
     <addaction name="actionSetBrd"/>
+    <addaction name="menu_2"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -380,6 +391,16 @@
   <action name="actionSetBrd">
    <property name="text">
     <string>板卡设置</string>
+   </property>
+  </action>
+  <action name="action_reset_sigDis">
+   <property name="text">
+    <string>重置LVDT信号描述</string>
+   </property>
+  </action>
+  <action name="action_reset_SigAO">
+   <property name="text">
+    <string>重置AO信号描述</string>
    </property>
   </action>
  </widget>

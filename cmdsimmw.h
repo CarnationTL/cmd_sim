@@ -15,6 +15,8 @@
 #include <QComboBox>
 #include <QTableView>
 #include <QPlainTextEdit>
+#include <QDialogButtonBox>
+
 
 namespace Ui {
 class CMDSimMW;
@@ -26,9 +28,12 @@ class CMDSimMW : public QMainWindow {
 public:
     explicit CMDSimMW(QWidget *parent = 0);
     ~CMDSimMW();
-    int initInstructs();
+    int initLvInstructs();
+    int initAoInstructs();
     void qbshow(QString str);
 
+signals:
+    int msig_delIndex(QModelIndex &index);
 private slots:
     void on_actionSetBrd_triggered();
 
@@ -37,8 +42,6 @@ private slots:
     void on_bbx_sig_sel_rejected();
 
     void on_cbx_sigts_currentIndexChanged(const QString &arg1);
-
-    void on_pushButton_clicked();
 
     void on_commandLinkButton_clicked();
 
@@ -49,6 +52,23 @@ private slots:
     void on_btn_setwp_clicked();
 
 	void myBtnSlot();
+
+
+    void on_pushButton_4_clicked();
+
+    void on_btn_sigSel_ok_clicked();            /* sigsel ok */
+
+    void on_listw_sig_sel_clicked(const QModelIndex &index);
+
+    void m_delItem(QModelIndex &index);
+
+    void on_action_reset_sigDis_triggered();
+
+
+    void on_listw_sig_sel_pressed(const QModelIndex &index);
+
+    void on_action_reset_SigAO_triggered();
+
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
@@ -59,7 +79,13 @@ private:
     int init75c3(void);
 
     QStringList *ps_ins_v;
-    QStandardItemModel *dv_model;
+    QStringList *ps_ao_ins_v;
+    QStandardItemModel *org_dv_lv_model;
+    QStandardItemModel *dv_lv_model;
+
+    QStandardItemModel *org_dv_ao_model;
+    QStandardItemModel *dv_ao_model;
+
     QStandardItemModel *lch_model;
     QStandardItemModel *ach_model;
     QStandardItemModel *rlch_model;
@@ -71,18 +97,25 @@ private:
     void initHWSel();
     void initCHModel();
     QDialog *_pdlg;
-    QGridLayout *_pMainLay;
+    QGridLayout *_pMainLay;                     
     QGridLayout *_pLeftLay;
-    QLineEdit *_pSeachEdit;
-    QCompleter *_pCompleter;
-    QComboBox *_pcbxSigSel;
-    QComboBox *_pcbxCh;
-    QTableView *_ptbl;
+    QLineEdit *_pSeachEdit;                     /* sreach edit for signal name*/
+    QLineEdit *_pNewSigEdit;                    /* new  sig edit*/
+    QCompleter *_pCompleter;                    /* auto complete */
+    QComboBox *_pcbxSigSel;                     /* select sig */
+    QComboBox *_pcbxCh;                         /* select channel */
+    QTableView *_ptbl;                          /* show set result */
     QDialog *_pqwtdlg;
+    QPlainTextEdit *_ppl;                       /* show status */
+    QListView *_plistvsig;                      /* the list view for sigsel */
+    QDialogButtonBox *_pbtnBoxSigSel;           /* button box for sig accept and 
+                                                   reject(delete) */
 
-    void initLchList();
+    void initLchList();                         
     void initAOList();
-    void initTbl();
+    void initTbl();                             /* init result table for set  */
+    void initLvsigNameModel(int cnt);
+    void initAOsigNameModel(int cnt);
 
     int warningTextInfo(QPlainTextEdit &p);
     int showWarning();
@@ -91,6 +124,13 @@ private:
     bool switchtoUmodel(QStandardItem *item, int type);
 
 	void addtionSetUi();
+    void addtionSigSlotsMVC();
+    void appendtxtStatus(QString &str);         /* append status plainEdit ctl */
+    void initWidgetsPointer();                  /* init widget pointer */
+    int addItemToModel(QStandardItemModel* model, QString &newItem);  
+    int delItemFromModel(QStandardItemModel* model);
+    int rechkItemSel(QStandardItemModel* model);
+
 };
 
 #endif // CMDSIMMW_H
