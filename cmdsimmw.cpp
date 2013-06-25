@@ -850,12 +850,11 @@ void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
     if(pf->isCheckable() == false) {
         return;
     }
-
-    if(pf->checkState() == Qt::Checked /*&& chSta == Qt::Unchecked */) {
+    if(pf->checkState() == Qt::Checked && chSta == Qt::Unchecked ) {
         tmp.append(cvcp936("选中->"));
         tmp.append(pf->text());
         appendtxtStatus(tmp);
-    } else if (pf->checkState() == Qt::Unchecked /*&& chSta == Qt::Checked */) {
+    } else if (pf->checkState() == Qt::Unchecked && chSta == Qt::Checked ) {
         tmp.append(cvcp936("取消选中->"));
         tmp.append(pf->text());
         appendtxtStatus(tmp);
@@ -959,4 +958,15 @@ void CMDSimMW::initAOsigNameModel(int cnt) {
     }
 }
 
+void CMDSimMW::on_listw_sig_sel_pressed(const QModelIndex &index) {
+    QStandardItem *p = NULL;
+    if(_plistvsig == NULL)
+        return;
+    if(_plistvsig->model() == dv_lv_model) {
+        p = dv_lv_model->itemFromIndex(index);
+    } else if(_plistvsig->model() == dv_ao_model) {
+        p = dv_ao_model->itemFromIndex(index);
+    }
+    chSta = p->checkState();
+}
 

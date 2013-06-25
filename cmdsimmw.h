@@ -65,6 +65,8 @@ private slots:
     void on_action_reset_sigDis_triggered();
 
 
+    void on_listw_sig_sel_pressed(const QModelIndex &index);
+
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
