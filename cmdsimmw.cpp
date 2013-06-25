@@ -927,18 +927,29 @@ void CMDSimMW::m_delItem(QModelIndex &index) {
     }
 }
 
-
+/* reset lvdt sig */
 void CMDSimMW::on_action_reset_sigDis_triggered() {
-    dv_lv_model->clear();
-    dv_lv_model->removeRows(0, dv_lv_model->rowCount());
-    int tmp = org_dv_lv_model->rowCount();
-    for(int i = 0; i < tmp; i++) {
-        QStandardItem *p = new QStandardItem(org_dv_lv_model->item(i, 0)->text());
-        p->setCheckable(true);
-        p->setCheckState(Qt::Unchecked);
-        dv_lv_model->setItem(i, 0, p);
+    QString tmpstr(cvcp936("确定重置LVDT信号列表？"));
+    int ret = QMessageBox::warning(this, cvcp936("提示"),
+            tmpstr,
+            QMessageBox::Yes | QMessageBox::Cancel,
+            QMessageBox::Yes);
+
+    if(ret == QMessageBox::Yes) {
+        dv_lv_model->clear();
+        dv_lv_model->removeRows(0, dv_lv_model->rowCount());
+        int tmp = org_dv_lv_model->rowCount();
+        for(int i = 0; i < tmp; i++) {
+            QStandardItem *p = new QStandardItem(org_dv_lv_model->item(i, 0)->text());
+            p->setCheckable(true);
+            p->setCheckState(Qt::Unchecked);
+            dv_lv_model->setItem(i, 0, p);
+        }
+        appendtxtStatus(cvcp936("重置LVDT信号列表!"));
+        //_plistvsig->setModel(dv_model);           /* already bind model to Widget  */
+    } else if(ret == QMessageBox::Cancel) {
+        //do nothing
     }
-    //_plistvsig->setModel(dv_model);           /* already bind model to Widget  */
 }
 
 /*init lch signal model */
@@ -999,13 +1010,25 @@ void CMDSimMW::on_listw_sig_sel_pressed(const QModelIndex &index) {
 
 /* reset signal dis */
 void CMDSimMW::on_action_reset_SigAO_triggered() {
-    dv_ao_model->clear();
-    dv_ao_model->removeRows(0, dv_ao_model->rowCount());
-    int tmp = org_dv_ao_model->rowCount();
-    for(int i = 0; i < tmp; i++) {
-        QStandardItem *p = new QStandardItem(org_dv_ao_model->item(i, 0)->text());
-        p->setCheckable(true);
-        p->setCheckState(Qt::Unchecked);
-        dv_ao_model->setItem(i, 0, p);
+    QString tmpstr(cvcp936("确定重置AO信号列表？"));
+    int ret = QMessageBox::warning(this, cvcp936("提示"),
+                                   tmpstr,
+                                   QMessageBox::Yes | QMessageBox::Cancel,
+                                   QMessageBox::Yes);
+
+
+    if(ret == QMessageBox::Yes) {
+        dv_ao_model->clear();
+        dv_ao_model->removeRows(0, dv_ao_model->rowCount());
+        int tmp = org_dv_ao_model->rowCount();
+        for(int i = 0; i < tmp; i++) {
+            QStandardItem *p = new QStandardItem(org_dv_ao_model->item(i, 0)->text());
+            p->setCheckable(true);
+            p->setCheckState(Qt::Unchecked);
+            dv_ao_model->setItem(i, 0, p);
+        }
+        appendtxtStatus(cvcp936("重置AO信号列表!"));
+    } else if(ret == QMessageBox::Cancel) {
+        //do nothing
     }
 }
