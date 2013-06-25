@@ -999,7 +999,6 @@ void CMDSimMW::on_listw_sig_sel_pressed(const QModelIndex &index) {
 
 /* reset signal dis */
 void CMDSimMW::on_action_reset_SigAO_triggered() {
-
     dv_ao_model->clear();
     dv_ao_model->removeRows(0, dv_ao_model->rowCount());
     int tmp = org_dv_ao_model->rowCount();

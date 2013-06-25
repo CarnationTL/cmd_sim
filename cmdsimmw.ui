@@ -10,6 +10,11 @@
     <height>629</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>CMDSimMW</string>
   </property>
@@ -360,10 +365,15 @@
      <x>0</x>
      <y>0</y>
      <width>1019</width>
-     <height>17</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
     <property name="title">
      <string>设置</string>
     </property>
@@ -392,15 +402,30 @@
    <property name="text">
     <string>板卡设置</string>
    </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
   </action>
   <action name="action_reset_sigDis">
    <property name="text">
     <string>重置LVDT信号描述</string>
    </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
   </action>
   <action name="action_reset_SigAO">
    <property name="text">
     <string>重置AO信号描述</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
    </property>
   </action>
  </widget>
