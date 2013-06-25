@@ -280,6 +280,11 @@
       <height>201</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
@@ -368,16 +373,26 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
    <widget class="QMenu" name="menu">
     <property name="font">
      <font>
       <family>微软雅黑</family>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="title">
      <string>设置</string>
     </property>
-    <widget class="QMenu" name="menu_2">
+    <property name="separatorsCollapsible">
+     <bool>false</bool>
+    </property>
+    <widget class="QMenu" name="menu_reset_sig">
      <property name="title">
       <string>信号选择设置</string>
      </property>
@@ -385,7 +400,7 @@
      <addaction name="action_reset_SigAO"/>
     </widget>
     <addaction name="actionSetBrd"/>
-    <addaction name="menu_2"/>
+    <addaction name="menu_reset_sig"/>
    </widget>
    <addaction name="menu"/>
   </widget>
