@@ -250,6 +250,8 @@ int CMDSimMW::init75c3() {
 /**
   convert cp936 to unicode
 */
+#if defined(Q_OS_WIN)
+
 QString CMDSimMW::cvcp936(const char str[]) {
     if((sizeof(str) /sizeof(char)) <= 0)
         return QString("");
@@ -260,6 +262,22 @@ QString CMDSimMW::cvcp936(const char str[]) {
     }
     return QString("");
 }
+
+#elif defined(Q_OS_LINUX)
+//do nothing
+QString CMDSimMW::cvcp936(const char str[]) {
+    if((sizeof(str) /sizeof(char)) <= 0)
+        return QString("");
+    QTextCodec *codec = QTextCodec::codecForName("utf-8");
+    if(codec != NULL) {
+        QString ret = codec->toUnicode(str);
+        return ret;
+    }
+    return QString("");
+}
+#endif
+
+
 
 /**
   band the model to view
