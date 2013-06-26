@@ -19,15 +19,12 @@
 #ifndef __RFM2G_TYPES_H
 #define __RFM2G_TYPES_H
 
-
-
 /*****************************************************************************/
 
 /* Provide Type Definitions for basic portable types*/
 typedef unsigned char           RFM2G_UINT8;
 typedef unsigned short		    RFM2G_UINT16;
 typedef unsigned long           RFM2G_UINT32;
-
 typedef unsigned __int64		RFM2G_UINT64;
 
 typedef signed char             RFM2G_INT8;
