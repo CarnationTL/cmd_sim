@@ -1,6 +1,11 @@
 #ifndef C75C3DLLENCAP_H
 #define C75C3DLLENCAP_H
+
+#include <qglobal.h>
+#if defined(Q_OS_WIN)
 #include <Windows.h>
+#endif
+
 
 #include "C75C3Expls.h"
 #include <QString>
@@ -13,7 +18,12 @@ private:
     C75C3DllEncap();
     ~C75C3DllEncap();
     static C75C3DllEncap * C75C3;
+#if defined(Q_OS_WIN)
     static HINSTANCE hdll;
+#elif defined(Q_OS_LINUX)
+    static int hdll;
+#endif
+
 public:
     static C75C3DllEncap *getInst() {
 		static C75C3DllEncap instC75;
@@ -25,9 +35,13 @@ public:
             LPCWSTR strR = L"CPCI75C3Dll";
             hdll = LoadLibrary(strR);
 #else
-			//not dis...
+#if defined(Q_OS_WIN)
+
+            //not dis...
             LPCWSTR strD = L"CPCI75C3Dll";
             hdll = LoadLibrary(strD);
+#endif
+
 #endif
             return 0;
         }

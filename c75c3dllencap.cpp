@@ -1,5 +1,7 @@
 #include "c75c3dllencap.h"
 
+#if defined(Q_OS_WIN)
+
 #define GET_FP(hdll, TYPE, STR, ret) do { \
     if(hdll != NULL) { \
      TYPE _tp = (TYPE)(GetProcAddress(hdll, STR)); \
@@ -7,7 +9,27 @@
     } \
 }while(0)
 
+#elif defined(Q_OS_LINUX)
+
+#define GET_FP(hdll, TYPE, STR, ret) do { \
+    if(hdll != NULL) { \
+    ; \
+    ; \
+    } \
+}while(0)
+
+#endif
+
+
+
+
+
+#if defined(Q_OS_WIN)
 HINSTANCE C75C3DllEncap::hdll = NULL;
+#elif defined(Q_OS_LINUX)
+int C75C3DllEncap::hdll = 0;
+#endif
+
 C75C3DllEncap::C75C3DllEncap() {
 
 }

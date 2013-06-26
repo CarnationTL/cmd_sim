@@ -1,7 +1,15 @@
 #define WIN32_LEAN_AND_MEAN
 #include "brd75c3.h"
 #include "c75c3funcp.h"
+
+#if defined(Q_OS_WIN)
 #include "CPCI75C3.h"
+#endif
+
+#if defined(Q_OS_LINUX)
+#define CPCI75C3_FAIL -1
+#endif
+
 Brd75C3::Brd75C3(QObject *parent) :
     CommBrd(parent) {
 }
