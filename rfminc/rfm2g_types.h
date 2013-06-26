@@ -18,7 +18,7 @@
 
 #ifndef __RFM2G_TYPES_H
 #define __RFM2G_TYPES_H
-#include <qglobal.h>
+
 /*****************************************************************************/
 
 /* Provide Type Definitions for basic portable types*/
@@ -38,10 +38,6 @@ typedef signed char             RFM2G_CHAR;
 
 typedef unsigned char           RFM2G_BOOL;
 
-
-#if defined(Q_OS_LINUX)
-typedef unsigned long ULONG32;
-#endif
 
 #ifndef ULONG_PTR
 	typedef ULONG32				RFM2G_ADDR;
