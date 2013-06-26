@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = CMDSim
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += /Gd
+win32: QMAKE_CXXFLAGS += /Gd
 
 CONFIG += qwt
 
