@@ -1,5 +1,6 @@
 #ifndef LVDTCH_H
 #define LVDTCH_H
+#include <qglobal.h>
 #if defined(Q_OS_WIN)
 #include "c75c3dllencap.h"
 #endif
