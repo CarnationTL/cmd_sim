@@ -591,11 +591,13 @@ void CMDSimMW::on_bbx_sig_sel_accepted() {
   so use while to force call del function
 */
 void CMDSimMW::on_bbx_sig_sel_rejected() {
+    QModelIndex indx_;
     if(_plistvsig->model() == dv_lv_model) {
         while(rechkItemSel(dv_lv_model)) {
             for(int i = 0; i < dv_lv_model->rowCount(); i++) {
                 if(dv_lv_model->item(i, 0)->checkState() == Qt::Checked) {
-                    emit(msig_delIndex(dv_lv_model->index(i, 0)));
+                    indx_ = dv_lv_model->index(i, 0);
+                    emit(msig_delIndex(indx_));
                 }
             }
         }
@@ -603,7 +605,8 @@ void CMDSimMW::on_bbx_sig_sel_rejected() {
         while(rechkItemSel(dv_ao_model)) {
             for(int i = 0; i < dv_ao_model->rowCount(); i++) {
                 if(dv_ao_model->item(i, 0)->checkState() == Qt::Checked) {
-                    emit(msig_delIndex(dv_ao_model->index(i, 0)));
+                    indx_ = dv_ao_model->index(i, 0);
+                    emit(msig_delIndex(indx_));
                 }
             }
         }
@@ -957,7 +960,8 @@ void CMDSimMW::on_action_reset_sigDis_triggered() {
             p->setCheckState(Qt::Unchecked);
             dv_lv_model->setItem(i, 0, p);
         }
-        appendtxtStatus(cvcp936("重置LVDT信号列表!"));
+        QString tmp_(cvcp936("重置LVDT信号列表!"));
+        appendtxtStatus(tmp_);
         //_plistvsig->setModel(dv_model);           /* already bind model to Widget  */
     } else if(ret == QMessageBox::Cancel) {
         //do nothing
@@ -1039,7 +1043,8 @@ void CMDSimMW::on_action_reset_SigAO_triggered() {
             p->setCheckState(Qt::Unchecked);
             dv_ao_model->setItem(i, 0, p);
         }
-        appendtxtStatus(cvcp936("重置AO信号列表!"));
+        QString tmp_(cvcp936("重置AO信号列表!"));
+        appendtxtStatus(tmp_);
     } else if(ret == QMessageBox::Cancel) {
         //do nothing
     }

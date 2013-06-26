@@ -68,8 +68,8 @@ DEPENDPATH += $$PWD/../../../usr/local/qwt-6.1.0-rc3/include
 
 win32: LIBS += -L$$PWD/rfmlib/ -lrfm2gdll_stdc
 
-INCLUDEPATH += $$PWD/rfmlib
-DEPENDPATH += $$PWD/rfmlib
+win32: INCLUDEPATH += $$PWD/rfmlib
+win32: DEPENDPATH += $$PWD/rfmlib
 
 win32: PRE_TARGETDEPS += $$PWD/rfmlib/rfm2gdll_stdc.lib
 
@@ -77,8 +77,8 @@ win32: PRE_TARGETDEPS += $$PWD/rfmlib/rfm2gdll_stdc.lib
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/75C3Rlib/ -lCPCI75C3Dll
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/75C3Dlib/ -lCPCI75C3Dlld
 
-INCLUDEPATH += $$PWD/75C3inc
-DEPENDPATH += $$PWD/75C3inc
+win32: INCLUDEPATH += $$PWD/75C3inc
+win32: DEPENDPATH += $$PWD/75C3inc
 
 OTHER_FILES += \
     notes.txt \
@@ -104,5 +104,5 @@ RESOURCES += \
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/75C3Rlib/ -lCPCI75C3Dll
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/75C3Dlib/ -lCPCI75C3Dlld
 
-INCLUDEPATH += $$PWD/75C3Rlib
-DEPENDPATH += $$PWD/75C3Rlib
+win32: INCLUDEPATH += $$PWD/75C3Rlib
+win32: DEPENDPATH += $$PWD/75C3Rlib
