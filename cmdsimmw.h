@@ -69,6 +69,12 @@ private slots:
 
     void on_action_reset_SigAO_triggered();
 
+    void on_tbl_selres_activated(const QModelIndex &index);
+
+    void on_tbl_selres_clicked(const QModelIndex &index);
+
+    void on_tbl_selres_pressed(const QModelIndex &index);
+
 private:
     enum {LVDTBrds = 4};
     QString *SIG_LVDT;
@@ -130,7 +136,6 @@ private:
     int addItemToModel(QStandardItemModel* model, QString &newItem);  
     int delItemFromModel(QStandardItemModel* model);
     int rechkItemSel(QStandardItemModel* model);
-
 };
 
 #endif // CMDSIMMW_H

@@ -24,6 +24,7 @@
 #include <QPalette>
 #include <QTimer>
 #include <QIcon>
+#include <QDebug>
 
 typedef int(* funca )(int);
 int chSta = -1;
@@ -343,34 +344,30 @@ void CMDSimMW::initAOList() {
 */
 void CMDSimMW::initTbl() {
     //set table sytle
-    _ptbl = ui->tbl_selres;
+    //_ptbl = ui->tbl_selres;
+    if(_ptbl == NULL) {
+        return;
+    }
     tbl_model = new QStandardItemModel(4, 4);
     _ptbl->setModel(tbl_model);
     tbl_model->setHeaderData(0, Qt::Horizontal, cvcp936("类型"));
     tbl_model->setHeaderData(1, Qt::Horizontal, cvcp936("名称"));
     tbl_model->setHeaderData(2, Qt::Horizontal, cvcp936("编号"));
     tbl_model->setHeaderData(3, Qt::Horizontal, cvcp936("模式"));
-
     for(int i = 0; i < TBL_COL; i++) {
         for(int j = 0; j < TBL_COL; j++) {
             QModelIndex idx = tbl_model->index(i, j);
             //test the first col...
             if(j == 0) {
                 tbl_model->setData(idx, "L");
+                //TableVButtonDeg btn;
+                //_ptbl->setItemDelegate(&btn);
+                _ptbl->setIndexWidget(tbl_model->index(i, j), new QPushButton("L"));
             } else {
                 tbl_model->setData(idx, "test");
             }
         }
     }
-
-#if 0
-    //set last col
-    _ptbl->horizontalHeacder()->setStretchLastSection(true);
-    _ptbl->setColumnWidth(0, 35);
-    if(_ptbl != NULL) {
-
-    }
-#endif
 }
 
 
@@ -787,6 +784,9 @@ void CMDSimMW::initWidgetsPointer() {
     _ptbl = NULL;
     _pqwtdlg = NULL;
     _ppl = NULL;
+    _ptbl = NULL;
+    _pbtnBoxSigSel = NULL;
+
     _pbtnBoxSigSel = ui->bbx_sig_sel;
 
     _pSeachEdit = ui->edit_search;
@@ -795,6 +795,8 @@ void CMDSimMW::initWidgetsPointer() {
     _ppl = ui->pploptStatus;
     _pcbxSigSel = ui->cbx_sigts;
     _pcbxCh = ui->cbx_ch;
+    _ptbl = ui->tbl_selres;
+
 }
 
 /*add own sig to Control */
@@ -1031,4 +1033,23 @@ void CMDSimMW::on_action_reset_SigAO_triggered() {
     } else if(ret == QMessageBox::Cancel) {
         //do nothing
     }
+}
+
+
+
+void CMDSimMW::on_tbl_selres_activated(const QModelIndex &index) {
+    QStandardItem *p = tbl_model->itemFromIndex(index);
+    qDebug() << "active" << p->text();
+}
+
+/* result table clicked */
+void CMDSimMW::on_tbl_selres_clicked(const QModelIndex &index) {
+   // qbshow("clicked");
+    QStandardItem *p = tbl_model->itemFromIndex(index);
+    qDebug() << "clicked" << p->text();
+}
+
+void CMDSimMW::on_tbl_selres_pressed(const QModelIndex &index) {
+    QStandardItem *p = tbl_model->itemFromIndex(index);
+    qDebug() << "press" << p->text() ;
 }
