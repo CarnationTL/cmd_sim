@@ -1,10 +1,15 @@
 ﻿#define WIN32_LEAN_AND_MEAN
+#include <qglobal.h>
 #include <QMessageBox>
 #include "cmdsimmw.h"
 #include "ui_cmdsimmw.h"
+
+#if defined(Q_OS_WIN)
 #include "rfm2gse.h"
 #include "C75C3Expls.h"
 #include "c75c3dllencap.h"
+#endif
+
 #include "lvdtch.h"
 #include <QStringList>
 #include <QTextCodec>
@@ -230,8 +235,13 @@ void CMDSimMW::qbshow(QString str) {
 }
 
 int CMDSimMW::initrfm() {
+#if defined(Q_OS_WIN)
     RFM2gSE se;
     return se.open();
+#elif defined(Q_OS_LINUX)
+    return 0;
+#endif
+
 }
 
 int CMDSimMW::init75c3() {
