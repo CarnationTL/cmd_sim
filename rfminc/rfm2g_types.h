@@ -20,18 +20,30 @@
 #define __RFM2G_TYPES_H
 
 
+
 /*****************************************************************************/
 
 /* Provide Type Definitions for basic portable types*/
 typedef unsigned char           RFM2G_UINT8;
 typedef unsigned short		    RFM2G_UINT16;
 typedef unsigned long           RFM2G_UINT32;
-typedef unsigned __int64		RFM2G_UINT64; 
+
+#if defined(Q_OS_LINUX)
+typedef unsigned long long	  RFM2G_UINT64;
+#elif defined(Q_OS_WIN32)
+typedef unsigned __int64		RFM2G_UINT64;
+#endif
 
 typedef signed char             RFM2G_INT8;
 typedef signed short	        RFM2G_INT16;
 typedef signed long             RFM2G_INT32;
+
+#if defined(Q_OS_LINUX)
+typedef long long			    RFM2G_INT64;
+#elif defined(Q_OS_WIN32)
 typedef __int64				    RFM2G_INT64;
+#endif
+
 typedef signed char             RFM2G_CHAR;
 
 typedef unsigned char           RFM2G_BOOL;

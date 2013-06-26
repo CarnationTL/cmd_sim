@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = CMDSim
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += /Gd
+win32: QMAKE_CXXFLAGS += /Gd
 
 CONFIG += qwt
 
@@ -57,6 +57,13 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwtd
 
 INCLUDEPATH += $$PWD/qwtinc
 DEPENDPATH += $$PWD/qwtinc
+
+#add qwt linux
+
+unix:!macx: LIBS += -L$$PWD/../../../usr/local/qwt-6.1.0-rc3/lib/ -lqwt
+
+INCLUDEPATH += $$PWD/../../../usr/local/qwt-6.1.0-rc3/include
+DEPENDPATH += $$PWD/../../../usr/local/qwt-6.1.0-rc3/include
 
 
 win32: LIBS += -L$$PWD/rfmlib/ -lrfm2gdll_stdc
