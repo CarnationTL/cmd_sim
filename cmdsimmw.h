@@ -16,7 +16,7 @@
 #include <QTableView>
 #include <QPlainTextEdit>
 #include <QDialogButtonBox>
-
+#include <QSignalMapper>
 
 namespace Ui {
 class CMDSimMW;
@@ -117,6 +117,7 @@ private:
     QDialogButtonBox *_pbtnBoxSigSel;           /* button box for sig accept and 
                                                    reject(delete) */
 
+    QSignalMapper *_pSigMaper;
     void initLchList();                         
     void initAOList();
     void initTbl();                             /* init result table for set  */

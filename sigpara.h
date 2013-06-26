@@ -13,7 +13,12 @@ class Sig : public QObject {
         Sig(double amp, double feq) : _amp(amp), _feq(feq) {
 
         }
-        ~Sig() {}
+
+        Sig(const Sig &other) : QObject(0){
+            _amp = other.Amp ();
+            _feq = other.Feq ();
+        }
+        ~Sig(){}
         double  Amp() const {
             return _amp;
         }
@@ -40,14 +45,14 @@ class Sine : public Sig {
 
         }
         Sine ( const Sine &other ) : Sig(other.Amp(), other.Feq() ){
-            _amp = other.Amp();
-            _feq = other.Feq();
+
         }
         ~Sine () {
         }
         Sine& operator = ( const Sine &other ) {
             _amp = other.Amp();
             _feq = other.Feq();
+            return *this;
         }
 }; /* -----  end of class Sine  ----- */
 
@@ -58,8 +63,7 @@ class Tri : public Sig {
 
         }
         Tri ( const Tri &other ) : Sig(other.Amp(), other.Feq()){
-            _amp = other.Amp();
-            _feq = other.Feq();
+
         }
         ~Tri () {
         }
@@ -67,6 +71,7 @@ class Tri : public Sig {
         Tri& operator = ( const Tri &other ) {
             _amp = other.Amp();
             _feq = other.Feq();
+            return *this;
         }
 }; /* -----  end of class Tri  ----- */
 
@@ -76,9 +81,9 @@ class Sp : public Sig {
     public:
         
         Sp (double value) {
-            value = _value;
+            _value = value;
         }
-        Sp ( const Sp &other ) {
+        Sp ( const Sp &other ) : Sig(other){
             _value = other.Value();
         }
         ~Sp () {
@@ -92,6 +97,7 @@ class Sp : public Sig {
         }
         Sp& operator = ( const Sp &other ) {
             _value = other.Value();
+            return *this;
         }
     private:
         double _value;
@@ -105,10 +111,9 @@ class Square : public Sig {
         Square (double amp, double feq, double duty) : Sig(amp, feq), _duty(duty) {
 
         }
-        Square ( const Square &other ) {
-            _amp = other.Amp();
-            _feq = other.Feq();
+        Square ( const Square &other ) : Sig(other){
             _duty = other.Duty();
+
         }
         ~Square () {
         }
@@ -117,6 +122,7 @@ class Square : public Sig {
             _amp = other.Amp();
             _feq = other.Feq();
             _duty = other.Duty();
+            return *this;
         }
         double Duty() const {
             return _duty;
@@ -136,9 +142,8 @@ class Saw : public Sig {
         
         Saw (double amp, double feq) : Sig(amp, feq)  {
         }
-        Saw ( const Saw &other ) {
-            _amp = other.Amp();
-            _feq = other.Feq();
+        Saw ( const Saw &other ) : Sig(other){
+
         }
         ~Saw () {
         }
@@ -146,6 +151,7 @@ class Saw : public Sig {
         Saw& operator = ( const Saw &other ) {
             _amp = other.Amp();
             _feq = other.Feq();
+            return *this;
         }
 }; /* -----  end of class Saw  ----- */
 

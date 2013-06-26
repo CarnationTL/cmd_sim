@@ -40,6 +40,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     ui(new Ui::CMDSimMW) {
 
 
+    _pSigMaper = new QSignalMapper();           /* init sigmaper for all */
     connect(this, SIGNAL(msig_delIndex(QModelIndex&)), this, SLOT(m_delItem(QModelIndex&)));
 
     SIG_LVDT = new QString(cvcp936("LVDT"));
@@ -50,9 +51,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 
     initWidgetsPointer();
 
-#if 1
 	addtionSetUi();
-#endif
+
 #if 0
 	if (initrfm() != EXE_SUCCESS) {
 		QMessageBox::warning(NULL, "lib_load", "lib_load", QMessageBox::Yes);
@@ -162,7 +162,7 @@ int CMDSimMW::initAoInstructs() {
     QString tempStr;
 
     if(prefix == NULL || end == NULL)
-        return NULL;
+        return -1;
 
     for(int i = 0; i < prefix->size(); i++) {
         for(int j = 0; j < end->size(); j++)  {
@@ -212,7 +212,7 @@ int CMDSimMW::initLvInstructs() {
     QString tempStr;
 
     if(prefix == NULL || end == NULL)
-        return NULL;
+        return -1;
 
     for(int i = 0; i < prefix->size(); i++) {
         for(int j = 0; j < end->size(); j++)  {
