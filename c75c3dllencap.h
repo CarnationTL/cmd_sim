@@ -1,8 +1,6 @@
 #ifndef C75C3DLLENCAP_H
 #define C75C3DLLENCAP_H
-#if defined(Q_OS_WIN32)
 #include <Windows.h>
-#endif
 
 #include "C75C3Expls.h"
 #include <QString>

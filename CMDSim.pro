@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = CMDSim
 TEMPLATE = app
 
-win32: QMAKE_CXXFLAGS += /Gd
+QMAKE_CXXFLAGS += /Gd
 
 CONFIG += qwt
 
@@ -98,3 +98,11 @@ OTHER_FILES += \
 
 RESOURCES += \
     qres.qrc
+
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/75C3Rlib/ -lCPCI75C3Dll
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/75C3Dlib/ -lCPCI75C3Dlld
+
+INCLUDEPATH += $$PWD/75C3Rlib
+DEPENDPATH += $$PWD/75C3Rlib

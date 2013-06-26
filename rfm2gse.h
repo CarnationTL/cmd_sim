@@ -1,13 +1,11 @@
 #ifndef RFM2GSE_H
 #define RFM2GSE_H
 
-#if defined(Q_OS_WIN32)
 #include <Windows.h>
 #include <wincodecsdk.h>
 #include <wincodec.h>
 #include <WinDef.h>
 #include <WinBase.h>
-#endif
 
 #include "rfminc/rfm2g_windows.h"
 #include "rfminc/rfm2g_types.h"
