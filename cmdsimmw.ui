@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1019</width>
-    <height>629</height>
+    <width>1199</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="font">
@@ -226,10 +226,10 @@
    <widget class="QTableView" name="tbl_selres">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>30</y>
-      <width>571</width>
-      <height>131</height>
+      <x>420</x>
+      <y>50</y>
+      <width>671</width>
+      <height>241</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -242,24 +242,11 @@
      <enum>QFrame::Sunken</enum>
     </property>
    </widget>
-   <widget class="QCommandLinkButton" name="commandLinkButton">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>180</y>
-      <width>168</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CommandLinkButton</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>180</y>
+      <y>500</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -275,82 +262,89 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>220</y>
-      <width>321</width>
-      <height>201</height>
+      <y>520</y>
+      <width>651</width>
+      <height>151</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>450</y>
-      <width>75</width>
-      <height>23</height>
+      <y>20</y>
+      <width>691</width>
+      <height>281</height>
      </rect>
     </property>
-    <property name="text">
-     <string>PushButton</string>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+    </property>
+    <property name="title">
+     <string>配置表：</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QListView" name="listv_ch">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>450</y>
-      <width>75</width>
-      <height>23</height>
+      <x>250</x>
+      <y>161</y>
+      <width>161</width>
+      <height>321</height>
      </rect>
     </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
    </widget>
-   <widget class="QPushButton" name="btn_setwp">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>450</y>
-      <width>75</width>
-      <height>23</height>
+      <x>910</x>
+      <y>330</y>
+      <width>108</width>
+      <height>176</height>
      </rect>
     </property>
-    <property name="text">
-     <string>setwp</string>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="btn_MySin">
+       <property name="text">
+        <string>MySig</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>append</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_setwp">
+       <property name="text">
+        <string>setwp</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
-   <widget class="QPushButton" name="btn_MySin">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>510</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>MySig</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>320</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>append</string>
-    </property>
-   </widget>
+   <zorder>groupBox_2</zorder>
    <zorder>groupBox</zorder>
    <zorder>gBox_sig_sel</zorder>
    <zorder>layoutWidget</zorder>
-   <zorder>tbl_selres</zorder>
-   <zorder>commandLinkButton</zorder>
    <zorder>label</zorder>
    <zorder>pploptStatus</zorder>
    <zorder>pushButton_2</zorder>
@@ -358,14 +352,19 @@
    <zorder>btn_setwp</zorder>
    <zorder>btn_MySin</zorder>
    <zorder>pushButton_4</zorder>
+   <zorder>groupBox_2</zorder>
+   <zorder>btn_MySin</zorder>
+   <zorder>btn_MySin</zorder>
+   <zorder>tbl_selres</zorder>
+   <zorder>listv_ch</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1019</width>
-     <height>22</height>
+     <width>1199</width>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

@@ -34,6 +34,7 @@
 typedef int(* funca )(int);
 int chSta = -1;
 #define TBL_COL 4
+#define TBL_ROW 20
 
 CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),
@@ -53,13 +54,13 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 
 	addtionSetUi();
 
-#if 0
+#if 0                                   /* init rfm lib */
 	if (initrfm() != EXE_SUCCESS) {
 		QMessageBox::warning(NULL, "lib_load", "lib_load", QMessageBox::Yes);
 	}
 #endif
 
-#if 0
+#if 0                                   /* init 75c3 when hardware install */
     init75c3();
 #endif
 
@@ -117,6 +118,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     initTbl();
     initoptLog();
 
+    initlistvCh ();
 
 #if 1                                           /* test the sig gen */
     Sine para(1, 23);
@@ -349,10 +351,18 @@ void CMDSimMW::initCHModel() {
     }
 }
 
+
+void CMDSimMW::initlistvCh() {
+    _plistvch->setEditTriggers (QAbstractItemView::NoEditTriggers);
+    _plistvch->setModel (lch_model);
+}
+
 void CMDSimMW::initLchList() {
     lch_model = new QStandardItemModel();
     for(int i = 0; i < MAX_LVDT_CH; i++) {
         QStandardItem *item = new QStandardItem(cvcp936("LVDT") + QString::number(i, 10));
+        item->setCheckable (true);
+        item->setCheckState (Qt::Unchecked);
         lch_model->appendRow(item);
     }
     rlch_model = new QStandardItemModel();
@@ -362,40 +372,52 @@ void CMDSimMW::initAOList() {
     ach_model = new QStandardItemModel();
     for(int i = 0; i < MAX_AO_CH; i++) {
         QStandardItem *item = new QStandardItem(cvcp936("AO") + QString::number(i, 10));
+        item->setCheckable (true);
+        item->setCheckState (Qt::Unchecked);
         ach_model->appendRow(item);
     }
     rach_model = new QStandardItemModel();
 }
 
 /**
-  init tbl
+  init tbl and table model and attch to tableview
 */
 void CMDSimMW::initTbl() {
     //set table sytle
-    //_ptbl = ui->tbl_selres;
     if(_ptbl == NULL) {
         return;
     }
-    tbl_model = new QStandardItemModel(4, 4);
+    QPushButton *tbtn;
+    tbl_model = new QStandardItemModel(TBL_ROW, TBL_COL);
     _ptbl->setModel(tbl_model);
+
     tbl_model->setHeaderData(0, Qt::Horizontal, cvcp936("类型"));
     tbl_model->setHeaderData(1, Qt::Horizontal, cvcp936("名称"));
-    tbl_model->setHeaderData(2, Qt::Horizontal, cvcp936("编号"));
-    tbl_model->setHeaderData(3, Qt::Horizontal, cvcp936("模式"));
-    for(int i = 0; i < TBL_COL; i++) {
-        for(int j = 0; j < TBL_COL; j++) {
+    tbl_model->setHeaderData(2, Qt::Horizontal, cvcp936("关联通道号"));
+    tbl_model->setHeaderData(3, Qt::Horizontal, cvcp936("设置"));
+
+    _ptbl->setEditTriggers (QAbstractItemView::NoEditTriggers);
+    QHeaderView *header = new QHeaderView(Qt::Horizontal, _ptbl);
+    header->setMovable (true);                  /* move cols */
+    _ptbl->setHorizontalHeader (header);
+    //_ptbl->horizontalHeader ()->setStretchLastSection ();
+    int trow = tbl_model->rowCount() ,tcol = tbl_model->columnCount();
+    for(int i = 0; i < trow; i++) {
+        for(int j = 0; j < tcol; j++) {
             QModelIndex idx = tbl_model->index(i, j);
             //test the first col...
-            if(j == 0) {
-                tbl_model->setData(idx, "L");
-                //TableVButtonDeg btn;
-                //_ptbl->setItemDelegate(&btn);
-                _ptbl->setIndexWidget(tbl_model->index(i, j), new QPushButton("L"));
+            if(j == tcol - 1) {
+                tbl_model->setData(idx, "btncol");
+                tbtn = new QPushButton(cvcp936 ("设置"));
+                _ptbl->setIndexWidget(tbl_model->index(i, j), tbtn);
+                connect (tbtn, SIGNAL(clicked()), _pSigMaper, SLOT(map()));
+                _pSigMaper->setMapping (tbtn, i + 1); /* row start 0 */
             } else {
                 tbl_model->setData(idx, "test");
             }
         }
     }
+    connect (_pSigMaper, SIGNAL(mapped(int)), this, SLOT(msigtableClick(int)));
 }
 
 
@@ -457,10 +479,10 @@ void CMDSimMW::initoptLog() {
 
     //_ppl = ui->pploptStatus;
     QPalette pal;
-    pal.setColor(QPalette::WindowText, Qt::yellow);
-    pal.setColor(QPalette::Text, Qt::yellow);
-    pal.setColor(QPalette::Active, QPalette::Base, Qt::red);
-    pal.setColor(QPalette::Inactive, QPalette::Base, Qt::red);
+    pal.setColor(QPalette::WindowText, Qt::blue);
+    pal.setColor(QPalette::Text, Qt::blue);
+    pal.setColor(QPalette::Active, QPalette::Base, Qt::white);
+    pal.setColor(QPalette::Inactive, QPalette::Base, Qt::white);
     _ppl->setPalette(pal);
 
     if(_ppl != NULL) {
@@ -650,11 +672,13 @@ void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
         //_pcbxCh->addItem(cvcp936("LVDT>>>>>>"));
         _pcbxCh->setModel(lch_model);
         _plistvsig->setModel(dv_lv_model);
+        _plistvch->setModel (lch_model);
     } else if(arg1.compare(_sAO, Qt::CaseInsensitive) == 0) {
         //band model
         //_pcbxCh->addItem(cvcp936("AO>>>>>>"));
         _pcbxCh->setModel(ach_model);
         _plistvsig->setModel(dv_ao_model);
+        _plistvch->setModel (ach_model);
 
     }
 }
@@ -713,22 +737,6 @@ bool CMDSimMW::switchtoUmodel(QStandardItem *item, int type) {
     return false;
 }
 
-void CMDSimMW::on_commandLinkButton_clicked() {
-
-
-#if 1
-    showWarning();
-#endif
-#if 0
-    _pqwtdlg = new SetWPDlg(this);
-    if(_pqwtdlg != NULL) {
-        //_pqwtdlg->setAttribute(Qt::WA_DeleteOnClose);  //2parameter = true
-        _pqwtdlg->setAttribute(Qt::WA_DeleteOnClose);
-        _pqwtdlg->exec();
-    }
-#endif
-}
-
 /*
   _pqwtdlg = new SetWPDlg(this);
   if(_pqwtdlg_ )
@@ -752,7 +760,7 @@ void CMDSimMW::on_pushButton_2_clicked() {
         _ppl->setReadOnly(true);
     }
 
-#if 0
+/*
     for(int i = 0;i < 5; i++) {
         Sleep(1000);
         if(i % 2 == 0) {
@@ -768,7 +776,7 @@ void CMDSimMW::on_pushButton_2_clicked() {
         }
        _ppl->setPalette(pal);
     }
-#endif
+*/
 
 }
 
@@ -822,6 +830,7 @@ void CMDSimMW::initWidgetsPointer() {
 
     _pSeachEdit = ui->edit_search;
     _plistvsig = ui->listw_sig_sel;
+    _plistvch = ui->listv_ch;
     _pNewSigEdit = ui->edit_newSig;
     _ppl = ui->pploptStatus;
     _pcbxSigSel = ui->cbx_sigts;
@@ -1008,6 +1017,7 @@ void CMDSimMW::initLvsigNameModel(int cnt) {
         }
     }
 }
+
 /* init ao ch model */
 void CMDSimMW::initAOsigNameModel(int cnt) {
     dv_ao_model = new QStandardItemModel(cnt, 0);
@@ -1085,4 +1095,18 @@ void CMDSimMW::on_tbl_selres_clicked(const QModelIndex &index) {
 void CMDSimMW::on_tbl_selres_pressed(const QModelIndex &index) {
     QStandardItem *p = tbl_model->itemFromIndex(index);
     qDebug() << "press" << p->text() ;
+}
+
+void CMDSimMW::msigtableClick(int row) {
+    QMessageBox::warning (this, "run", QString::number (row, 10), QMessageBox::Yes);
+}
+
+
+void CMDSimMW::on_listv_ch_clicked(const QModelIndex &index) {
+
+#ifdef QT_DEBUG
+    qDebug () << "debug" ;
+#elif QT_NO_DEBUG
+    qDebug () << "no debug" ;
+#endif
 }

@@ -26,32 +26,51 @@ private:
 
 public:
     static C75C3DllEncap *getInst() {
-		static C75C3DllEncap instC75;
-		return &instC75;
-	}
-    int loadDll() {
+        static C75C3DllEncap instC75;
+        return &instC75;
+    }
+
+#if defined(Q_OS_WIN)
+
+  int loadDll() {
         if(hdll == NULL) {
 #ifdef QT_NO_DEBUG
             LPCWSTR strR = L"CPCI75C3Dll";
             hdll = LoadLibrary(strR);
 #else
-#if defined(Q_OS_WIN)
-
             //not dis...
             LPCWSTR strD = L"CPCI75C3Dll";
             hdll = LoadLibrary(strD);
-#endif
-
 #endif
             return 0;
         }
         return 1;
     }
+#elif defined(Q_OS_LINUX)
+    int loadDll() {
+        hdll = 0;
+        return 0;
+    }
+
+#endif
+
+
+
+
+
     bool isloaded() {
+#if defined(Q_OS_WIN)
         if(hdll != NULL) {
             return true;
         } else
             return false;
+#elif defined(Q_OS_LINUX)
+        if(hdll != 0) {
+            return true;
+        } else
+            return false;
+#endif
+     
     }
 
     FPTR_INIT initbrd();

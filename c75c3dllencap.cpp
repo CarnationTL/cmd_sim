@@ -12,8 +12,8 @@
 #elif defined(Q_OS_LINUX)
 
 #define GET_FP(hdll, TYPE, STR, ret) do { \
-    if(hdll != NULL) { \
-    ; \
+    if(hdll != 0) { \
+    ret = 0; \
     ; \
     } \
 }while(0)

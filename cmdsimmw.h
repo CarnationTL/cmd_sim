@@ -43,8 +43,6 @@ private slots:
 
     void on_cbx_sigts_currentIndexChanged(const QString &arg1);
 
-    void on_commandLinkButton_clicked();
-
     void on_pushButton_2_clicked();
 
     void on_pushButton_3_clicked();
@@ -74,6 +72,9 @@ private slots:
     void on_tbl_selres_clicked(const QModelIndex &index);
 
     void on_tbl_selres_pressed(const QModelIndex &index);
+
+    void msigtableClick(int row);
+    void on_listv_ch_clicked(const QModelIndex &index);
 
 private:
     enum {LVDTBrds = 4};
@@ -114,10 +115,12 @@ private:
     QDialog *_pqwtdlg;
     QPlainTextEdit *_ppl;                       /* show status */
     QListView *_plistvsig;                      /* the list view for sigsel */
+    QListView *_plistvch;                       /* the list view for chs */
     QDialogButtonBox *_pbtnBoxSigSel;           /* button box for sig accept and 
                                                    reject(delete) */
 
     QSignalMapper *_pSigMaper;
+    void initlistvCh();
     void initLchList();                         
     void initAOList();
     void initTbl();                             /* init result table for set  */
