@@ -17,6 +17,7 @@
 #include <QPlainTextEdit>
 #include <QDialogButtonBox>
 #include <QSignalMapper>
+//#include <QRadioButton>
 
 namespace Ui {
 class CMDSimMW;
@@ -43,9 +44,7 @@ private slots:
 
     void on_cbx_sigts_currentIndexChanged(const QString &arg1);
 
-    void on_pushButton_2_clicked();
-
-    void on_pushButton_3_clicked();
+    //void on_pushButton_2_clicked();
 
     void on_btn_setwp_clicked();
 
@@ -78,6 +77,7 @@ private slots:
 
 private:
     enum {LVDTBrds = 4};
+    enum {E_DV_LV_MODEL, E_DV_AO_MODEL};
     QString *SIG_LVDT;
     QString *SIG_AO;
     enum {T_L, T_A};
@@ -104,6 +104,7 @@ private:
     void initHWSel();
     void initCHModel();
     QDialog *_pdlg;
+    QDialog *_psetwpdlg;
     QGridLayout *_pMainLay;                     
     QGridLayout *_pLeftLay;
     QLineEdit *_pSeachEdit;                     /* sreach edit for signal name*/
@@ -112,7 +113,7 @@ private:
     QComboBox *_pcbxSigSel;                     /* select sig */
     QComboBox *_pcbxCh;                         /* select channel */
     QTableView *_ptbl;                          /* show set result */
-    QDialog *_pqwtdlg;
+
     QPlainTextEdit *_ppl;                       /* show status */
     QListView *_plistvsig;                      /* the list view for sigsel */
     QListView *_plistvch;                       /* the list view for chs */
@@ -140,6 +141,7 @@ private:
     int addItemToModel(QStandardItemModel* model, QString &newItem);  
     int delItemFromModel(QStandardItemModel* model);
     int rechkItemSel(QStandardItemModel* model);
+    int checkListSigSel(int type);                      /* multi check */
 };
 
 #endif // CMDSIMMW_H

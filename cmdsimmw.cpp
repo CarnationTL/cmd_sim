@@ -737,11 +737,12 @@ bool CMDSimMW::switchtoUmodel(QStandardItem *item, int type) {
     return false;
 }
 
+
 /*
   _pqwtdlg = new SetWPDlg(this);
   if(_pqwtdlg_ )
 */
-
+/*
 void CMDSimMW::on_pushButton_2_clicked() {
 
     //_ppl = ui->pploptStatus;
@@ -760,7 +761,6 @@ void CMDSimMW::on_pushButton_2_clicked() {
         _ppl->setReadOnly(true);
     }
 
-/*
     for(int i = 0;i < 5; i++) {
         Sleep(1000);
         if(i % 2 == 0) {
@@ -776,34 +776,18 @@ void CMDSimMW::on_pushButton_2_clicked() {
         }
        _ppl->setPalette(pal);
     }
+
+}
 */
-
-}
-
-void CMDSimMW::on_pushButton_3_clicked() {
-
-    //_ppl = ui->pploptStatus;
-    QPalette pal;
-    pal.setColor(QPalette::WindowText, Qt::red);
-    pal.setColor(QPalette::Text, Qt::red);
-    pal.setColor(QPalette::Active, QPalette::Base, Qt::yellow);
-    pal.setColor(QPalette::Inactive, QPalette::Base, Qt::yellow);
-    _ppl->setPalette(pal);
-
-    if(_ppl != NULL) {
-        _ppl->setPlainText("=============");
-        _ppl->appendPlainText("show one line");
-        _ppl->appendPlainText("===============");
-        _ppl->setReadOnly(true);
-    }
-}
-
-
 void CMDSimMW::on_btn_setwp_clicked() {
-	QDialog *p = new SetWPDlg();
-	if(p != NULL) {
-		p->show();
-	}
+//	QDialog *p = new SetWPDlg();
+    ///if(p != NULL) {
+    ///	p->show();
+    ///}
+
+    if(_psetwpdlg != NULL) {
+        _psetwpdlg->exec ();
+    }
 }
 
 void CMDSimMW::myBtnSlot() {
@@ -821,7 +805,7 @@ void CMDSimMW::initWidgetsPointer() {
     _pcbxSigSel = NULL;
     _pcbxCh = NULL;
     _ptbl = NULL;
-    _pqwtdlg = NULL;
+    _psetwpdlg = NULL;
     _ppl = NULL;
     _ptbl = NULL;
     _pbtnBoxSigSel = NULL;
@@ -836,7 +820,7 @@ void CMDSimMW::initWidgetsPointer() {
     _pcbxSigSel = ui->cbx_sigts;
     _pcbxCh = ui->cbx_ch;
     _ptbl = ui->tbl_selres;
-
+    _psetwpdlg = new SetWPDlg();
 }
 
 /*add own sig to Control */
@@ -909,6 +893,7 @@ void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
     if(pf->isCheckable() == false) {
         return;
     }
+    /* append to status text */
     if(pf->checkState() == Qt::Checked && chSta == Qt::Unchecked ) {
         tmp.append(cvcp936("选中->"));
         tmp.append(pf->text());
@@ -1105,8 +1090,43 @@ void CMDSimMW::msigtableClick(int row) {
 void CMDSimMW::on_listv_ch_clicked(const QModelIndex &index) {
 
 #ifdef QT_DEBUG
-    qDebug () << "debug" ;
+    qDebug () << "debug" << ;
 #elif QT_NO_DEBUG
     qDebug () << "no debug" ;
 #endif
 }
+
+
+/* check the multcheck */
+/**
+  return dv_lv_model check cnt
+*/
+int CMDSimMW::checkListSigSel(int type) {
+
+    int cnt = 0;
+    if(type == E_DV_AO_MODEL) {
+        int row = dv_ao_model->rowCount ();
+        for(int i = 0; i < row; i++) {
+            QModelIndex pindx = dv_ao_model->index (i, 0);
+            QStandardItem *p = dv_ao_model->itemFromIndex (pindx);
+            if(p != NULL) {
+                if(p->checkState () == Qt::Checked) {
+                    cnt++;
+                }
+            }
+        }
+    } else if(type == E_DV_LV_MODEL) {
+        int row = dv_lv_model->rowCount();
+        for(int i = 0; i < row; i++) {
+            QModelIndex pindx = dv_lv_model->index (i, 0);
+            QStandardItem *p = dv_lv_model->itemFromIndex (pindx);
+            if(p != NULL) {
+                if( p->checkState () == Qt::Checked) {
+                    cnt++;
+                }
+            }
+        }
+    }
+    return cnt;
+}
+

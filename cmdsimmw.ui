@@ -18,7 +18,7 @@
   <property name="windowTitle">
    <string>CMDSimMW</string>
   </property>
-  <widget class="QWidget" name="centralWidget">
+  <widget class="QWidget" name="cenwidget">
    <widget class="QGroupBox" name="gBox_sig_sel">
     <property name="geometry">
      <rect>
@@ -122,7 +122,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="frame_layout">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -131,9 +131,9 @@
       <height>2</height>
      </rect>
     </property>
-    <layout class="QFormLayout" name="formLayout"/>
+    <layout class="QFormLayout" name="form_layout"/>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="gBox_chsel">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -268,7 +268,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="gBox_configt">
     <property name="geometry">
      <rect>
       <x>410</x>
@@ -294,7 +294,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="btn_group_layout">
     <property name="geometry">
      <rect>
       <x>910</x>
@@ -303,7 +303,7 @@
       <height>176</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="vtest_layout">
      <item>
       <widget class="QPushButton" name="btn_MySin">
        <property name="text">
@@ -325,36 +325,15 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_3">
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
-   <zorder>groupBox_2</zorder>
-   <zorder>groupBox</zorder>
+   <zorder>frame_layout</zorder>
+   <zorder>gBox_chsel</zorder>
    <zorder>gBox_sig_sel</zorder>
-   <zorder>layoutWidget</zorder>
+   <zorder>btn_group_layout</zorder>
    <zorder>label</zorder>
    <zorder>pploptStatus</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>btn_setwp</zorder>
-   <zorder>btn_MySin</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>groupBox_2</zorder>
-   <zorder>btn_MySin</zorder>
-   <zorder>btn_MySin</zorder>
+   <zorder>gBox_configt</zorder>
    <zorder>tbl_selres</zorder>
    <zorder>listv_ch</zorder>
   </widget>
