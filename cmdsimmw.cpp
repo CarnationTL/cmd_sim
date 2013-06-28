@@ -17,6 +17,7 @@
 #include <QLayout>
 #include "setbrddlg.h"
 #include "setwpdlg.h"
+#include "cmddefs.h"
 #include <QCompleter>
 #include <QList>
 #include <QHeaderView>
@@ -35,6 +36,7 @@ typedef int(* funca )(int);
 int chSta = -1;
 #define TBL_COL 4
 #define TBL_ROW 20
+
 
 CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),
@@ -930,6 +932,7 @@ int CMDSimMW::delItemFromModel(QStandardItemModel *model) {
     return 0;
 }
 
+/* recheck item sel for delete function */
 int CMDSimMW::rechkItemSel(QStandardItemModel *model) {
     int tmp = model->rowCount();
     for(int i = 0; i < tmp; i++) {
@@ -1090,7 +1093,7 @@ void CMDSimMW::msigtableClick(int row) {
 void CMDSimMW::on_listv_ch_clicked(const QModelIndex &index) {
 
 #ifdef QT_DEBUG
-    qDebug () << "debug" << ;
+    qDebug () << "debug" ;
 #elif QT_NO_DEBUG
     qDebug () << "no debug" ;
 #endif
@@ -1128,5 +1131,16 @@ int CMDSimMW::checkListSigSel(int type) {
         }
     }
     return cnt;
+}
+
+/* change rc style for chs list */
+int CMDSimMW::changeRCstyle (int type) {
+    if(type == E_DV_LV_MODEL) {
+
+        return EXE_SUCCESS;
+    } else if(type == E_DV_AO_MODEL) {
+        return EXE_SUCCESS;
+    }
+    return EXE_FAIL;
 }
 

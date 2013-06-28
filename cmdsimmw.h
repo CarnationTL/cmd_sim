@@ -142,6 +142,7 @@ private:
     int delItemFromModel(QStandardItemModel* model);
     int rechkItemSel(QStandardItemModel* model);
     int checkListSigSel(int type);                      /* multi check */
+    int changeRCstyle(int type);
 };
 
 #endif // CMDSIMMW_H
