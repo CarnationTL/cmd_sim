@@ -14,7 +14,7 @@
 #define DEV_LEN         80
 #define MAX_LVDT_CH     32
 #define MAX_AO_CH       12
-
+#define T_CODE
 enum sigtypes {
     T_SINE,
     T_TRI,

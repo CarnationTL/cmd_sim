@@ -30,6 +30,8 @@
 #include <QPalette>
 #include <QTimer>
 #include <QIcon>
+#include <QCheckBox>
+#include <QRadioButton>
 #include <QDebug>
 
 typedef int(* funca )(int);
@@ -120,7 +122,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     initTbl();
     initoptLog();
 
-    initlistvCh ();
+    initlistvCh ();                             /* bind model to listview */
 
 #if 1                                           /* test the sig gen */
     Sine para(1, 23);
@@ -353,18 +355,37 @@ void CMDSimMW::initCHModel() {
     }
 }
 
-
+/* bind  to lch model listview Control */
+/**
+  default to init lchlist and map clicked sig to Sigmapper
+  default to init lchlist with checkbox
+*/
 void CMDSimMW::initlistvCh() {
+#if !defined(T_CODE)
+    _plistvch->setEditTriggers (QAbstractItemView::NoEditTriggers);
+    int row = lch_model->rowCount ();
+    QCheckBox *chk = NULL;
+    QModelIndex pindx;
+    QStandardItem *pitem = NULL;
+    //lch_model->modelReset ();
+    for(int i = 0; i < row; i++) {
+        pindx = lch_model->index (i, 0);
+        pitem = lch_model->itemFromIndex (pindx);
+        chk = new QCheckBox(pitem->text ());        /* init text with  lch_model item text*/
+        _plistvch->setIndexWidget (pindx, chk);
+    }
+#else
     _plistvch->setEditTriggers (QAbstractItemView::NoEditTriggers);
     _plistvch->setModel (lch_model);
+#endif
 }
 
 void CMDSimMW::initLchList() {
     lch_model = new QStandardItemModel();
     for(int i = 0; i < MAX_LVDT_CH; i++) {
         QStandardItem *item = new QStandardItem(cvcp936("LVDT") + QString::number(i, 10));
-        item->setCheckable (true);
-        item->setCheckState (Qt::Unchecked);
+        //item->setCheckable (true);
+        //item->setCheckState (Qt::Unchecked);
         lch_model->appendRow(item);
     }
     rlch_model = new QStandardItemModel();
@@ -1091,6 +1112,11 @@ void CMDSimMW::msigtableClick(int row) {
 
 
 void CMDSimMW::on_listv_ch_clicked(const QModelIndex &index) {
+
+#if defined(T_CODE)
+    int a = index.data ().toInt ();
+    qDebug () << a;
+#endif
 
 #ifdef QT_DEBUG
     qDebug () << "debug" ;
