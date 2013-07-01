@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     brd75c3.cpp \
     setlbrdparadlg.cpp \
     siggen.cpp \
-    sigpara.cpp
+    sigpara.cpp \
+    cmdsimmw_init.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \

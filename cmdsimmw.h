@@ -17,7 +17,9 @@
 #include <QPlainTextEdit>
 #include <QDialogButtonBox>
 #include <QSignalMapper>
-//#include <QRadioButton>
+#include <QList>
+#include <QRadioButton>
+#include <QCheckBox>
 
 namespace Ui {
 class CMDSimMW;
@@ -43,8 +45,6 @@ private slots:
     void on_bbx_sig_sel_rejected();
 
     void on_cbx_sigts_currentIndexChanged(const QString &arg1);
-
-    //void on_pushButton_2_clicked();
 
     void on_btn_setwp_clicked();
 
@@ -72,8 +72,13 @@ private slots:
 
     void on_tbl_selres_pressed(const QModelIndex &index);
 
-    void msigtableClick(int row);
+    void mslot_tableClick(int row);
+    void mslot_CHradioClick(QString str);
+    void mslot_CHcheckClick(QString str);
     void on_listv_ch_clicked(const QModelIndex &index);
+
+
+    void on_cbx_sigts_activated(int index);
 
 private:
     enum {LVDTBrds = 4};
@@ -87,21 +92,23 @@ private:
 
     QStringList *ps_ins_v;
     QStringList *ps_ao_ins_v;
-    QStandardItemModel *org_dv_lv_model;
+    QStandardItemModel *org_dv_lv_model;        /* the copy of dv_lv_model */
     QStandardItemModel *dv_lv_model;
 
-    QStandardItemModel *org_dv_ao_model;
+    QStandardItemModel *org_dv_ao_model;        /* the copy of dv_ao_model */
     QStandardItemModel *dv_ao_model;
 
-    QStandardItemModel *lch_model;
-    QStandardItemModel *ach_model;
-    QStandardItemModel *rlch_model;
+    QStandardItemModel *lch_model;              /* the lch list model */
+    QStandardItemModel *ach_model;              /* the ach list model */
+
+    QStandardItemModel *rlch_model;             
     QStandardItemModel *rach_model;
-    QStandardItemModel *tbl_model;
+
+    QStandardItemModel *tbl_model;              /* the set table model */
+    QStandardItemModel *empty_model;
     QString cvcp936(const char str[]);
     void initInsView();
     void initSeachLE();
-    void initHWSel();
     void initCHModel();
     QDialog *_pdlg;
     QDialog *_psetwpdlg;
@@ -111,7 +118,7 @@ private:
     QLineEdit *_pNewSigEdit;                    /* new  sig edit*/
     QCompleter *_pCompleter;                    /* auto complete */
     QComboBox *_pcbxSigSel;                     /* select sig */
-    QComboBox *_pcbxCh;                         /* select channel */
+    //QComboBox *_pcbxCh;                         /* select channel */
     QTableView *_ptbl;                          /* show set result */
 
     QPlainTextEdit *_ppl;                       /* show status */
@@ -120,10 +127,23 @@ private:
     QDialogButtonBox *_pbtnBoxSigSel;           /* button box for sig accept and 
                                                    reject(delete) */
 
+
+    QList <QRadioButton*> _lslvradio;
+    QList <QCheckBox*> _lslvchk;
+    QList <QRadioButton*> _lsaoradio;
+    QList <QCheckBox*> _lsaochk;
+
     QSignalMapper *_pSigMaper;
     void initlistvCh();
+#if 0
     void initLchList();                         
     void initAOList();
+#endif
+    void initcbxsigts();
+    //void InitLchListWidget();
+
+    //void InitAOListWidget();
+    void initLAchWidgetLs();
     void initTbl();                             /* init result table for set  */
     void initLvsigNameModel(int cnt);
     void initAOsigNameModel(int cnt);
@@ -131,8 +151,6 @@ private:
     int warningTextInfo(QPlainTextEdit &p);
     int showWarning();
     void initoptLog();
-    bool switchtoRmodel(QStandardItem *item, int type);
-    bool switchtoUmodel(QStandardItem *item, int type);
 
 	void addtionSetUi();
     void addtionSigSlotsMVC();
@@ -143,6 +161,8 @@ private:
     int rechkItemSel(QStandardItemModel* model);
     int checkListSigSel(int type);                      /* multi check */
     int changeRCstyle(int type);
+    int chkItemSelMul(QStandardItemModel* model);
+
 };
 
 #endif // CMDSIMMW_H
