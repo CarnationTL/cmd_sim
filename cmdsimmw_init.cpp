@@ -80,16 +80,27 @@ void CMDSimMW::initCHModel() {
     QString _sAO(cvcp936("AO"));
     //_pcbxCh = ui->cbx_ch;
     if(_pcbxSigSel != NULL) {
-//        _tmpStr = _pcbxSigSel->currentText();
+        _tmpStr = _pcbxSigSel->currentText();
         if(_tmpStr.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
             //bind model
             if(lch_model != NULL) {
                 _plistvsig->setModel(dv_lv_model);
+                _plistvch->setModel (lch_model);
+                for(int i = 0; i < lch_model->rowCount (); i++) {
+                    _plistvch->setIndexWidget (lch_model->index (i, 0),
+                                new QCheckBox(cvcp936 ("LVDT") + QString::number (i)));
+                }
+
             }
         } else if(_tmpStr.compare(_sAO, Qt::CaseInsensitive) == 0) {
             //bind model
             if(ach_model != NULL) {
                 _plistvsig->setModel(dv_ao_model);
+                _plistvch->setModel (ach_model);
+                for(int i = 0; i < ach_model->rowCount (); i++) {
+                    _plistvch->setIndexWidget (ach_model->index (i, 0),
+                                new QCheckBox(cvcp936 ("AO") + QString::number (i)));
+                }
             }
         }
     }
@@ -235,23 +246,8 @@ void CMDSimMW::initoptLog() {
     /* qbshow(_ppl->toPlainText()); */
 }
 
-
-
-
-
-void CMDSimMW::initLAchWidgetLs() {
-    for(int i = 0; i < MAX_LVDT_CH; i++) {
-        _lslvchk.push_back (new QCheckBox(cvcp936 ("LVDT") + QString::number (i, 10)));
-        _lslvradio.push_back (new QRadioButton(cvcp936 ("LVDT") + QString::number (i, 10)));
-    }
-    for(int i = 0; i < MAX_AO_CH; i++) {
-        _lsaoradio.push_back (new QRadioButton(cvcp936 ("AO") + QString::number (i, 10)));
-        _lsaochk.push_back (new QCheckBox(cvcp936 ("AO") + QString::number (i, 10)));
-    }
-}
-
 /**
-  init tbl and table model and attch to tableview
+ init tbl and table model and attch to tableview
 */
 void CMDSimMW::initTbl() {
     //set table sytle
@@ -424,4 +420,62 @@ void CMDSimMW::initAOsigNameModel(int cnt) {
             org_dv_ao_model->setItem(i, org_newItem);
         }
     }
+}
+
+
+
+
+void CMDSimMW::initcbxsigts() {
+    _pcbxSigSel->insertItem (0, cvcp936 ("LVDT"));
+    _pcbxSigSel->insertItem (1, cvcp936 ("AO"));
+
+
+
+}
+
+
+/* change the model bind ctl */
+bool CMDSimMW::changeChListModelBind(int type, int ctl_type) {
+
+    if(_plistvch == NULL) {
+        return false;
+    }
+    if(type == E_LV_CH) {
+        int len = lch_model->rowCount ();
+        _plistvch->setModel (lch_model);
+        if(ctl_type == E_CHK) {
+            for (int i = 0; i < len; ++i) {
+                //_plistvch->setIndexWidget (lch_model->index (i, 0), _lslvchk.at (i));
+                _plistvch->setIndexWidget (lch_model->index (i, 0),
+                        new QCheckBox(cvcp936 ("LVDT") + QString::number (i)));
+            }
+            return true;
+        } else if(ctl_type == E_RADIO) {
+            for (int i = 0; i < len; ++i) {
+                //_plistvch->setIndexWidget (lch_model->index (i, 0), _lslvradio.at (i));
+                _plistvch->setIndexWidget (lch_model->index (i, 0),
+                        new QRadioButton(cvcp936 ("LVDT") + QString::number (i)));
+            }
+            return true;
+        }
+    } else if(type == E_AO_CH) {
+        int len = ach_model->rowCount ();
+        _plistvch->setModel (ach_model);
+        if(ctl_type == E_CHK) {
+            for (int i = 0; i < len; ++i) {
+                //_plistvch->setIndexWidget (ach_model->index (i, 0), _lsaochk.at (i));
+                _plistvch->setIndexWidget (ach_model->index (i, 0), 
+                        new QCheckBox(cvcp936("AO") + QString::number(i)));
+            }
+            return true;
+        } else if(ctl_type == E_RADIO) {
+            for (int i = 0; i < len; ++i) {
+                //_plistvch->setIndexWidget (ach_model->index (i, 0), _lsaoradio.at (i));
+                _plistvch->setIndexWidget (ach_model->index (i, 0), 
+                        new QRadioButton(cvcp936("AO") + QString::number(i)));
+            }
+            return true;
+        }
+    }
+    return false;
 }

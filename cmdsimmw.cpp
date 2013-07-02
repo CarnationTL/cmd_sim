@@ -57,6 +57,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 
     initWidgetsPointer();
 
+    initlistvChModel ();
 
     addtionSetUi();
 
@@ -119,7 +120,6 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     //initLchList();
     initInsView();
 
-    initLAchWidgetLs ();
     initSeachLE();
     initcbxsigts ();
     initCHModel();
@@ -200,12 +200,14 @@ QString CMDSimMW::cvcp936(const char str[]) {
 
 
 
-/* bind  to lch model listview Control */
-/**
-  default to init lchlist and map clicked sig to Sigmapper
-  default to init lchlist with checkbox
-*/
-void CMDSimMW::initlistvCh() {
+
+///* bind  to lch model listview Control */
+///**
+//  default to init lchlist and map clicked sig to Sigmapper
+//  default to init lchlist with checkbox
+//*/
+void CMDSimMW::initlistvChModel () {
+
 #if !defined(T_CODE)
     _plistvch->setEditTriggers (QAbstractItemView::NoEditTriggers);
     int row = lch_model->rowCount ();
@@ -222,8 +224,20 @@ void CMDSimMW::initlistvCh() {
         _plistvch->setIndexWidget (pindx, chk);
     }
 #else
-    _plistvch->setEditTriggers (QAbstractItemView::NoEditTriggers);
-    _plistvch->setModel (lch_model);
+   // _plistvch->setEditTriggers (QAbstractItemView::NoEditTriggers);
+   // _plistvch->setModel (lch_model);
+
+    lch_model = new QStandardItemModel();
+    ach_model = new QStandardItemModel();
+
+    for(int i = 0; i < MAX_LVDT_CH; i++) {
+        QStandardItem *p = new QStandardItem("");
+        lch_model->appendRow (p);
+    }
+    for(int i = 0; i < MAX_AO_CH; i++) {
+        QStandardItem *p = new QStandardItem("");
+        ach_model->appendRow (p);
+    }
 #endif
 }
 
@@ -239,50 +253,6 @@ void CMDSimMW::initLchList() {
     rlch_model = new QStandardItemModel();
 }
 #endif
-
-#if 0
-void CMDSimMW::initAOList() {
-    ach_model = new QStandardItemModel();
-    for(int i = 0; i < MAX_AO_CH; i++) {
-        QStandardItem *item = new QStandardItem(cvcp936("AO") + QString::number(i, 10));
-        item->setCheckable (true);
-        item->setCheckState (Qt::Unchecked);
-        ach_model->appendRow(item);
-    }
-    rach_model = new QStandardItemModel();
-}
-#endif
-
-void CMDSimMW::initcbxsigts() {
-    _pcbxSigSel->insertItem (0, cvcp936 ("LVDT"));
-    _pcbxSigSel->insertItem (1, cvcp936 ("AO"));
-}
-
-//
-//void CMDSimMW::InitLchListWidget() {
-//    lch_model = new QStandardItemModel();
-//    for(int i = 0; i < MAX_LVDT_CH; i++) {
-//        //QStandardItem *item = new QStandardItem("QString::number (i + 1, 10)");
-//        QStandardItem *item = new QStandardItem("");
-//        lch_model->appendRow (item);
-//    }
-////    int len = lch_model->rowCount ();
-////   // QRadioButton *rad = NULL;
-////    _plistvch->setModel (lch_model);
-////    for(int i = 0; i < len; i++) {
-////        QModelIndex idx = lch_model->index (i, 0);
-////        //rad = new QRadioButton(cvcp936 ("LVDT") + QString::number (i, 10));
-////      //  _plistvch->setIndexWidget (idx, _lslvchk.at (i));
-////    }
-//}
-
-//void CMDSimMW::InitAOListWidget() {
-//    ach_model = new QStandardItemModel();
-//    for (int i = 0; i < MAX_AO_CH; ++i) {
-//        QStandardItem *it = new QStandardItem("");
-//        ach_model->appendRow (it);
-//    }
-//}
 
 
 /* not complete yet for show warning in plainEdit  */
@@ -428,37 +398,16 @@ void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
     if(_pcbxSigSel->count () < 2) {
         return;
     }
-
-    qDebug () << lch_model->rowCount () << ach_model->rowCount () ;
-    if(lch_model->rowCount() < 0 || ach_model->rowCount() < 0) {
-        return;
-    }
-
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
-    //_pcbxCh = ui->cbx_ch;
-    //_pcbxCh->clear();
-    //band model
+
     if(arg1.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
+        changeChListModelBind (E_LV_CH, E_CHK);
         _plistvsig->setModel(dv_lv_model);
-        _plistvch->setModel (lch_model);
-        qDebug () << _lslvchk.size () << "|||" << _lslvradio.size ();
-        for(int i = 0; i < lch_model->rowCount (); i++) {
-            _plistvch->setIndexWidget (lch_model->index (i, 0), _lslvradio.at (i));
-            //_plistvch->setIndexWidget (lch_model->index (i, 0), new QCheckBox("aa"));
-        }
-    } else if(arg1.compare(_sAO, Qt::CaseInsensitive) == 0) {
+    } else if(arg1.compare (_sAO, Qt::CaseInsensitive) == 0) {
+        changeChListModelBind (E_AO_CH, E_CHK);
         _plistvsig->setModel(dv_ao_model);
-        _plistvch->setModel (ach_model);
-        qDebug () << _lsaochk.size () << "|||" << _lsaoradio.size ();
-        for(int i = 0 ; i < ach_model->rowCount (); i++) {
-            _plistvch->setIndexWidget (ach_model->index (i, 0), _lsaoradio.at (i));
-            //_plistvch->setIndexWidget (ach_model->index (i, 0), new QCheckBox("Bb"));
-
-
-        }
     }
-
 }
 
 void CMDSimMW::on_btn_setwp_clicked() {
@@ -529,25 +478,12 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
         QMessageBox::warning (this, cvcp936 ("警告"), cvcp936 ("关联模块出错，请重新启动应用程序"), QMessageBox::Yes);
         return;
     }
-//_pcbxCh = ui->cbx_ch;
-    //_pcbxSigSel = ui->cbx_sigts;
-//    QString _curText, _curText2;
-//    _curText = _pcbxCh->currentText();
-//    _curText2 = _pcbxSigSel->currentText();
-//
-//    QList <QStandardItem *> findres;
-//    findres = lch_model->findItems(_curText);
-//    if(findres.size() == 1) {
-//       qbshow( QString::number(findres.at(1)->row(), 10));
-//    }
+
 #endif
 
 }
 
 
-//void  CMDSimMW::on_sigLv_clicked(const QModelIndex &index) {
-//
-//}
 /* listw_sig_sel checkState  */
 void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
      QStandardItem *pf = NULL;
@@ -721,6 +657,8 @@ void CMDSimMW::mslot_tableClick(int row) {
 }
 
 
+
+/* list of chs clicked function */
 void CMDSimMW::on_listv_ch_clicked(const QModelIndex &index) {
 
 #if defined(T_CODE)
@@ -804,6 +742,7 @@ int CMDSimMW::chkItemSelMul(QStandardItemModel *model) {
 }
 
 
+
 /* for the rd button click  */
 /**
  * Sigmaper call back function
@@ -823,10 +762,10 @@ void CMDSimMW::mslot_CHcheckClick(QString str) {
     if(str.length () <= 0) {
         return;
     }
-
     return;
 }
 
 void CMDSimMW::on_cbx_sigts_activated(int index) {
 
 }
+

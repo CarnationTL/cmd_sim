@@ -83,6 +83,7 @@ private slots:
 private:
     enum {LVDTBrds = 4};
     enum {E_DV_LV_MODEL, E_DV_AO_MODEL};
+    enum {E_LV_CH, E_AO_CH, E_CHK, E_RADIO};
     QString *SIG_LVDT;
     QString *SIG_AO;
     enum {T_L, T_A};
@@ -127,23 +128,10 @@ private:
     QDialogButtonBox *_pbtnBoxSigSel;           /* button box for sig accept and 
                                                    reject(delete) */
 
-
-    QList <QRadioButton*> _lslvradio;
-    QList <QCheckBox*> _lslvchk;
-    QList <QRadioButton*> _lsaoradio;
-    QList <QCheckBox*> _lsaochk;
-
     QSignalMapper *_pSigMaper;
-    void initlistvCh();
-#if 0
-    void initLchList();                         
-    void initAOList();
-#endif
-    void initcbxsigts();
-    //void InitLchListWidget();
+    void initlistvChModel();
 
-    //void InitAOListWidget();
-    void initLAchWidgetLs();
+    void initcbxsigts();
     void initTbl();                             /* init result table for set  */
     void initLvsigNameModel(int cnt);
     void initAOsigNameModel(int cnt);
@@ -163,6 +151,7 @@ private:
     int changeRCstyle(int type);
     int chkItemSelMul(QStandardItemModel* model);
 
+    bool changeChListModelBind(int type, int ctl_type);
 };
 
 #endif // CMDSIMMW_H
