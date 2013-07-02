@@ -55,7 +55,7 @@ private slots:
 
     void on_btn_sigSel_ok_clicked();            /* sigsel ok */
 
-    void on_listw_sig_sel_clicked(const QModelIndex &index);
+    void on_listw_sig_sel_clicked(const QModelIndex &index); /* sig list view*/
 
     void m_delItem(QModelIndex &index);
 

@@ -483,19 +483,36 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
 
 }
 
-
 /* listw_sig_sel checkState  */
 void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
      QStandardItem *pf = NULL;
     if(_plistvsig->model() == dv_lv_model) {
         pf = dv_lv_model->itemFromIndex(index);
+        QModelIndex pidx = lch_model->index (1, 0);
+        QString precls =_plistvch->indexWidget (pidx)->metaObject ()->className ();
         if(chkItemSelMul (dv_lv_model) >= MUL_SEL) {
             //TODO change to radio button
+            if(precls.compare (QString("QCheckBox")) == 0) {
+                changeChListModelBind (E_LV_CH, E_RADIO);
+            }
+        } else {
+            if(precls.compare(QString("QRadioButton")) == 0) {
+                changeChListModelBind (E_LV_CH, E_CHK);
+            }
         }
     } else if(_plistvsig->model() == dv_ao_model) {
         pf = dv_ao_model->itemFromIndex(index);
+        QModelIndex pidx = ach_model->index (1, 0);
+        QString precls =_plistvch->indexWidget (pidx)->metaObject ()->className ();
         if(chkItemSelMul (dv_ao_model) >= MUL_SEL) {
             //TODO change to radio button
+            if(precls.compare (QString("QCheckBox")) == 0) {
+                changeChListModelBind (E_AO_CH, E_RADIO);
+            }
+        } else {
+            if(precls.compare (QString("QRadioButton")) == 0) {
+                changeChListModelBind (E_AO_CH, E_CHK);
+            }
         }
     }
     if(pf == NULL) {
