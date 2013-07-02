@@ -465,21 +465,74 @@ void CMDSimMW::on_pushButton_4_clicked() {
   select the sig ch and type
 */
 void CMDSimMW::on_btn_sigSel_ok_clicked() {
-#if defined(T_CODE)
-    //get the select lvdt ch number and relate channel number
-    QString _ctxt1, _ctxt2;
-    QStandardItemModel *p = (QStandardItemModel *)_plistvch->model ();
-    QModelIndex pindx = _plistvch->currentIndex ();
-    if(p == lch_model) {
-
-    } else if( p == ach_model) {
+    //TODO get the sel result and put them input tbl !!!!
+    QStringList sigsel, chsel;
+    if(_plistvsig->model () == dv_lv_model || _plistvch->model () == lch_model) {
+        for(int i = 0; i < dv_lv_model->rowCount (); i++) {
+            if(dv_lv_model->item (i, 0)->checkState () == Qt::Checked) {
+                sigsel << dv_lv_model->item (i, 0)->text ();
+            }
+        }
+        //test the widget
+        QString cls = _plistvch->indexWidget (lch_model->index (1, 0))->metaObject ()->className ();
+        if(cls.compare (QString("QCheckBox")) == 0) {
+            QCheckBox *pitem = NULL;
+            for(int i = 0; i < lch_model->rowCount (); i++) {
+                pitem = dynamic_cast <QCheckBox*> (_plistvch->indexWidget (lch_model->index (i, 0)));
+                if(pitem->checkState () == Qt::Checked) {
+                    chsel << pitem->text ();
+                }
+            }
+        } else if(cls.compare (QString("QRadioButton")) == 0) {
+            QRadioButton *pitem = NULL;
+            for(int i = 0; i < lch_model->rowCount (); i++) {
+                pitem = dynamic_cast <QRadioButton*> (_plistvch->indexWidget (lch_model->index (i, 0)));
+                if(pitem->isChecked () == true) {
+                    chsel << pitem->text ();
+                }
+            }
+        }
+    } else if (_plistvsig->model () == dv_ao_model || _plistvch->model () == ach_model){
+        for(int i = 0; i < dv_ao_model->rowCount (); i++) {
+            if(dv_ao_model->item (i, 0)->checkState () == Qt::Checked) {
+                sigsel << dv_ao_model->item (i, 0)->text ();
+            }
+        }
+        QString cls = _plistvch->indexWidget (ach_model->index (1, 0))->metaObject ()->className ();
+        if(cls.compare (QString("QCheckBox")) == 0) {
+            QCheckBox *pitem = NULL;
+            for(int i = 0; i < ach_model->rowCount (); i++) {
+                pitem = dynamic_cast <QCheckBox*> (_plistvch->indexWidget (ach_model->index (i, 0)));
+                if(pitem->checkState () == Qt::Checked) {
+                    chsel << pitem->text ();
+                }
+            }
+        } else if(cls.compare (QString("QRadioButton")) == 0) {
+            QRadioButton *pitem = NULL;
+            for(int i = 0; i < ach_model->rowCount (); i++) {
+                pitem = dynamic_cast <QRadioButton*> (_plistvch->indexWidget (ach_model->index (i, 0)));
+                if(pitem->isChecked () == true) {
+                    chsel << pitem->text ();
+                }
+            }
+        }
 
     } else {
-        QMessageBox::warning (this, cvcp936 ("警告"), cvcp936 ("关联模块出错，请重新启动应用程序"), QMessageBox::Yes);
         return;
     }
 
-#endif
+    if(sigsel.length () > 0 && chsel.length () > 0) {
+        qDebug () << "sig" <<sigsel;
+        qDebug () << "chsle" <<chsel;
+    } else if(sigsel.length () > 0 && chsel.length () <= 0) {
+        qDebug () << sigsel;
+        qDebug () << chsel << "no ch";
+    } else if(sigsel.length () <= 0 && chsel.length () > 0) {
+       qDebug () << chsel;
+       qDebug () << "no sigsel";
+    } else if(sigsel.length () <= 0 && chsel.length () <= 0) {
+        qDebug () << "none" ;
+    }
 
 }
 
@@ -491,7 +544,6 @@ void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
         QModelIndex pidx = lch_model->index (1, 0);
         QString precls =_plistvch->indexWidget (pidx)->metaObject ()->className ();
         if(chkItemSelMul (dv_lv_model) >= MUL_SEL) {
-            //TODO change to radio button
             if(precls.compare (QString("QCheckBox")) == 0) {
                 changeChListModelBind (E_LV_CH, E_RADIO);
             }
@@ -505,7 +557,6 @@ void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
         QModelIndex pidx = ach_model->index (1, 0);
         QString precls =_plistvch->indexWidget (pidx)->metaObject ()->className ();
         if(chkItemSelMul (dv_ao_model) >= MUL_SEL) {
-            //TODO change to radio button
             if(precls.compare (QString("QCheckBox")) == 0) {
                 changeChListModelBind (E_AO_CH, E_RADIO);
             }
