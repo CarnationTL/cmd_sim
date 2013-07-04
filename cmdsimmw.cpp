@@ -33,6 +33,11 @@
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QDebug>
+#include <QMenu>
+
+#include <oscilloscope/samplingthread.h>
+#include <oscilloscope/qwtoscmain.h>
+
 
 typedef int(* funca )(int);
 int chSta = -1;
@@ -713,6 +718,11 @@ void CMDSimMW::on_tbl_selres_clicked(const QModelIndex &index) {
    // qbshow("clicked");
     QStandardItem *p = tbl_model->itemFromIndex(index);
     qDebug() << "clicked" << p->text();
+#if 0
+    QMenu *con = new QMenu(this);
+    con->addAction ("delte");
+    con->exec ();
+#endif
 }
 
 void CMDSimMW::on_tbl_selres_pressed(const QModelIndex &index) {
@@ -833,7 +843,72 @@ void CMDSimMW::mslot_CHcheckClick(QString str) {
     return;
 }
 
+void CMDSimMW::mslot_tblContextMenu(QAction *action) {
+    QVariant var =action->data ();
+    QPoint pp = var.toPoint ();
+
+    QModelIndex idx = _ptbl->indexAt (pp);
+    QStandardItem *item = tbl_model->itemFromIndex (idx);
+    qbshow (item->text ());
+}
+
 void CMDSimMW::on_cbx_sigts_activated(int index) {
 
+}
+
+
+void CMDSimMW::on_tbl_selres_customContextMenuRequested(const QPoint &pos) {
+    //TODO 过滤右键菜单坐标，不是每次都弹出
+#if 0
+    QRect rect = _ptbl->geometry ();
+    int top = rect.top ();
+    int right = rect.right ();
+    int left = rect.left ();
+    left += _ptbl->columnWidth (0);
+    left += _ptbl->columnWidth (1);
+    left += _ptbl->columnWidth (2);
+#endif
+    QRect rect = _ptbl->contentsRect ();
+    if(pos.x () >= rect.left () && pos.x () <= rect.right ()) {
+        if(pos.y () >= rect.top () && pos.y () <= rect.bottom ()) {
+            QMenu *con = new QMenu(ui->tbl_selres);
+            qDebug () << pos.x () << pos.y () <<" the pos::";
+            qDebug () << QCursor::pos ().x(), QCursor::pos ().y();
+            //QAction *paction = new QAction(cvcp936 ("删除通道"));
+            QAction *paction =  con->addAction (cvcp936 ("删除通道"));
+            paction->setData (pos);
+            connect (con, SIGNAL(triggered(QAction*)), this, SLOT(mslot_tblContextMenu(QAction*)));
+            con->exec (QCursor::pos ());
+        }
+    }
+
+}
+
+
+void CMDSimMW::on_btnViewOsc_clicked() {
+
+    window = new QwtOSCMain();
+    window->setAttribute (Qt::WA_DeleteOnClose);
+
+    window->resize( 800, 400 );
+    window->clearData ();
+
+    window->samplingThread = new SamplingThread();
+
+    window->samplingThread->setFrequency( window->frequency() );
+    window->samplingThread->setAmplitude( window->amplitude() );
+    window->samplingThread->setInterval( window->signalInterval() );
+
+    window->connect( window, SIGNAL( frequencyChanged( double ) ),
+            window->samplingThread, SLOT( setFrequency( double ) ) );
+    window->connect( window, SIGNAL( amplitudeChanged( double ) ),
+            window->samplingThread, SLOT( setAmplitude( double ) ) );
+    window->connect( window, SIGNAL( signalIntervalChanged( double ) ),
+            window->samplingThread, SLOT( setInterval( double ) ) );
+
+
+    window->show ();
+    window->samplingThread->start();
+    window->start();
 }
 

@@ -29,7 +29,14 @@ SOURCES += main.cpp\
     setlbrdparadlg.cpp \
     siggen.cpp \
     sigpara.cpp \
-    cmdsimmw_init.cpp
+    cmdsimmw_init.cpp \
+    oscilloscope/curvedata.cpp \
+    oscilloscope/knob.cpp \
+    oscilloscope/plot.cpp \
+    oscilloscope/samplingthread.cpp \
+    oscilloscope/signaldata.cpp \
+    oscilloscope/wheelbox.cpp \
+    oscilloscope/qwtoscmain.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -46,7 +53,14 @@ HEADERS  += cmdsimmw.h \
     brd75c3.h \
     setlbrdparadlg.h \
     siggen.h \
-    sigpara.h
+    sigpara.h \
+    oscilloscope/curvedata.h \
+    oscilloscope/knob.h \
+    oscilloscope/plot.h \
+    oscilloscope/samplingthread.h \
+    oscilloscope/signaldata.h \
+    oscilloscope/wheelbox.h \
+    oscilloscope/qwtoscmain.h
 
 FORMS    += cmdsimmw.ui \
     setbrddlg.ui \

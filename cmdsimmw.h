@@ -20,6 +20,8 @@
 #include <QList>
 #include <QRadioButton>
 #include <QCheckBox>
+#include <oscilloscope/qwtoscmain.h>
+#include <oscilloscope/samplingthread.h>
 
 namespace Ui {
 class CMDSimMW;
@@ -61,7 +63,6 @@ private slots:
 
     void on_action_reset_sigDis_triggered();
 
-
     void on_listw_sig_sel_pressed(const QModelIndex &index);
 
     void on_action_reset_SigAO_triggered();
@@ -75,10 +76,14 @@ private slots:
     void mslot_tableClick(int row);
     void mslot_CHradioClick(QString str);
     void mslot_CHcheckClick(QString str);
+    void mslot_tblContextMenu(QAction* action);
     void on_listv_ch_clicked(const QModelIndex &index);
 
-
     void on_cbx_sigts_activated(int index);
+
+    void on_tbl_selres_customContextMenuRequested(const QPoint &pos);
+
+    void on_btnViewOsc_clicked();
 
 private:
     enum {LVDTBrds = 4};
@@ -139,6 +144,7 @@ private:
     int warningTextInfo(QPlainTextEdit &p);
     int showWarning();
     void initoptLog();
+    void initTblConTextMenu();
 
 	void addtionSetUi();
     void addtionSigSlotsMVC();
@@ -152,6 +158,8 @@ private:
     int chkItemSelMul(QStandardItemModel* model);
 
     bool changeChListModelBind(int type, int ctl_type);
+    QwtOSCMain *window;
 };
 
 #endif // CMDSIMMW_H
+

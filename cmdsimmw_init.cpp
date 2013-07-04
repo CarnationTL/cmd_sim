@@ -33,7 +33,9 @@
 #include <QIcon>
 #include <QCheckBox>
 #include <QRadioButton>
+#include <QMenu>
 #include <QDebug>
+
 
 
 #define TBL_COL 4
@@ -246,6 +248,11 @@ void CMDSimMW::initoptLog() {
     /* qbshow(_ppl->toPlainText()); */
 }
 
+
+void CMDSimMW::initTblConTextMenu() {
+
+}
+
 /**
  init tbl and table model and attch to tableview
 */
@@ -254,6 +261,9 @@ void CMDSimMW::initTbl() {
     if(_ptbl == NULL) {
         return;
     }
+   //use right click
+    _ptbl->setContextMenuPolicy (Qt::CustomContextMenu);
+
     QPushButton *tbtn;
     tbl_model = new QStandardItemModel(TBL_ROW, TBL_COL);
     _ptbl->setModel(tbl_model);
@@ -288,39 +298,6 @@ void CMDSimMW::initTbl() {
 }
 
 
-#if 0
-void CMDSimMW::initLchModel() {
-    QStringList _strlist;
-    lch_model = new QStandardItemModel(MAX_LVDT_CH, 0, 0);
-    QString _tmp;
-    for(int i = 0; i < MAX_LVDT_CH; i++) {
-        _tmp.clear();
-        _tmp.append((cvcp936("LVDT") + i));
-        _strlist.append(_tmp);
-        QStandardItem *_item = new QStandardItem(_tmp.at(i));
-        //lch_model->setItem(i, _item);
-        lch_model->insertRow(i, _item);
-    }
-//    _pcbxCh = ui->cbx_ch;
-//    _pcbxCh->setModelColumn(0);
-//    _pcbxCh->setModel(lch_model);
-}
-#endif
-
-#if 0
-void CMDSimMW::initAOModel() {
-    QStringList _strlist;
-    ach_model = new QStandardItemModel(MAX_AO_CH, 0);
-    QString _tmp;
-    for(int i = 0; i < MAX_LVDT_CH; i++) {
-        _tmp.clear();
-        _tmp.append((cvcp936("AO") + i));
-        _strlist.append(_tmp);
-        QStandardItem *_item = new QStandardItem(_tmp.at(i));
-        ach_model->setItem(i, _item);
-    }
-}
-#endif
 
 /**
   set the layout of setBrdDlg (will move to new ui file)
@@ -347,6 +324,7 @@ int CMDSimMW::initSetBrdDlg(QDialog *pdlg) {
 }
 #endif
 
+
 /* init pointers of main Widget.. */
 void CMDSimMW::initWidgetsPointer() {
 
@@ -372,7 +350,6 @@ void CMDSimMW::initWidgetsPointer() {
     _ptbl = ui->tbl_selres;
     _psetwpdlg = new SetWPDlg();
 }
-
 
 
 /*init lch signal model */
@@ -424,13 +401,10 @@ void CMDSimMW::initAOsigNameModel(int cnt) {
 
 
 
-
+/* init list sig select*/
 void CMDSimMW::initcbxsigts() {
     _pcbxSigSel->insertItem (0, cvcp936 ("LVDT"));
     _pcbxSigSel->insertItem (1, cvcp936 ("AO"));
-
-
-
 }
 
 
@@ -445,14 +419,12 @@ bool CMDSimMW::changeChListModelBind(int type, int ctl_type) {
         _plistvch->setModel (lch_model);
         if(ctl_type == E_CHK) {
             for (int i = 0; i < len; ++i) {
-                //_plistvch->setIndexWidget (lch_model->index (i, 0), _lslvchk.at (i));
                 _plistvch->setIndexWidget (lch_model->index (i, 0),
                         new QCheckBox(cvcp936 ("LVDT") + QString::number (i)));
             }
             return true;
         } else if(ctl_type == E_RADIO) {
             for (int i = 0; i < len; ++i) {
-                //_plistvch->setIndexWidget (lch_model->index (i, 0), _lslvradio.at (i));
                 _plistvch->setIndexWidget (lch_model->index (i, 0),
                         new QRadioButton(cvcp936 ("LVDT") + QString::number (i)));
             }
@@ -463,14 +435,12 @@ bool CMDSimMW::changeChListModelBind(int type, int ctl_type) {
         _plistvch->setModel (ach_model);
         if(ctl_type == E_CHK) {
             for (int i = 0; i < len; ++i) {
-                //_plistvch->setIndexWidget (ach_model->index (i, 0), _lsaochk.at (i));
                 _plistvch->setIndexWidget (ach_model->index (i, 0), 
                         new QCheckBox(cvcp936("AO") + QString::number(i)));
             }
             return true;
         } else if(ctl_type == E_RADIO) {
             for (int i = 0; i < len; ++i) {
-                //_plistvch->setIndexWidget (ach_model->index (i, 0), _lsaoradio.at (i));
                 _plistvch->setIndexWidget (ach_model->index (i, 0), 
                         new QRadioButton(cvcp936("AO") + QString::number(i)));
             }
@@ -479,3 +449,4 @@ bool CMDSimMW::changeChListModelBind(int type, int ctl_type) {
     }
     return false;
 }
+
