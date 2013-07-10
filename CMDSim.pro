@@ -77,8 +77,8 @@ DEPENDPATH += $$PWD/qwtinc
 
 unix:!macx: LIBS += -L$$PWD/../../../usr/local/qwt-6.1.0-rc3/lib/ -lqwt
 
-INCLUDEPATH += $$PWD/../../../usr/local/qwt-6.1.0-rc3/include
-DEPENDPATH += $$PWD/../../../usr/local/qwt-6.1.0-rc3/include
+unix:!macx: INCLUDEPATH += $$PWD/../../../usr/local/qwt-6.1.0-rc3/include
+unix:!macx: DEPENDPATH += $$PWD/../../../usr/local/qwt-6.1.0-rc3/include
 
 
 win32: LIBS += -L$$PWD/rfmlib/ -lrfm2gdll_stdc
@@ -121,3 +121,4 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/75C3Dlib/ -lCPCI75C3Dll
 
 win32: INCLUDEPATH += $$PWD/75C3Rlib
 win32: DEPENDPATH += $$PWD/75C3Rlib
+

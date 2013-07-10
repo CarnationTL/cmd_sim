@@ -22,6 +22,8 @@
 #include <QCheckBox>
 #include <oscilloscope/qwtoscmain.h>
 #include <oscilloscope/samplingthread.h>
+#include <QList>
+#include <QStringList>
 
 namespace Ui {
 class CMDSimMW;
@@ -85,6 +87,8 @@ private slots:
 
     void on_btnViewOsc_clicked();
 
+    void on_tmpdel_clicked();
+
 private:
     enum {LVDTBrds = 4};
     enum {E_DV_LV_MODEL, E_DV_AO_MODEL};
@@ -112,6 +116,11 @@ private:
 
     QStandardItemModel *tbl_model;              /* the set table model */
     QStandardItemModel *empty_model;
+
+
+    QList <QStringList> *del_ch_list;
+    QList <QStringList> *del_sig_list;
+
     QString cvcp936(const char str[]);
     void initInsView();
     void initSeachLE();
@@ -140,6 +149,9 @@ private:
     void initTbl();                             /* init result table for set  */
     void initLvsigNameModel(int cnt);
     void initAOsigNameModel(int cnt);
+    void initdelsaveModel();
+    void addtblRow();
+    void deltblRow();
 
     int warningTextInfo(QPlainTextEdit &p);
     int showWarning();
@@ -152,12 +164,13 @@ private:
     void initWidgetsPointer();                  /* init widget pointer */
     int addItemToModel(QStandardItemModel* model, QString &newItem);  
     int delItemFromModel(QStandardItemModel* model);
-    int rechkItemSel(QStandardItemModel* model);
+    int rechkItemSel(int type, QWidget *p, QStandardItemModel* model);
     int checkListSigSel(int type);                      /* multi check */
     int changeRCstyle(int type);
     int chkItemSelMul(QStandardItemModel* model);
 
     bool changeChListModelBind(int type, int ctl_type);
+    int rmModelCheck(QStandardItemModel *p);
     QwtOSCMain *window;
 };
 

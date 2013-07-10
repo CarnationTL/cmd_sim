@@ -297,6 +297,16 @@ void CMDSimMW::initTbl() {
     connect (_pSigMaper, SIGNAL(mapped(int)), this, SLOT(mslot_tableClick(int)));
 }
 
+/* add table row */
+void CMDSimMW::addtblRow() {
+    //TODO add table context and map the signal
+
+}
+
+void CMDSimMW::deltblRow() {
+    //TODO del table context and remove sig map, release the resouce
+
+}
 
 
 /**
@@ -400,6 +410,12 @@ void CMDSimMW::initAOsigNameModel(int cnt) {
 }
 
 
+/* use to save del things */
+void CMDSimMW::initdelsaveModel() {
+    del_ch_list = new QList<QStringList>();
+    del_sig_list = new QList<QStringList>();
+}
+
 
 /* init list sig select*/
 void CMDSimMW::initcbxsigts() {
@@ -448,5 +464,11 @@ bool CMDSimMW::changeChListModelBind(int type, int ctl_type) {
         }
     }
     return false;
+}
+/* rm the model check*/
+int CMDSimMW::rmModelCheck(QStandardItemModel *p) {
+    if(p != NULL) {
+
+    }
 }
 

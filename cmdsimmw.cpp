@@ -63,6 +63,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     initWidgetsPointer();
 
     initlistvChModel ();
+    initdelsaveModel ();
 
     addtionSetUi();
 
@@ -374,7 +375,7 @@ void CMDSimMW::on_bbx_sig_sel_accepted() {
 void CMDSimMW::on_bbx_sig_sel_rejected() {
     QModelIndex indx_;
     if(_plistvsig->model() == dv_lv_model) {
-        while(rechkItemSel(dv_lv_model)) {
+        while(rechkItemSel(E_CHK, NULL,  dv_lv_model)) {
             for(int i = 0; i < dv_lv_model->rowCount(); i++) {
                 if(dv_lv_model->item(i, 0)->checkState() == Qt::Checked) {
                     indx_ = dv_lv_model->index(i, 0);
@@ -383,7 +384,7 @@ void CMDSimMW::on_bbx_sig_sel_rejected() {
             }
         }
     } else if(_plistvsig->model() == dv_ao_model) {
-        while(rechkItemSel(dv_ao_model)) {
+        while(rechkItemSel(E_CHK, NULL, dv_ao_model)) {
             for(int i = 0; i < dv_ao_model->rowCount(); i++) {
                 if(dv_ao_model->item(i, 0)->checkState() == Qt::Checked) {
                     indx_ = dv_ao_model->index(i, 0);
@@ -488,6 +489,23 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
                     chsel << pitem->text ();
                 }
             }
+
+            //TODO to be test for
+#if 1
+            //TODO del rows
+            while(rechkItemSel (E_CHK, NULL, lch_model)) {
+                QCheckBox *_pchk = NULL;
+                for(int i = 0; i < lch_model->rowCount (); i++) {
+                    _pchk = dynamic_cast <QCheckBox*>(_plistvch->indexWidget (lch_model->index (i, 0)));
+                    if(_pchk != NULL) {
+                        if(_pchk->isCheckable () == Qt::Checked) {
+                            lch_model->removeRow (i);
+                        }
+                    }
+                }
+            }
+#endif
+
         } else if(cls.compare (QString("QRadioButton")) == 0) {
             QRadioButton *pitem = NULL;
             for(int i = 0; i < lch_model->rowCount (); i++) {
@@ -497,6 +515,7 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
                 }
             }
         }
+
     } else if (_plistvsig->model () == dv_ao_model || _plistvch->model () == ach_model){
         for(int i = 0; i < dv_ao_model->rowCount (); i++) {
             if(dv_ao_model->item (i, 0)->checkState () == Qt::Checked) {
@@ -539,7 +558,40 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
         qDebug () << "none" ;
     }
 
+    del_ch_list->append (chsel);
+    del_sig_list->append (sigsel);
+
+
+#if 0
+    int lpos = del_ch_list->length () - 1;
+    if(lpos != del_sig_list->length () - 1) {
+        return;
+    }
+
+    for(int i = 0; i < del_ch_list->at (lpos).length (); i++) {
+
+    }
+#endif
 }
+
+
+void CMDSimMW::on_tmpdel_clicked() {
+    //TODO test del from table and restore to lchlist
+    for(int i = 0; i < del_sig_list->length (); i++) {
+        const QStringList &ref = del_sig_list->at (i);
+        for(int j = 0; j < ref.length (); j++) {
+            qDebug () <<"del"<< ref.at (j);
+        }
+    }
+    for(int i = 0; i < del_ch_list->length (); i++) {
+        const QStringList &ref = del_ch_list->at (i);
+        for(int j = 0; j < ref.length (); j++) {
+            qDebug () << "del" <<ref.at (j);
+        }
+    }
+
+}
+
 
 /* listw_sig_sel checkState  */
 void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
@@ -616,11 +668,28 @@ int CMDSimMW::delItemFromModel(QStandardItemModel *model) {
 }
 
 /* recheck item sel for delete function */
-int CMDSimMW::rechkItemSel(QStandardItemModel *model) {
-    int tmp = model->rowCount();
-    for(int i = 0; i < tmp; i++) {
-        if(model->item(i)->checkState() == Qt::Checked){
-            return 1;
+int CMDSimMW::rechkItemSel(int type, QWidget *widget, QStandardItemModel *model) {
+
+    if(type == E_CHK) {
+        int tmp = model->rowCount();
+        for(int i = 0; i < tmp; i++) {
+            if(model->item(i)->checkState() == Qt::Checked){
+                return 1;
+            }
+        }
+    } else if(type == E_RADIO && widget != NULL) {
+        QListView *pid = NULL;
+        pid = dynamic_cast <QListView*>(widget);
+        QRadioButton *pradio = NULL;
+        if(pid != NULL) {
+            int tmp = model->rowCount ();
+            for(int i = 0; i < tmp; i++) {
+                pradio = dynamic_cast <QRadioButton*> (pid->indexWidget (model->index (i, 0)));
+                if(pradio != NULL) {
+                    if(pradio->isCheckable () == true)
+                        return 1;
+                }
+            }
         }
     }
     return 0;
@@ -884,9 +953,12 @@ void CMDSimMW::on_tbl_selres_customContextMenuRequested(const QPoint &pos) {
 
 }
 
-
+/*
+ *show wave
+  */
 void CMDSimMW::on_btnViewOsc_clicked() {
 
+#if 1
     window = new QwtOSCMain();
     window->setAttribute (Qt::WA_DeleteOnClose);
 
@@ -906,9 +978,10 @@ void CMDSimMW::on_btnViewOsc_clicked() {
     window->connect( window, SIGNAL( signalIntervalChanged( double ) ),
             window->samplingThread, SLOT( setInterval( double ) ) );
 
-
     window->show ();
     window->samplingThread->start();
     window->start();
+#endif
 }
+
 

@@ -324,6 +324,19 @@
      <string>ViewOsc</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="tmpdel">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>430</y>
+      <width>71</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>tmpDel</string>
+    </property>
+   </widget>
    <zorder>frame_layout</zorder>
    <zorder>gBox_chsel</zorder>
    <zorder>gBox_sig_sel</zorder>
@@ -336,6 +349,7 @@
    <zorder>btn_sigSel_ok</zorder>
    <zorder>qwtPlot</zorder>
    <zorder>btnViewOsc</zorder>
+   <zorder>tmpdel</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
