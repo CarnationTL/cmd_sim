@@ -564,9 +564,16 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
     }
 #endif
 
-   if(lsigsel.length () > 0) {
+   if(lsigsel.length () > 0 && lchsel.length () > 0) {
+       for (int i = 0; i < lchsel.length(); i++) {
+           if(lchsel.length()  > 0)  {
+
+           }
+
+       }
        qDebug () <<"LVDT";
        qDebug () << "lsig" << lsigsel << "lch" << lchsel;
+
    }
 
    if(asigsel.length () > 0) {

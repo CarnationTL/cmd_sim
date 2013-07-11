@@ -1,6 +1,13 @@
 
 #ignore thumbnails created by windows
 Thumbs.db
+#clang compelte
+*.o
+moc_*.cpp
+ui_*.h
+cmd_sim.pro
+qrc_qres.cpp
+CMDSim
 #Ignore files build by Visual Studio
 *.ipch
 *.obj

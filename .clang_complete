@@ -1,0 +1,14 @@
+-I/usr/share/qt4/mkspecs/linux-g++
+-I.
+-I/usr/include/qt4/QtCore
+-I/usr/include/qt4/QtGui
+-I/usr/include/qt4
+-Iqwtinc
+-I/usr/local/qwt-6.1.0-rc3/include
+-D_REENTRANT
+-DQT_NO_DEBUG
+-DQT_GUI_LIB
+-DQT_CORE_LIB
+-DQT_SHARED
+-Wall
+-W
