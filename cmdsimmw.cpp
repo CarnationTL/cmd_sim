@@ -409,9 +409,11 @@ void CMDSimMW::on_cbx_sigts_currentIndexChanged(const QString &arg1) {
 
     if(arg1.compare(_sLVDT, Qt::CaseInsensitive) == 0) {
         changeChListModelBind (E_LV_CH, E_CHK);
+        resetModelChkStatus (dv_lv_model);
         _plistvsig->setModel(dv_lv_model);
     } else if(arg1.compare (_sAO, Qt::CaseInsensitive) == 0) {
         changeChListModelBind (E_AO_CH, E_CHK);
+        resetModelChkStatus (dv_ao_model);
         _plistvsig->setModel(dv_ao_model);
     }
 }
@@ -472,11 +474,11 @@ void CMDSimMW::on_pushButton_4_clicked() {
 */
 void CMDSimMW::on_btn_sigSel_ok_clicked() {
     //TODO get the sel result and put them input tbl !!!!
-    QStringList sigsel, chsel;
+    QStringList lsigsel, lchsel, asigsel, achsel;
     if(_plistvsig->model () == dv_lv_model || _plistvch->model () == lch_model) {
         for(int i = 0; i < dv_lv_model->rowCount (); i++) {
             if(dv_lv_model->item (i, 0)->checkState () == Qt::Checked) {
-                sigsel << dv_lv_model->item (i, 0)->text ();
+                lsigsel << dv_lv_model->item (i, 0)->text ();
             }
         }
         //test the widget
@@ -486,12 +488,12 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
             for(int i = 0; i < lch_model->rowCount (); i++) {
                 pitem = dynamic_cast <QCheckBox*> (_plistvch->indexWidget (lch_model->index (i, 0)));
                 if(pitem->checkState () == Qt::Checked) {
-                    chsel << pitem->text ();
+                    lchsel << pitem->text ();
                 }
             }
 
             //TODO to be test for
-#if 1
+#if 0
             //TODO del rows
             while(rechkItemSel (E_CHK, NULL, lch_model)) {
                 QCheckBox *_pchk = NULL;
@@ -511,7 +513,7 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
             for(int i = 0; i < lch_model->rowCount (); i++) {
                 pitem = dynamic_cast <QRadioButton*> (_plistvch->indexWidget (lch_model->index (i, 0)));
                 if(pitem->isChecked () == true) {
-                    chsel << pitem->text ();
+                    lchsel << pitem->text ();
                 }
             }
         }
@@ -519,7 +521,7 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
     } else if (_plistvsig->model () == dv_ao_model || _plistvch->model () == ach_model){
         for(int i = 0; i < dv_ao_model->rowCount (); i++) {
             if(dv_ao_model->item (i, 0)->checkState () == Qt::Checked) {
-                sigsel << dv_ao_model->item (i, 0)->text ();
+                asigsel << dv_ao_model->item (i, 0)->text ();
             }
         }
         QString cls = _plistvch->indexWidget (ach_model->index (1, 0))->metaObject ()->className ();
@@ -528,7 +530,7 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
             for(int i = 0; i < ach_model->rowCount (); i++) {
                 pitem = dynamic_cast <QCheckBox*> (_plistvch->indexWidget (ach_model->index (i, 0)));
                 if(pitem->checkState () == Qt::Checked) {
-                    chsel << pitem->text ();
+                    achsel << pitem->text ();
                 }
             }
         } else if(cls.compare (QString("QRadioButton")) == 0) {
@@ -536,7 +538,7 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
             for(int i = 0; i < ach_model->rowCount (); i++) {
                 pitem = dynamic_cast <QRadioButton*> (_plistvch->indexWidget (ach_model->index (i, 0)));
                 if(pitem->isChecked () == true) {
-                    chsel << pitem->text ();
+                    achsel << pitem->text ();
                 }
             }
         }
@@ -545,6 +547,9 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
         return;
     }
 
+#if defined(T_CODE)
+
+#if 0
     if(sigsel.length () > 0 && chsel.length () > 0) {
         qDebug () << "sig" <<sigsel;
         qDebug () << "chsle" <<chsel;
@@ -552,15 +557,41 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
         qDebug () << sigsel;
         qDebug () << chsel << "no ch";
     } else if(sigsel.length () <= 0 && chsel.length () > 0) {
-       qDebug () << chsel;
-       qDebug () << "no sigsel";
+        qDebug () << chsel;
+        qDebug () << "no sigsel";
     } else if(sigsel.length () <= 0 && chsel.length () <= 0) {
         qDebug () << "none" ;
     }
+#endif
 
+   if(lsigsel.length () > 0) {
+       qDebug () <<"LVDT";
+       qDebug () << "lsig" << lsigsel << "lch" << lchsel;
+   }
+
+   if(asigsel.length () > 0) {
+       qDebug () << "AO";
+       qDebug () << "asig" << asigsel << "ach" << achsel;
+   }
+
+
+#endif
+
+#if 0
+    for(int i = 0; i < sigsel.length (); i++) {
+
+    }
+
+    for(int j = 0; j < chsel.length (); j++) {
+
+    }
+#endif
+
+
+#if 0
     del_ch_list->append (chsel);
     del_sig_list->append (sigsel);
-
+#endif
 
 #if 0
     int lpos = del_ch_list->length () - 1;
@@ -983,5 +1014,4 @@ void CMDSimMW::on_btnViewOsc_clicked() {
     window->start();
 #endif
 }
-
 

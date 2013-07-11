@@ -472,3 +472,15 @@ int CMDSimMW::rmModelCheck(QStandardItemModel *p) {
     }
 }
 
+bool CMDSimMW::resetModelChkStatus(QStandardItemModel *p) {
+    if(p != NULL) {
+        QStandardItem *item = NULL;
+        for(int i = 0; i < p->rowCount (); i++) {
+            item = p->item (i, 0);
+            item->setCheckState (Qt::Unchecked);
+        }
+        return true;
+    }
+    return false;
+}
+

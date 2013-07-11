@@ -171,6 +171,7 @@ private:
 
     bool changeChListModelBind(int type, int ctl_type);
     int rmModelCheck(QStandardItemModel *p);
+    bool resetModelChkStatus(QStandardItemModel *p);
     QwtOSCMain *window;
 };
 
