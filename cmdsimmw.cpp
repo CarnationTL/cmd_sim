@@ -467,8 +467,6 @@ void CMDSimMW::on_pushButton_4_clicked() {
     _ppl->appendPlainText("new line\n");
 }
 
-
-
 /**
   select the sig ch and type
 */
@@ -547,6 +545,7 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
         return;
     }
 
+
 #if defined(T_CODE)
 
 #if 0
@@ -564,28 +563,78 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
     }
 #endif
 
-   if(lsigsel.length () > 0 && lchsel.length () > 0) {
-       for (int i = 0; i < lchsel.length(); i++) {
-           if(lchsel.length()  > 0)  {
+    //LVDT sig
+    if(lsigsel.length () > 0 && lchsel.length () > 0) {
 
-           }
+        findrmModelRow(dv_lv_model, lsigsel);
+        findrmModelRow(lch_model, lchsel);
+#if 0
+        QList <QStandardItem*> list;
+        for(int i = 0; i < lsigsel.length(); i++) {
+            list = dv_lv_model->findItems(lsigsel.at(i));
+            if(list.length() == 1) {
+                int row_ = list.at(0)->row ();
+                dv_lv_model->removeRow (row_);
+            } else if(list.length() > 1) {
+                for(int c = 0; c < list.length(); i++) {
+                    dv_lv_model->removeRow(list.at(c)->row());
+                }
+            } else {
+                //not correct
+            }
+        }
+#endif
+         //warning: 两种listmodel构建方法不一样，删除时要注意
+#if 0
+        QList <QStandardItem*> lstch;
+        for(int i = 0; i < lchsel.length(); i++) {
+            lstch = lch_model->findItems(lchsel.at(i));
+            if(lstch.length() == 1) {
+                int row_ = lstch.at(0)->row();
+                lch_model->removeRow(0);
+            } else if(lstch.length() > 1) {
+                for(int c = 0; c < lstch.length(); c++) {
+                    lch_model->removeRow(lstch.at(c)->row());
+                }
+            } else {
+                //not corrent
+            }
+        }
+#endif
+    }
 
-       }
-       qDebug () <<"LVDT";
-       qDebug () << "lsig" << lsigsel << "lch" << lchsel;
 
-   }
 
-   if(asigsel.length () > 0) {
-       qDebug () << "AO";
-       qDebug () << "asig" << asigsel << "ach" << achsel;
-   }
+    //AO sig
+    //
+    if(asigsel.length () > 0 && achsel.length() > 0) {
+
+        findrmModelRow(dv_ao_model, asigsel);
+        findrmModelRow(ach_model, achsel);
+    }
+#if 0
+        //qDebug () << "AO";
+        //qDebug () << "asig" << asigsel << "ach" << achsel;
+        QList <QStandardItem *> list;
+        for(int i = 0; i < asigsel.length(); i++) {
+            list = dv_ao_model->findItems(asigsel.at(i));
+            if(list.length() == 1) {
+
+            } else if(list.length() > 1) {
+
+            } else {
+                //not corrent
+            }
+        }
+    }
+
+#endif
 
 
 #endif
 
 #if 0
-    for(int i = 0; i < sigsel.length (); i++) {
+for(int i = 0; i < sigsel.length (); i++) {
 
     }
 
@@ -611,8 +660,6 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
     }
 #endif
 }
-
-
 void CMDSimMW::on_tmpdel_clicked() {
     //TODO test del from table and restore to lchlist
     for(int i = 0; i < del_sig_list->length (); i++) {
@@ -975,6 +1022,7 @@ void CMDSimMW::on_tbl_selres_customContextMenuRequested(const QPoint &pos) {
     left += _ptbl->columnWidth (1);
     left += _ptbl->columnWidth (2);
 #endif
+
     QRect rect = _ptbl->contentsRect ();
     if(pos.x () >= rect.left () && pos.x () <= rect.right ()) {
         if(pos.y () >= rect.top () && pos.y () <= rect.bottom ()) {

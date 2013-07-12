@@ -1,9 +1,9 @@
 #!/bin/bash - 
 #===============================================================================
 #
-#          FILE: clang_gen.sh
+#          FILE: clang_clean.sh
 # 
-#         USAGE: ./clang_gen.sh 
+#         USAGE: ./clang_clean.sh 
 # 
 #   DESCRIPTION: 
 # 
@@ -13,10 +13,8 @@
 #         NOTES: ---
 #        AUTHOR: tongl (), 
 #  ORGANIZATION: 
-#       CREATED: 2013年07月11日 16时35分41秒 CST
+#       CREATED: 2013年07月11日 17时18分51秒 CST
 #      REVISION:  ---
 #===============================================================================
 
-/usr/local/Trolltech/Qt-4.8.4/bin/qmake -o Makefile CMDSim.pro;
-make CC='~/.vim/bundle/clang_complete/bin/cc_args.py gcc' CXX='~/.vim/bundle/clang_complete/bin/cc_args.py g++' -B;
-
+make clean

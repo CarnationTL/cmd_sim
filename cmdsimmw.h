@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <QList>
 #include <QStringList>
 #include <QListView>
 #include <QStandardItemModel>
@@ -17,13 +18,10 @@
 #include <QPlainTextEdit>
 #include <QDialogButtonBox>
 #include <QSignalMapper>
-#include <QList>
 #include <QRadioButton>
 #include <QCheckBox>
 #include <oscilloscope/qwtoscmain.h>
 #include <oscilloscope/samplingthread.h>
-#include <QList>
-#include <QStringList>
 
 namespace Ui {
 class CMDSimMW;
@@ -172,6 +170,7 @@ private:
     bool changeChListModelBind(int type, int ctl_type);
     int rmModelCheck(QStandardItemModel *p);
     bool resetModelChkStatus(QStandardItemModel *p);
+    bool findrmModelRow(QStandardItemModel *model, QStringList list);
     QwtOSCMain *window;
 };
 

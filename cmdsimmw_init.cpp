@@ -484,3 +484,42 @@ bool CMDSimMW::resetModelChkStatus(QStandardItemModel *p) {
     return false;
 }
 
+
+
+bool CMDSimMW::findrmModelRow(QStandardItemModel *model, QStringList list) {
+    if(model == NULL || model->rowCount() <= 0)
+        return false;
+    int len = list.length();
+    QList <QStandardItem*> itemlist;
+    for(int i = 0; i < len; i++) {
+        itemlist = model->findItems(list.at(i));
+        if(itemlist.length() == 1) {
+            model->removeRow(itemlist.at(0)->row());
+            return true;
+        } else if(itemlist.length() > 1) {
+            for(int j = 0; j < itemlist.length(); j++) {
+                model->removeRow(itemlist.at(j)->row());
+            }
+            return true;
+        } else
+            return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
