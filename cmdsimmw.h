@@ -20,8 +20,10 @@
 #include <QSignalMapper>
 #include <QRadioButton>
 #include <QCheckBox>
+#include <QMap>
 #include <oscilloscope/qwtoscmain.h>
 #include <oscilloscope/samplingthread.h>
+
 
 namespace Ui {
 class CMDSimMW;
@@ -116,31 +118,36 @@ private:
     QStandardItemModel *empty_model;
 
 
-    QList <QStringList> *del_ch_list;
-    QList <QStringList> *del_sig_list;
+    QStringList *del_ch_list;
+    QStringList *del_sig_list;
+    QStringList *org_lch_list;
+    QStringList *org_ach_list;
 
-    QString cvcp936(const char str[]);
-    void initInsView();
-    void initSeachLE();
-    void initCHModel();
-    QDialog *_pdlg;
-    QDialog *_psetwpdlg;
-    QGridLayout *_pMainLay;                     
+    QDialog     *_pdlg;
+
+    QDialog     *_psetwpdlg;
+    QGridLayout *_pMainLay;
     QGridLayout *_pLeftLay;
-    QLineEdit *_pSeachEdit;                     /* sreach edit for signal name*/
-    QLineEdit *_pNewSigEdit;                    /* new  sig edit*/
-    QCompleter *_pCompleter;                    /* auto complete */
-    QComboBox *_pcbxSigSel;                     /* select sig */
-    //QComboBox *_pcbxCh;                         /* select channel */
-    QTableView *_ptbl;                          /* show set result */
+    QLineEdit   *_pSeachEdit;              /* sreach edit for signal name*/
+    QLineEdit   *_pNewSigEdit;             /* new  sig edit*/
+    QCompleter  *_pCompleter;              /* auto complete */
+    QComboBox   *_pcbxSigSel;              /* select sig */
+    //QComboBox *_pcbxCh;                   /* select channel */
+    QTableView *_ptbl;                     /* show set result */
 
     QPlainTextEdit *_ppl;                       /* show status */
     QListView *_plistvsig;                      /* the list view for sigsel */
     QListView *_plistvch;                       /* the list view for chs */
     QDialogButtonBox *_pbtnBoxSigSel;           /* button box for sig accept and 
                                                    reject(delete) */
-
     QSignalMapper *_pSigMaper;
+
+    QString cvcp936(const char str[]);
+
+    void initInsView();
+    void initSeachLE();
+    void initCHModel();
+
     void initlistvChModel();
 
     void initcbxsigts();
@@ -151,8 +158,8 @@ private:
     void addtblRow();
     void deltblRow();
 
-    int warningTextInfo(QPlainTextEdit &p);
-    int showWarning();
+    int  warningTextInfo(QPlainTextEdit &p);
+    int  showWarning();
     void initoptLog();
     void initTblConTextMenu();
 
@@ -160,17 +167,22 @@ private:
     void addtionSigSlotsMVC();
     void appendtxtStatus(QString &str);         /* append status plainEdit ctl */
     void initWidgetsPointer();                  /* init widget pointer */
-    int addItemToModel(QStandardItemModel* model, QString &newItem);  
-    int delItemFromModel(QStandardItemModel* model);
-    int rechkItemSel(int type, QWidget *p, QStandardItemModel* model);
-    int checkListSigSel(int type);                      /* multi check */
-    int changeRCstyle(int type);
-    int chkItemSelMul(QStandardItemModel* model);
+    int  addItemToModel(QStandardItemModel* model, QString &newItem);
+    int  delItemFromModel(QStandardItemModel* model);
+    int  rechkItemSel(int type, QWidget *p, QStandardItemModel* model);
+    int  checkListSigSel(int type);                      /* multi check */
+    int  changeRCstyle(int type);
+    int  chkItemSelMul(QStandardItemModel* model);
 
     bool changeChListModelBind(int type, int ctl_type);
-    int rmModelCheck(QStandardItemModel *p);
+    int  rmModelCheck(QStandardItemModel *p);
     bool resetModelChkStatus(QStandardItemModel *p);
     bool findrmModelRow(QStandardItemModel *model, QStringList list);
+    bool findrmRowWithWidget(QStandardItemModel *model, QStringList list);
+    bool pushInStrList(QStringList *list, QString elem);
+    bool removeStrList(QStringList *list, QString elem);
+    //QStandardItem *findMapWidget(QMap <QString, QStandardItem*> *map, QString key);
+    //QString findMapkey(QMap <QString, QStandardItem*> *map, QStandardItem* widget);
     QwtOSCMain *window;
 };
 

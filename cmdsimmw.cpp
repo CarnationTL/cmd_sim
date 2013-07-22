@@ -50,11 +50,10 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMDSimMW) {
 
-    _pSigMaper = new QSignalMapper();           /* init sigmaper for all */
+    SIG_LVDT    = new QString(cvcp936("LVDT"));
+    SIG_AO      = new QString(cvcp936("AO"));
+    _pSigMaper  = new QSignalMapper();           /* init sigmaper for all */
     connect(this, SIGNAL(msig_delIndex(QModelIndex&)), this, SLOT(m_delItem(QModelIndex&)));
-
-    SIG_LVDT = new QString(cvcp936("LVDT"));
-    SIG_AO = new QString(cvcp936("AO"));
 
     empty_model = new QStandardItemModel();
     ui->setupUi(this);
@@ -121,9 +120,10 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     }
 #endif
 
-//    LVDTCh *ptrLch = new LVDTCh(1, "lvdt_ch1");
+    //LVDTCh *ptrLch = new LVDTCh(1, "lvdt_ch1");
     //initAOList();
     //initLchList();
+    
     initInsView();
 
     initSeachLE();
@@ -244,21 +244,9 @@ void CMDSimMW::initlistvChModel () {
         QStandardItem *p = new QStandardItem("");
         ach_model->appendRow (p);
     }
-#endif
-}
 
-#if 0
-void CMDSimMW::initLchList() {
-    lch_model = new QStandardItemModel();
-    for(int i = 0; i < MAX_LVDT_CH; i++) {
-        QStandardItem *item = new QStandardItem(cvcp936("LVDT") + QString::number(i, 10));
-        item->setCheckable (true);
-        item->setCheckState (Qt::Unchecked);
-        lch_model->appendRow(item);
-    }
-    rlch_model = new QStandardItemModel();
-}
 #endif
+}
 
 
 /* not complete yet for show warning in plainEdit  */
@@ -469,28 +457,34 @@ void CMDSimMW::on_pushButton_4_clicked() {
 
 /**
   select the sig ch and type
+  信号确认按钮
 */
 void CMDSimMW::on_btn_sigSel_ok_clicked() {
     //TODO get the sel result and put them input tbl !!!!
     QStringList lsigsel, lchsel, asigsel, achsel;
-    if(_plistvsig->model () == dv_lv_model || _plistvch->model () == lch_model) {
+    if(_plistvsig->model () == dv_lv_model ||
+        _plistvch->model () == lch_model) {
         for(int i = 0; i < dv_lv_model->rowCount (); i++) {
             if(dv_lv_model->item (i, 0)->checkState () == Qt::Checked) {
                 lsigsel << dv_lv_model->item (i, 0)->text ();
             }
         }
+
         //test the widget
-        QString cls = _plistvch->indexWidget (lch_model->index (1, 0))->metaObject ()->className ();
+        QString cls = _plistvch->indexWidget (lch_model->index (0, 0))->metaObject ()->className ();
         if(cls.compare (QString("QCheckBox")) == 0) {
             QCheckBox *pitem = NULL;
             for(int i = 0; i < lch_model->rowCount (); i++) {
                 pitem = dynamic_cast <QCheckBox*> (_plistvch->indexWidget (lch_model->index (i, 0)));
+                if(pitem == NULL)
+                    continue;
                 if(pitem->checkState () == Qt::Checked) {
                     lchsel << pitem->text ();
                 }
             }
 
             //TODO to be test for
+            
 #if 0
             //TODO del rows
             while(rechkItemSel (E_CHK, NULL, lch_model)) {
@@ -510,6 +504,8 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
             QRadioButton *pitem = NULL;
             for(int i = 0; i < lch_model->rowCount (); i++) {
                 pitem = dynamic_cast <QRadioButton*> (_plistvch->indexWidget (lch_model->index (i, 0)));
+                if(pitem == NULL)
+                    continue;
                 if(pitem->isChecked () == true) {
                     lchsel << pitem->text ();
                 }
@@ -522,7 +518,7 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
                 asigsel << dv_ao_model->item (i, 0)->text ();
             }
         }
-        QString cls = _plistvch->indexWidget (ach_model->index (1, 0))->metaObject ()->className ();
+        QString cls = _plistvch->indexWidget (ach_model->index (0, 0))->metaObject ()->className ();
         if(cls.compare (QString("QCheckBox")) == 0) {
             QCheckBox *pitem = NULL;
             for(int i = 0; i < ach_model->rowCount (); i++) {
@@ -545,145 +541,47 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
         return;
     }
 
-
-#if defined(T_CODE)
-
 #if 0
-    if(sigsel.length () > 0 && chsel.length () > 0) {
-        qDebug () << "sig" <<sigsel;
-        qDebug () << "chsle" <<chsel;
-    } else if(sigsel.length () > 0 && chsel.length () <= 0) {
-        qDebug () << sigsel;
-        qDebug () << chsel << "no ch";
-    } else if(sigsel.length () <= 0 && chsel.length () > 0) {
-        qDebug () << chsel;
-        qDebug () << "no sigsel";
-    } else if(sigsel.length () <= 0 && chsel.length () <= 0) {
-        qDebug () << "none" ;
-    }
+    qDebug () << lchsel <<"lch sel";
+    qDebug () << achsel <<"ach sel";
+    qDebug () << lsigsel <<"lsig sel";
+    qDebug () << asigsel << "asig sel";
 #endif
 
     //LVDT sig
     if(lsigsel.length () > 0 && lchsel.length () > 0) {
 
         findrmModelRow(dv_lv_model, lsigsel);
-        findrmModelRow(lch_model, lchsel);
-#if 0
-        QList <QStandardItem*> list;
-        for(int i = 0; i < lsigsel.length(); i++) {
-            list = dv_lv_model->findItems(lsigsel.at(i));
-            if(list.length() == 1) {
-                int row_ = list.at(0)->row ();
-                dv_lv_model->removeRow (row_);
-            } else if(list.length() > 1) {
-                for(int c = 0; c < list.length(); i++) {
-                    dv_lv_model->removeRow(list.at(c)->row());
-                }
-            } else {
-                //not correct
-            }
-        }
-#endif
-         //warning: 两种listmodel构建方法不一样，删除时要注意
-#if 0
-        QList <QStandardItem*> lstch;
-        for(int i = 0; i < lchsel.length(); i++) {
-            lstch = lch_model->findItems(lchsel.at(i));
-            if(lstch.length() == 1) {
-                int row_ = lstch.at(0)->row();
-                lch_model->removeRow(0);
-            } else if(lstch.length() > 1) {
-                for(int c = 0; c < lstch.length(); c++) {
-                    lch_model->removeRow(lstch.at(c)->row());
-                }
-            } else {
-                //not corrent
-            }
-        }
-#endif
+
+        //findrmModelRow(lch_model, lchsel);
+        findrmRowWithWidget (lch_model, lchsel);
     }
-
-
-
     //AO sig
-    //
     if(asigsel.length () > 0 && achsel.length() > 0) {
 
         findrmModelRow(dv_ao_model, asigsel);
-        findrmModelRow(ach_model, achsel);
+        //findrmModelRow(ach_model, achsel);
+        findrmRowWithWidget (ach_model, achsel);
     }
-#if 0
-        //qDebug () << "AO";
-        //qDebug () << "asig" << asigsel << "ach" << achsel;
-        QList <QStandardItem *> list;
-        for(int i = 0; i < asigsel.length(); i++) {
-            list = dv_ao_model->findItems(asigsel.at(i));
-            if(list.length() == 1) {
-
-            } else if(list.length() > 1) {
-
-            } else {
-                //not corrent
-            }
-        }
-    }
-
-#endif
-
-
-#endif
-
-#if 0
-for(int i = 0; i < sigsel.length (); i++) {
-
-    }
-
-    for(int j = 0; j < chsel.length (); j++) {
-
-    }
-#endif
-
-
-#if 0
-    del_ch_list->append (chsel);
-    del_sig_list->append (sigsel);
-#endif
-
-#if 0
-    int lpos = del_ch_list->length () - 1;
-    if(lpos != del_sig_list->length () - 1) {
-        return;
-    }
-
-    for(int i = 0; i < del_ch_list->at (lpos).length (); i++) {
-
-    }
-#endif
 }
+
+
 void CMDSimMW::on_tmpdel_clicked() {
-    //TODO test del from table and restore to lchlist
-    for(int i = 0; i < del_sig_list->length (); i++) {
-        const QStringList &ref = del_sig_list->at (i);
-        for(int j = 0; j < ref.length (); j++) {
-            qDebug () <<"del"<< ref.at (j);
-        }
-    }
-    for(int i = 0; i < del_ch_list->length (); i++) {
-        const QStringList &ref = del_ch_list->at (i);
-        for(int j = 0; j < ref.length (); j++) {
-            qDebug () << "del" <<ref.at (j);
-        }
-    }
-
+    return;
 }
-
 
 /* listw_sig_sel checkState  */
 void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
      QStandardItem *pf = NULL;
     if(_plistvsig->model() == dv_lv_model) {
         pf = dv_lv_model->itemFromIndex(index);
-        QModelIndex pidx = lch_model->index (1, 0);
+        QModelIndex pidx;
+        if(lch_model->rowCount () > 0) {
+            pidx = lch_model->index (0, 0);
+        }else {
+            QMessageBox::warning (this, "information", "ch empty!", QMessageBox::Yes);
+            return;
+        }
         QString precls =_plistvch->indexWidget (pidx)->metaObject ()->className ();
         if(chkItemSelMul (dv_lv_model) >= MUL_SEL) {
             if(precls.compare (QString("QCheckBox")) == 0) {
@@ -696,7 +594,13 @@ void CMDSimMW::on_listw_sig_sel_clicked(const QModelIndex &index) {
         }
     } else if(_plistvsig->model() == dv_ao_model) {
         pf = dv_ao_model->itemFromIndex(index);
-        QModelIndex pidx = ach_model->index (1, 0);
+        QModelIndex pidx ;
+        if(ach_model->rowCount () > 0) {
+            pidx = ach_model->index (0, 0);
+        } else {
+            QMessageBox::warning (this, "information", "ch empty!", QMessageBox::Yes);
+            return;
+        }
         QString precls =_plistvch->indexWidget (pidx)->metaObject ()->className ();
         if(chkItemSelMul (dv_ao_model) >= MUL_SEL) {
             if(precls.compare (QString("QCheckBox")) == 0) {
@@ -980,6 +884,7 @@ int CMDSimMW::chkItemSelMul(QStandardItemModel *model) {
  * Sigmaper call back function
  */
 void CMDSimMW::mslot_CHradioClick(QString str) {
+    str = "";
     //TODO the radio button call back funtion
     return;
 }
@@ -1008,6 +913,8 @@ void CMDSimMW::mslot_tblContextMenu(QAction *action) {
 
 void CMDSimMW::on_cbx_sigts_activated(int index) {
 
+    index = 0;
+    index += 0;
 }
 
 
@@ -1038,6 +945,10 @@ void CMDSimMW::on_tbl_selres_customContextMenuRequested(const QPoint &pos) {
     }
 
 }
+
+
+
+
 
 /*
  *show wave
@@ -1070,3 +981,59 @@ void CMDSimMW::on_btnViewOsc_clicked() {
 #endif
 }
 
+
+
+
+
+/* pushInStrList for stringlist*/
+bool CMDSimMW::pushInStrList(QStringList *list, QString elem) {
+    if(list == NULL)
+        return false;
+    if(list->length() >= 0) {
+        list->append(elem);
+        //list->sort();
+        return true;
+    }
+    return false;
+}
+
+/* removeStrList for stringlist */
+bool CMDSimMW::removeStrList(QStringList *list, QString elem) {
+    if(list == NULL)
+        return false;
+    if(list->length() > 0) {
+        for(;;) {
+            if(list->removeOne(elem) == false) {
+                break;
+            }
+        }
+        //list->sort();
+        return true;
+    }
+    return false;
+}
+
+
+
+//QStandardItem *CMDSimMW::findMapWidget(QMap<QString, QStandardItem *> *map,
+//                                        QString key) {
+//    if(map != NULL) {
+//        QList <QStandardItem *> list = map->values(key);
+//        if(list.length() == 1) {
+//            return list.at(0);
+//        }
+//    }
+//    return NULL;
+//}
+
+
+//QString CMDSimMW::findMapkey(QMap<QString, QStandardItem *> *map,
+//                                QStandardItem *widget) {
+//    if(map == NULL) {
+//        QList <QString> list = map->keys(widget);
+//        if(list.length() == 1) {
+//            return list.at(0);
+//        }
+//    }
+//    return QString("");
+//}

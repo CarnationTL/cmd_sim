@@ -1,6 +1,6 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include <qglobal.h>
+#include <QtGlobal>
 #include <QMessageBox>
 #include "cmdsimmw.h"
 #include "ui_cmdsimmw.h"
@@ -77,9 +77,11 @@ void CMDSimMW::initSeachLE() {
 */
 
 void CMDSimMW::initCHModel() {
+
     QString _tmpStr;
     QString _sLVDT(cvcp936("LVDT"));
     QString _sAO(cvcp936("AO"));
+
     //_pcbxCh = ui->cbx_ch;
     if(_pcbxSigSel != NULL) {
         _tmpStr = _pcbxSigSel->currentText();
@@ -88,9 +90,14 @@ void CMDSimMW::initCHModel() {
             if(lch_model != NULL) {
                 _plistvsig->setModel(dv_lv_model);
                 _plistvch->setModel (lch_model);
+                if(org_lch_list->count() != MAX_LVDT_CH) {
+                    return;
+                }
+
+
                 for(int i = 0; i < lch_model->rowCount (); i++) {
                     _plistvch->setIndexWidget (lch_model->index (i, 0),
-                                new QCheckBox(cvcp936 ("LVDT") + QString::number (i)));
+                                new QCheckBox(org_lch_list->at(i)));
                 }
 
             }
@@ -99,9 +106,12 @@ void CMDSimMW::initCHModel() {
             if(ach_model != NULL) {
                 _plistvsig->setModel(dv_ao_model);
                 _plistvch->setModel (ach_model);
+                if(org_ach_list->count() != MAX_AO_CH) {
+                    return;
+                }
                 for(int i = 0; i < ach_model->rowCount (); i++) {
                     _plistvch->setIndexWidget (ach_model->index (i, 0),
-                                new QCheckBox(cvcp936 ("AO") + QString::number (i)));
+                                new QCheckBox(org_ach_list->at(i)));
                 }
             }
         }
@@ -412,8 +422,40 @@ void CMDSimMW::initAOsigNameModel(int cnt) {
 
 /* use to save del things */
 void CMDSimMW::initdelsaveModel() {
-    del_ch_list = new QList<QStringList>();
-    del_sig_list = new QList<QStringList>();
+    del_ch_list = new QStringList();
+    del_sig_list = new QStringList();
+
+    org_ach_list = new QStringList();
+    org_lch_list = new QStringList();
+
+
+    //wlmap = new QMap<QString, QStandardItem*>();
+    //wamap = new QMap<QString, QStandardItem*>();
+
+    //init org_lch_list org_ach_list
+    for(int i = 0; i < MAX_LVDT_CH; i++) {
+        QString tmp(cvcp936 ("LVDT") + QString::number (i, 10));
+        pushInStrList(org_lch_list, tmp);
+    }
+
+    for(int i = 0; i < MAX_AO_CH; i++) {
+        QString tmp(cvcp936 ("AO") + QString::number (i, 10));
+        pushInStrList(org_ach_list, tmp);
+    }
+
+    ////init map
+    //for(int i = 0; i < org_lch_list->length(); i++) {
+    //    wlmap->insert(org_lch_list->at(i), lch_model->item(i));
+    //}
+   
+    ////init map
+    //for(int i = 0; i < org_ach_list->length(); i++) {
+    //    wamap->insert(org_ach_list->at(i), ach_model->item(i));
+    //}
+
+    //qDebug() << wlmap->value(QString("LVDT0"));
+    //qDebug()<< *wamap;
+    //qDebug() << *wlmap;
 }
 
 
@@ -430,41 +472,55 @@ bool CMDSimMW::changeChListModelBind(int type, int ctl_type) {
     if(_plistvch == NULL) {
         return false;
     }
+
     if(type == E_LV_CH) {
-        int len = lch_model->rowCount ();
+        int len = org_lch_list->count();
+        //if(!synQstrList(lch_model, len)) {
+        //    return false;
+        //}
+
         _plistvch->setModel (lch_model);
         if(ctl_type == E_CHK) {
             for (int i = 0; i < len; ++i) {
                 _plistvch->setIndexWidget (lch_model->index (i, 0),
-                        new QCheckBox(cvcp936 ("LVDT") + QString::number (i)));
+                        new QCheckBox(org_lch_list->at (i)));
             }
             return true;
         } else if(ctl_type == E_RADIO) {
             for (int i = 0; i < len; ++i) {
                 _plistvch->setIndexWidget (lch_model->index (i, 0),
-                        new QRadioButton(cvcp936 ("LVDT") + QString::number (i)));
+                        new QRadioButton(org_lch_list->at(i)));
             }
             return true;
         }
     } else if(type == E_AO_CH) {
-        int len = ach_model->rowCount ();
+        int len = org_ach_list->count();
+        //if(!synQstrList(ach_model, len)) {
+        //    return false;
+        //}
         _plistvch->setModel (ach_model);
         if(ctl_type == E_CHK) {
             for (int i = 0; i < len; ++i) {
                 _plistvch->setIndexWidget (ach_model->index (i, 0), 
-                        new QCheckBox(cvcp936("AO") + QString::number(i)));
+                        new QCheckBox(org_ach_list->at(i)));
             }
             return true;
         } else if(ctl_type == E_RADIO) {
             for (int i = 0; i < len; ++i) {
                 _plistvch->setIndexWidget (ach_model->index (i, 0), 
-                        new QRadioButton(cvcp936("AO") + QString::number(i)));
+                        new QRadioButton(org_ach_list->at(i)));
             }
             return true;
         }
     }
     return false;
 }
+
+
+
+
+
+
 /* rm the model check*/
 int CMDSimMW::rmModelCheck(QStandardItemModel *p) {
     if(p != NULL) {
@@ -495,31 +551,83 @@ bool CMDSimMW::findrmModelRow(QStandardItemModel *model, QStringList list) {
         itemlist = model->findItems(list.at(i));
         if(itemlist.length() == 1) {
             model->removeRow(itemlist.at(0)->row());
-            return true;
         } else if(itemlist.length() > 1) {
             for(int j = 0; j < itemlist.length(); j++) {
                 model->removeRow(itemlist.at(j)->row());
             }
-            return true;
         } else
             return false;
     }
+    return true;
 }
 
 
+/*!
+ * find the qlist control items and removeRow just for lch_model and _plistvch 
+ * */
+bool CMDSimMW::findrmRowWithWidget(QStandardItemModel *model, QStringList list) {
 
+    //TODO 根据 org_ach_list org_lch_list 更新
+    int rmcnt = list.length();
+    int orgmodel_cnt = model->rowCount ();
+    int flag_o = -1;
+    int flag_i = -1;
+    for(int i = 0; i < rmcnt; i++) {
+        if(list.at(i).contains(QString("LVDT")) == true) {
+            flag_o = E_LV_CH;
+            break;
+        } else if(list.at(i).contains(QString("AO")) == true) {
+            flag_o = E_AO_CH;
+            break;
+        }
+    }
 
+    if(model == lch_model && _plistvch->model() == lch_model) {
+        flag_i = E_LV_CH;
+    } else if(model == ach_model && _plistvch->model() == ach_model) {
+        flag_i = E_AO_CH;
+    }
 
+    if(flag_o == flag_i) {
+        _plistvch->setModel(model);
+        if(flag_o == E_LV_CH) {
+            for(int i = 0; i < rmcnt; i++) {
+                org_lch_list->removeOne(list.at(i));
+            }
 
+            model->removeRows(0, orgmodel_cnt - 1);
+            for(int i = 0; i < org_lch_list->length(); i++) {
+                model->appendRow(new QStandardItem(""));
+            }
+            //默认插入checkbox
+            if(org_lch_list->length () <= 0)
+                return true;
+            for(int i = 0; i < org_lch_list->length(); i++) {
+                _plistvch->setIndexWidget (_plistvch->model ()->index (i, 0),
+                                           new QCheckBox(org_lch_list->at (i)));
+            }
 
+        } else if(flag_o == E_AO_CH) {
+            for(int i = 0; i < rmcnt; i++) {
+                org_ach_list->removeOne (list.at (i));
+            }
 
-
-
-
-
-
-
-
-
-
-
+            model->removeRows(0, orgmodel_cnt - 1);
+            for(int i = 0; i < org_ach_list->length(); i++) {
+                model->appendRow(new QStandardItem(""));
+            }
+            //默认插入checkbox
+            if(org_ach_list->length () <= 0)
+                return true;
+            for(int i = 0; i < org_ach_list->length(); i++) {
+                _plistvch->setIndexWidget (_plistvch->model ()->index (i, 0),
+                        new QCheckBox(org_ach_list->at (i)));
+            }
+        }
+        //remove all and instert all
+        return true;
+    } else {
+        return false;
+    }
+}
+//TODO:不能删除最后元素, 检查同步代码
