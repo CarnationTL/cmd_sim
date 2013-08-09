@@ -526,6 +526,7 @@ int CMDSimMW::rmModelCheck(QStandardItemModel *p) {
     if(p != NULL) {
 
     }
+    return 0;
 }
 
 bool CMDSimMW::resetModelChkStatus(QStandardItemModel *p) {
@@ -630,4 +631,5 @@ bool CMDSimMW::findrmRowWithWidget(QStandardItemModel *model, QStringList list) 
         return false;
     }
 }
+
 //TODO:不能删除最后元素, 检查同步代码

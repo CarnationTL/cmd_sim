@@ -70,3 +70,4 @@ double Apdapter::doConvert(double pVal) {
     }
     return (double)EXE_FAIL;
 }
+

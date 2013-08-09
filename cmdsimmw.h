@@ -181,8 +181,6 @@ private:
     bool findrmRowWithWidget(QStandardItemModel *model, QStringList list);
     bool pushInStrList(QStringList *list, QString elem);
     bool removeStrList(QStringList *list, QString elem);
-    //QStandardItem *findMapWidget(QMap <QString, QStandardItem*> *map, QString key);
-    //QString findMapkey(QMap <QString, QStandardItem*> *map, QStandardItem* widget);
     QwtOSCMain *window;
 };
 

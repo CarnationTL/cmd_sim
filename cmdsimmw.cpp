@@ -461,15 +461,19 @@ void CMDSimMW::on_pushButton_4_clicked() {
 */
 void CMDSimMW::on_btn_sigSel_ok_clicked() {
     //TODO get the sel result and put them input tbl !!!!
+
     QStringList lsigsel, lchsel, asigsel, achsel;
-    if(_plistvsig->model () == dv_lv_model ||
-        _plistvch->model () == lch_model) {
+    if(_plistvsig->model () == dv_lv_model || _plistvch->model () == lch_model) {
+
+        if(org_lch_list->length () <= 0) {
+            return;
+        }
+
         for(int i = 0; i < dv_lv_model->rowCount (); i++) {
             if(dv_lv_model->item (i, 0)->checkState () == Qt::Checked) {
                 lsigsel << dv_lv_model->item (i, 0)->text ();
             }
         }
-
         //test the widget
         QString cls = _plistvch->indexWidget (lch_model->index (0, 0))->metaObject ()->className ();
         if(cls.compare (QString("QCheckBox")) == 0) {
@@ -513,6 +517,9 @@ void CMDSimMW::on_btn_sigSel_ok_clicked() {
         }
 
     } else if (_plistvsig->model () == dv_ao_model || _plistvch->model () == ach_model){
+        if(org_ach_list->length () <= 0) {
+            return;
+        }
         for(int i = 0; i < dv_ao_model->rowCount (); i++) {
             if(dv_ao_model->item (i, 0)->checkState () == Qt::Checked) {
                 asigsel << dv_ao_model->item (i, 0)->text ();
@@ -946,10 +953,6 @@ void CMDSimMW::on_tbl_selres_customContextMenuRequested(const QPoint &pos) {
 
 }
 
-
-
-
-
 /*
  *show wave
   */
@@ -982,9 +985,6 @@ void CMDSimMW::on_btnViewOsc_clicked() {
 }
 
 
-
-
-
 /* pushInStrList for stringlist*/
 bool CMDSimMW::pushInStrList(QStringList *list, QString elem) {
     if(list == NULL)
@@ -996,6 +996,7 @@ bool CMDSimMW::pushInStrList(QStringList *list, QString elem) {
     }
     return false;
 }
+
 
 /* removeStrList for stringlist */
 bool CMDSimMW::removeStrList(QStringList *list, QString elem) {
@@ -1013,27 +1014,3 @@ bool CMDSimMW::removeStrList(QStringList *list, QString elem) {
     return false;
 }
 
-
-
-//QStandardItem *CMDSimMW::findMapWidget(QMap<QString, QStandardItem *> *map,
-//                                        QString key) {
-//    if(map != NULL) {
-//        QList <QStandardItem *> list = map->values(key);
-//        if(list.length() == 1) {
-//            return list.at(0);
-//        }
-//    }
-//    return NULL;
-//}
-
-
-//QString CMDSimMW::findMapkey(QMap<QString, QStandardItem *> *map,
-//                                QStandardItem *widget) {
-//    if(map == NULL) {
-//        QList <QString> list = map->keys(widget);
-//        if(list.length() == 1) {
-//            return list.at(0);
-//        }
-//    }
-//    return QString("");
-//}
