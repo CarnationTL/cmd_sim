@@ -379,7 +379,14 @@
     <addaction name="actionSetBrd"/>
     <addaction name="menu_sig_reset"/>
    </widget>
+   <widget class="QMenu" name="menu_tools">
+    <property name="title">
+     <string>工具</string>
+    </property>
+    <addaction name="action_tools"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_tools"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -418,6 +425,11 @@
     <font>
      <family>微软雅黑</family>
     </font>
+   </property>
+  </action>
+  <action name="action_tools">
+   <property name="text">
+    <string>波形生成</string>
    </property>
   </action>
  </widget>

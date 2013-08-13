@@ -34,6 +34,7 @@
 #include <QRadioButton>
 #include <QDebug>
 #include <QMenu>
+#include <QProcess>
 
 #include <oscilloscope/samplingthread.h>
 #include <oscilloscope/qwtoscmain.h>
@@ -1014,3 +1015,12 @@ bool CMDSimMW::removeStrList(QStringList *list, QString elem) {
     return false;
 }
 
+
+void CMDSimMW::on_action_tools_triggered() {
+    QProcess *process = new QProcess(this);
+#if defined (Q_OS_LINUX)
+    process->start (QString("/home/mars/cmd_sim/GenWData"));
+#elif defined(Q_OS_WIN)
+    process->start (QString("C:\GenWData.exe"));
+#endif
+}
