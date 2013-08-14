@@ -1015,7 +1015,7 @@ bool CMDSimMW::removeStrList(QStringList *list, QString elem) {
     return false;
 }
 
-
+//工具action
 void CMDSimMW::on_action_tools_triggered() {
     QProcess *process = new QProcess(this);
 #if defined (Q_OS_LINUX)

@@ -187,4 +187,3 @@ private:
 };
 
 #endif // CMDSIMMW_H
-
