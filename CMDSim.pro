@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     oscilloscope/samplingthread.cpp \
     oscilloscope/signaldata.cpp \
     oscilloscope/wheelbox.cpp \
-    oscilloscope/qwtoscmain.cpp
+    oscilloscope/qwtoscmain.cpp \
+    sigdata.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -60,7 +61,8 @@ HEADERS  += cmdsimmw.h \
     oscilloscope/samplingthread.h \
     oscilloscope/signaldata.h \
     oscilloscope/wheelbox.h \
-    oscilloscope/qwtoscmain.h
+    oscilloscope/qwtoscmain.h \
+    sigdata.h
 
 FORMS    += cmdsimmw.ui \
     setbrddlg.ui \

@@ -13,6 +13,9 @@ class LVDTCh : public CommonCh
 public:
     explicit LVDTCh(QObject *parent = 0);
     explicit LVDTCh(int chno, QString chname, QObject *parent = 0);
+    int sigType() const;
+    void setSigType(int sigType);
+
 private:
 #if defined(Q_OS_WIN)
     C75C3DllEncap *ptr;
@@ -21,7 +24,9 @@ private:
 signals:
     
 public slots:
-    
+
+private:
+    int _sigType;
 };
 
 #endif // LVDTCH_H

@@ -8,3 +8,12 @@ LVDTCh::LVDTCh(int chno, QString chname, QObject *parent) :
     CommonCh(chno, chname, parent) {
 
 }
+
+
+int LVDTCh::sigType() const {
+    return _sigType;
+}
+
+void LVDTCh::setSigType(int sigType) {
+    _sigType = sigType;
+}
