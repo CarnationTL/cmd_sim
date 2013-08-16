@@ -17,6 +17,7 @@
 #include <QLayout>
 #include "setbrddlg.h"
 #include "setwpdlg.h"
+#include "dlgsetch.h"
 #include "cmddefs.h"
 #include <QCompleter>
 #include <QList>
@@ -420,6 +421,8 @@ void CMDSimMW::on_btn_setwp_clicked() {
 
 void CMDSimMW::myBtnSlot() {
 	qbshow("test my own slot");
+    if(_psetChdlg != NULL)
+        _psetChdlg->exec ();
 }
 
 
@@ -1024,3 +1027,15 @@ void CMDSimMW::on_action_tools_triggered() {
     process->start (QString("C:\GenWData.exe"));
 #endif
 }
+
+
+void CMDSimMW::on_cbxCtl_clicked() {
+    if (ui->cbxCtl->isChecked () == true) {
+        //外部
+        //禁用不必要的控件,table设置等,只留出反射内存接口
+        //调用反射内存接口
+    } else {
+        //内部
+    }
+}
+

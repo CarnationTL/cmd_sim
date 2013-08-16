@@ -91,6 +91,8 @@ private slots:
 
     void on_action_tools_triggered();
 
+    void on_cbxCtl_clicked();
+
 private:
     enum {LVDTBrds = 4};
     enum {E_DV_LV_MODEL, E_DV_AO_MODEL};
@@ -128,6 +130,7 @@ private:
     QDialog     *_pdlg;
 
     QDialog     *_psetwpdlg;
+    QDialog     *_psetChdlg;
     QGridLayout *_pMainLay;
     QGridLayout *_pLeftLay;
     QLineEdit   *_pSeachEdit;              /* sreach edit for signal name*/

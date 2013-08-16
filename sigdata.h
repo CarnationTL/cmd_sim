@@ -13,6 +13,7 @@
 #include <Qwt/qwt_series_data.h>
 #include <Qwt/qwt_plot.h>
 #define D_PTS 256
+#define PI 3.141592653
 
 class SinusData: public QwtSyntheticPointData
 {
@@ -266,10 +267,6 @@ public:
     ~SigData();
     int sigTypes() const;
     void setSigTypes(int sigTypes);
-
-    SinusData sin() const;
-    void setSin(const SinusData &sin);
-
     void genDataFrame(int type);
 signals:
 

@@ -337,6 +337,19 @@
      <string>tmpDel</string>
     </property>
    </widget>
+   <widget class="QCheckBox" name="cbxCtl">
+    <property name="geometry">
+     <rect>
+      <x>1030</x>
+      <y>10</y>
+      <width>97</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>外部控制</string>
+    </property>
+   </widget>
    <zorder>frame_layout</zorder>
    <zorder>gBox_chsel</zorder>
    <zorder>gBox_sig_sel</zorder>
@@ -350,6 +363,7 @@
    <zorder>qwtPlot</zorder>
    <zorder>btnViewOsc</zorder>
    <zorder>tmpdel</zorder>
+   <zorder>cbxCtl</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

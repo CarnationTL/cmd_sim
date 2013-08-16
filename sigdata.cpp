@@ -9,15 +9,6 @@ SigData::~SigData() {
 
 }
 
-SinusData SigData::sin() const
-{
-    return _sin;
-}
-
-void SigData::setSin(const SinusData &sin)
-{
-    _sin = sin;
-}
 
 void SigData::genDataFrame(int type) {
     switch (type) {
