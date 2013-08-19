@@ -41,7 +41,6 @@
 #include <oscilloscope/samplingthread.h>
 #include <oscilloscope/qwtoscmain.h>
 
-
 typedef int(* funca )(int);
 int chSta = -1;
 #define TBL_COL 4
@@ -422,8 +421,8 @@ void CMDSimMW::on_btn_setwp_clicked() {
 
 void CMDSimMW::myBtnSlot() {
     qbshow("test my own slot");
-    extTools dig;
-    dig.exec ();
+    //extTools dig;
+    //dig.exec ();
 }
 
 
@@ -1019,12 +1018,28 @@ bool CMDSimMW::removeStrList(QStringList *list, QString elem) {
     return false;
 }
 
+void CMDSimMW::mainPlotInit() {
+    if(_mainPlot != NULL && _mainCurve != NULL) {
+        _mainPlot->setAutoDelete (true);
+        _mainPlot->setAxisScale(QwtPlot::xBottom, 0, 10.0);
+        _mainPlot->setAxisScale(QwtPlot::yLeft, -10.0, 10.0);
+        _mainGrid = new QwtPlotGrid();
+        _mainGrid->enableXMin (true);
+        _mainGrid->setMajorPen( Qt::white, 0, Qt::DotLine );
+        _mainGrid->setMinorPen( Qt::gray, 0 , Qt::DotLine );
+        if(_mainPlot != NULL) {
+            _mainGrid->attach (_mainPlot);
+        }
+
+        _mainPlot->setCanvasBackground (QColor(0, 49, 114));
+    }
+}
+
 //工具action
 void CMDSimMW::on_action_tools_triggered() {
     extTools dlg;
     dlg.exec ();
 }
-
 
 void CMDSimMW::on_cbxCtl_clicked() {
     if (ui->cbxCtl->isChecked () == true) {
@@ -1035,4 +1050,3 @@ void CMDSimMW::on_cbxCtl_clicked() {
         //内部
     }
 }
-

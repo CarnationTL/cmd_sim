@@ -1,4 +1,4 @@
-#ifndef CMDSIMMW_H
+﻿#ifndef CMDSIMMW_H
 #define CMDSIMMW_H
 
 #include <QMainWindow>
@@ -23,7 +23,9 @@
 #include <QMap>
 #include <oscilloscope/qwtoscmain.h>
 #include <oscilloscope/samplingthread.h>
-
+#include <Qwt/qwt_plot.h>
+#include <Qwt/qwt_plot_curve.h>
+#include <Qwt/qwt_plot_grid.h>
 
 namespace Ui {
 class CMDSimMW;
@@ -186,6 +188,12 @@ private:
     bool findrmRowWithWidget(QStandardItemModel *model, QStringList list);
     bool pushInStrList(QStringList *list, QString elem);
     bool removeStrList(QStringList *list, QString elem);
+
+    void mainPlotInit();
+    QwtPlot *_mainPlot;
+    QwtPlotCurve *_mainCurve;
+    QwtPlotGrid *_mainGrid;
+
     QwtOSCMain *window;
 };
 
