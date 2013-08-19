@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     sigGen/tridata.cpp \
     sigGen/squdata.cpp \
     sigGen/curvedatan.cpp \
-    sigGen/sawdata.cpp
+    sigGen/sawdata.cpp \
+    exttools.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -74,13 +75,15 @@ HEADERS  += cmdsimmw.h \
     sigGen/tridata.h \
     sigGen/squdata.h \
     sigGen/curvedatan.h \
-    sigGen/sawdata.h
+    sigGen/sawdata.h \
+    exttools.h
 
 FORMS    += cmdsimmw.ui \
     setbrddlg.ui \
     setwpdlg.ui \
     setlbrdparadlg.ui \
-    dlgsetch.ui
+    dlgsetch.ui \
+    exttools.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwt
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwtd

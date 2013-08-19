@@ -135,4 +135,3 @@ QPolygonF CurveDataN::findpoint(QPointF point) {
     }
     return ret;
 }
-

@@ -21,6 +21,3 @@ private:
 };
 
 #endif // CURVEDATAN_H
-
-
-
