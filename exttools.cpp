@@ -160,7 +160,7 @@ void extTools::on_btnGenWData_clicked() {
 
 
 void extTools::on_btnClose_clicked() {
-    QApplication::closeAllWindows ();
+    this->close ();
 }
 
 void extTools::on_rbSin_clicked() {

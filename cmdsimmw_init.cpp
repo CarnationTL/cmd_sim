@@ -19,6 +19,7 @@
 #include "setbrddlg.h"
 #include "dlgsetch.h"
 #include "setwpdlg.h"
+#include "exttools.h"
 #include "cmddefs.h"
 #include <QCompleter>
 #include <QList>
@@ -373,6 +374,7 @@ void CMDSimMW::initWidgetsPointer() {
     _psetwpdlg = new SetWPDlg();
     _psetChdlg = new DlgSetCh();
 }
+
 
 
 /*init lch signal model */

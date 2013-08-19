@@ -18,6 +18,7 @@
 #include "setbrddlg.h"
 #include "setwpdlg.h"
 #include "dlgsetch.h"
+#include "exttools.h"
 #include "cmddefs.h"
 #include <QCompleter>
 #include <QList>
@@ -420,9 +421,9 @@ void CMDSimMW::on_btn_setwp_clicked() {
 }
 
 void CMDSimMW::myBtnSlot() {
-	qbshow("test my own slot");
-    if(_psetChdlg != NULL)
-        _psetChdlg->exec ();
+    qbshow("test my own slot");
+    extTools dig;
+    dig.exec ();
 }
 
 
@@ -1020,12 +1021,8 @@ bool CMDSimMW::removeStrList(QStringList *list, QString elem) {
 
 //工具action
 void CMDSimMW::on_action_tools_triggered() {
-    QProcess *process = new QProcess(this);
-#if defined (Q_OS_LINUX)
-    process->start (QString("/home/mars/cmd_sim/GenWData"));
-#elif defined(Q_OS_WIN)
-    process->start (QString("C:\GenWData.exe"));
-#endif
+    extTools dlg;
+    dlg.exec ();
 }
 
 
