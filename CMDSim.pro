@@ -42,7 +42,8 @@ SOURCES += main.cpp\
     sigGen/sinusdata.cpp \
     sigGen/tridata.cpp \
     sigGen/squdata.cpp \
-    sigGen/curvedatan.cpp
+    sigGen/curvedatan.cpp \
+    sigGen/sawdata.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -72,7 +73,8 @@ HEADERS  += cmdsimmw.h \
     sigGen/sinusdata.h \
     sigGen/tridata.h \
     sigGen/squdata.h \
-    sigGen/curvedatan.h
+    sigGen/curvedatan.h \
+    sigGen/sawdata.h
 
 FORMS    += cmdsimmw.ui \
     setbrddlg.ui \

@@ -5,10 +5,12 @@ class SquData : public QwtSyntheticPointData
 {
 public:
     SquData(double amp, double time, double dutyc);
+    virtual double y( double x ) const;
 private:
     double _amp;
     double _time;
     double _dutyc;
+    double _feq;
 };
 
 #endif // SQUDATA_H

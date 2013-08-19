@@ -1,17 +1,19 @@
-#ifndef SINUSDATA_H
-#define SINUSDATA_H
+#ifndef SAWDATA_H
+#define SAWDATA_H
 
 #include <Qwt/qwt_point_data.h>
 #define PI 3.1415927
-class SinusData : public QwtSyntheticPointData
+class SawData : public QwtSyntheticPointData
 {
 public:
-    SinusData(double amp, double time);
+    SawData(double amp, double time);
     virtual double y( double x ) const;
 private:
     double _amp;
     double _feq;
     double _time;
+
+
 };
 
-#endif // SINUSDATA_H
+#endif // SAWDATA_H
