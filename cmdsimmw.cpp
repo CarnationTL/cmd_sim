@@ -203,6 +203,19 @@ QString CMDSimMW::cvcp936(const char str[]) {
     }
     return QString("");
 }
+
+#elif defined(Q_OS_DARWIN)
+//do nothing
+QString CMDSimMW::cvcp936(const char str[]) {
+    if((sizeof(str) /sizeof(char)) <= 0)
+        return QString("");
+    QTextCodec *codec = QTextCodec::codecForName("utf-8");
+    if(codec != NULL) {
+        QString ret = codec->toUnicode(str);
+        return ret;
+    }
+    return QString("");
+}
 #endif
 
 

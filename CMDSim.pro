@@ -140,3 +140,11 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/75C3Dlib/ -lCPCI75C3Dll
 win32: INCLUDEPATH += $$PWD/75C3Rlib
 win32: DEPENDPATH += $$PWD/75C3Rlib
 
+
+
+
+
+mac: LIBS += -F$$PWD/../../../../usr/local/qwt-6.1.0/lib/ -framework qwt
+
+INCLUDEPATH += $$PWD/../../../../usr/local/qwt-6.1.0
+DEPENDPATH += $$PWD/../../../../usr/local/qwt-6.1.0
