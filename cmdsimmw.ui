@@ -397,6 +397,7 @@
      <string>工具</string>
     </property>
     <addaction name="action_tools"/>
+    <addaction name="action_rfm"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_tools"/>
@@ -443,6 +444,11 @@
   <action name="action_tools">
    <property name="text">
     <string>波形生成</string>
+   </property>
+  </action>
+  <action name="action_rfm">
+   <property name="text">
+    <string>反射内存调试</string>
    </property>
   </action>
  </widget>
