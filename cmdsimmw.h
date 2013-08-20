@@ -95,6 +95,8 @@ private slots:
 
     void on_cbxCtl_clicked();
 
+    void on_action_rfm_triggered();
+
 private:
     enum {LVDTBrds = 4};
     enum {E_DV_LV_MODEL, E_DV_AO_MODEL};

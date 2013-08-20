@@ -20,6 +20,7 @@
 #include "dlgsetch.h"
 #include "exttools.h"
 #include "cmddefs.h"
+#include "dlgrfmdebug.h"
 #include <QCompleter>
 #include <QList>
 #include <QHeaderView>
@@ -1074,4 +1075,10 @@ void CMDSimMW::on_cbxCtl_clicked() {
     } else {
         //内部
     }
+}
+
+
+void CMDSimMW::on_action_rfm_triggered() {
+    DlgRFMDebug rfm;
+    rfm.exec();
 }
