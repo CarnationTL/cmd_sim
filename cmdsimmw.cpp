@@ -153,6 +153,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 
     //_pcbxCh->clear();
     //_pcbxCh->setModel(ach_model);
+    _mainPlot = ui->qwtPlot;
+    mainPlotInit();
 }
 
 CMDSimMW::~CMDSimMW() {
