@@ -1,7 +1,7 @@
 #include "tridata.h"
 
 TriData::TriData(double amp, double time) :
-    QwtSyntheticPointData(100)
+    QwtSyntheticPointData(D_PTS)
 {
     _amp = amp;
     _time = time;

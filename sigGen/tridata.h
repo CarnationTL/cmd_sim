@@ -2,6 +2,10 @@
 #define TRIDATA_H
 
 #include <Qwt/qwt_point_data.h>
+
+
+#define PI 3.1415927
+#define D_PTS 256
 class TriData : public QwtSyntheticPointData
 {
 public:

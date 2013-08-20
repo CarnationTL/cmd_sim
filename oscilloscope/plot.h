@@ -1,6 +1,6 @@
-#include <qwt_plot.h>
-#include <qwt_interval.h>
-#include <qwt_system_clock.h>
+#include <Qwt/qwt_plot.h>
+#include <Qwt/qwt_interval.h>
+#include <Qwt/qwt_system_clock.h>
 
 class QwtPlotCurve;
 class QwtPlotMarker;
@@ -9,7 +9,6 @@ class QwtPlotDirectPainter;
 class Plot: public QwtPlot
 {
     Q_OBJECT
-
 public:
     Plot( QWidget * = NULL );
     virtual ~Plot();

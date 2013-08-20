@@ -56,8 +56,8 @@ extTools::extTools(QWidget *parent) :
     ui->spVoltage->setValue (10.0);
     ui->sbAMP->setMaximum (100.0);
 
-
-
+    gpvp.addButton(ui->rbphy);
+    gpvp.addButton(ui->rbvoltage);
 }
 
 extTools::~extTools()
@@ -893,4 +893,3 @@ void extTools::on_spphysic_valueChanged(double arg1) {
         changePRgn (arg1);
     }
 }
-

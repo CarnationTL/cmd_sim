@@ -1,7 +1,7 @@
 #include "sawdata.h"
 
 SawData::SawData(double amp, double time) :
-    QwtSyntheticPointData(100)
+    QwtSyntheticPointData(D_PTS)
 
 {
     _amp = amp;

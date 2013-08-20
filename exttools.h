@@ -19,15 +19,20 @@
 #include <Qwt/qwt_painter.h>
 #include <Qwt/qwt_plot_grid.h>
 #include <QListWidgetItem>
+#include <QButtonGroup>
 #include "sigGen/curvedatan.h"
 #include "sigGen/sawdata.h"
 #include "sigGen/sinusdata.h"
 #include "sigGen/squdata.h"
 #include "sigGen/tridata.h"
 
-#define PI 3.1415926
-#define D_PTS 256
+#ifdef PI
+#define PI 3.1415927
+#endif
 
+#ifdef D_PTS
+#define D_PTS 256
+#endif
 
 
 namespace Ui {
@@ -140,8 +145,7 @@ private:
     double volfac;
     void changePRgn(double v);
 
-
-
+    QButtonGroup gpvp;
 
 };
 

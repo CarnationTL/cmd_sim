@@ -47,6 +47,14 @@ int chSta = -1;
 #define TBL_ROW 20
 #define MUL_SEL 2
 
+#ifdef D_PTS
+#define D_PTS 256
+#endif
+
+#ifdef PI
+#define PI 3.1415927
+#endif
+
 
 CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),

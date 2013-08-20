@@ -15,6 +15,7 @@ win32: QMAKE_CXXFLAGS += /Gd
 
 CONFIG += qwt
 
+DEFINES += QWT_DLL QT_DLL
 SOURCES += main.cpp\
         cmdsimmw.cpp \
     rfm2gse.cpp \
@@ -91,6 +92,12 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwtd
 INCLUDEPATH += $$PWD/qwtinc
 DEPENDPATH += $$PWD/qwtinc
 
+
+
+
+
+
+
 #add qwt linux
 
 unix:!macx: LIBS += -L$$PWD/../../../usr/local/qwt-6.1.0-rc3/lib/ -lqwt
@@ -142,9 +149,13 @@ win32: DEPENDPATH += $$PWD/75C3Rlib
 
 
 
-
-
 mac: LIBS += -F$$PWD/../../../../usr/local/qwt-6.1.0/lib/ -framework qwt
 
 INCLUDEPATH += $$PWD/../../../../usr/local/qwt-6.1.0
 DEPENDPATH += $$PWD/../../../../usr/local/qwt-6.1.0
+
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Qwt-6.1.0/lib/ -lqwt
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Qwt-6.1.0/lib/ -lqwtd
+#
+#INCLUDEPATH += $$PWD/../../Qwt-6.1.0/include
+#DEPENDPATH += $$PWD/../../Qwt-6.1.0/include
