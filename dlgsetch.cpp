@@ -6,6 +6,8 @@ DlgSetCh::DlgSetCh(QWidget *parent) :
     ui(new Ui::DlgSetCh)
 {
     ui->setupUi(this);
+    //table = ui->tableWidget;
+    initTblchInfo();
 }
 
 DlgSetCh::~DlgSetCh()
@@ -91,4 +93,10 @@ void DlgSetCh::on_btncurDel_clicked()
 void DlgSetCh::on_ckbloop_clicked()
 {
 
+}
+
+void DlgSetCh::initTblchInfo() {
+    if(table != NULL) {
+//        table->VerticalHeader()->
+    }
 }

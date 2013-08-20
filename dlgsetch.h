@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QModelIndex>
+#include <QTableWidget>
 
 namespace Ui {
 class DlgSetCh;
@@ -59,6 +60,8 @@ private slots:
 
 private:
     Ui::DlgSetCh *ui;
+    QTableWidget *table;
+    void initTblchInfo();
 };
 
 #endif // DLGSETCH_H

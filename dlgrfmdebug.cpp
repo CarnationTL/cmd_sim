@@ -6,6 +6,8 @@ DlgRFMDebug::DlgRFMDebug(QWidget *parent) :
     ui(new Ui::DlgRFMDebug)
 {
     ui->setupUi(this);
+    this->setWindowTitle("RFM DEBUG");
+
 }
 
 DlgRFMDebug::~DlgRFMDebug()

@@ -7,17 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>865</width>
-    <height>707</height>
+    <height>785</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">font: 75 9pt &quot;微软雅黑&quot;;</string>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
      <x>470</x>
-     <y>670</y>
+     <y>720</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -33,7 +36,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>20</y>
+     <y>120</y>
      <width>171</width>
      <height>301</height>
     </rect>
@@ -141,7 +144,7 @@
    <property name="geometry">
     <rect>
      <x>370</x>
-     <y>20</y>
+     <y>120</y>
      <width>341</width>
      <height>351</height>
     </rect>
@@ -313,7 +316,7 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>20</y>
+     <y>120</y>
      <width>171</width>
      <height>301</height>
     </rect>
@@ -433,10 +436,23 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>350</y>
+     <y>540</y>
      <width>811</width>
-     <height>281</height>
+     <height>181</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>691</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>通道信息：</string>
    </property>
   </widget>
  </widget>
