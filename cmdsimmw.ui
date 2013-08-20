@@ -138,8 +138,8 @@
      <rect>
       <x>230</x>
       <y>20</y>
-      <width>171</width>
-      <height>141</height>
+      <width>181</width>
+      <height>491</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -178,33 +178,11 @@
      </property>
     </widget>
    </widget>
-   <widget class="QTableView" name="tbl_selres">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>50</y>
-      <width>441</width>
-      <height>241</height>
-     </rect>
-    </property>
-    <property name="contextMenuPolicy">
-     <enum>Qt::DefaultContextMenu</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Sunken</enum>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>470</y>
+      <x>20</x>
+      <y>640</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -219,19 +197,19 @@
    <widget class="QPlainTextEdit" name="pploptStatus">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>490</y>
+      <x>20</x>
+      <y>660</y>
       <width>651</width>
-      <height>151</height>
+      <height>41</height>
      </rect>
     </property>
    </widget>
    <widget class="QGroupBox" name="gBox_configt">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>30</y>
-      <width>451</width>
+      <x>420</x>
+      <y>20</y>
+      <width>551</width>
       <height>271</height>
      </rect>
     </property>
@@ -241,6 +219,28 @@
     <property name="title">
      <string>配置表：</string>
     </property>
+    <widget class="QTableView" name="tbl_selres">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>521</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+    </widget>
    </widget>
    <widget class="QListView" name="listv_ch">
     <property name="geometry">
@@ -248,17 +248,17 @@
       <x>240</x>
       <y>90</y>
       <width>161</width>
-      <height>321</height>
+      <height>371</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="btn_group_layout">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>300</y>
-      <width>108</width>
-      <height>176</height>
+      <x>20</x>
+      <y>520</y>
+      <width>311</width>
+      <height>89</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="vtest_layout">
@@ -289,7 +289,7 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>430</y>
+      <y>470</y>
       <width>61</width>
       <height>23</height>
      </rect>
@@ -304,18 +304,18 @@
    <widget class="QwtPlot" name="qwtPlot">
     <property name="geometry">
      <rect>
-      <x>860</x>
-      <y>60</y>
-      <width>400</width>
-      <height>391</height>
+      <x>440</x>
+      <y>310</y>
+      <width>541</width>
+      <height>301</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="btnViewOsc">
     <property name="geometry">
      <rect>
-      <x>750</x>
-      <y>340</y>
+      <x>330</x>
+      <y>620</y>
       <width>94</width>
       <height>28</height>
      </rect>
@@ -327,8 +327,8 @@
    <widget class="QPushButton" name="tmpdel">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>430</y>
+      <x>340</x>
+      <y>520</y>
       <width>71</width>
       <height>28</height>
      </rect>
@@ -340,8 +340,8 @@
    <widget class="QCheckBox" name="cbxCtl">
     <property name="geometry">
      <rect>
-      <x>1030</x>
-      <y>10</y>
+      <x>1160</x>
+      <y>20</y>
       <width>97</width>
       <height>25</height>
      </rect>
@@ -357,7 +357,6 @@
    <zorder>label</zorder>
    <zorder>pploptStatus</zorder>
    <zorder>gBox_configt</zorder>
-   <zorder>tbl_selres</zorder>
    <zorder>listv_ch</zorder>
    <zorder>btn_sigSel_ok</zorder>
    <zorder>qwtPlot</zorder>
@@ -371,7 +370,7 @@
      <x>0</x>
      <y>0</y>
      <width>1279</width>
-     <height>28</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
