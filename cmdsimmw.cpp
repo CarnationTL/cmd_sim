@@ -151,6 +151,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     p->genData(para);
 #endif
 
+
+    mainPlotInit();
     //_pcbxCh->clear();
     //_pcbxCh->setModel(ach_model);
 }
