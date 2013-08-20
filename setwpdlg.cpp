@@ -7,10 +7,10 @@
 #include <qwt_series_data.h>
 
 
-class SinusData: public QwtSyntheticPointData
+class SinusDataT: public QwtSyntheticPointData
 {
 public:
-    SinusData():
+    SinusDataT():
         QwtSyntheticPointData( 100 )
     {
     }
@@ -92,7 +92,7 @@ void SetWPDlg::on_pb_test2_clicked() {
 	QwtPlotCurve *c = new QwtPlotCurve("curve1");
     c->setRenderHint(QwtPlotItem::RenderAntialiased);
     c->setPen(QPen(Qt::red));
-    c->setData(new SinusData());
+    c->setData(new SinusDataT());
     c->attach(pp);
     pp->show();
 

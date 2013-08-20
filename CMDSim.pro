@@ -15,6 +15,7 @@ win32: QMAKE_CXXFLAGS += /Gd
 
 CONFIG += qwt
 
+DEFINES += QWT_DLL
 SOURCES += main.cpp\
         cmdsimmw.cpp \
     rfm2gse.cpp \
@@ -85,11 +86,17 @@ FORMS    += cmdsimmw.ui \
     dlgsetch.ui \
     exttools.ui
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwt
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwtd
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwt
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwtd
+#
+#INCLUDEPATH += $$PWD/qwtinc
+#DEPENDPATH += $$PWD/qwtinc
 
-INCLUDEPATH += $$PWD/qwtinc
-DEPENDPATH += $$PWD/qwtinc
+
+
+
+
+
 
 #add qwt linux
 
@@ -140,3 +147,9 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/75C3Dlib/ -lCPCI75C3Dll
 win32: INCLUDEPATH += $$PWD/75C3Rlib
 win32: DEPENDPATH += $$PWD/75C3Rlib
 
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Qwt-6.1.0/lib/ -lqwt
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Qwt-6.1.0/lib/ -lqwtd
+
+INCLUDEPATH += $$PWD/../../Qwt-6.1.0/include
+DEPENDPATH += $$PWD/../../Qwt-6.1.0/include

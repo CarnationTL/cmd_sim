@@ -1,4 +1,4 @@
-#include "plot.h"
+﻿#include "plot.h"
 #include "curvedata.h"
 #include "signaldata.h"
 #include <qwt_plot_grid.h>
@@ -10,6 +10,7 @@
 #include <qwt_curve_fitter.h>
 #include <qwt_painter.h>
 #include <qevent.h>
+
 
 class Canvas: public QwtPlotCanvas
 {

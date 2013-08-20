@@ -1,7 +1,7 @@
 #ifndef _SAMPLING_THREAD_
 #define _SAMPLING_THREAD_
 
-#include <qwt_sampling_thread.h>
+#include <Qwt/qwt_sampling_thread.h>
 
 class SamplingThread: public QwtSamplingThread
 {

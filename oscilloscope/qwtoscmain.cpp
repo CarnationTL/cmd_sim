@@ -83,6 +83,7 @@ double QwtOSCMain::signalInterval() const
 
 bool QwtOSCMain::close() {
     QWidget::close ();
+    return true;
 }
 
 void QwtOSCMain::clearData() {

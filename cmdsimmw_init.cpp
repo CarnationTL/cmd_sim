@@ -1,4 +1,4 @@
-#define WIN32_LEAN_AND_MEAN
+﻿#define WIN32_LEAN_AND_MEAN
 
 #include <QtGlobal>
 #include <QMessageBox>
@@ -124,6 +124,8 @@ void CMDSimMW::initCHModel() {
 
 
 int CMDSimMW::initAoInstructs() {
+
+
     QStringList *prefix = new QStringList();
 
     prefix->append(cvcp936("左驾驶盘力信号"));
