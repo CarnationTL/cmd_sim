@@ -1,7 +1,7 @@
 #include "squdata.h"
 
 SquData::SquData(double amp, double time, double dutyc) :
-    QwtSyntheticPointData(100)
+    QwtSyntheticPointData(D_PTS)
 {
     _amp = amp;
     _time = time;
