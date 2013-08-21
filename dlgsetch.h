@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QModelIndex>
 #include <QTableWidget>
+#include <QLabel>
+#include <QStringList>
 
 namespace Ui {
 class DlgSetCh;
@@ -62,6 +64,8 @@ private:
     Ui::DlgSetCh *ui;
     QTableWidget *table;
     void initTblchInfo();
+    QLabel *info;
+    QString genChInfo(QStringList chlst, QStringList namelist);
 };
 
 #endif // DLGSETCH_H

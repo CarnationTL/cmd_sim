@@ -53,8 +53,14 @@ private slots:
 
     void on_sp4f_valueChanged(double arg1);
 
+signals:
+    void v1change(double val);
+public slots:
+//    void v1process(double val);
 private:
     Ui::SetBrdDlg *ui;
+    void mapsignals();
+    void initctls();
 };
 
 #endif // SETBRDDLG_H
