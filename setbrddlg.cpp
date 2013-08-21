@@ -1,5 +1,6 @@
 #include "setbrddlg.h"
 #include "ui_setbrddlg.h"
+#include <QPalette>
 
 SetBrdDlg::SetBrdDlg(QWidget *parent) :
     QDialog(parent),
@@ -8,6 +9,7 @@ SetBrdDlg::SetBrdDlg(QWidget *parent) :
     ui->setupUi(this);
     //this->setLayout(ui->setbdGlay);
     mapsignals();
+    initctls();
 }
 
 /**
@@ -146,5 +148,15 @@ void SetBrdDlg::mapsignals() {
 
 void SetBrdDlg::initctls() {
 
+    ui->lcd1v->setAutoFillBackground(true);
+    QPalette lcdp = ui->lcd1v->palette();
+
+    lcdp.setColor(QPalette::Normal, QPalette::WindowText, Qt::green);
+    lcdp.setColor(QPalette::Normal, QPalette::Window, Qt::black);
+
+    // lcdp.setColor(QPalette::Normal, QPalette::WindowText, Qt::red);
+    // lcdp.setColor(QPalette::Normal, QPalette::Window, Qt::black);
+
+    ui->lcd1v->setPalette(lcdp);
 }
 
