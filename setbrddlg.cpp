@@ -1,6 +1,7 @@
 #include "setbrddlg.h"
 #include "ui_setbrddlg.h"
 #include <QPalette>
+#include <Qwt/qwt_scale_engine.h>
 
 SetBrdDlg::SetBrdDlg(QWidget *parent) :
     QDialog(parent),
@@ -144,19 +145,38 @@ void SetBrdDlg::mapsignals() {
     connect(ui->sp4v, SIGNAL(valueChanged(double)), ui->lcd4v, SLOT(display(double)));
     connect(ui->kb4f, SIGNAL(valueChanged(double)), ui->lcd4f, SLOT(display(double)));
     connect(ui->sp4f, SIGNAL(valueChanged(double)), ui->lcd4f, SLOT(display(double)));
+
 }
 
 void SetBrdDlg::initctls() {
 
-    ui->lcd1v->setAutoFillBackground(true);
-    QPalette lcdp = ui->lcd1v->palette();
+    ui->kb1f->setScale(360, 1800);
+    ui->kb1f->setKnobStyle(QwtKnob::Flat);
+    ui->kb1f->setMarkerStyle(QwtKnob::Notch);
+    ui->kb1f->setScaleEngine(new QwtLogScaleEngine());
+    ui->kb1f->setScaleStepSize(1.0);
+    ui->kb1f->setScaleMaxMinor(10);
 
-    lcdp.setColor(QPalette::Normal, QPalette::WindowText, Qt::green);
-    lcdp.setColor(QPalette::Normal, QPalette::Window, Qt::black);
+//    ui->kb2f->setScale(360, 1800);
+//    ui->kb2f->setKnobStyle(QwtKnob::Flat);
+//    ui->kb2f->setMarkerStyle(QwtKnob::Notch);
+//    ui->kb2f->setScaleEngine(new QwtLogScaleEngine());
+//    ui->kb2f->setScaleStepSize(1.0);
+//    ui->kb2f->setScaleMaxMinor(10);
+//
+//    ui->kb3f->setScale(360, 1800);
+//    ui->kb3f->setKnobStyle(QwtKnob::Flat);
+//    ui->kb3f->setMarkerStyle(QwtKnob::Notch);
+//    ui->kb3f->setScaleEngine(new QwtLogScaleEngine());
+//    ui->kb3f->setScaleStepSize(1.0);
+//    ui->kb3f->setScaleMaxMinor(10);
+//
+//    ui->kb4f->setScale(360, 1800);
+//    ui->kb4f->setKnobStyle(QwtKnob::Flat);
+//    ui->kb4f->setMarkerStyle(QwtKnob::Notch);
+//    ui->kb4f->setScaleEngine(new QwtLogScaleEngine());
+//    ui->kb4f->setScaleStepSize(1.0);
+//    ui->kb4f->setScaleMaxMinor(10);
 
-    // lcdp.setColor(QPalette::Normal, QPalette::WindowText, Qt::red);
-    // lcdp.setColor(QPalette::Normal, QPalette::Window, Qt::black);
-
-    ui->lcd1v->setPalette(lcdp);
 }
 

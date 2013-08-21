@@ -50,6 +50,21 @@
       <height>111</height>
      </rect>
     </property>
+    <property name="lowerBound">
+     <double>0.000000000000000</double>
+    </property>
+    <property name="upperBound">
+     <double>10.000000000000000</double>
+    </property>
+    <property name="scaleMaxMajor">
+     <number>5</number>
+    </property>
+    <property name="scaleMaxMinor">
+     <number>3</number>
+    </property>
+    <property name="scaleStepSize">
+     <double>0.000000000000000</double>
+    </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">

@@ -55,8 +55,6 @@ private slots:
 
 signals:
     void v1change(double val);
-public slots:
-//    void v1process(double val);
 private:
     Ui::SetBrdDlg *ui;
     void mapsignals();
