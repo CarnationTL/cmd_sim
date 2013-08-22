@@ -1081,4 +1081,5 @@ void CMDSimMW::on_cbxCtl_clicked() {
 void CMDSimMW::on_action_rfm_triggered() {
     DlgRFMDebug rfm;
     rfm.exec();
+
 }
