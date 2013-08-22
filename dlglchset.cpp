@@ -2,6 +2,9 @@
 #include "ui_dlglchset.h"
 #include <Qwt/qwt_symbol.h>
 
+
+bool firstFlagW = false;
+
 DlgLchSet::DlgLchSet(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DlgLchSet)
@@ -195,8 +198,50 @@ void DlgLchSet::on_sbEndY_valueChanged(double arg1)
 
 }
 
-void DlgLchSet::on_btnConfirmSeg_clicked()
-{
+void DlgLchSet::on_btnConfirmSeg_clicked() {
+
+    double xs = ui->sbstartTime->value ();
+    double ys = ui->sbStartY->value ();
+
+    double xe = ui->sbEndTime->value ();
+    double ye = ui->sbEndY->value ();
+
+
+
+    if(_pcurve != NULL) {
+
+        if(firstFlagW == false) {
+            //first
+            _pcurve->appendP (xs, ys);
+            QString ptsStr = QString("x: ") + QString::number (xs, 'g', 3) +
+                    QString("    ") + QString("y: ") + QString::number (ys, 'g', 3);
+            ui->lswcurv->addItem (ptsStr);
+            _pcurve->appendP (xe, ye);
+            QString ptsEnd = QString("x: ") + QString::number (xe, 'g', 3) +
+                    QString("    ") + QString("y: ") + QString::number (ye, 'g', 3);
+            ui->lswcurv->addItem (ptsEnd);
+            doPlotCus();
+            ui->sbStartY->setEnabled (false);
+            ui->sbstartTime->setEnabled (false);
+            ui->sbStartY->setValue (ye);
+            ui->sbstartTime->setValue (xe);
+            ui->sbEndTime->setMinimum (xe);
+        } else {
+            _pcurve->appendP (xe, ye);
+            QString ptsEnd = QString("x: ") + QString::number (xe, 'g', 3) +
+                    QString("    ") + QString("y: ") + QString::number (ye, 'g', 3);
+            ui->lswcurv->addItem (ptsEnd);
+            doPlotCus();
+            ui->sbStartY->setValue (ye);
+            ui->sbstartTime->setValue (xe);
+            ui->sbEndTime->setMinimum (xe);
+        }
+        firstFlagW = true;
+    }
+
+    _lasttime = ui->sbstartTime->value ();
+   // ui->sbstartTime->setMinimum (_lasttime);
+
 
 }
 

@@ -104,6 +104,7 @@ private:
     double _amp;
     double _dutyc;
     double _time;
+    double _lasttime;
 };
 
 #endif // DLGLCHSET_H
