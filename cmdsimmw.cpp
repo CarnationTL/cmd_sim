@@ -157,7 +157,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     _mainPlot = ui->qwtPlot;
     mainPlotInit();
 
-#if 0
+#if 1
     this->hide();
     DlgLchSet set;
     set.exec();
