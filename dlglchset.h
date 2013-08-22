@@ -10,6 +10,7 @@
 #include <sigGen/sawdata.h>
 #include <sigGen/squdata.h>
 #include <sigGen/curvedatan.h>
+#include <QModelIndex>
 
 namespace Ui {
 class DlgLchSet;

@@ -179,13 +179,11 @@ void DlgLchSet::on_sbstartTime_valueChanged(double arg1)
 
 }
 
-void DlgLchSet::on_sbEndTime_valueChanged(double arg1)
-{
+void DlgLchSet::on_sbEndTime_valueChanged(double arg1) {
 
 }
 
-void DlgLchSet::on_sbStartY_valueChanged(double arg1)
-{
+void DlgLchSet::on_sbStartY_valueChanged(double arg1) {
 
 }
 
