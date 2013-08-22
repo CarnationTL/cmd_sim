@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <Qwt/qwt_plot.h>
+#include <Qwt/qwt_plot_curve.h>
 #include <Qwt/qwt_plot_grid.h>
 
 #include <sigGen/sinusdata.h>
@@ -21,6 +22,7 @@ class DlgLchSet : public QDialog
     Q_OBJECT
     
 public:
+
     explicit DlgLchSet(QWidget *parent = 0);
     ~DlgLchSet();
     
@@ -90,7 +92,18 @@ private:
     void initpointers();
     QwtPlot *plot;
     QwtPlotGrid *grid;
+    QwtPlotCurve *pc;
+
+    CurveDataN *_pcurve;
+    void doPlot(int);
+    void doPlotCus();
     void cycleandloop();
+private:
+    enum {SINE, SAW, TRI, SQU, CUS };
+    enum {VOL, PHY};
+    double _amp;
+    double _dutyc;
+    double _time;
 };
 
 #endif // DLGLCHSET_H

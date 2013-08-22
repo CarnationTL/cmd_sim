@@ -1,5 +1,6 @@
 #include "dlglchset.h"
 #include "ui_dlglchset.h"
+#include <Qwt/qwt_symbol.h>
 
 DlgLchSet::DlgLchSet(QWidget *parent) :
     QDialog(parent),
@@ -37,6 +38,7 @@ QString DlgLchSet::genChInfo(QStringList chlst, QStringList namelist) {
 }
 
 void DlgLchSet::plotInit() {
+
     plot->setAutoDelete (true);
     plot->setAxisScale(QwtPlot::xBottom, 0, 10.0);
     plot->setAxisScale(QwtPlot::yLeft, -10.0, 10.0);
@@ -49,6 +51,7 @@ void DlgLchSet::plotInit() {
     }
 
     plot->setCanvasBackground (QColor(0, 49, 114));
+    pc = NULL;
 }
 
 void DlgLchSet::initpointers() {
@@ -69,23 +72,24 @@ void DlgLchSet::cycleandloop() {
 }
 
 void DlgLchSet::on_sbAMP_Sine_valueChanged(double arg1) {
-
+    _amp = arg1;
+    doPlot(SINE);
 }
 
-void DlgLchSet::on_sbTIME_Sine_valueChanged(double arg1)
-{
-
+void DlgLchSet::on_sbTIME_Sine_valueChanged(double arg1) {
+    _time = arg1;
+    doPlot(SINE);
 }
 
-void DlgLchSet::on_sbAMP_Tri_valueChanged(double arg1)
-{
-
+void DlgLchSet::on_sbAMP_Tri_valueChanged(double arg1) {
+    _amp = arg1;
+    doPlot(TRI);
 }
 
 
-void DlgLchSet::on_sbTIME_Tri_valueChanged(double arg1)
-{
-
+void DlgLchSet::on_sbTIME_Tri_valueChanged(double arg1) {
+    _time = arg1;
+    doPlot(TRI);
 }
 
 void DlgLchSet::on_rbloo_Sine_clicked() {
@@ -115,19 +119,18 @@ void DlgLchSet::on_rbclyle_Tri_clicked() {
         ui->spcycle_Tri->setDisabled(false);
 }
 
-void DlgLchSet::on_spcycle_Tri_valueChanged(int arg1)
-{
+void DlgLchSet::on_spcycle_Tri_valueChanged(int arg1) {
 
 }
 
-void DlgLchSet::on_sbAMP_Saw_valueChanged(double arg1)
-{
-
+void DlgLchSet::on_sbAMP_Saw_valueChanged(double arg1) {
+    _amp = arg1;
+    doPlot(SAW);
 }
 
-void DlgLchSet::on_sbTIME_Saw_valueChanged(double arg1)
-{
-
+void DlgLchSet::on_sbTIME_Saw_valueChanged(double arg1) {
+    _time = arg1;
+    doPlot(SAW);
 }
 
 void DlgLchSet::on_rbloo_Saw_clicked() {
@@ -144,19 +147,19 @@ void DlgLchSet::on_spcycle_Saw_valueChanged(int arg1) {
 
 }
 
-void DlgLchSet::on_sbAMP_Squ_valueChanged(double arg1)
-{
-
+void DlgLchSet::on_sbAMP_Squ_valueChanged(double arg1) {
+    _amp = arg1;
+    doPlot(SQU);
 }
 
-void DlgLchSet::on_sbTIME_Squ_valueChanged(double arg1)
-{
-
+void DlgLchSet::on_sbTIME_Squ_valueChanged(double arg1) {
+    _time = arg1;
+    doPlot(SQU);
 }
 
-void DlgLchSet::on_sbDUTY_Squ_valueChanged(double arg1)
-{
-
+void DlgLchSet::on_sbDUTY_Squ_valueChanged(double arg1) {
+    _dutyc = arg1;
+    doPlot(SQU);
 }
 
 void DlgLchSet::on_rbloo_Squ_clicked() {
@@ -211,4 +214,99 @@ void DlgLchSet::on_cbloop_Cur_clicked() {
 
 void DlgLchSet::on_btncurDel_clicked() {
 
+}
+
+void DlgLchSet::doPlot(int t) {
+
+    if(pc == NULL) {
+        pc = new QwtPlotCurve("curve");
+        pc->setPen (QPen(Qt::green));
+        //pc->setSymbol (new QwtSymbol(QwtSymbol::Triangle, Qt::yellow, QPen(Qt::blue), QSize(5, 5)));
+        pc->setSymbol(NULL);
+    }
+
+    int a, ti;
+    if(_amp < 0)
+        a = -_amp;
+    else
+        a = _amp;
+    if(_time < 0)
+        ti = -_time;
+    else
+        ti = _time;
+
+    if(a == 0.0) {
+        plot->setAxisScale(QwtPlot::yLeft, -10.0, 10.0);
+    } else {
+        plot->setAxisScale (QwtPlot::yLeft, -a, a);
+    }
+
+    if(ti == 0.0) {
+        plot->setAxisScale(QwtPlot::xBottom, 0, 10.0);
+    } else {
+        plot->setAxisScale (QwtPlot::xBottom, 0, ti);
+    }
+
+   // plot->setAxisScale (QwtPlot::xBottom, 0.0, 10.0);
+   // plot->setAxisScale (QwtPlot::yLeft, -1.0, 1.0);
+
+    if(pc != NULL) {
+        switch (t) {
+        case SINE:
+            pc->setData (new SinusData(a, ti));
+            break;
+        case TRI:
+            pc->setData (new TriData(a, ti));
+            break;
+        case SAW:
+            pc->setData (new SawData(a, ti));
+            break;
+        case SQU:
+            if(_dutyc)
+            pc->setData (new SquData(a, _dutyc, ti));
+            break;
+        case CUS:
+            break;
+        default:
+            break;
+        }
+        //QwtSetSeriesData *sdata;
+    }
+    pc->attach (plot);
+    plot->show ();
+    plot->replot ();
+}
+
+
+void DlgLchSet::doPlotCus() {
+    if(pc == NULL) {
+        pc = new QwtPlotCurve("curve");
+        pc->setPen (QPen(Qt::green));
+        pc->setSymbol (new QwtSymbol(QwtSymbol::Triangle, Qt::yellow, QPen(Qt::blue), QSize(5, 5)));
+    }
+    //QwtSetSeriesData *sdata;
+    //找出最小bottom
+    //plot->setAxisScale (QwtPlot::xBottom, 0, _time);
+    //plot->setAxisScale (QwtPlot::yLeft, -_amp, _amp);
+    //    CusData *cusdata = new CusData(0.0, 0.0, 100);
+    //    cusdata->appendP(4.0, 3.0);
+    //    cusdata->appendP(6.0, 10.0);
+
+    if(_pcurve != NULL) {
+
+        //_pcurve->appendP (0.0, 4.4);
+        //_pcurve->appendP (0.5, 4.4);
+        //_pcurve->appendP (1.0, -4.4);
+        //_pcurve->appendP (2.0, -14.4);
+        //_pcurve->appendP (3.0, 24.4);
+        //_pcurve->appendP (4.0, -40.4);
+        //_pcurve->appendP (5.0, 54.4);
+
+        pc->setSamples( _pcurve->getpts ());
+        plot->setAxisScale (QwtPlot::xBottom, 0, _pcurve->getXRgn ());
+        plot->setAxisScale (QwtPlot::yLeft, -_pcurve->getYRgn (), _pcurve->getYRgn ());
+        pc->attach (plot);
+        plot->show ();
+        plot->replot ();
+    }
 }

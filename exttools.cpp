@@ -1,4 +1,4 @@
-#include "exttools.h"
+﻿#include "exttools.h"
 #include "ui_exttools.h"
 
 #include <QSettings>
@@ -16,6 +16,7 @@
 //#define S_ITEM_VPV "vpvalue"
 #define S_ITEM_VPPHY "vpphy"
 #define S_ITEM_VPVOL "vpvol"
+
 
 
 bool firstFlag = false;
