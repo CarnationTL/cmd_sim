@@ -17,7 +17,6 @@
 #include <QDialog>
 #include <QLayout>
 #include "setbrddlg.h"
-#include "dlgsetch.h"
 #include "setwpdlg.h"
 #include "exttools.h"
 #include "cmddefs.h"
@@ -374,7 +373,6 @@ void CMDSimMW::initWidgetsPointer() {
     _pcbxSigSel = ui->cbx_sigts;
     _ptbl = ui->tbl_selres;
     _psetwpdlg = new SetWPDlg();
-    _psetChdlg = new DlgSetCh();
 }
 
 

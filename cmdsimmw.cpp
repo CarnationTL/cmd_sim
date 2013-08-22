@@ -17,7 +17,7 @@
 #include <QLayout>
 #include "setbrddlg.h"
 #include "setwpdlg.h"
-#include "dlgsetch.h"
+#include "dlglchset.h"
 #include "exttools.h"
 #include "cmddefs.h"
 #include "dlgrfmdebug.h"
@@ -432,7 +432,10 @@ void CMDSimMW::on_btn_setwp_clicked() {
 
 void CMDSimMW::myBtnSlot() {
     qbshow("test my own slot");
-    DlgSetCh setch;
+//    DlgSetCh setch;
+//    setch.exec();
+
+    DlgLchSet setch;
     setch.exec();
     //extTools dig;
     //dig.exec ();
@@ -761,6 +764,7 @@ void CMDSimMW::on_listw_sig_sel_pressed(const QModelIndex &index) {
     }
     chSta = p->checkState();
 }
+
 
 /* reset signal dis */
 void CMDSimMW::on_action_reset_SigAO_triggered() {

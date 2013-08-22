@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DlgLchSet</class>
+ <widget class="QDialog" name="DlgLchSet">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>742</width>
+    <height>510</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 75 9pt &quot;微软雅黑&quot;;</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>470</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>301</width>
+     <height>391</height>
+    </rect>
+   </property>
+   <property name="tabPosition">
+    <enum>QTabWidget::North</enum>
+   </property>
+   <property name="tabShape">
+    <enum>QTabWidget::Rounded</enum>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tabSine">
+    <attribute name="title">
+     <string>正弦波</string>
+    </attribute>
+    <widget class="QGroupBox" name="gbPara_Sine">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>251</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="title">
+      <string>波形参数</string>
+     </property>
+     <widget class="QLabel" name="lbFEQ_Sine">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>FEQ:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbAMP_Sine">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>28</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>1024.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbAMP_Sine">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>AMP:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbTIME_Sine">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TIME:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbTIME_Sine">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>68</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>65536.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbamp_end_Sine">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>41</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&quot;&quot;</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbclyle_Sine">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>140</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>周期个数</string>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
+     </widget>
+     <widget class="QRadioButton" name="rbloo_Sine">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>循环</string>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
+     </widget>
+     <widget class="QSpinBox" name="spcycle_Sine">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>138</y>
+        <width>42</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="btn_apply_Sine">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>200</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>应用</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabTri">
+    <attribute name="title">
+     <string>三角波</string>
+    </attribute>
+    <widget class="QPushButton" name="btn_apply_Tri">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>200</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>应用</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="gbPara_Tri">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>251</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="title">
+      <string>波形参数</string>
+     </property>
+     <widget class="QLabel" name="lbFEQ_Tri">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>FEQ:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbAMP_Tri">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>28</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>1024.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbAMP_Tri">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>AMP:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbTIME_Tri">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TIME:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbTIME_2">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>68</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>65536.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbamp_end_Tri">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>41</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&quot;&quot;</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spcycle_Tri">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>138</y>
+        <width>42</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbclyle_Tri">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>140</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>周期个数</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbloo_Tri">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>循环</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabSaw">
+    <attribute name="title">
+     <string>锯齿波</string>
+    </attribute>
+    <widget class="QPushButton" name="btn_apply_Saw">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>200</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>应用</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="gbPara_Saw">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>251</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="title">
+      <string>波形参数</string>
+     </property>
+     <widget class="QLabel" name="lbFEQ_Saw">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>FEQ:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbAMP_Saw">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>28</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>1024.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbAMP_Saw">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>AMP:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbTIME_Saw">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TIME:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbTIME_Saw">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>68</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>65536.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbamp_end_Saw">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>41</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&quot;&quot;</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spcycle_Saw">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>138</y>
+        <width>42</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbclyle_Saw">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>140</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>周期个数</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbloo_Saw">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>循环</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabSqu">
+    <attribute name="title">
+     <string>方波</string>
+    </attribute>
+    <widget class="QPushButton" name="btn_apply_Squ">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>250</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>应用</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="gbPara_Squ">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>251</width>
+       <height>221</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="title">
+      <string>波形参数</string>
+     </property>
+     <widget class="QLabel" name="lbFEQ_Squ">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>FEQ:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbAMP_Squ">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>28</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>1024.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbAMP_Squ">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>AMP:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbDUTY_Squ">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>DUTY:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbDUTY_Squ">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>132</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>100.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbTIME_Squ">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TIME:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbTIME_Squ">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>68</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>65536.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbamp_end_Squ">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>41</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&quot;&quot;</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbloo_Squ">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>循环</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbclyle_Squ">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>180</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>周期个数</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spcycle_Squ">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>178</y>
+        <width>42</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabCur">
+    <attribute name="title">
+     <string>自定义</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>291</width>
+       <height>351</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>自定义参数</string>
+     </property>
+     <widget class="QDoubleSpinBox" name="sbstartTime">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>25</y>
+        <width>71</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>65536.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblStartTime">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>StartTime:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbEndTime">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>70</y>
+        <width>71</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>65536.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblEndTime">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>62</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>EndTime:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbStartY">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>25</y>
+        <width>71</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <double>-1000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>30</y>
+        <width>41</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>StartY:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbEndY">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>70</y>
+        <width>71</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <double>-1000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>70</y>
+        <width>41</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>EndY:</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="lswcurv">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>180</y>
+        <width>251</width>
+        <height>111</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnConfirmSeg">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>110</y>
+        <width>71</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>添加段</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btncurDel">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>300</y>
+        <width>71</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>删除段</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>150</y>
+        <width>62</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string> 已添加:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cbloop_Cur">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>310</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>循环产生</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QwtPlot" name="plotWhole">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>80</y>
+     <width>400</width>
+     <height>381</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>611</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>buttonBox</zorder>
+  <zorder>tabWidget</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>plotWhole</zorder>
+  <zorder>label_4</zorder>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>DlgLchSet</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>DlgLchSet</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
+</ui>

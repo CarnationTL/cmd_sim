@@ -39,14 +39,14 @@ SOURCES += main.cpp\
     oscilloscope/wheelbox.cpp \
     oscilloscope/qwtoscmain.cpp \
     sigdata.cpp \
-    dlgsetch.cpp \
     sigGen/sinusdata.cpp \
     sigGen/tridata.cpp \
     sigGen/squdata.cpp \
     sigGen/curvedatan.cpp \
     sigGen/sawdata.cpp \
     exttools.cpp \
-    dlgrfmdebug.cpp
+    dlgrfmdebug.cpp \
+    dlglchset.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -72,22 +72,22 @@ HEADERS  += cmdsimmw.h \
     oscilloscope/wheelbox.h \
     oscilloscope/qwtoscmain.h \
     sigdata.h \
-    dlgsetch.h \
     sigGen/sinusdata.h \
     sigGen/tridata.h \
     sigGen/squdata.h \
     sigGen/curvedatan.h \
     sigGen/sawdata.h \
     exttools.h \
-    dlgrfmdebug.h
+    dlgrfmdebug.h \
+    dlglchset.h
 
 FORMS    += cmdsimmw.ui \
     setbrddlg.ui \
     setwpdlg.ui \
     setlbrdparadlg.ui \
-    dlgsetch.ui \
     exttools.ui \
-    dlgrfmdebug.ui
+    dlgrfmdebug.ui \
+    dlglchset.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwt
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qwtlib/ -lqwtd
