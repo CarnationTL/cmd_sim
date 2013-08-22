@@ -2,6 +2,8 @@
 #define DLGLCHSET_H
 
 #include <QDialog>
+#include <Qwt/qwt_plot.h>
+#include <Qwt/qwt_plot_grid.h>
 
 namespace Ui {
 class DlgLchSet;
@@ -18,6 +20,10 @@ public:
 private:
     Ui::DlgLchSet *ui;
     QString genChInfo(QStringList chlst, QStringList namelist);
+    void plotInit();
+    void initpointers();
+    QwtPlot *plot;
+    QwtPlotGrid *grid;
 };
 
 #endif // DLGLCHSET_H

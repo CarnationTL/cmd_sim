@@ -6,6 +6,8 @@ DlgLchSet::DlgLchSet(QWidget *parent) :
     ui(new Ui::DlgLchSet)
 {
     ui->setupUi(this);
+    initpointers();
+    plotInit();
 }
 
 DlgLchSet::~DlgLchSet()
@@ -33,4 +35,21 @@ QString DlgLchSet::genChInfo(QStringList chlst, QStringList namelist) {
     return retstr;
 }
 
+void DlgLchSet::plotInit() {
+    plot->setAutoDelete (true);
+    plot->setAxisScale(QwtPlot::xBottom, 0, 10.0);
+    plot->setAxisScale(QwtPlot::yLeft, -10.0, 10.0);
+    grid = new QwtPlotGrid();
+    grid->enableXMin (true);
+    grid->setMajorPen( Qt::white, 0, Qt::DotLine );
+    grid->setMinorPen( Qt::gray, 0 , Qt::DotLine );
+    if(plot != NULL) {
+            grid->attach (plot);
+    }
 
+    plot->setCanvasBackground (QColor(0, 49, 114));
+}
+
+void DlgLchSet::initpointers() {
+    plot = ui->plotWhole;
+}
