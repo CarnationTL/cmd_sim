@@ -22,6 +22,8 @@ private:
     static HINSTANCE hdll;
 #elif defined(Q_OS_LINUX)
     static int hdll;
+#elif defined(Q_OS_MACX)
+    static int hdll;
 #endif
 
 public:
@@ -52,6 +54,11 @@ public:
         return 0;
     }
 
+#elif defined(Q_OS_DARWIN)
+    int loadDll() {
+        hdll = 0;
+        return 0;
+    }
 #endif
 
 
@@ -65,6 +72,11 @@ public:
         } else
             return false;
 #elif defined(Q_OS_LINUX)
+        if(hdll != 0) {
+            return true;
+        } else
+            return false;
+#elif defined(Q_OS_DARWIN)
         if(hdll != 0) {
             return true;
         } else
