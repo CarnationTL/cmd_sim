@@ -17,7 +17,7 @@
 #include <QLayout>
 #include "setbrddlg.h"
 #include "setwpdlg.h"
-#include "dlgsetch.h"
+#include "dlglchset.h"
 #include "exttools.h"
 #include "cmddefs.h"
 #include "dlgrfmdebug.h"
@@ -158,6 +158,12 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     //_pcbxCh->setModel(ach_model);
     _mainPlot = ui->qwtPlot;
     mainPlotInit();
+
+#if 1
+    this->hide();
+    DlgLchSet set;
+    set.exec();
+#endif
 }
 
 CMDSimMW::~CMDSimMW() {
@@ -447,6 +453,14 @@ void CMDSimMW::on_btn_setwp_clicked() {
 
 void CMDSimMW::myBtnSlot() {
     qbshow("test my own slot");
+<<<<<<< HEAD
+=======
+//    DlgSetCh setch;
+//    setch.exec();
+
+    DlgLchSet setch;
+    setch.exec();
+>>>>>>> master
     //extTools dig;
     //dig.exec ();
 }
@@ -774,6 +788,7 @@ void CMDSimMW::on_listw_sig_sel_pressed(const QModelIndex &index) {
     }
     chSta = p->checkState();
 }
+
 
 /* reset signal dis */
 void CMDSimMW::on_action_reset_SigAO_triggered() {
