@@ -288,7 +288,7 @@
        <string>TIME:</string>
       </property>
      </widget>
-     <widget class="QDoubleSpinBox" name="sbTIME_2">
+     <widget class="QDoubleSpinBox" name="sbTIME_Tri">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -336,6 +336,9 @@
       <property name="text">
        <string>周期个数</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup_2</string>
+      </attribute>
      </widget>
      <widget class="QRadioButton" name="rbloo_Tri">
       <property name="geometry">
@@ -349,6 +352,9 @@
       <property name="text">
        <string>循环</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup_2</string>
+      </attribute>
      </widget>
     </widget>
    </widget>
@@ -484,6 +490,9 @@
       <property name="text">
        <string>周期个数</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup_3</string>
+      </attribute>
      </widget>
      <widget class="QRadioButton" name="rbloo_Saw">
       <property name="geometry">
@@ -497,6 +506,9 @@
       <property name="text">
        <string>循环</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup_3</string>
+      </attribute>
      </widget>
     </widget>
    </widget>
@@ -648,6 +660,9 @@
       <property name="text">
        <string>循环</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup_4</string>
+      </attribute>
      </widget>
      <widget class="QRadioButton" name="rbclyle_Squ">
       <property name="geometry">
@@ -661,6 +676,9 @@
       <property name="text">
        <string>周期个数</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup_4</string>
+      </attribute>
      </widget>
      <widget class="QSpinBox" name="spcycle_Squ">
       <property name="geometry">
@@ -888,17 +906,13 @@
     <string/>
    </property>
   </widget>
-  <zorder>buttonBox</zorder>
-  <zorder>tabWidget</zorder>
-  <zorder>groupBox</zorder>
-  <zorder>plotWhole</zorder>
-  <zorder>label_4</zorder>
  </widget>
  <customwidgets>
   <customwidget>
    <class>QwtPlot</class>
    <extends>QFrame</extends>
    <header>qwt_plot.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -938,5 +952,8 @@
  </connections>
  <buttongroups>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_4"/>
  </buttongroups>
 </ui>

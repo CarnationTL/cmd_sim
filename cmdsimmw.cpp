@@ -152,6 +152,8 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     p->genData(para);
 #endif
 
+
+    //mainPlotInit();
     //_pcbxCh->clear();
     //_pcbxCh->setModel(ach_model);
     _mainPlot = ui->qwtPlot;
@@ -209,6 +211,19 @@ QString CMDSimMW::cvcp936(const char str[]) {
 }
 
 #elif defined(Q_OS_LINUX)
+//do nothing
+QString CMDSimMW::cvcp936(const char str[]) {
+    if((sizeof(str) /sizeof(char)) <= 0)
+        return QString("");
+    QTextCodec *codec = QTextCodec::codecForName("utf-8");
+    if(codec != NULL) {
+        QString ret = codec->toUnicode(str);
+        return ret;
+    }
+    return QString("");
+}
+
+#elif defined(Q_OS_DARWIN)
 //do nothing
 QString CMDSimMW::cvcp936(const char str[]) {
     if((sizeof(str) /sizeof(char)) <= 0)
@@ -438,8 +453,6 @@ void CMDSimMW::on_btn_setwp_clicked() {
 
 void CMDSimMW::myBtnSlot() {
     qbshow("test my own slot");
-//    DlgSetCh setch;
-//    setch.exec();
 
     DlgLchSet setch;
     setch.exec();
@@ -1075,8 +1088,8 @@ void CMDSimMW::on_cbxCtl_clicked() {
 }
 
 
-//rfm debug dlg
 void CMDSimMW::on_action_rfm_triggered() {
     DlgRFMDebug rfm;
     rfm.exec();
+
 }

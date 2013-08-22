@@ -2,7 +2,6 @@
 #define DLGRFMDEBUG_H
 
 #include <QDialog>
-#include "rfm2gse.h"
 
 namespace Ui {
 class DlgRFMDebug;
@@ -18,7 +17,6 @@ public:
     
 private:
     Ui::DlgRFMDebug *ui;
-    RFM2gSE se;
 };
 
 #endif // DLGRFMDEBUG_H

@@ -10,6 +10,11 @@
 #define CPCI75C3_FAIL -1
 #endif
 
+#if defined(Q_OS_DARWIN)
+#define CPCI75C3_FAIL -1
+#endif
+
+
 Brd75C3::Brd75C3(QObject *parent) :
     CommBrd(parent) {
 }

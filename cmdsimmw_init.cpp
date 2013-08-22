@@ -288,7 +288,9 @@ void CMDSimMW::initTbl() {
 
     _ptbl->setEditTriggers (QAbstractItemView::NoEditTriggers);
     QHeaderView *header = new QHeaderView(Qt::Horizontal, _ptbl);
+#if !defined(Q_OS_DARWIN)
     header->setMovable (true);                  /* move cols */
+#endif
     _ptbl->setHorizontalHeader (header);
     //_ptbl->horizontalHeader ()->setStretchLastSection ();
     int trow = tbl_model->rowCount() ,tcol = tbl_model->columnCount();
