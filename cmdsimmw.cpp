@@ -153,13 +153,13 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 #endif
 
 
-    mainPlotInit();
+    //mainPlotInit();
     //_pcbxCh->clear();
     //_pcbxCh->setModel(ach_model);
     _mainPlot = ui->qwtPlot;
     mainPlotInit();
 
-#if 1
+#if 0
     this->hide();
     DlgLchSet set;
     set.exec();
@@ -453,14 +453,9 @@ void CMDSimMW::on_btn_setwp_clicked() {
 
 void CMDSimMW::myBtnSlot() {
     qbshow("test my own slot");
-<<<<<<< HEAD
-=======
-//    DlgSetCh setch;
-//    setch.exec();
 
     DlgLchSet setch;
     setch.exec();
->>>>>>> master
     //extTools dig;
     //dig.exec ();
 }
