@@ -1,12 +1,13 @@
 #include "squdata.h"
 
-SquData::SquData(double amp, double time, double dutyc) :
+SquData::SquData(double amp, double time, double dutyc, double cycles) :
     QwtSyntheticPointData(D_PTS)
 {
     _amp = amp;
     _time = time;
     _dutyc = dutyc;
-    _feq = 1.0 / _time;
+    _cycles = cycles;
+    _feq =  _cycles / _time;
 }
 
 

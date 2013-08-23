@@ -12,6 +12,8 @@
 #include <sigGen/squdata.h>
 #include <sigGen/curvedatan.h>
 #include <QModelIndex>
+#include <QListWidgetItem>
+#include <Qwt/qwt_plot_marker.h>
 
 namespace Ui {
 class DlgLchSet;
@@ -85,6 +87,10 @@ private slots:
 
     void on_btncurDel_clicked();
 
+    void on_lswcurv_itemClicked(QListWidgetItem *item);
+
+    void on_tabWidget_currentChanged(int index);
+
 private:
     Ui::DlgLchSet *ui;
     QString genChInfo(QStringList chlst, QStringList namelist);
@@ -94,6 +100,9 @@ private:
     QwtPlotGrid *grid;
     QwtPlotCurve *pc;
 
+    QwtPlotMarker sm;
+    QwtPlotMarker em;
+
     CurveDataN *_pcurve;
     void doPlot(int);
     void doPlotCus();
@@ -101,10 +110,12 @@ private:
 private:
     enum {SINE, SAW, TRI, SQU, CUS };
     enum {VOL, PHY};
+
     double _amp;
     double _dutyc;
     double _time;
     double _lasttime;
+    int _cycles;
 };
 
 #endif // DLGLCHSET_H

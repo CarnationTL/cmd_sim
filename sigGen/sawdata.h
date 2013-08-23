@@ -7,13 +7,13 @@
 class SawData : public QwtSyntheticPointData
 {
 public:
-    SawData(double amp, double time);
+    SawData(double amp, double time, double cycles);
     virtual double y( double x ) const;
 private:
     double _amp;
     double _feq;
     double _time;
-
+    double _cycles;
 
 };
 

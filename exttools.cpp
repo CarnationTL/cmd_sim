@@ -254,17 +254,16 @@ void extTools::doPlot(int t) {
     if(pc != NULL) {
         switch (t) {
         case SINE:
-            pc->setData (new SinusData(a, ti));
+            pc->setData (new SinusData(a, ti, 1.0));
             break;
         case TRI:
-            pc->setData (new TriData(a, ti));
+            pc->setData (new TriData(a, ti, 1.0));
             break;
         case SAW:
-            pc->setData (new SawData(a, ti));
+            pc->setData (new SawData(a, ti, 1.0));
             break;
         case SQU:
-            if(_dutyc)
-            pc->setData (new SquData(a, _dutyc, ti));
+            pc->setData (new SquData(a, _dutyc, ti, 1.0));
             break;
         case CUS:
             break;
@@ -724,8 +723,6 @@ void extTools::on_btnConfirmSeg_clicked() {
     double xe = ui->sbEndTime->value ();
     double ye = ui->sbEndY->value ();
 
-
-
     if(_pcurve != NULL) {
 
         if(firstFlag == false) {
@@ -759,7 +756,6 @@ void extTools::on_btnConfirmSeg_clicked() {
 
     _lasttime = ui->sbstartTime->value ();
    // ui->sbstartTime->setMinimum (_lasttime);
-
 }
 
 
@@ -880,7 +876,6 @@ void extTools::on_spVoltage_valueChanged(double arg1) {
 
 //物理量量程
 void extTools::on_spphysic_valueChanged(double arg1) {
-
     phyfac = ui->spphysic->value ();
     volfac = ui->spVoltage->value ();
     if(phyfac != 0.0 && volfac != 0.0) {

@@ -1,12 +1,13 @@
 #include "sawdata.h"
 
-SawData::SawData(double amp, double time) :
+SawData::SawData(double amp, double time, double cycle) :
     QwtSyntheticPointData(D_PTS)
 
 {
     _amp = amp;
     _time = time;
-    _feq = 1.0 / _time;
+    _cycles = cycle;
+    _feq = _cycles / _time;
 }
 
 
