@@ -149,7 +149,6 @@ void SetBrdDlg::mapsignals() {
 }
 
 void SetBrdDlg::initctls() {
-
     ui->kb1f->setScale(360, 1800);
     ui->kb1f->setKnobStyle(QwtKnob::Flat);
     ui->kb1f->setMarkerStyle(QwtKnob::Notch);

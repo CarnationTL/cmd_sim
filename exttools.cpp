@@ -148,13 +148,10 @@ void extTools::on_btnGenWData_clicked() {
     for(int i = 0; i < list.length (); i++) {
         qDebug () << list.at (i).toDouble ();
     }
-
     qDebug () << fn ;
-
     //read form file
     QSettings setread(fn);
     qDebug () << setread.value (S_ITEM_AMP).toDouble ();
-
 #endif
 
 }
@@ -793,10 +790,6 @@ void extTools::on_lswcurv_itemClicked(QListWidgetItem *item) {
 
 
     //qDebug () << _pcurve->genWriteData ();
-
-#if 1
-
-#endif
 
 #if 0
     //_sym.drawSymbol (NULL, _pcurve->getpts ().at (0));

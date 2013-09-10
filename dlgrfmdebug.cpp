@@ -3,12 +3,12 @@
 
 DlgRFMDebug::DlgRFMDebug(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DlgRFMDebug)
-{
+    ui(new Ui::DlgRFMDebug) {
     ui->setupUi(this);
 }
 
-DlgRFMDebug::~DlgRFMDebug()
-{
+
+
+DlgRFMDebug::~DlgRFMDebug() {
     delete ui;
 }

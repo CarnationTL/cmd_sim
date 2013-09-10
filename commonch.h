@@ -16,7 +16,7 @@ public:
     QString chname() const;
     void setChname(const QString &chname);
 
-private:
+protected:
     int _chno;
     QString _chname;
 signals:

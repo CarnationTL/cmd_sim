@@ -278,13 +278,14 @@ void CMDSimMW::initTbl() {
     _ptbl->setContextMenuPolicy (Qt::CustomContextMenu);
 
     QPushButton *tbtn;
-    tbl_model = new QStandardItemModel(TBL_ROW, TBL_COL);
+    tbl_model = new QStandardItemModel(TBL_ROW, TBL_COL + 1);
     _ptbl->setModel(tbl_model);
 
     tbl_model->setHeaderData(0, Qt::Horizontal, cvcp936("类型"));
     tbl_model->setHeaderData(1, Qt::Horizontal, cvcp936("名称"));
     tbl_model->setHeaderData(2, Qt::Horizontal, cvcp936("关联通道号"));
     tbl_model->setHeaderData(3, Qt::Horizontal, cvcp936("设置"));
+    tbl_model->setHeaderData(4, Qt::Horizontal, cvcp936("启动"));
 
     _ptbl->setEditTriggers (QAbstractItemView::NoEditTriggers);
     QHeaderView *header = new QHeaderView(Qt::Horizontal, _ptbl);
@@ -298,13 +299,20 @@ void CMDSimMW::initTbl() {
         for(int j = 0; j < tcol; j++) {
             QModelIndex idx = tbl_model->index(i, j);
             //test the first col...
-            if(j == tcol - 1) {
+            if(j == tcol - 2) {
                 tbl_model->setData(idx, "btncol");
                 tbtn = new QPushButton(cvcp936 ("设置"));
                 _ptbl->setIndexWidget(tbl_model->index(i, j), tbtn);
                 connect (tbtn, SIGNAL(clicked()), _pSigMaper, SLOT(map()));
                 _pSigMaper->setMapping (tbtn, i + 1); /* row start 0 */
-            } else {
+            }
+            if(j == tcol - 1) {
+                //tbl_model->setData(idx, "chkstart");
+                QCheckBox *chk = new QCheckBox(cvcp936("启动"));
+                _ptbl->setIndexWidget(tbl_model->index(i, j), chk);
+                //connect(chk, SIGNAL(clicked()), _pSigMaper, SLOT(map()));
+                //_pSigMaper->setMapping(chk, i + 1);
+            }else {
                 tbl_model->setData(idx, "test");
             }
         }

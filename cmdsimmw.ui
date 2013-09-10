@@ -304,7 +304,7 @@
    <widget class="QwtPlot" name="qwtPlot">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>430</x>
       <y>310</y>
       <width>541</width>
       <height>301</height>
@@ -350,6 +350,32 @@
      <string>外部控制</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnStart">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>260</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>启动输出</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnStop">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>300</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>停止输出</string>
+    </property>
+   </widget>
    <zorder>frame_layout</zorder>
    <zorder>gBox_chsel</zorder>
    <zorder>gBox_sig_sel</zorder>
@@ -363,6 +389,8 @@
    <zorder>btnViewOsc</zorder>
    <zorder>tmpdel</zorder>
    <zorder>cbxCtl</zorder>
+   <zorder>btnStart</zorder>
+   <zorder>btnStop</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

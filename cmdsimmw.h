@@ -26,6 +26,7 @@
 #include <Qwt/qwt_plot.h>
 #include <Qwt/qwt_plot_curve.h>
 #include <Qwt/qwt_plot_grid.h>
+#include <lvdtch.h>
 
 namespace Ui {
 class CMDSimMW;
@@ -96,6 +97,10 @@ private slots:
     void on_cbxCtl_clicked();
 
     void on_action_rfm_triggered();
+
+    void on_btnStart_clicked();
+
+    void on_btnStop_clicked();
 
 private:
     enum {LVDTBrds = 4};
@@ -197,6 +202,10 @@ private:
     QwtPlotGrid *_mainGrid;
 
     QwtOSCMain *window;
+
+    QList <int> lvChSList;
+    QList <int> getLvChStartlist();
+    QList <LVDTCh *> LCHs;
 };
 
 #endif // CMDSIMMW_H

@@ -11,6 +11,8 @@ DlgLchSet::DlgLchSet(QWidget *parent) :
     ui(new Ui::DlgLchSet)
 {
     ui->setupUi(this);
+
+
     initpointers();
     plotInit();
     cycleandloop();
@@ -23,6 +25,7 @@ DlgLchSet::~DlgLchSet()
 
 //ch info
 QString DlgLchSet::genChInfo(QStringList chlst, QStringList namelist) {
+
     QString retstr;
     if(chlst.length() > 0 && namelist.length() > 0) {
         int chlen = chlst.length();
@@ -56,6 +59,8 @@ void DlgLchSet::plotInit() {
 
     plot->setCanvasBackground (QColor(0, 49, 114));
     pc = NULL;
+
+    _pcurve = new CurveDataN(D_PTS);
 }
 
 void DlgLchSet::initpointers() {
@@ -264,7 +269,21 @@ void DlgLchSet::on_cbloop_Cur_clicked() {
 }
 
 void DlgLchSet::on_btncurDel_clicked() {
+    if(ui->lswcurv->count () > 0) {
+        QString t = ui->lswcurv->selectedItems ().at (0)->text ();
+        QStringList list = t.split ("    ");
+        double x = list.at (0).split ("x:").at (1).trimmed ().toDouble ();
+        double y = list.at (1).split ("y:").at (1).trimmed ().toDouble ();
+        QPointF p(x,y);
+        _pcurve->delSpcPts (p);
+        int row = ui->lswcurv->row (ui->lswcurv->selectedItems ().at (0));
+        ui->lswcurv->takeItem (0);
+        if(ui->lswcurv->count () != 0) {
+            doPlotCus ();
+        } else {
 
+        }
+    }
 }
 
 void DlgLchSet::doPlot(int t) {
@@ -336,6 +355,9 @@ void DlgLchSet::doPlot(int t) {
             pc->setData (new SquData(a, _dutyc, ti, _cycles));
             break;
         case CUS:
+            break;
+        case SP:    //add setting
+
             break;
         default:
             break;
@@ -434,15 +456,28 @@ void DlgLchSet::on_lswcurv_itemClicked(QListWidgetItem *item) {
 void DlgLchSet::on_tabWidget_currentChanged(int index) {
     switch (index) {
     case 0: /*sine*/
+        _amp = ui->sbAMP_Sine->value();
+        _time = ui->sbTIME_Sine->value();
+        _cycles = ui->spcycle_Sine->value();
         doPlot(SINE);
         break;
     case 1:
+        _amp = ui->sbAMP_Tri->value();
+        _time = ui->sbTIME_Tri->value();
+        _cycles = ui->spcycle_Tri->value();
         doPlot(TRI);
         break;
     case 2:
+        _amp = ui->sbAMP_Saw->value();
+        _time = ui->sbTIME_Saw->value();
+        _cycles = ui->spcycle_Saw->value();
         doPlot(SAW);
         break;
     case 3:
+        _amp = ui->sbAMP_Squ->value();
+        _time = ui->sbTIME_Squ->value();
+        _cycles = ui->spcycle_Squ->value();
+        _dutyc = ui->sbDUTY_Squ->value();
         doPlot(SQU);
         break;
     case 4:
@@ -452,3 +487,74 @@ void DlgLchSet::on_tabWidget_currentChanged(int index) {
         break;
     }
 }
+
+//get set info and apply to lchs
+void DlgLchSet::on_buttonBox_accepted() {
+
+    int index = ui->tabWidget->currentIndex();
+    int size_ = pc->data()->size();
+    switch (index) {
+    case 0: /*sine*/
+        _amp = ui->sbAMP_Sine->value();
+        _time = ui->sbTIME_Sine->value();
+        _cycles = ui->spcycle_Sine->value();
+
+        for(int i = 0; i < size_; i++) {
+            //replace the QployF to lchd pts
+            _pts << pc->data()->sample(i);
+        }
+        break;
+    case 1:
+        _amp = ui->sbAMP_Tri->value();
+        _time = ui->sbTIME_Tri->value();
+        _cycles = ui->spcycle_Tri->value();
+
+        for(int i = 0; i < size_; i++) {
+            //replace the QployF to lchd pts
+            _pts << pc->data()->sample(i);
+        }
+        break;
+    case 2:
+        _amp = ui->sbAMP_Saw->value();
+        _time = ui->sbTIME_Saw->value();
+        _cycles = ui->spcycle_Saw->value();
+
+        for(int i = 0; i < size_; i++) {
+            //replace the QployF to lchd pts
+            _pts << pc->data()->sample(i);
+        }
+        break;
+    case 3:
+        _amp = ui->sbAMP_Squ->value();
+        _time = ui->sbTIME_Squ->value();
+        _cycles = ui->spcycle_Squ->value();
+        _dutyc = ui->sbDUTY_Squ->value();
+
+        for(int i = 0; i < size_; i++) {
+            //replace the QployF to lchd pts
+            _pts << pc->data()->sample(i);
+        }
+        break;
+    case 4:
+        //curve plot
+        break;
+    case 5:
+        // sp plot
+        break;
+    default:
+        break;
+    }
+}
+
+void DlgLchSet::on_buttonBox_rejected() {
+
+}
+
+
+void DlgLchSet::on_btnApplyChangeSp_clicked() {
+    double spvalue = ui->sbAMP_Sp->value();
+    double spTime = ui->sbTIME_Sp->value();
+
+
+}
+

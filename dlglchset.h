@@ -91,6 +91,12 @@ private slots:
 
     void on_tabWidget_currentChanged(int index);
 
+    void on_buttonBox_accepted();
+
+    void on_buttonBox_rejected();
+
+    void on_btnApplyChangeSp_clicked();
+
 private:
     Ui::DlgLchSet *ui;
     QString genChInfo(QStringList chlst, QStringList namelist);
@@ -108,7 +114,7 @@ private:
     void doPlotCus();
     void cycleandloop();
 private:
-    enum {SINE, SAW, TRI, SQU, CUS };
+    enum {SINE, SAW, TRI, SQU, CUS, SP};
     enum {VOL, PHY};
 
     double _amp;
@@ -116,6 +122,7 @@ private:
     double _time;
     double _lasttime;
     int _cycles;
+    QPolygonF _pts;
 };
 
 #endif // DLGLCHSET_H

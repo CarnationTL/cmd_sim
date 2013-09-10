@@ -95,7 +95,6 @@ private slots:
 
     void on_spphysic_valueChanged(double arg1);
 
-
 private:
     Ui::extTools *ui;
     int _dcnt;

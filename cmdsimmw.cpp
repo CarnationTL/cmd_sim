@@ -57,6 +57,7 @@ int chSta = -1;
 #endif
 
 
+
 CMDSimMW::CMDSimMW(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMDSimMW) {
@@ -80,16 +81,24 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
 
 #if 0                                   /* init rfm lib */
 	if (initrfm() != EXE_SUCCESS) {
-		QMessageBox::warning(NULL, "lib_load", "lib_load", QMessageBox::Yes);
+        QMessageBox::warning(NULL, "rfm lib_load", "lib_load", QMessageBox::Yes);
 	}
 #endif
 
-#if 0                                   /* init 75c3 when hardware install */
+#if 0                                    /* init 75c3 when hardware install */
     init75c3();
+
+#if 0
+    LCHs.at(0)->ptr->loadDll();
+   FPTR_OPEN open = LCHs.at(0)->ptr->getOpen();
+   int ret = open(0);
+   qDebug() << ret;
+#endif
+
 #endif
 
 #if 0
-    C75C3Encap enp;
+    C75C3DllEncap enp;
     enp.pclib = new QLibrary("CPCI75C3Dll");
     enp.pclib->load();
     if(enp.pclib->isLoaded()) {
@@ -192,6 +201,9 @@ int CMDSimMW::initrfm() {
 }
 
 int CMDSimMW::init75c3() {
+    for(int i = 0; i < MAX_LVDT_CH; i++) {
+        LCHs.push_back(new LVDTCh(i, QString("LVDT") + QString::number(i)));
+    }
     return 0;
 }
 /**
@@ -961,7 +973,6 @@ void CMDSimMW::mslot_tblContextMenu(QAction *action) {
 void CMDSimMW::on_cbx_sigts_activated(int index) {
 
     index = 0;
-    index += 0;
 }
 
 
@@ -1071,6 +1082,16 @@ void CMDSimMW::mainPlotInit() {
     }
 }
 
+QList<int> CMDSimMW::getLvChStartlist() {
+   int row = tbl_model->rowCount();
+   for(int i = 0; i < row; i++) {
+       //get the releate to lch
+       //TODO
+       _ptbl->indexWidget(tbl_model->index(i, TBL_COL + 1));
+   }
+   return lvChSList;
+}
+
 //工具action
 void CMDSimMW::on_action_tools_triggered() {
     extTools dlg;
@@ -1093,3 +1114,12 @@ void CMDSimMW::on_action_rfm_triggered() {
     rfm.exec();
 
 }
+
+void CMDSimMW::on_btnStart_clicked() {
+    //启动列表 执行
+}
+
+void CMDSimMW::on_btnStop_clicked() {
+
+}
+
