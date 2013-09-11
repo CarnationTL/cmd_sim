@@ -1,6 +1,7 @@
 #include "apdapter.h"
 #include <qmath.h>
 #include <cmddefs.h>
+
 Apdapter::Apdapter(QObject *parent) :
     QObject(parent) {
 }
@@ -70,5 +71,3 @@ double Apdapter::doConvert(double pVal) {
     }
     return (double)EXE_FAIL;
 }
-
-

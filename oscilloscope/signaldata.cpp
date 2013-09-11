@@ -115,8 +115,7 @@ void SignalData::clearStaleValues( double limit )
    //d_data->values.reserve( values.size() );
 
     int index;
-    for ( index = values.size() - 1; index >= 0; index-- )
-    {
+    for ( index = values.size() - 1; index >= 0; index-- ) {
         if ( values[index].x() < limit )
             break;
     }

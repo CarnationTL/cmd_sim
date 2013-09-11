@@ -1,10 +1,9 @@
 #ifndef _SIGNAL_DATA_H_
-#define _SIGNAL_DATA_H_ 1
+#define _SIGNAL_DATA_H_
 
 #include <qrect.h>
 
-class SignalData
-{
+class SignalData {
 public:
     static SignalData &instance();
 

@@ -3,6 +3,8 @@
 
 CurveDataN::CurveDataN(int size) {
     _t_size = size;
+    _points << QPointF(0.0, 0.0);
+    _points.clear();
 }
 
 void CurveDataN::appendP(double x, double y) {
@@ -64,6 +66,9 @@ QPolygonF CurveDataN::genWriteData() {
 double CurveDataN::getYRgn() {
 
     int len = _points.count ();
+    if(len == 0.0) {
+        return 0.0;
+    }
     double ymax = _points.at (0).y ();
     double ymin = _points.at (0).y ();
     for(int i = 1; i < len; i++) {
@@ -85,6 +90,9 @@ double CurveDataN::getYRgn() {
 
 double CurveDataN::getXRgn() {
     int len = _points.count ();
+    if(len == 0) {
+        return 0.0;
+    }
     double xmax = _points.at (0).x ();
     for(int i = 0; i < len; i++) {
         if(xmax <= _points.at (i).x ()) {

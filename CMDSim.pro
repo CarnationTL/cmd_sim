@@ -46,7 +46,8 @@ SOURCES += main.cpp\
     sigGen/sawdata.cpp \
     exttools.cpp \
     dlgrfmdebug.cpp \
-    dlglchset.cpp
+    dlglchset.cpp \
+    sigGen/spdata.cpp
 
 HEADERS  += cmdsimmw.h \
     rfm2gse.h \
@@ -79,7 +80,8 @@ HEADERS  += cmdsimmw.h \
     sigGen/sawdata.h \
     exttools.h \
     dlgrfmdebug.h \
-    dlglchset.h
+    dlglchset.h \
+    sigGen/spdata.h
 
 FORMS    += cmdsimmw.ui \
     setbrddlg.ui \

@@ -282,5 +282,3 @@ void Plot::clear() {
 
 
 
-
-

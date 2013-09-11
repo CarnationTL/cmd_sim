@@ -1,11 +1,12 @@
 #include "tridata.h"
 
-TriData::TriData(double amp, double time) :
+TriData::TriData(double amp, double time, double cycles) :
     QwtSyntheticPointData(D_PTS)
 {
     _amp = amp;
     _time = time;
-    _feq = 1.0 / _time;
+    _cycles = cycles;
+    _feq = _cycles / _time;
 }
 
 double TriData::y(double x) const {

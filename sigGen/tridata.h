@@ -9,12 +9,13 @@
 class TriData : public QwtSyntheticPointData
 {
 public:
-    TriData(double amp, double time);
+    TriData(double amp, double time, double cycles);
     virtual double y (double x) const;
 private:
     double _amp;
     double _time;
     double _feq;
+    double _cycles;
 };
 
 #endif // TRIDATA_H

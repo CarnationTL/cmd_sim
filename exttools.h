@@ -95,11 +95,6 @@ private slots:
 
     void on_spphysic_valueChanged(double arg1);
 
-
-
-
-
-
 private:
     Ui::extTools *ui;
     int _dcnt;
@@ -124,8 +119,8 @@ private:
     QStringList deconsSdata(QString xy);
     CurveDataN *_pcurve;
     QwtSymbol _sym;
-//    QwtPlotMarker *_hmarker;
-//    void markerinit();
+    //  QwtPlotMarker *_hmarker;
+    //  void markerinit();
     QwtPlotGrid *grid;
     void gridinit();
     double _lasttime;

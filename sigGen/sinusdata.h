@@ -7,12 +7,13 @@
 class SinusData : public QwtSyntheticPointData
 {
 public:
-    SinusData(double amp, double time);
+    SinusData(double amp, double time, double cycles);
     virtual double y( double x ) const;
 private:
     double _amp;
     double _feq;
     double _time;
+    double _cycles;
 };
 
 #endif // SINUSDATA_H

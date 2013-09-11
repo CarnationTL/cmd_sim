@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <Qwt/qwt_plot.h>
+#include <Qwt/qwt_plot_curve.h>
 #include <Qwt/qwt_plot_grid.h>
 
 #include <sigGen/sinusdata.h>
@@ -10,6 +11,9 @@
 #include <sigGen/sawdata.h>
 #include <sigGen/squdata.h>
 #include <sigGen/curvedatan.h>
+#include <QModelIndex>
+#include <QListWidgetItem>
+#include <Qwt/qwt_plot_marker.h>
 
 namespace Ui {
 class DlgLchSet;
@@ -20,6 +24,7 @@ class DlgLchSet : public QDialog
     Q_OBJECT
     
 public:
+
     explicit DlgLchSet(QWidget *parent = 0);
     ~DlgLchSet();
     
@@ -82,6 +87,16 @@ private slots:
 
     void on_btncurDel_clicked();
 
+    void on_lswcurv_itemClicked(QListWidgetItem *item);
+
+    void on_tabWidget_currentChanged(int index);
+
+    void on_buttonBox_accepted();
+
+    void on_buttonBox_rejected();
+
+    void on_btnApplyChangeSp_clicked();
+
 private:
     Ui::DlgLchSet *ui;
     QString genChInfo(QStringList chlst, QStringList namelist);
@@ -89,7 +104,25 @@ private:
     void initpointers();
     QwtPlot *plot;
     QwtPlotGrid *grid;
+    QwtPlotCurve *pc;
+
+    QwtPlotMarker sm;
+    QwtPlotMarker em;
+
+    CurveDataN *_pcurve;
+    void doPlot(int);
+    void doPlotCus();
     void cycleandloop();
+private:
+    enum {SINE, SAW, TRI, SQU, CUS, SP};
+    enum {VOL, PHY};
+
+    double _amp;
+    double _dutyc;
+    double _time;
+    double _lasttime;
+    int _cycles;
+    QPolygonF _pts;
 };
 
 #endif // DLGLCHSET_H

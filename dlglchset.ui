@@ -37,7 +37,7 @@
     <rect>
      <x>10</x>
      <y>60</y>
-     <width>301</width>
+     <width>341</width>
      <height>391</height>
     </rect>
    </property>
@@ -50,6 +50,105 @@
    <property name="currentIndex">
     <number>0</number>
    </property>
+   <widget class="QWidget" name="tab_Sp">
+    <attribute name="title">
+     <string>单点</string>
+    </attribute>
+    <widget class="QGroupBox" name="gbPara_Sp">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>251</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="title">
+      <string>波形参数</string>
+     </property>
+     <widget class="QDoubleSpinBox" name="sbAMP_Sp">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>28</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>1024.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbAMP_Sp">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>单点值:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbTIME_Sp">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>40</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>时间:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="sbTIME_Sp">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>68</y>
+        <width>111</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>65536.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbloo_Sp">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>循环</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnApplyChangeSp">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>130</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>应用</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
    <widget class="QWidget" name="tabSine">
     <attribute name="title">
      <string>正弦波</string>
@@ -79,7 +178,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>FEQ:</string>
+       <string>频率:</string>
       </property>
      </widget>
      <widget class="QDoubleSpinBox" name="sbAMP_Sine">
@@ -105,7 +204,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>AMP:</string>
+       <string>幅值:</string>
       </property>
      </widget>
      <widget class="QLabel" name="lbTIME_Sine">
@@ -118,7 +217,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>TIME:</string>
+       <string>时间:</string>
       </property>
      </widget>
      <widget class="QDoubleSpinBox" name="sbTIME_Sine">
@@ -886,9 +985,9 @@
   <widget class="QwtPlot" name="plotWhole">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>359</x>
      <y>80</y>
-     <width>400</width>
+     <width>361</width>
      <height>381</height>
     </rect>
    </property>
@@ -951,9 +1050,9 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
