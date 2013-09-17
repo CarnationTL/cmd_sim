@@ -308,7 +308,11 @@ void DlgLchSet::doPlot(int t) {
     if(a == 0.0) {
         plot->setAxisScale(QwtPlot::yLeft, -10.0, 10.0);
     } else {
-        plot->setAxisScale (QwtPlot::yLeft, -a, a);
+        if(t == SP) {
+            plot->setAxisScale(QwtPlot::yLeft, -a * 2, a * 2);
+        } else {
+            plot->setAxisScale (QwtPlot::yLeft, -a, a);
+        }
     }
 
     if(ti == 0.0) {
@@ -357,7 +361,9 @@ void DlgLchSet::doPlot(int t) {
         case CUS:
             break;
         case SP:    //add setting
-
+//            if(ui->rbloo_Sp->isChecked() == true) {
+//            }
+            pc->setData(new SpData(a, ti));
             break;
         default:
             break;
@@ -434,12 +440,7 @@ void DlgLchSet::on_lswcurv_itemClicked(QListWidgetItem *item) {
     em.attach (plot);
     qDebug () << pts;
 
-
     //qDebug () << _pcurve->genWriteData ();
-
-#if 1
-
-#endif
 
 #if 0
     //_sym.drawSymbol (NULL, _pcurve->getpts ().at (0));
@@ -454,33 +455,42 @@ void DlgLchSet::on_lswcurv_itemClicked(QListWidgetItem *item) {
 }
 
 void DlgLchSet::on_tabWidget_currentChanged(int index) {
+
+    qDebug() << index << "table index";
+
+
     switch (index) {
-    case 0: /*sine*/
+    case 0:
+        _amp = ui->sbAMP_Sp->value();
+        _time = ui->sbTIME_Sp->value();
+        doPlot(SP);
+        break;
+    case 1: /*sine*/
         _amp = ui->sbAMP_Sine->value();
         _time = ui->sbTIME_Sine->value();
         _cycles = ui->spcycle_Sine->value();
         doPlot(SINE);
         break;
-    case 1:
+    case 2:
         _amp = ui->sbAMP_Tri->value();
         _time = ui->sbTIME_Tri->value();
         _cycles = ui->spcycle_Tri->value();
         doPlot(TRI);
         break;
-    case 2:
+    case 3:
         _amp = ui->sbAMP_Saw->value();
         _time = ui->sbTIME_Saw->value();
         _cycles = ui->spcycle_Saw->value();
         doPlot(SAW);
         break;
-    case 3:
+    case 4:
         _amp = ui->sbAMP_Squ->value();
         _time = ui->sbTIME_Squ->value();
         _cycles = ui->spcycle_Squ->value();
         _dutyc = ui->sbDUTY_Squ->value();
         doPlot(SQU);
         break;
-    case 4:
+    case 5:
         doPlotCus();
         break;
     default:
@@ -494,7 +504,11 @@ void DlgLchSet::on_buttonBox_accepted() {
     int index = ui->tabWidget->currentIndex();
     int size_ = pc->data()->size();
     switch (index) {
-    case 0: /*sine*/
+    case 0:
+        // sp plot
+        qDebug() << "the sp points" << endl;
+        break;
+    case 1: /*sine*/
         _amp = ui->sbAMP_Sine->value();
         _time = ui->sbTIME_Sine->value();
         _cycles = ui->spcycle_Sine->value();
@@ -504,7 +518,7 @@ void DlgLchSet::on_buttonBox_accepted() {
             _pts << pc->data()->sample(i);
         }
         break;
-    case 1:
+    case 2:
         _amp = ui->sbAMP_Tri->value();
         _time = ui->sbTIME_Tri->value();
         _cycles = ui->spcycle_Tri->value();
@@ -514,7 +528,7 @@ void DlgLchSet::on_buttonBox_accepted() {
             _pts << pc->data()->sample(i);
         }
         break;
-    case 2:
+    case 3:
         _amp = ui->sbAMP_Saw->value();
         _time = ui->sbTIME_Saw->value();
         _cycles = ui->spcycle_Saw->value();
@@ -524,7 +538,7 @@ void DlgLchSet::on_buttonBox_accepted() {
             _pts << pc->data()->sample(i);
         }
         break;
-    case 3:
+    case 4:
         _amp = ui->sbAMP_Squ->value();
         _time = ui->sbTIME_Squ->value();
         _cycles = ui->spcycle_Squ->value();
@@ -535,11 +549,8 @@ void DlgLchSet::on_buttonBox_accepted() {
             _pts << pc->data()->sample(i);
         }
         break;
-    case 4:
-        //curve plot
-        break;
     case 5:
-        // sp plot
+        //curve plot
         break;
     default:
         break;
@@ -555,6 +566,4 @@ void DlgLchSet::on_btnApplyChangeSp_clicked() {
     double spvalue = ui->sbAMP_Sp->value();
     double spTime = ui->sbTIME_Sp->value();
 
-
 }
-

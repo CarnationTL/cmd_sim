@@ -140,7 +140,7 @@ private:
 
     QDialog     *_psetwpdlg;
     QDialog     *_psetChdlg;
-    QGridLayout *_pMainLay;
+//    QGridLayout *_pMainLay;
     QGridLayout *_pLeftLay;
     QLineEdit   *_pSeachEdit;              /* sreach edit for signal name*/
     QLineEdit   *_pNewSigEdit;             /* new  sig edit*/
@@ -206,6 +206,7 @@ private:
     QList <int> lvChSList;
     QList <int> getLvChStartlist();
     QList <LVDTCh *> LCHs;
+
 };
 
 #endif // CMDSIMMW_H

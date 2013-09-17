@@ -1072,8 +1072,8 @@ void CMDSimMW::mainPlotInit() {
         _mainPlot->setAxisScale(QwtPlot::yLeft, -10.0, 10.0);
         _mainGrid = new QwtPlotGrid();
         _mainGrid->enableXMin (true);
-        _mainGrid->setMajorPen( Qt::white, 0, Qt::DotLine );
-        _mainGrid->setMinorPen( Qt::gray, 0 , Qt::DotLine );
+        _mainGrid->setMajorPen(Qt::white, 0, Qt::DotLine);
+        _mainGrid->setMinorPen(Qt::gray, 0 , Qt::DotLine);
         if(_mainPlot != NULL) {
             _mainGrid->attach (_mainPlot);
         }

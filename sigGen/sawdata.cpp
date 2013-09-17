@@ -11,6 +11,7 @@ SawData::SawData(double amp, double time, double cycle) :
 }
 
 
+
 double SawData::y (double x) const {
     double t = 0;
     double *phase = &t;
