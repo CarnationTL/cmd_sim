@@ -6,8 +6,9 @@ SpData::SpData(double amp, double time) :
     _time = time;
 }
 
-
-
+//need resize plot outside
 double SpData::y(double x) const {
-    return x;
+    return _amp;
 }
+
+

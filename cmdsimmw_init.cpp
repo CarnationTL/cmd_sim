@@ -361,7 +361,7 @@ int CMDSimMW::initSetBrdDlg(QDialog *pdlg) {
 /* init pointers of main Widget.. */
 void CMDSimMW::initWidgetsPointer() {
 
-    _pMainLay = NULL;
+//    _pMainLay = NULL;
     _pLeftLay = NULL;
     _pLeftLay = NULL;
     _pCompleter = NULL;
@@ -646,5 +646,6 @@ bool CMDSimMW::findrmRowWithWidget(QStandardItemModel *model, QStringList list) 
         return false;
     }
 }
+
 
 //TODO:不能删除最后元素, 检查同步代码

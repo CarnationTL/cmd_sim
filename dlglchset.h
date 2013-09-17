@@ -11,6 +11,7 @@
 #include <sigGen/sawdata.h>
 #include <sigGen/squdata.h>
 #include <sigGen/curvedatan.h>
+#include <sigGen/spdata.h>
 #include <QModelIndex>
 #include <QListWidgetItem>
 #include <Qwt/qwt_plot_marker.h>
