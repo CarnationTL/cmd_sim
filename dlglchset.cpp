@@ -563,7 +563,38 @@ void DlgLchSet::on_buttonBox_rejected() {
 
 
 void DlgLchSet::on_btnApplyChangeSp_clicked() {
-    double spvalue = ui->sbAMP_Sp->value();
-    double spTime = ui->sbTIME_Sp->value();
-
+    _amp = ui->sbAMP_Sp->value();
+    _time = ui->sbTIME_Sp->value();
+    doPlot(SP);
+    //change the hardware output
+    //....
 }
+
+<<<<<<< HEAD
+}
+=======
+void DlgLchSet::on_sbAMP_Sp_valueChanged(double arg1) {
+    _amp = arg1;
+    _time = ui->sbTIME_Sp->value();
+    doPlot(SP);
+}
+
+void DlgLchSet::on_sbTIME_Sp_valueChanged(double arg1) {
+    _amp = ui->sbAMP_Sp->value();
+    _time = arg1;
+    doPlot(SP);
+}
+
+void DlgLchSet::on_rbloo_Sp_clicked(bool checked) {
+    if(checked == true) {
+        _time = 99999999;
+        //disable
+        ui->sbTIME_Sp->setEnabled(false);
+        doPlot(SP);
+    } else {
+        _time = ui->sbTIME_Sp->value();
+        ui->sbTIME_Sp->setEnabled(true);
+        doPlot(SP);
+    }
+}
+>>>>>>> master
