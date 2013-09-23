@@ -6,7 +6,9 @@ LVDTCh::LVDTCh(QObject *parent) :
 
 LVDTCh::LVDTCh(int chno, QString chname, QObject *parent) :
     CommonCh(chno, chname, parent) {
+#if defined(Q_OS_WIN)
     ptr = C75C3DllEncap::getInst();
+#endif
 }
 
 
