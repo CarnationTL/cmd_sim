@@ -168,7 +168,7 @@ CMDSimMW::CMDSimMW(QWidget *parent) :
     _mainPlot = ui->qwtPlot;
     mainPlotInit();
 
-#if 1
+#if 0
     this->hide();
     DlgLchSet set;
     set.exec();
@@ -342,10 +342,7 @@ int CMDSimMW::showWarning() {
         warningTextInfo(*(ui->pploptStatus));
     }
     return 0;
-
 }
-
-
 
 
 /**
