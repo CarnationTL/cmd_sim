@@ -98,6 +98,12 @@ private slots:
 
     void on_btnApplyChangeSp_clicked();
 
+    void on_sbAMP_Sp_valueChanged(double arg1);
+
+    void on_sbTIME_Sp_valueChanged(double arg1);
+
+    void on_rbloo_Sp_clicked(bool checked);
+
 private:
     Ui::DlgLchSet *ui;
     QString genChInfo(QStringList chlst, QStringList namelist);

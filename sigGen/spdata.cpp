@@ -10,5 +10,3 @@ SpData::SpData(double amp, double time) :
 double SpData::y(double x) const {
     return _amp;
 }
-
-

@@ -168,7 +168,6 @@ public:
                         ret << QPointF(s, k * s + shift);
                     }
                 }
-
             }
             return ret;
         }

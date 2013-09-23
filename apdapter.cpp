@@ -10,7 +10,6 @@ Apdapter::Apdapter(double maxPval, double minPval,
                    double maxEval, double minEval, QObject *parent) :
                    _maxPhyval(maxPval), _minPhyval(minPval),
                    _maxElcval(maxEval), _minElcval(minEval), QObject(parent) {
-
 }
 
 double Apdapter::maxPhyval() const {
