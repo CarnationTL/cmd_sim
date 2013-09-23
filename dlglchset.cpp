@@ -570,9 +570,6 @@ void DlgLchSet::on_btnApplyChangeSp_clicked() {
     //....
 }
 
-<<<<<<< HEAD
-}
-=======
 void DlgLchSet::on_sbAMP_Sp_valueChanged(double arg1) {
     _amp = arg1;
     _time = ui->sbTIME_Sp->value();
@@ -597,4 +594,3 @@ void DlgLchSet::on_rbloo_Sp_clicked(bool checked) {
         doPlot(SP);
     }
 }
->>>>>>> master
