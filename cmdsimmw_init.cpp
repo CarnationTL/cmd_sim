@@ -279,6 +279,8 @@ void CMDSimMW::initTbl() {
 
     QPushButton *tbtn;
     tbl_model = new QStandardItemModel(TBL_ROW, TBL_COL + 1);
+
+
     _ptbl->setModel(tbl_model);
 
     tbl_model->setHeaderData(0, Qt::Horizontal, cvcp936("类型"));
@@ -318,6 +320,19 @@ void CMDSimMW::initTbl() {
         }
     }
     connect (_pSigMaper, SIGNAL(mapped(int)), this, SLOT(mslot_tableClick(int)));
+
+
+
+    // test for insert data
+#if 1
+    QList <QStandardItem *> items;
+    for (int i = 0; i < 5; ++i) {
+        items.push_back(new QStandardItem(QString::number(i)));
+    }
+    tbl_model->appendRow(items);
+#endif
+
+
 }
 
 /* add table row */
