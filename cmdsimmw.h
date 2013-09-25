@@ -169,8 +169,8 @@ private:
     void initLvsigNameModel(int cnt);
     void initAOsigNameModel(int cnt);
     void initdelsaveModel();
-    void addtblRow();
-    void deltblRow();
+    void addtblRow(const QList <QStandardItem *> &item);
+    void deltblRow(int row);
 
     int  warningTextInfo(QPlainTextEdit &p);
     int  showWarning();

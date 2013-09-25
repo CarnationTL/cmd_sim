@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1279</width>
-    <height>753</height>
+    <width>1057</width>
+    <height>839</height>
    </rect>
   </property>
   <property name="font">
@@ -199,8 +199,8 @@
      <rect>
       <x>20</x>
       <y>660</y>
-      <width>651</width>
-      <height>41</height>
+      <width>961</width>
+      <height>101</height>
      </rect>
     </property>
    </widget>
@@ -257,8 +257,8 @@
      <rect>
       <x>20</x>
       <y>520</y>
-      <width>311</width>
-      <height>89</height>
+      <width>151</width>
+      <height>91</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="vtest_layout">
@@ -314,8 +314,8 @@
    <widget class="QPushButton" name="btnViewOsc">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>620</y>
+      <x>320</x>
+      <y>560</y>
       <width>94</width>
       <height>28</height>
      </rect>
@@ -327,7 +327,7 @@
    <widget class="QPushButton" name="tmpdel">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>320</x>
       <y>520</y>
       <width>71</width>
       <height>28</height>
@@ -340,8 +340,8 @@
    <widget class="QCheckBox" name="cbxCtl">
     <property name="geometry">
      <rect>
-      <x>1160</x>
-      <y>20</y>
+      <x>980</x>
+      <y>110</y>
       <width>97</width>
       <height>25</height>
      </rect>
@@ -353,8 +353,8 @@
    <widget class="QPushButton" name="btnStart">
     <property name="geometry">
      <rect>
-      <x>990</x>
-      <y>260</y>
+      <x>980</x>
+      <y>40</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -366,8 +366,8 @@
    <widget class="QPushButton" name="btnStop">
     <property name="geometry">
      <rect>
-      <x>990</x>
-      <y>300</y>
+      <x>980</x>
+      <y>70</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -397,7 +397,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1279</width>
+     <width>1057</width>
      <height>23</height>
     </rect>
    </property>
@@ -486,6 +486,7 @@
    <class>QwtPlot</class>
    <extends>QFrame</extends>
    <header>qwt_plot.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

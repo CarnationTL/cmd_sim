@@ -1000,7 +1000,6 @@ void CMDSimMW::on_tbl_selres_customContextMenuRequested(const QPoint &pos) {
     }
 
 }
-
 /*
  *show wave
   */
@@ -1118,5 +1117,16 @@ void CMDSimMW::on_btnStart_clicked() {
 
 void CMDSimMW::on_btnStop_clicked() {
 
+    int cnt = tbl_model->rowCount();
+    int ret =  QMessageBox::warning(this, QString::number(cnt), "T", QMessageBox::Yes | QMessageBox::Cancel);
+    tbl_model->removeRows(cnt , 1);
+
+//   if(ret == QMessageBox::Yes) {
+//       tbl_model->removeRow(cnt);
+//       _ptbl->setModel(tbl_model);
+//   } else if(ret == QMessageBox::Cancel) {
+//
+//   }
 }
+
 

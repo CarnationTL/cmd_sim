@@ -336,14 +336,13 @@ void CMDSimMW::initTbl() {
 }
 
 /* add table row */
-void CMDSimMW::addtblRow() {
+void CMDSimMW::addtblRow(const QList<QStandardItem *> &item) {
     //TODO add table context and map the signal
-
+    tbl_model->appendRow(item);
 }
 
-void CMDSimMW::deltblRow() {
+void CMDSimMW::deltblRow(int row){
     //TODO del table context and remove sig map, release the resouce
-
 }
 
 
@@ -545,10 +544,6 @@ bool CMDSimMW::changeChListModelBind(int type, int ctl_type) {
     }
     return false;
 }
-
-
-
-
 
 
 /* rm the model check*/

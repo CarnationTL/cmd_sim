@@ -149,12 +149,12 @@ void SetBrdDlg::mapsignals() {
 }
 
 void SetBrdDlg::initctls() {
-    ui->kb1f->setScale(360, 1800);
-    ui->kb1f->setKnobStyle(QwtKnob::Flat);
-    ui->kb1f->setMarkerStyle(QwtKnob::Notch);
-    ui->kb1f->setScaleEngine(new QwtLogScaleEngine());
-    ui->kb1f->setScaleStepSize(1.0);
-    ui->kb1f->setScaleMaxMinor(10);
+//    ui->kb1f->setScale(360, 1800);
+//    ui->kb1f->setKnobStyle(QwtKnob::Flat);
+//    ui->kb1f->setMarkerStyle(QwtKnob::Notch);
+//    ui->kb1f->setScaleEngine(new QwtLogScaleEngine());
+//    ui->kb1f->setScaleStepSize(1.0);
+//    ui->kb1f->setScaleMaxMinor(10);
 
 //    ui->kb2f->setScale(360, 1800);
 //    ui->kb2f->setKnobStyle(QwtKnob::Flat);
